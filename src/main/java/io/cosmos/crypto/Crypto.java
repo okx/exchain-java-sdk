@@ -34,4 +34,8 @@ public class Crypto {
         System.arraycopy(Utils.bigIntegerToBytes(signature.s, 32), 0, result, 32, 32);
         return result;
     }
+    public  static  String generatePubKeyFromPriv(String privateKey) throws NoSuchAlgorithmException {
+        ECKey k = ECKey.fromPrivate(new BigInteger(privateKey, 16));
+        return k.getPublicKeyAsHex();
+    }
 }
