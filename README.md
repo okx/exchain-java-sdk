@@ -1,3 +1,0 @@
-# javasdk
-
-OKChain Java SDK
