@@ -3,13 +3,23 @@ package io.okchain.types;
 import com.google.gson.annotations.SerializedName;
 import io.cosmos.types.Fee;
 import io.cosmos.types.Signature;
-import io.cosmos.types.TransferMessage;
+
 
 import java.util.List;
 
-public class OKChainValue {
+public class StdTransaction {
+    public StdTransaction() {
+    }
+
+    public StdTransaction(IMsg[] msgs, Fee fee, List<Signature> signatures, String memo) {
+        this.msgs = msgs;
+        this.fee = fee;
+        this.signatures = signatures;
+        this.memo = memo;
+    }
+
     @SerializedName("msg")
-    private TransferMessage[] msgs;
+    private IMsg[] msgs;
 
     private Fee fee;
 
@@ -17,11 +27,11 @@ public class OKChainValue {
 
     private String memo;
 
-    public TransferMessage[] getMsgs() {
+    public IMsg[] getMsgs() {
         return msgs;
     }
 
-    public void setMsgs(TransferMessage[] msgs) {
+    public void setMsgs(IMsg[] msgs) {
         this.msgs = msgs;
     }
 

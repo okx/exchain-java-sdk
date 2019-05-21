@@ -15,9 +15,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @JsonPropertyOrder(alphabetic = true)
 public class Token {
 
-    private String denom;
-
     private String amount;
+
+    private String denom;
 
     public Token() {
 
