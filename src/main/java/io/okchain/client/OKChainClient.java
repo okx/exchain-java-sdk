@@ -1,16 +1,27 @@
 package io.okchain.client;
 
+import io.okchain.http.OKChainRequest;
+
 public class OKChainClient {
     public String privateKey;
     public String userAddress;
     public String accountNumber;
     public String chainId;
+    public String serverUrl;
 
-    public OKChainClient(String privateKey, String userAddress, String accountNumber, String chainId) {
+    public OKChainClient(String privateKey, String userAddress, String serverUrl) {
         this.privateKey = privateKey;
         this.userAddress = userAddress;
-        this.accountNumber = accountNumber;
-        this.chainId = chainId;
+        this.chainId = Args.chainId;
+        this.serverUrl = serverUrl;
+        this.accountNumber = OKChainRequest.GetAccountNumber(this);
+    }
+
+    public OKChainClient(String privateKey, String userAddress, int accountNumber) {
+        this.privateKey = privateKey;
+        this.userAddress = userAddress;
+        this.accountNumber = accountNumber+"";
+        this.chainId = Args.chainId;
     }
 
     public String getPrivateKey() {
@@ -43,5 +54,13 @@ public class OKChainClient {
 
     public void setChainId(String chainId) {
         this.chainId = chainId;
+    }
+
+    public String getServerUrl() {
+        return serverUrl;
+    }
+
+    public void setServerUrl(String serverUrl) {
+        this.serverUrl = serverUrl;
     }
 }

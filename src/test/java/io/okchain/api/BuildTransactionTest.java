@@ -18,7 +18,7 @@ public class BuildTransactionTest {
         String price = "1.00000000";
         String quantity = "1.00000000";
         String memo = "";
-        String transaction = BuildTransaction.generatePlaceOrderTransaction(okc,side,product,price,quantity,sequence,memo);
+        String transaction = BuildTransaction.generatePlaceOrderTransaction(okc,side,product,price,quantity,memo,sequence);
         System.out.println(transaction);
     }
 
@@ -28,7 +28,7 @@ public class BuildTransactionTest {
         String sequence = "51";
         String orderId = "ID0000065785-1";
         String memo = "";
-        String transaction = BuildTransaction.generateCancelOrderTransaction(okc,orderId,sequence,memo);
+        String transaction = BuildTransaction.generateCancelOrderTransaction(okc,orderId,memo,sequence);
         System.out.println(transaction);
     }
 
@@ -45,16 +45,15 @@ public class BuildTransactionTest {
         amount.setAmount("1.00000000");
         amountList.add(amount);
 
-        String transaction = BuildTransaction.generateSendTransaction(okc,to,amountList,sequence,memo);
+        String transaction = BuildTransaction.generateSendTransaction(okc,to,amountList,memo,sequence);
         System.out.println(transaction);
     }
 
     private OKChainClient generateClient() {
         String privateKey = "c4c451ce673485521f9c9b74b6d90f0da433ef7f012fa7f9db4def627dccd632";
         String address = "okchain152p8xmejhza7wuhhzut88vkakdgasqwlw2qjcf";
-        String accountNumber = "4";
-        String chainId = "okchain";
-        OKChainClient okc = new OKChainClient(privateKey,address,accountNumber,chainId);
+        int accountNumber = 4;
+        OKChainClient okc = new OKChainClient(privateKey,address,accountNumber);
         return okc;
     }
 }
