@@ -35,9 +35,9 @@ public class OKChainRequestTest {
 
     private OKChainClient generateClient() {
         String privateKey = "c4c451ce673485521f9c9b74b6d90f0da433ef7f012fa7f9db4def627dccd632";
-        String address = "okchain152p8xmejhza7wuhhzut88vkakdgasqwlw2qjcf";
+        //String address = "okchain152p8xmejhza7wuhhzut88vkakdgasqwlw2qjcf";
         String url = "http://192.168.71.35:1317";
-        OKChainClient okc = new OKChainClient(privateKey,address,url);
+        OKChainClient okc = new OKChainClient(privateKey,url);
         return okc;
     }
 }

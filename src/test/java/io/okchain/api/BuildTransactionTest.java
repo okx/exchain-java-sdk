@@ -51,9 +51,9 @@ public class BuildTransactionTest {
 
     private OKChainClient generateClient() {
         String privateKey = "c4c451ce673485521f9c9b74b6d90f0da433ef7f012fa7f9db4def627dccd632";
-        String address = "okchain152p8xmejhza7wuhhzut88vkakdgasqwlw2qjcf";
+        //String address = "okchain152p8xmejhza7wuhhzut88vkakdgasqwlw2qjcf";
         int accountNumber = 4;
-        OKChainClient okc = new OKChainClient(privateKey,address,accountNumber);
+        OKChainClient okc = new OKChainClient(privateKey,accountNumber);
         return okc;
     }
 }

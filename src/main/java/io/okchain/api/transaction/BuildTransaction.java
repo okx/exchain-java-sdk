@@ -100,7 +100,7 @@ public class BuildTransaction {
         Pubkey pubkey = new Pubkey();
         pubkey.setType("tendermint/PubKeySecp256k1");
         pubkey.setValue(Strings.fromByteArray(
-                Base64.encode(Hex.decode(Crypto.generatePubKeyFromPriv(privateKey)))));
+                Base64.encode(Hex.decode(Crypto.generatePubKeyHexFromPriv(privateKey)))));
         signature.setPubkey(pubkey);
         signature.setSignature(sigResult);
 

@@ -1,5 +1,7 @@
 package io.cosmos.crypto;
 
+import com.google.crypto.tink.subtle.Random;
+import io.cosmos.util.EncodeUtils;
 import org.bitcoinj.core.ECKey;
 import org.bitcoinj.core.Sha256Hash;
 import org.bitcoinj.core.Utils;
@@ -15,6 +17,11 @@ import java.security.NoSuchAlgorithmException;
  * @create: 2019-03-20 19:29
  **/
 public class Crypto {
+
+    public static String generatePrivateKey() {
+        Random random=new Random();
+        return EncodeUtils.bytesToHex(random.randBytes(32));
+    }
 
     public static byte[] sign(byte[] msg, String privateKey) throws NoSuchAlgorithmException {
         ECKey k = ECKey.fromPrivate(new BigInteger(privateKey, 16));
@@ -34,8 +41,12 @@ public class Crypto {
         System.arraycopy(Utils.bigIntegerToBytes(signature.s, 32), 0, result, 32, 32);
         return result;
     }
-    public  static  String generatePubKeyFromPriv(String privateKey) throws NoSuchAlgorithmException {
+    public  static  String generatePubKeyHexFromPriv(String privateKey) throws NoSuchAlgorithmException {
         ECKey k = ECKey.fromPrivate(new BigInteger(privateKey, 16));
         return k.getPublicKeyAsHex();
+    }
+    public  static byte[] generatePubkeyFromPriv(String privateKey) {
+        ECKey k = ECKey.fromPrivate(new BigInteger(privateKey, 16));
+        return k.getPubKey();
     }
 }
