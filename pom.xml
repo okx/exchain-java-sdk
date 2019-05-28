@@ -25,11 +25,27 @@
     </properties>
 
     <dependencies>
+        <!-- http -->
         <dependency>
-            <groupId>com.github.kevinsawicki</groupId>
-            <artifactId>http-request</artifactId>
-            <version>6.0</version>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.4</version>
         </dependency>
+
+
+        <!--webservice cxf -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>3.1.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>3.1.8</version>
+        </dependency>
+
+        <!--junit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
