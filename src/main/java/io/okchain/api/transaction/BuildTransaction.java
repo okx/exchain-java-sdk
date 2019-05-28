@@ -1,13 +1,12 @@
 package io.okchain.api.transaction;
 
 
-import io.cosmos.common.Utils;
-import io.cosmos.crypto.Crypto;
-import io.cosmos.types.Fee;
-import io.cosmos.types.Pubkey;
-import io.cosmos.types.Signature;
-import io.cosmos.types.Token;
-import io.cosmos.util.EncodeUtils;
+import io.okchain.common.Utils;
+import io.okchain.crypto.Crypto;
+import io.okchain.types.Fee;
+import io.okchain.types.Pubkey;
+import io.okchain.types.Signature;
+import io.okchain.types.Token;
 import io.okchain.client.OKChainClient;
 import io.okchain.http.OKChainRequest;
 import io.okchain.types.*;
@@ -56,9 +55,7 @@ public class BuildTransaction {
         Fee fee = generateFeeDefault();
         SignData signData = new SignData(okc.accountNumber, okc.chainId, fee, memo, new IMsg[]{signMsg}, sequence);
         try {
-            byte[] byteSignData = EncodeUtils.toJsonEncodeBytes(signData);
             String signDataJson = Utils.serializer.toJson(signData);
-            //System.out.println(new String(byteSignData));
             System.out.println(signDataJson);
             Signature signature = sign(signDataJson.getBytes(), okc.privateKey);
             //组装签名结构

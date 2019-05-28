@@ -2,7 +2,7 @@ package io.okchain.types;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
-import io.cosmos.types.Token;
+import io.okchain.types.Token;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 

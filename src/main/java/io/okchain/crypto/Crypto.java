@@ -1,10 +1,10 @@
-package io.cosmos.crypto;
+package io.okchain.crypto;
 
 import com.google.crypto.tink.subtle.Random;
-import io.cosmos.util.EncodeUtils;
 import org.bitcoinj.core.ECKey;
 import org.bitcoinj.core.Sha256Hash;
 import org.bitcoinj.core.Utils;
+import org.spongycastle.util.encoders.Hex;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -20,7 +20,7 @@ public class Crypto {
 
     public static String generatePrivateKey() {
         Random random=new Random();
-        return EncodeUtils.bytesToHex(random.randBytes(32));
+        return Hex.toHexString(random.randBytes(32));
     }
 
     public static String generateMnemonic() {

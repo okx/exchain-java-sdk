@@ -1,4 +1,4 @@
-package io.cosmos.types;
+package io.okchain.types;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -11,36 +11,37 @@ import java.util.List;
  * @program: coin-parent-sdk
  * @description:
  * @author: liqiang
- * @create: 2019-03-22 10:28
+ * @create: 2019-03-19 18:51
  **/
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder(alphabetic = true)
-public class InputOutput {
+public class Fee {
 
-    private String address;
-    private List<Token> coins;
+    private List<Token> amount;
 
-    public String getAddress() {
-        return address;
+    private String gas;
+
+    public List<Token> getAmount() {
+        return amount;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public String getGas() {
+        return gas;
     }
 
-    public List<Token> getCoins() {
-        return coins;
+    public void setAmount(List<Token> amount) {
+        this.amount = amount;
     }
 
-    public void setCoins(List<Token> coins) {
-        this.coins = coins;
+    public void setGas(String gas) {
+        this.gas = gas;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-            .append("address", address)
-            .append("coins", coins)
+            .append("amount", amount)
+            .append("gas", gas)
             .toString();
     }
 }

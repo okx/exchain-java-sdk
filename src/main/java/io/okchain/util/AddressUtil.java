@@ -1,24 +1,13 @@
-package io.cosmos.util;
+package io.okchain.util;
 
-import com.google.common.primitives.Bytes;
 import com.google.crypto.tink.subtle.Bech32;
 import io.common.crypto.encode.ConvertBits;
 import io.common.crypto.hash.Ripemd;
 import io.common.exception.AddressFormatException;
-import io.cosmos.common.Constants;
-import org.apache.commons.codec.DecoderException;
-import org.bouncycastle.crypto.digests.SHA256Digest;
-import org.bouncycastle.crypto.digests.SHA3Digest;
-import org.bouncycastle.util.Strings;
-import org.bouncycastle.util.encoders.Base64;
-import org.bouncycastle.util.encoders.Hex;
 
-import java.io.ByteArrayOutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @program: coin-parent-sdk
@@ -27,22 +16,6 @@ import java.util.List;
  * @create: 2018-12-17 11:31
  **/
 public class AddressUtil {
-
-    public static String createNewAddressEd25519(String mainPrefix, byte[] publickKey) throws Exception {
-        String addressResult = null;
-        try {
-            byte[] pubKeyHash = sha256Hash(publickKey, 0, publickKey.length);
-            byte[] address = new byte[20];
-            System.arraycopy(pubKeyHash, 0, address, 0, address.length);
-            byte[] bytes = encode(0, address);
-            addressResult = io.common.crypto.encode.Bech32.encode(mainPrefix, bytes);
-            System.out.println(addressResult);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return addressResult;
-
-    }
 
     public static String createNewAddressSecp256k1(String mainPrefix, byte[] publickKey) throws Exception {
         String addressResult = null;
@@ -58,22 +31,6 @@ public class AddressUtil {
 
     }
 
-    public static String createNewAddressSecp256k1Multi(byte[] publickKey) throws Exception {
-        String addressResult = null;
-        try {
-            byte[] aminoWrap = EncodeUtils.aminoWrap(publickKey, Constants.COSMOS_PUBLIC_PREFIX.getBytes(), true);
-            System.out.println(Hex.toHexString(aminoWrap));
-            byte[] pubKeyHash = sha256Hash(aminoWrap, 0, aminoWrap.length);
-            byte[] address = Ripemd.ripemd160(pubKeyHash);
-            byte[] bytes = encode(0, address);
-            addressResult = io.common.crypto.encode.Bech32.encode(Constants.COSMOS_MAIN_PREFIX, bytes);
-            System.out.println(addressResult);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return addressResult;
-
-    }
 
     public static byte[] getPubkeyValue(byte[] publickKey) throws Exception {
         try {
@@ -123,13 +80,4 @@ public class AddressUtil {
         return convertedProgram;
     }
 
-//    public static void main(String[] args) {
-//        try {
-//            AddressUtil.createNewAddressEd25519(Hex.decode("73e7c47079fb857d524856ccb48ae2f769d79bfb08020a6b16c16250adf1595b"));
-//            AddressUtil.createNewAddressSecp256k1(Hex.decode("02141202d82740af1b754b442f5fd9c4a862d49b5cafca5d04a9f06216ddf545bd"));
-//            AddressUtil.createNewAddressSecp256k1Multi(Hex.decode("039ef93bad5b93f9dfd8bdd8149b5ecb9d571863a1aa165fa7b074a8d6697da5c8"));
-//        } catch (Exception e) {
-//
-//        }
-//    }
 }

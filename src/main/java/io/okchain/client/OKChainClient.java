@@ -1,8 +1,8 @@
 package io.okchain.client;
 
-import io.cosmos.crypto.Crypto;
-import io.cosmos.types.Token;
-import io.cosmos.util.AddressUtil;
+import io.okchain.crypto.Crypto;
+import io.okchain.types.Token;
+import io.okchain.util.AddressUtil;
 import io.okchain.api.transaction.BuildTransaction;
 import io.okchain.http.OKChainRequest;
 

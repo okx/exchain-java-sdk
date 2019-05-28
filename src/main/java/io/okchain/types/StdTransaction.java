@@ -1,8 +1,8 @@
 package io.okchain.types;
 
 import com.google.gson.annotations.SerializedName;
-import io.cosmos.types.Fee;
-import io.cosmos.types.Signature;
+import io.okchain.types.Fee;
+import io.okchain.types.Signature;
 
 
 import java.util.List;

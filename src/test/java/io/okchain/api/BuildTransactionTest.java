@@ -1,6 +1,6 @@
 package io.okchain.api;
 
-import io.cosmos.types.Token;
+import io.okchain.types.Token;
 import io.okchain.api.transaction.BuildTransaction;
 import io.okchain.client.OKChainClient;
 import org.junit.Test;

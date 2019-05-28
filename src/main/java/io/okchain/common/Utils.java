@@ -1,16 +1,12 @@
-package io.cosmos.common;
+package io.okchain.common;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.bouncycastle.crypto.digests.Blake2bDigest;
-import org.bouncycastle.util.encoders.Hex;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SignatureException;
 import java.util.Arrays;
 
 public class Utils {

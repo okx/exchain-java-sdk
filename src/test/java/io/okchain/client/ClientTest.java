@@ -1,6 +1,6 @@
 package io.okchain.client;
 
-import io.cosmos.types.Token;
+import io.okchain.types.Token;
 import org.bouncycastle.util.test.TestResult;
 import org.junit.Test;
 import org.junit.Assert;
@@ -45,7 +45,7 @@ public class ClientTest {
     public void testCancelOrderTransaction() {
         OKChainClient okc = generateClient();
 
-        String orderId = "ID0000015733-1";
+        String orderId = "ID0000029813-1";
         String memo = "";
 
         String res = okc.sendCancelOrderTransaction(orderId,memo);

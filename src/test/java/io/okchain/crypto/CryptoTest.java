@@ -1,7 +1,7 @@
 package io.okchain.crypto;
 
-import io.cosmos.crypto.Crypto;
-import io.cosmos.util.AddressUtil;
+import io.okchain.crypto.Crypto;
+import io.okchain.util.AddressUtil;
 import org.junit.Test;
 
 public class CryptoTest {
