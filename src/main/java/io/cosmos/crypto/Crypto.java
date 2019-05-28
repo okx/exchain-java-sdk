@@ -23,6 +23,10 @@ public class Crypto {
         return EncodeUtils.bytesToHex(random.randBytes(32));
     }
 
+    public static String generateMnemonic() {
+        return "";
+    }
+
     public static byte[] sign(byte[] msg, String privateKey) throws NoSuchAlgorithmException {
         ECKey k = ECKey.fromPrivate(new BigInteger(privateKey, 16));
 

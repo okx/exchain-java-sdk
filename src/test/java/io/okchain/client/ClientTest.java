@@ -33,7 +33,7 @@ public class ClientTest {
 
         String side = "BUY";
         String product = "xxb_okb";
-        String price = "1.00000000";
+        String price = "0.10000000";
         String quantity = "1.00000000";
         String memo = "";
 
@@ -45,12 +45,31 @@ public class ClientTest {
     public void testCancelOrderTransaction() {
         OKChainClient okc = generateClient();
 
-        String orderId = "ID0000017570-1";
+        String orderId = "ID0000015733-1";
         String memo = "";
 
         String res = okc.sendCancelOrderTransaction(orderId,memo);
         System.out.println(res);
     }
+
+    @Test
+    public void testFailOP() {
+        String url = "http://192.168.71.35:1317";
+        OKChainClient okc = new OKChainClient(url);
+
+        String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
+        String memo = "";
+
+        List<Token> amountList = new ArrayList<>();
+        Token amount = new Token();
+        amount.setDenom("okb");
+        amount.setAmount("1.00000000");
+        amountList.add(amount);
+
+        String res = okc.sendTransferTransaction(to,amountList,memo,"0");
+        System.out.println(res);
+    }
+
 
     private OKChainClient generateClient() {
         String privateKey = "c4c451ce673485521f9c9b74b6d90f0da433ef7f012fa7f9db4def627dccd632";

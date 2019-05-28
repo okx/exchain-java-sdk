@@ -9,6 +9,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.util.List;
 
 public class MsgSend implements IMsg {
+
+    private List<Token> amount;
+
     @JsonProperty("from_address")
     @SerializedName("from_address")
     private String fromAddress;
@@ -16,8 +19,6 @@ public class MsgSend implements IMsg {
     @JsonProperty("to_address")
     @SerializedName("to_address")
     private String toAddress;
-
-    private List<Token> amount;
 
     public MsgSend() {
     }

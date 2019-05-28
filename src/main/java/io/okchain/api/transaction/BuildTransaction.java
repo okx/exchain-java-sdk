@@ -1,6 +1,7 @@
 package io.okchain.api.transaction;
 
 
+import io.cosmos.common.Utils;
 import io.cosmos.crypto.Crypto;
 import io.cosmos.types.Fee;
 import io.cosmos.types.Pubkey;
@@ -56,8 +57,10 @@ public class BuildTransaction {
         SignData signData = new SignData(okc.accountNumber, okc.chainId, fee, memo, new IMsg[]{signMsg}, sequence);
         try {
             byte[] byteSignData = EncodeUtils.toJsonEncodeBytes(signData);
-            System.out.println(new String(byteSignData));
-            Signature signature = sign(byteSignData, okc.privateKey);
+            String signDataJson = Utils.serializer.toJson(signData);
+            //System.out.println(new String(byteSignData));
+            System.out.println(signDataJson);
+            Signature signature = sign(signDataJson.getBytes(), okc.privateKey);
             //组装签名结构
             List<Signature> signatures = new ArrayList<>();
             signatures.add(signature);
@@ -76,15 +79,16 @@ public class BuildTransaction {
     }
 
     private static Fee generateFeeDefault() {
-        List<Token> amountList = new ArrayList<>();
-        Token amount = new Token();
-        amount.setDenom("okb");
-        amount.setAmount("1.00000000");
-        amountList.add(amount);
-        Fee fee = new Fee();
-        fee.setAmount(amountList);
-        fee.setGas("200000");
-        return fee;
+//        List<Token> amountList = new ArrayList<>();
+//        Token amount = new Token();
+//        amount.setDenom("okb");
+//        amount.setAmount("1.00000000");
+//        amountList.add(amount);
+//        Fee fee = new Fee();
+//        fee.setAmount(amountList);
+//        fee.setGas("200000");
+//        return fee;
+        return null;
     }
 
     private static Signature sign(byte[] byteSignData, String privateKey) throws Exception {
