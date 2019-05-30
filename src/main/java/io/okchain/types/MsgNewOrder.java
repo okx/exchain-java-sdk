@@ -1,7 +1,6 @@
 package io.okchain.types;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.gson.annotations.SerializedName;
+import com.alibaba.fastjson.annotation.JSONField;
 
 public class MsgNewOrder implements IMsg {
     public MsgNewOrder() {
@@ -73,33 +72,25 @@ public class MsgNewOrder implements IMsg {
         this.depth = depth;
     }
 
-    @JsonProperty("BatchNumber")
-    @SerializedName("BatchNumber")
+    @JSONField(name = "BatchNumber")
     private String batchNumber;
 
-
-    @JsonProperty("Depth")
-    @SerializedName("Depth")
+    @JSONField(name = "Depth")
     private String depth;
 
-    @JsonProperty("Price")
-    @SerializedName("Price")
+    @JSONField(name = "Price")
     private String price;    // price of the order
 
-    @JsonProperty("Product")
-    @SerializedName("Product")
+    @JSONField(name = "Product")
     private String product;   // product for trading pair in full name of the tokens
 
-    @JsonProperty("Quantity")
-    @SerializedName("Quantity")
+    @JSONField(name = "Quantity")
     private String quantity;     // quantity of the order
 
-    @JsonProperty("Sender")
-    @SerializedName("Sender")
+    @JSONField(name = "Sender")
     private String sender ; // order maker address
 
-    @JsonProperty("Side")
-    @SerializedName("Side")
+    @JSONField(name = "Side")
     private String side;  // BUY/SELL
 
 }

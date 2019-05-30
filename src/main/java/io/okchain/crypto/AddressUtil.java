@@ -1,4 +1,4 @@
-package io.okchain.util;
+package io.okchain.crypto;
 
 import com.google.crypto.tink.subtle.Bech32;
 import io.common.crypto.encode.ConvertBits;
@@ -12,10 +12,11 @@ import java.util.Arrays;
 /**
  * @program: coin-parent-sdk
  * @description: 地址相关的工具
- * @author: liqiang
- * @create: 2018-12-17 11:31
+ * @author: xuqian
+ * @create: 2019-05-28 11:31
  **/
 public class AddressUtil {
+
 
     public static String createNewAddressSecp256k1(String mainPrefix, byte[] publickKey) throws Exception {
         String addressResult = null;

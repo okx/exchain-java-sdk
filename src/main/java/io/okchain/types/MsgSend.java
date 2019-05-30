@@ -1,10 +1,6 @@
 package io.okchain.types;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.gson.annotations.SerializedName;
-import io.okchain.types.Token;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import com.alibaba.fastjson.annotation.JSONField;
 
 import java.util.List;
 
@@ -12,12 +8,10 @@ public class MsgSend implements IMsg {
 
     private List<Token> amount;
 
-    @JsonProperty("from_address")
-    @SerializedName("from_address")
+    @JSONField(name = "from_address")
     private String fromAddress;
 
-    @JsonProperty("to_address")
-    @SerializedName("to_address")
+    @JSONField(name = "to_address")
     private String toAddress;
 
     public MsgSend() {
@@ -53,12 +47,4 @@ public class MsgSend implements IMsg {
         this.toAddress = toAddress;
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("from_address", fromAddress)
-                .append("to_address", toAddress)
-                .append("amount", amount)
-                .toString();
-    }
 }

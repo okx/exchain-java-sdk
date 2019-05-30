@@ -1,13 +1,12 @@
 package io.okchain.types;
 
-import com.google.gson.annotations.SerializedName;
-import io.okchain.common.Utils;
+import com.alibaba.fastjson.annotation.JSONField;
 
 
 public class PostTransaction {
     private StdTransaction tx;
 
-    @SerializedName(value = "return")
+    @JSONField(name = "return")
     private String returnType;
 
     public PostTransaction() {
@@ -32,10 +31,6 @@ public class PostTransaction {
 
     public String getReturnType() {
         return returnType;
-    }
-
-    public String toJson() {
-        return Utils.serializer.toJson(this);
     }
 
 

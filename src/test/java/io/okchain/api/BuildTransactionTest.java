@@ -1,8 +1,11 @@
 package io.okchain.api;
 
-import io.okchain.types.Token;
-import io.okchain.api.transaction.BuildTransaction;
 import io.okchain.client.OKChainClient;
+import io.okchain.client.impl.OKChainClientImpl;
+import io.okchain.transaction.BuildTransaction;
+import io.okchain.types.AccountInfo;
+import io.okchain.types.AddressInfo;
+import io.okchain.types.Token;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -11,30 +14,32 @@ import java.util.List;
 public class BuildTransactionTest {
     @Test
     public void testBuildNewOrderTx() {
-        OKChainClient okc = generateClient();
+        AccountInfo account = generateAccountInfo();
         String sequence = "50";
         String side = "BUY";
         String product = "xxb_okb";
         String price = "1.00000000";
         String quantity = "1.00000000";
         String memo = "";
-        String transaction = BuildTransaction.generatePlaceOrderTransaction(okc,side,product,price,quantity,memo,sequence);
+        String transaction = BuildTransaction.generatePlaceOrderTransaction(account, side, product, price, quantity, memo);
         System.out.println(transaction);
     }
 
     @Test
     public void testBuildCancelOrderTx() {
-        OKChainClient okc = generateClient();
+        AccountInfo account = generateAccountInfo();
+
         String sequence = "51";
         String orderId = "ID0000065785-1";
         String memo = "";
-        String transaction = BuildTransaction.generateCancelOrderTransaction(okc,orderId,memo,sequence);
+        String transaction = BuildTransaction.generateCancelOrderTransaction(account, orderId, memo);
         System.out.println(transaction);
     }
 
     @Test
     public void testBuildSendTx() {
-        OKChainClient okc = generateClient();
+        AccountInfo account = generateAccountInfo();
+
         String sequence = "52";
         String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
         String memo = "";
@@ -45,15 +50,16 @@ public class BuildTransactionTest {
         amount.setAmount("1.00000000");
         amountList.add(amount);
 
-        String transaction = BuildTransaction.generateSendTransaction(okc,to,amountList,memo,sequence);
+        String transaction = BuildTransaction.generateSendTransaction(account, to, amountList, memo);
         System.out.println(transaction);
     }
 
-    private OKChainClient generateClient() {
-        String privateKey = "c4c451ce673485521f9c9b74b6d90f0da433ef7f012fa7f9db4def627dccd632";
-        //String address = "okchain152p8xmejhza7wuhhzut88vkakdgasqwlw2qjcf";
-        int accountNumber = 4;
-        OKChainClient okc = new OKChainClient(privateKey,accountNumber);
-        return okc;
+
+    private AccountInfo generateAccountInfo() {
+        String url = "";
+        OKChainClient okc = OKChainClientImpl.getOKChainClient(url);
+        AddressInfo addressInfo = okc.createAddressInfo();
+
+        return new AccountInfo(addressInfo, "0", "0");
     }
 }

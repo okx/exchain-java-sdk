@@ -1,9 +1,6 @@
 package io.okchain.types;
 
-import com.google.gson.annotations.SerializedName;
-import io.okchain.types.Fee;
-import io.okchain.types.Signature;
-
+import com.alibaba.fastjson.annotation.JSONField;
 
 import java.util.List;
 
@@ -18,7 +15,7 @@ public class StdTransaction {
         this.memo = memo;
     }
 
-    @SerializedName("msg")
+    @JSONField(name = "msg")
     private IMsg[] msgs;
 
     private Fee fee;

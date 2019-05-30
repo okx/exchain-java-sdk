@@ -1,15 +1,12 @@
 package io.okchain.types;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.gson.annotations.SerializedName;
+import com.alibaba.fastjson.annotation.JSONField;
 
 public class MsgCancelOrder implements IMsg {
-    @JsonProperty("OrderId")
-    @SerializedName("OrderId")
+    @JSONField(name = "OrderId")
     public String orderId;
 
-    @JsonProperty("Sender")
-    @SerializedName("Sender")
+    @JSONField(name = "Sender")
     public String sender;
 
     public MsgCancelOrder(String sender, String orderId) {

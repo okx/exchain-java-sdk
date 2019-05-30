@@ -1,10 +1,6 @@
 package io.okchain.types;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.gson.annotations.SerializedName;
-import io.okchain.types.Fee;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import com.alibaba.fastjson.annotation.JSONField;
 
 public class SignData {
     public SignData() {
@@ -19,28 +15,23 @@ public class SignData {
         this.sequence = sequence;
     }
 
-    @JsonProperty("account_number")
-    @SerializedName("account_number")
+
+    @JSONField(name = "account_number")
     private String accountNumber;
 
-    @JsonProperty("chain_id")
-    @SerializedName("chain_id")
+    @JSONField(name = "chain_id")
     private String chainId;
 
-    @JsonProperty("fee")
-    @SerializedName("fee")
+    @JSONField(name = "fee")
     private Fee fee;
 
-    @JsonProperty("memo")
-    @SerializedName("memo")
+    @JSONField(name = "memo")
     private String memo;
 
-    @JsonProperty("msgs")
-    @SerializedName("msgs")
+    @JSONField(name = "msgs")
     private IMsg[] msgs;
 
-    @JsonProperty("sequence")
-    @SerializedName("sequence")
+    @JSONField(name = "sequence")
     private String sequence;
 
     public String getChainId() {
@@ -95,15 +86,4 @@ public class SignData {
         this.fee = fee;
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("account_number", accountNumber)
-                .append("chain_id", chainId)
-                .append("fee", fee)
-                .append("memo", memo)
-                .append("msgs", msgs)
-                .append("sequence", sequence)
-                .toString();
-    }
 }

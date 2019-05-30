@@ -11,9 +11,9 @@ import java.util.Arrays;
 
 public class Utils {
 
-    public static String rfc3339DateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
+    public final static String rfc3339DateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
 
-    public static final Gson serializer = new GsonBuilder().setDateFormat(rfc3339DateFormat).disableHtmlEscaping().create();
+    public final static Gson serializer = new GsonBuilder().setDateFormat(rfc3339DateFormat).disableHtmlEscaping().create();
 
     public static int writeVarint(long value, ByteArrayOutputStream stream) throws IOException {
         byte[] varint = new byte[8];
