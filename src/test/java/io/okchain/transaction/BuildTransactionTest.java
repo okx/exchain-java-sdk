@@ -1,8 +1,7 @@
-package io.okchain.api;
+package io.okchain.transaction;
 
 import io.okchain.client.OKChainClient;
 import io.okchain.client.impl.OKChainClientImpl;
-import io.okchain.transaction.BuildTransaction;
 import io.okchain.types.AccountInfo;
 import io.okchain.types.AddressInfo;
 import io.okchain.types.Token;

@@ -38,6 +38,9 @@ public class BuildTransaction {
         if (account.getAccountNumber() == "" || account.getSequenceNumber() == "") {
 
         }
+        if (memo == null) {
+            memo = "";
+        }
         Fee fee = generateFeeDefault();
         SignData signData = new SignData(account.getAccountNumber(), ConstantIF.CHAIN_ID, fee, memo, new IMsg[]{signMsg}, account.getSequenceNumber());
         try {

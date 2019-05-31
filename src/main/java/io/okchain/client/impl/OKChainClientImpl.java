@@ -26,7 +26,7 @@ public class OKChainClientImpl implements OKChainClient {
         this.backend = backend;
     }
 
-    public static OKChainClient getOKChainClient(String backend) {
+    public static OKChainClient getOKChainClient(String backend) throws NullPointerException {
         if (okChainClient == null) {
             okChainClient = new OKChainClientImpl(backend);
         }
@@ -40,7 +40,8 @@ public class OKChainClientImpl implements OKChainClient {
 
     }
 
-    public JSONObject getAccountFromNode(String userAddress) {
+    public JSONObject getAccountFromNode(String userAddress) throws NullPointerException {
+        if (userAddress.equals("")) throw new NullPointerException("empty userAddress");
         JSONObject res = JSON.parseObject(getAccountPrivate(userAddress));
         return res;
     }
@@ -50,7 +51,8 @@ public class OKChainClientImpl implements OKChainClient {
         return getAddressInfo(privateKey);
     }
 
-    private AddressInfo getAddressInfo(String privateKey) {
+    private AddressInfo getAddressInfo(String privateKey) throws NullPointerException {
+        if (privateKey.equals("")) throw new NullPointerException("empty prvateKey");
         String pubKey = Crypto.generatePubKeyHexFromPriv(privateKey);
         String address = "";
         try {
@@ -61,7 +63,8 @@ public class OKChainClientImpl implements OKChainClient {
         return new AddressInfo(privateKey, pubKey, address);
     }
 
-    public AccountInfo getAccountInfo(String privateKey) {
+    public AccountInfo getAccountInfo(String privateKey) throws NullPointerException {
+        if (privateKey.equals("")) throw new NullPointerException("empty prvateKey");
         AddressInfo addressInfo = getAddressInfo(privateKey);
         JSONObject accountJson = JSON.parseObject(getAccountPrivate(addressInfo.getUserAddress()));
         String sequence = getSequance(accountJson);
@@ -69,32 +72,38 @@ public class OKChainClientImpl implements OKChainClient {
         return new AccountInfo(addressInfo, accountNumber, sequence);
     }
 
-    private static String getSequance(JSONObject account) {
+    private String getSequance(JSONObject account) {
         String res = (String) account.getJSONObject("value").get("sequence");
         return res;
     }
 
-    private static String getAccountNumber(JSONObject account) {
+    private String getAccountNumber(JSONObject account) {
         String res = (String) account.getJSONObject("value").get("account_number");
         return res;
     }
 
-    public JSONObject sendSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) {
-        if (!checkAccountInfoValue(account)) return null;
+    public JSONObject sendSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) throws NullPointerException {
+        checkAccountInfoValue(account);
+        if (to.equals("")) throw new NullPointerException("empty to");
+        if (amount == null || amount.isEmpty()) throw new NullPointerException("empty amount");
+
         String data = BuildTransaction.generateSendTransaction(account, to, amount, memo);
         return sendTransaction(data);
     }
 
 
-    public JSONObject sendPlaceOrderTransaction(AccountInfo account, PlaceOrderRequestParms parms, String memo) {
-        if (!checkAccountInfoValue(account)) return null;
+    public JSONObject sendPlaceOrderTransaction(AccountInfo account, PlaceOrderRequestParms parms, String memo) throws NullPointerException {
+        checkAccountInfoValue(account);
+        checkPlaceOrderRequestParms(parms);
         String data = BuildTransaction.generatePlaceOrderTransaction(account, parms.getSide(), parms.getProduct(), parms.getPrice(), parms.getQuantity(), memo);
         return sendTransaction(data);
     }
 
 
-    public JSONObject sendCancelOrderTransaction(AccountInfo account, String orderId, String memo) {
-        if (!checkAccountInfoValue(account)) return null;
+    public JSONObject sendCancelOrderTransaction(AccountInfo account, String orderId, String memo) throws NullPointerException {
+        checkAccountInfoValue(account);
+        if (orderId.equals("")) throw new NullPointerException("empty orderId");
+
         String data = BuildTransaction.generateCancelOrderTransaction(account, orderId, memo);
         return sendTransaction(data);
     }
@@ -104,16 +113,33 @@ public class OKChainClientImpl implements OKChainClient {
         return JSON.parseObject(res);
     }
 
-    private boolean checkAccountInfoValue(AccountInfo account) {
-        if (account.getPrivateKey().equals("")) return false;
-        if (account.getSequenceNumber().equals("") || account.getAccountNumber().equals("")) {
-            JSONObject accountJson = JSON.parseObject(account.getPrivateKey());
-            String sequence = getSequance(accountJson);
-            String accountNumber = getAccountNumber(accountJson);
-            if (sequence.equals("") || accountNumber.equals("")) return false;
-            if (account.getSequenceNumber().equals("")) account.setSequenceNumber(sequence);
-            if (account.getAccountNumber().equals("")) account.setAccountNumber(accountNumber);
-        }
-        return true;
+    private void checkAccountInfoValue(AccountInfo account) {
+        if (account == null) throw new NullPointerException("empty AccountInfo");
+        if (account.getAccountNumber().equals("")) throw new NullPointerException("empty accountNumber");
+        if (account.getSequenceNumber().equals("")) throw new NullPointerException("empty SequenceNumber");
+        if (account.getPrivateKey().equals("")) throw new NullPointerException("empty PrivateKey");
+        if (account.getPublicKey().equals("")) throw new NullPointerException("empty PublicKey");
+        if (account.getUserAddress().equals("")) throw new NullPointerException("empty UserAddress");
+        //        if (account.getPrivateKey().equals("")) return false;
+        //        if (account.getSequenceNumber().equals("") || account.getAccountNumber().equals("")) {
+        //            JSONObject accountJson = JSON.parseObject(account.getPrivateKey());
+        //            String sequence = getSequance(accountJson);
+        //            String accountNumber = getAccountNumber(accountJson);
+        //            if (sequence.equals("") || accountNumber.equals("")) return false;
+        //            if (account.getSequenceNumber().equals("")) account.setSequenceNumber(sequence);
+        //            if (account.getAccountNumber().equals(""))
+        // account.setAccountNumber(accountNumber);
+        //        }
+        //        return true;
+        //    }
     }
+
+    private void checkPlaceOrderRequestParms(PlaceOrderRequestParms parms) {
+        if (parms == null) throw new NullPointerException("empty PlaceOrderRequestParms");
+        if (parms.getPrice().equals("")) throw new NullPointerException("empty Price");
+        if (parms.getProduct().equals("")) throw new NullPointerException("empty Product");
+        if (parms.getQuantity().equals("")) throw new NullPointerException("empty Quantity");
+        if (parms.getSide().equals("")) throw new NullPointerException("empty Side");
+    }
+
 }

@@ -16,19 +16,19 @@ public interface OKChainClient {
 //        return null;
 //    }
 
-    public JSONObject getAccountFromNode(String userAddress);
+    public JSONObject getAccountFromNode(String userAddress) throws NullPointerException;
 
     public AddressInfo createAddressInfo();
 
-    public AccountInfo getAccountInfo(String privateKey);
+    public AccountInfo getAccountInfo(String privateKey) throws NullPointerException;
 
     public JSONObject sendSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) throws NullPointerException;
 
 
-    public JSONObject sendPlaceOrderTransaction(AccountInfo account, PlaceOrderRequestParms parms, String memo);
+    public JSONObject sendPlaceOrderTransaction(AccountInfo account, PlaceOrderRequestParms parms, String memo) throws NullPointerException;
 
 
-    public JSONObject sendCancelOrderTransaction(AccountInfo account, String orderId, String memo);
+    public JSONObject sendCancelOrderTransaction(AccountInfo account, String orderId, String memo) throws NullPointerException;
 
 
 }
