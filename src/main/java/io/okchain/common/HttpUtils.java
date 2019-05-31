@@ -1,5 +1,6 @@
 package io.okchain.common;
 
+import io.okchain.types.Pair;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -20,6 +21,27 @@ import java.util.Map;
 
 public class HttpUtils {
 
+    public static String httpGet(String url, ArrayList<Pair> pairs) {
+        String params = "";
+        if (pairs != null) {
+            for (int i = 0; i < pairs.size(); i++) {
+                String v = pairs.get(i).getValue();
+                if (v == null || v.equals("")) {
+                    pairs.remove(i);
+                    i--;
+                }
+            }
+            if (!pairs.isEmpty()) {
+                params = pairs.get(0).getKey() + "=" + pairs.get(0).getValue();
+                for (int i = 1; i < pairs.size(); i++) {
+                    params = params + "&" + pairs.get(i).getKey() + "=" + pairs.get(i).getValue();
+                }
+            }
+
+        }
+        if (params.equals("")) return httpGet(url);
+        return httpGet(url + "?" + params);
+    }
 
     public static String httpGet(String url) {
         System.out.println("get:" + url);

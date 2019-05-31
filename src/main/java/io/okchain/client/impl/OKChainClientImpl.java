@@ -9,11 +9,9 @@ import io.okchain.common.HttpUtils;
 import io.okchain.crypto.AddressUtil;
 import io.okchain.crypto.Crypto;
 import io.okchain.transaction.BuildTransaction;
-import io.okchain.types.AccountInfo;
-import io.okchain.types.AddressInfo;
-import io.okchain.types.PlaceOrderRequestParms;
-import io.okchain.types.Token;
+import io.okchain.types.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OKChainClientImpl implements OKChainClient {
@@ -51,7 +49,7 @@ public class OKChainClientImpl implements OKChainClient {
         return getAddressInfo(privateKey);
     }
 
-    private AddressInfo getAddressInfo(String privateKey) throws NullPointerException {
+    public AddressInfo getAddressInfo(String privateKey) throws NullPointerException {
         if (privateKey.equals("")) throw new NullPointerException("empty prvateKey");
         String pubKey = Crypto.generatePubKeyHexFromPriv(privateKey);
         String address = "";
@@ -92,7 +90,7 @@ public class OKChainClientImpl implements OKChainClient {
     }
 
 
-    public JSONObject sendPlaceOrderTransaction(AccountInfo account, PlaceOrderRequestParms parms, String memo) throws NullPointerException {
+    public JSONObject sendPlaceOrderTransaction(AccountInfo account, RequestPlaceOrderParams parms, String memo) throws NullPointerException {
         checkAccountInfoValue(account);
         checkPlaceOrderRequestParms(parms);
         String data = BuildTransaction.generatePlaceOrderTransaction(account, parms.getSide(), parms.getProduct(), parms.getPrice(), parms.getQuantity(), memo);
@@ -134,12 +132,120 @@ public class OKChainClientImpl implements OKChainClient {
         //    }
     }
 
-    private void checkPlaceOrderRequestParms(PlaceOrderRequestParms parms) {
+    private void checkPlaceOrderRequestParms(RequestPlaceOrderParams parms) {
         if (parms == null) throw new NullPointerException("empty PlaceOrderRequestParms");
         if (parms.getPrice().equals("")) throw new NullPointerException("empty Price");
         if (parms.getProduct().equals("")) throw new NullPointerException("empty Product");
         if (parms.getQuantity().equals("")) throw new NullPointerException("empty Quantity");
         if (parms.getSide().equals("")) throw new NullPointerException("empty Side");
     }
+
+    private BaseModel queryRequest(String url, ArrayList<Pair> pairs) {
+        String res = HttpUtils.httpGet(url, pairs);
+        return JSON.parseObject(res, BaseModel.class);
+    }
+
+    public BaseModel getAccountALLTokens(String address) throws NullPointerException {
+        if (address.equals("")) throw new NullPointerException("empty address");
+        return queryRequest(backend + ConstantIF.GET_ACCOUNT_ALL_TOKENS_URL_PATH + address, null);
+    }
+
+    public BaseModel getAccountToken(String address, String symbol) throws NullPointerException {
+        if (address.equals("")) throw new NullPointerException("empty address");
+        if (symbol.equals("")) throw new NullPointerException("empty symbol");
+        ArrayList<Pair> pairs = new ArrayList<>();
+        pairs.add(new Pair("symbol", symbol));
+        return queryRequest(backend + ConstantIF.GET_ACCOUNT_TOKEN_URL_PATH + address, pairs);
+    }
+
+    public BaseModel getTokens() {
+        return queryRequest(backend + ConstantIF.GET_TOKENS_URL_PATH, null);
+    }
+
+
+    public BaseModel getToken(String symbol) throws NullPointerException {
+        if (symbol.equals("")) throw new NullPointerException("empty symbol");
+        return queryRequest(backend + ConstantIF.GET_TOKEN_URL_PATH + symbol, null);
+    }
+
+    public BaseModel getProducts() {
+        return queryRequest(backend + ConstantIF.GET_PRODUCTS_URL_PATH, null);
+    }
+
+    public BaseModel getDepthBook(String product) throws NullPointerException {
+        if (product.equals("")) throw new NullPointerException("empty product");
+        ArrayList<Pair> pairs = new ArrayList<>();
+        pairs.add(new Pair("product", product));
+        return queryRequest(backend + ConstantIF.GET_DEPTHBOOK_URL_PATH, pairs);
+    }
+
+    public BaseModel getCandles(String granularity, String instrumentId, String size) throws NullPointerException {
+        if (instrumentId.equals("")) throw new NullPointerException("empty product");
+        ArrayList<Pair> pairs = new ArrayList<>();
+        pairs.add(new Pair("granularity", granularity));
+        pairs.add(new Pair("size", size));
+        return queryRequest(backend + ConstantIF.GET_CANDLES_URL_PATH + instrumentId, pairs);
+    }
+
+    public BaseModel getTickers(String count) {
+        ArrayList<Pair> pairs = new ArrayList<>();
+        pairs.add(new Pair("count", count));
+        return queryRequest(backend + ConstantIF.GET_TICKERS_URL_PATH, pairs);
+    }
+
+
+    public BaseModel getOrderListOpen(RequestOrderListOpenParams params) throws NullPointerException {
+        if (params.getAddress().equals("")) throw new NullPointerException("empty Address");
+        ArrayList<Pair> pairs = new ArrayList<>();
+        pairs.add(new Pair("product", params.getProduct()));
+        pairs.add(new Pair("address", params.getAddress()));
+        pairs.add(new Pair("side", params.getSide()));
+        pairs.add(new Pair("start", params.getStart()));
+        pairs.add(new Pair("end", params.getEnd()));
+        pairs.add(new Pair("page", params.getPage()));
+        pairs.add(new Pair("perPage", params.getPerPage()));
+        return queryRequest(backend + ConstantIF.GET_ORDERLIST_OPEN_URL_PATH, pairs);
+
+    }
+
+    public BaseModel getOrderListClosed(RequestOrderListClosedParams params) throws NullPointerException {
+        if (params.getAddress().equals("")) throw new NullPointerException("empty Address");
+        ArrayList<Pair> pairs = new ArrayList<>();
+        pairs.add(new Pair("product", params.getProduct()));
+        pairs.add(new Pair("address", params.getAddress()));
+        pairs.add(new Pair("side", params.getSide()));
+        pairs.add(new Pair("start", params.getStart()));
+        pairs.add(new Pair("end", params.getEnd()));
+        pairs.add(new Pair("page", params.getPage()));
+        pairs.add(new Pair("perPage", params.getPerPage()));
+        pairs.add(new Pair("hideNoFill", params.getHideNoFill()));
+        return queryRequest(backend + ConstantIF.GET_ORDERLIST_CLOSED_URL_PATH, pairs);
+    }
+
+    public BaseModel getDeals(RequestDealsParams params) throws NullPointerException {
+        if (params.getAddress().equals("")) throw new NullPointerException("empty Address");
+        ArrayList<Pair> pairs = new ArrayList<>();
+        pairs.add(new Pair("product", params.getProduct()));
+        pairs.add(new Pair("address", params.getAddress()));
+        pairs.add(new Pair("side", params.getSide()));
+        pairs.add(new Pair("start", params.getStart()));
+        pairs.add(new Pair("end", params.getEnd()));
+        pairs.add(new Pair("page", params.getPage()));
+        pairs.add(new Pair("perPage", params.getPerPage()));
+        return queryRequest(backend + ConstantIF.GET_DEALS_URL_PATH, pairs);
+    }
+
+    public BaseModel getTransactions(RequestTransactionsParams params) throws NullPointerException {
+        if (params.getAddress().equals("")) throw new NullPointerException("empty Address");
+        ArrayList<Pair> pairs = new ArrayList<>();
+        pairs.add(new Pair("address", params.getAddress()));
+        pairs.add(new Pair("type", params.getType()));
+        pairs.add(new Pair("start", params.getStart()));
+        pairs.add(new Pair("end", params.getEnd()));
+        pairs.add(new Pair("page", params.getPage()));
+        pairs.add(new Pair("perPage", params.getPerPage()));
+        return queryRequest(backend + ConstantIF.GET_TRANSACTIONS_URL_PATH, pairs);
+    }
+
 
 }

@@ -2,7 +2,7 @@ package io.okchain.types;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
-public class PlaceOrderRequestParms {
+public class RequestPlaceOrderParams {
     @JSONField(name = "Price")
     private String price;    // price of the order
 
@@ -15,7 +15,7 @@ public class PlaceOrderRequestParms {
     @JSONField(name = "Side")
     private String side;  // BUY/SELL
 
-    public PlaceOrderRequestParms(String price, String product, String quantity, String side) {
+    public RequestPlaceOrderParams(String price, String product, String quantity, String side) {
         this.price = price;
         this.product = product;
         this.quantity = quantity;
