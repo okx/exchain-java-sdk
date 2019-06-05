@@ -3,6 +3,10 @@ package io.okchain.common;
 public interface ConstantIF {
     public static String CHAIN_ID = "okchain";
     public static String ADDRESS_PREFIX = "okchain";
+
+    //public static String HD_PATH = "m/44'/118'/0'/0/0";
+    public static String HD_PATH = "M/44H/118H/0H/0/0";
+    //url path
     public static String ACCOUNT_URL_PATH = "/auth/accounts/";
     public static String TRANSACTION_URL_PATH = "/txs";
 

@@ -1,15 +1,20 @@
 package io.okchain.crypto;
 
-import com.google.crypto.tink.subtle.Random;
+
+import com.google.common.base.Splitter;
 import io.okchain.common.ConstantIF;
 import org.bitcoinj.core.ECKey;
 import org.bitcoinj.core.Sha256Hash;
 import org.bitcoinj.core.Utils;
-import org.spongycastle.util.encoders.Hex;
+import org.bitcoinj.crypto.*;
+import org.bouncycastle.util.encoders.Hex;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.List;
+
 
 /**
  * @program: coin-parent-sdk
@@ -20,13 +25,36 @@ import java.security.NoSuchAlgorithmException;
 public class Crypto {
 
     public static String generatePrivateKey() {
-        Random random=new Random();
-        return Hex.toHexString(random.randBytes(32));
+        byte[] privateKey = new byte[32];
+        new SecureRandom().nextBytes(privateKey);
+        return Hex.toHexString(privateKey);
+
     }
 
     public static String generateMnemonic() {
-        return "";
+        byte[] entrophy = new byte[128 / 8];
+        new SecureRandom().nextBytes(entrophy);
+        try {
+
+            return Utils.join(MnemonicCode.INSTANCE.toMnemonic(entrophy));
+        } catch (MnemonicException.MnemonicLengthException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
+
+    public static String generatePrivateKeyFromMnemonic(String mnemonic) {
+        List<String> words = Splitter.on(" ").splitToList(mnemonic);
+        byte[] seed = MnemonicCode.INSTANCE.toSeed(words, "");
+        DeterministicKey key = HDKeyDerivation.createMasterPrivateKey(seed);
+
+        List<ChildNumber> childNumbers = HDUtils.parsePath(ConstantIF.HD_PATH);
+        for (ChildNumber cn : childNumbers) {
+            key = HDKeyDerivation.deriveChildKey(key, cn);
+        }
+        return key.getPrivateKeyAsHex();
+    }
+
 
     public static byte[] sign(byte[] msg, String privateKey) throws NoSuchAlgorithmException {
         ECKey k = ECKey.fromPrivate(new BigInteger(privateKey, 16));

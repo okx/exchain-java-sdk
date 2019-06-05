@@ -26,4 +26,17 @@ public class CryptoTest {
         System.out.println("执行时间：" + excTime + "s");
 
     }
+
+    @Test
+    public void generateMnemonic() {
+        System.out.println(Crypto.generateMnemonic());
+    }
+
+    @Test
+    public void generatePrivateKeyFromMnemonic() {
+        String mnemonic = "total lottery arena when pudding best candy until army spoil drill pool";
+        System.out.println(Crypto.generatePrivateKeyFromMnemonic(mnemonic));
+    }
+
+
 }

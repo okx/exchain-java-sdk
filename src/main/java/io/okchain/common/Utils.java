@@ -1,7 +1,5 @@
 package io.okchain.common;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.bouncycastle.crypto.digests.Blake2bDigest;
 
 import java.io.ByteArrayOutputStream;
@@ -13,7 +11,7 @@ public class Utils {
 
     public final static String rfc3339DateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
 
-    public final static Gson serializer = new GsonBuilder().setDateFormat(rfc3339DateFormat).disableHtmlEscaping().create();
+    //public final static Gson serializer = new GsonBuilder().setDateFormat(rfc3339DateFormat).disableHtmlEscaping().create();
 
     public static int writeVarint(long value, ByteArrayOutputStream stream) throws IOException {
         byte[] varint = new byte[8];
