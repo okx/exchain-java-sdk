@@ -2,11 +2,9 @@ package io.okchain.client.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.google.crypto.tink.subtle.Hex;
 import io.okchain.client.OKChainClient;
 import io.okchain.common.ConstantIF;
 import io.okchain.common.HttpUtils;
-import io.okchain.crypto.AddressUtil;
 import io.okchain.crypto.Crypto;
 import io.okchain.transaction.BuildTransaction;
 import io.okchain.types.*;
@@ -52,12 +50,7 @@ public class OKChainClientImpl implements OKChainClient {
     public AddressInfo getAddressInfo(String privateKey) throws NullPointerException {
         if (privateKey.equals("")) throw new NullPointerException("empty prvateKey");
         String pubKey = Crypto.generatePubKeyHexFromPriv(privateKey);
-        String address = "";
-        try {
-            address = AddressUtil.createNewAddressSecp256k1(ConstantIF.ADDRESS_PREFIX, Hex.decode(pubKey));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String address = Crypto.generateAddressFromPub(pubKey);
         return new AddressInfo(privateKey, pubKey, address);
     }
 

@@ -65,7 +65,7 @@ public class ClientTest {
 
 
     private OKChainClient generateClient() {
-        String url = "http://192.168.71.35:1317";
+        String url = "http://192.168.71.132:1317";
         OKChainClient okc = OKChainClientImpl.getOKChainClient(url);
         return okc;
     }

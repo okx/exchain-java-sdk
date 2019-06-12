@@ -25,6 +25,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.web3j</groupId>
+            <artifactId>core</artifactId>
+            <version>4.2.0</version>
+        </dependency>
         <!--fastjson -->
         <dependency>
             <groupId>com.alibaba</groupId>

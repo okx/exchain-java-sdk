@@ -85,14 +85,14 @@ public class Crypto {
         return k.getPubKey();
     }
 
-    public String generateAddressFromPriv(String privateKey) {
+    public static String generateAddressFromPriv(String privateKey) {
         String pub = generatePubKeyHexFromPriv(privateKey);
         return generateAddressFromPub(pub);
     }
 
-    public String generateAddressFromPub(String pubKey) {
+    public static String generateAddressFromPub(String pubKey) {
         try {
-            String addr = AddressUtil.createNewAddressSecp256k1(ConstantIF.ADDRESS_PREFIX, pubKey.getBytes());
+            String addr = AddressUtil.createNewAddressSecp256k1(ConstantIF.ADDRESS_PREFIX, Hex.decode(pubKey));
             return addr;
         } catch (Exception e) {
             e.printStackTrace();
