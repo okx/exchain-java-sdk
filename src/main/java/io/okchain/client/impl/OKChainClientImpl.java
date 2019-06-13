@@ -6,9 +6,13 @@ import io.okchain.client.OKChainClient;
 import io.okchain.common.ConstantIF;
 import io.okchain.common.HttpUtils;
 import io.okchain.crypto.Crypto;
+import io.okchain.crypto.keystore.CipherException;
+import io.okchain.crypto.keystore.KeyStoreUtils;
 import io.okchain.transaction.BuildTransaction;
 import io.okchain.types.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +79,19 @@ public class OKChainClientImpl implements OKChainClient {
 
     public String getPrivateKeyFromMnemonic(String mnemonic) {
         return Crypto.generatePrivateKeyFromMnemonic(mnemonic);
+    }
+
+    public String generateMnemonic() {
+        return Crypto.generateMnemonic();
+    }
+
+    public String generateKeyStore(String privateKey, String passWord) throws CipherException, IOException {
+        File file = new File("./");
+        return KeyStoreUtils.generateWalletFile(passWord, privateKey, file, true);
+    }
+
+    public String getPrivateKeyFromKeyStore(String keyStoreFilePath, String passWord) throws IOException, CipherException {
+        return KeyStoreUtils.getPrivateKeyFromKeyStoreFile(keyStoreFilePath, passWord);
     }
 
     public JSONObject sendSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) throws NullPointerException {

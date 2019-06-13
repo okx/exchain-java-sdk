@@ -77,7 +77,6 @@ public class CryptoTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        file.delete();
         try {
             String privateKey = KeyStoreUtils.getPrivateKeyFromKeyStoreFile(filename, password);
             System.out.println(privateKey);
@@ -86,7 +85,9 @@ public class CryptoTest {
         } catch (CipherException e) {
             e.printStackTrace();
         }
-
+        file.delete();
+        File keyStoreFile = new File(filename);
+        keyStoreFile.delete();
     }
 
 

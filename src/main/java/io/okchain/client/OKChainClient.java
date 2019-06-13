@@ -2,8 +2,10 @@ package io.okchain.client;
 
 
 import com.alibaba.fastjson.JSONObject;
+import io.okchain.crypto.keystore.CipherException;
 import io.okchain.types.*;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface OKChainClient {
@@ -22,6 +24,12 @@ public interface OKChainClient {
     public AddressInfo getAddressInfo(String privateKey) throws NullPointerException;
 
     public String getPrivateKeyFromMnemonic(String mnemonic);
+
+    public String generateMnemonic();
+
+    public String generateKeyStore(String privateKey, String passWord) throws CipherException, IOException;
+
+    public String getPrivateKeyFromKeyStore(String keyStoreFilePath, String passWord) throws IOException, CipherException;
     //send transaction
 
     public JSONObject sendSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) throws NullPointerException;
