@@ -50,7 +50,7 @@ public class BuildTransaction {
         Fee fee = generateFeeDefault();
         SignData signData = new SignData(account.getAccountNumber(), ConstantIF.CHAIN_ID, fee, memo, new IMsg[]{signMsg}, account.getSequenceNumber());
         try {
-            String signDataJson = JSONObject.toJSON(signData).toString();
+            String signDataJson = JSONObject.toJSONString(signData);
             System.out.println("signData: " + signDataJson);
             Signature signature = sign(signDataJson.getBytes(), account.getPrivateKey());
             //组装签名结构
@@ -60,7 +60,7 @@ public class BuildTransaction {
             //组装待广播交易结构
 
             PostTransaction postTransaction = new PostTransaction(stdTransaction, "block");
-            return JSON.toJSON(postTransaction).toString();
+            return JSON.toJSONString(postTransaction);
 
         } catch (Exception e) {
             e.printStackTrace();

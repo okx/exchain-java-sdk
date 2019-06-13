@@ -63,6 +63,16 @@ public class ClientTest {
         System.out.println(resJson.toString());
     }
 
+    private TransferUnit generateTrasferUnit(String to, String denom, String amount) {
+        List<Token> coins = new ArrayList<>();
+        Token coin = new Token();
+        coin.setDenom(denom);
+        coin.setAmount(amount);
+        coins.add(coin);
+        TransferUnit transferUint = new TransferUnit(coins, to);
+        return transferUint;
+    }
+
     @Test
     public void testMultiSendTransaction() {
         OKChainClient okc = generateClient();
@@ -72,18 +82,12 @@ public class ClientTest {
         String to2 = "okchain1eutyuqqase3eyvwe92caw8dcx5ly8s54lnazy5";
         String memo = "";
 
+        String amount = "1.00000000";
+        String denom = "okb";
 
-        List<Token> coins = new ArrayList<>();
-        Token amount = new Token();
-        amount.setDenom("okb");
-        amount.setAmount("1.00000000");
-        coins.add(amount);
-
-        TransferUnit transferUint = new TransferUnit(coins, to);
-        TransferUnit transferUint2 = new TransferUnit(coins, to2);
         List<TransferUnit> transfers = new ArrayList<>();
-        transfers.add(transferUint);
-        transfers.add(transferUint2);
+        transfers.add(generateTrasferUnit(to, denom, amount));
+        transfers.add(generateTrasferUnit(to2, denom, amount));
 
         JSONObject resJson = okc.sendMultiSendTransaction(account, transfers, memo);
         System.out.println(resJson.toString());
@@ -95,20 +99,14 @@ public class ClientTest {
         String to2 = "okchain1eutyuqqase3eyvwe92caw8dcx5ly8s54lnazy5";
         String memo = "";
 
+        String amount = "1.00000000";
+        String denom = "okb";
 
-        List<Token> coins = new ArrayList<>();
-        Token amount = new Token();
-        amount.setDenom("okb");
-        amount.setAmount("1.00000000");
-        coins.add(amount);
-
-        TransferUnit transferUint = new TransferUnit(coins, to);
-        TransferUnit transferUint2 = new TransferUnit(coins, to);
         List<TransferUnit> transfers = new ArrayList<>();
-        transfers.add(transferUint);
-        transfers.add(transferUint2);
+        transfers.add(generateTrasferUnit(to, denom, amount));
+        transfers.add(generateTrasferUnit(to2, denom, amount));
 
-        System.out.println(JSON.toJSON(transfers).toString());
+        System.out.println(JSON.toJSONString(transfers));
     }
 
     private OKChainClient generateClient() {
