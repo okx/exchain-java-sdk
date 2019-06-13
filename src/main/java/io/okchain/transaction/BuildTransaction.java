@@ -33,6 +33,12 @@ public class BuildTransaction {
         return buildTransaction(account, stdMsg, msg, memo);
     }
 
+    public static String generateMultiSendTransaction(AccountInfo account, List<TransferUnit> transfers, String memo) {
+        IMsg msg = new MsgMultiSend(account.getUserAddress(), transfers);
+        IMsg stdMsg = new MsgStd("token/MultiSend", msg);
+        return buildTransaction(account, stdMsg, msg, memo);
+    }
+
 
     private static String buildTransaction(AccountInfo account, IMsg stdMsg, IMsg signMsg, String memo) {
         if (account.getAccountNumber() == "" || account.getSequenceNumber() == "") {
@@ -44,7 +50,7 @@ public class BuildTransaction {
         Fee fee = generateFeeDefault();
         SignData signData = new SignData(account.getAccountNumber(), ConstantIF.CHAIN_ID, fee, memo, new IMsg[]{signMsg}, account.getSequenceNumber());
         try {
-            String signDataJson = JSONObject.toJSONString(signData);
+            String signDataJson = JSONObject.toJSON(signData).toString();
             System.out.println("signData: " + signDataJson);
             Signature signature = sign(signDataJson.getBytes(), account.getPrivateKey());
             //组装签名结构
@@ -54,7 +60,7 @@ public class BuildTransaction {
             //组装待广播交易结构
 
             PostTransaction postTransaction = new PostTransaction(stdTransaction, "block");
-            return JSON.toJSONString(postTransaction);
+            return JSON.toJSON(postTransaction).toString();
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -29,8 +29,9 @@ public interface OKChainClient {
 
     public JSONObject sendPlaceOrderTransaction(AccountInfo account, RequestPlaceOrderParams parms, String memo) throws NullPointerException;
 
-
     public JSONObject sendCancelOrderTransaction(AccountInfo account, String orderId, String memo) throws NullPointerException;
+
+    public JSONObject sendMultiSendTransaction(AccountInfo account, List<TransferUnit> transfers, String memo);
 
 
     //query

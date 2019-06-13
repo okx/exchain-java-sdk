@@ -99,6 +99,13 @@ public class OKChainClientImpl implements OKChainClient {
         return sendTransaction(data);
     }
 
+    public JSONObject sendMultiSendTransaction(AccountInfo account, List<TransferUnit> transfers, String memo) {
+        checkAccountInfoValue(account);
+        if (transfers == null || transfers.isEmpty()) throw new NullPointerException("empty transfers");
+        String data = BuildTransaction.generateMultiSendTransaction(account, transfers, memo);
+        return sendTransaction(data);
+    }
+
     private JSONObject sendTransaction(String data) {
         String res = HttpUtils.httpPost(this.backend + ConstantIF.TRANSACTION_URL_PATH, data);
         return JSON.parseObject(res);

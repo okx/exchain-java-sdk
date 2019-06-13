@@ -63,6 +63,53 @@ public class ClientTest {
         System.out.println(resJson.toString());
     }
 
+    @Test
+    public void testMultiSendTransaction() {
+        OKChainClient okc = generateClient();
+        AccountInfo account = generateAccountInfo(okc);
+
+        String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
+        String to2 = "okchain1eutyuqqase3eyvwe92caw8dcx5ly8s54lnazy5";
+        String memo = "";
+
+
+        List<Token> coins = new ArrayList<>();
+        Token amount = new Token();
+        amount.setDenom("okb");
+        amount.setAmount("1.00000000");
+        coins.add(amount);
+
+        TransferUnit transferUint = new TransferUnit(coins, to);
+        TransferUnit transferUint2 = new TransferUnit(coins, to2);
+        List<TransferUnit> transfers = new ArrayList<>();
+        transfers.add(transferUint);
+        transfers.add(transferUint2);
+
+        JSONObject resJson = okc.sendMultiSendTransaction(account, transfers, memo);
+        System.out.println(resJson.toString());
+    }
+
+    @Test
+    public void testTransferUint() {
+        String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
+        String to2 = "okchain1eutyuqqase3eyvwe92caw8dcx5ly8s54lnazy5";
+        String memo = "";
+
+
+        List<Token> coins = new ArrayList<>();
+        Token amount = new Token();
+        amount.setDenom("okb");
+        amount.setAmount("1.00000000");
+        coins.add(amount);
+
+        TransferUnit transferUint = new TransferUnit(coins, to);
+        TransferUnit transferUint2 = new TransferUnit(coins, to);
+        List<TransferUnit> transfers = new ArrayList<>();
+        transfers.add(transferUint);
+        transfers.add(transferUint2);
+
+        System.out.println(JSON.toJSON(transfers).toString());
+    }
 
     private OKChainClient generateClient() {
         String url = "http://192.168.71.132:1317";
@@ -80,7 +127,7 @@ public class ClientTest {
         OKChainClient okc = generateClient();
         String address = "okchain152p8xmejhza7wuhhzut88vkakdgasqwlw2qjcf";
         BaseModel resJson = okc.getAccountALLTokens(address);
-        String res = JSON.toJSONString(resJson);
+        String res = JSON.toJSON(resJson).toString();
         System.out.println(res);
     }
 
@@ -90,7 +137,7 @@ public class ClientTest {
         String address = "okchain152p8xmejhza7wuhhzut88vkakdgasqwlw2qjcf";
         String symbol = "okb";
         BaseModel resJson = okc.getAccountToken(address, symbol);
-        String res = JSON.toJSONString(resJson);
+        String res = JSON.toJSON(resJson).toString();
         System.out.println(res);
     }
 
@@ -98,7 +145,7 @@ public class ClientTest {
     public void getTokens() {
         OKChainClient okc = generateClient();
         BaseModel resJson = okc.getTokens();
-        String res = JSON.toJSONString(resJson);
+        String res = JSON.toJSON(resJson).toString();
         System.out.println(res);
     }
 
@@ -107,7 +154,7 @@ public class ClientTest {
         OKChainClient okc = generateClient();
         String symbol = "okb";
         BaseModel resJson = okc.getToken(symbol);
-        String res = JSON.toJSONString(resJson);
+        String res = JSON.toJSON(resJson).toString();
         System.out.println(res);
     }
 
@@ -115,7 +162,7 @@ public class ClientTest {
     public void getProducts() {
         OKChainClient okc = generateClient();
         BaseModel resJson = okc.getProducts();
-        String res = JSON.toJSONString(resJson);
+        String res = JSON.toJSON(resJson).toString();
         System.out.println(res);
     }
 
@@ -124,7 +171,7 @@ public class ClientTest {
         OKChainClient okc = generateClient();
         String product = "xxb_okb";
         BaseModel resJson = okc.getDepthBook(product);
-        String res = JSON.toJSONString(resJson);
+        String res = JSON.toJSON(resJson).toString();
         System.out.println(res);
     }
 
@@ -135,7 +182,7 @@ public class ClientTest {
         String instrumentId = "xxb_okb";
         String size = "10";
         BaseModel resJson = okc.getCandles(granularity, instrumentId, size);
-        String res = JSON.toJSONString(resJson);
+        String res = JSON.toJSON(resJson).toString();
         System.out.println(res);
     }
 
@@ -144,7 +191,7 @@ public class ClientTest {
         OKChainClient okc = generateClient();
         String count = "10";
         BaseModel resJson = okc.getTickers(count);
-        String res = JSON.toJSONString(resJson);
+        String res = JSON.toJSON(resJson).toString();
         System.out.println(res);
     }
 
@@ -154,7 +201,7 @@ public class ClientTest {
         String address = "okchain152p8xmejhza7wuhhzut88vkakdgasqwlw2qjcf";
         RequestOrderListOpenParams params = new RequestOrderListOpenParams(address);
         BaseModel resJson = okc.getOrderListOpen(params);
-        String res = JSON.toJSONString(resJson);
+        String res = JSON.toJSON(resJson).toString();
         System.out.println(res);
     }
 
@@ -164,7 +211,7 @@ public class ClientTest {
         String address = "okchain152p8xmejhza7wuhhzut88vkakdgasqwlw2qjcf";
         RequestOrderListClosedParams params = new RequestOrderListClosedParams(address);
         BaseModel resJson = okc.getOrderListClosed(params);
-        String res = JSON.toJSONString(resJson);
+        String res = JSON.toJSON(resJson).toString();
         System.out.println(res);
     }
 
@@ -174,7 +221,7 @@ public class ClientTest {
         String address = "okchain152p8xmejhza7wuhhzut88vkakdgasqwlw2qjcf";
         RequestDealsParams params = new RequestDealsParams(address);
         BaseModel resJson = okc.getDeals(params);
-        String res = JSON.toJSONString(resJson);
+        String res = JSON.toJSON(resJson).toString();
         System.out.println(res);
     }
 
@@ -184,7 +231,7 @@ public class ClientTest {
         String address = "okchain152p8xmejhza7wuhhzut88vkakdgasqwlw2qjcf";
         RequestTransactionsParams params = new RequestTransactionsParams(address);
         BaseModel resJson = okc.getTransactions(params);
-        String res = JSON.toJSONString(resJson);
+        String res = JSON.toJSON(resJson).toString();
         System.out.println(res);
     }
 }
