@@ -21,7 +21,7 @@ public interface OKChainClient {
 
     public AddressInfo getAddressInfo(String privateKey) throws NullPointerException;
 
-
+    public String getPrivateKeyFromMnemonic(String mnemonic);
     //send transaction
 
     public JSONObject sendSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) throws NullPointerException;

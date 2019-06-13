@@ -73,6 +73,10 @@ public class OKChainClientImpl implements OKChainClient {
         return res;
     }
 
+    public String getPrivateKeyFromMnemonic(String mnemonic) {
+        return Crypto.generatePrivateKeyFromMnemonic(mnemonic);
+    }
+
     public JSONObject sendSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) throws NullPointerException {
         checkAccountInfoValue(account);
         if (to.equals("")) throw new NullPointerException("empty to");
