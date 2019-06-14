@@ -74,8 +74,10 @@ public class ClientTest {
             Assert.assertNotEquals("", filename);
         } catch (CipherException e) {
             e.printStackTrace();
+            Assert.assertNull(e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
+            Assert.assertNull(e.getMessage());
         }
         try {
             String privateKey = okc.getPrivateKeyFromKeyStore(filename, password);
@@ -83,8 +85,10 @@ public class ClientTest {
             Assert.assertEquals(privateKey, this.privateKey);
         } catch (IOException e) {
             e.printStackTrace();
+            Assert.assertNull(e.getMessage());
         } catch (CipherException e) {
             e.printStackTrace();
+            Assert.assertNull(e.getMessage());
         }
         File file = new File(filename);
         file.delete();
