@@ -1,7 +1,7 @@
-package io.okchain.crypto;
+package com.okchain.crypto;
 
-import io.okchain.crypto.keystore.CipherException;
-import io.okchain.crypto.keystore.KeyStoreUtils;
+import com.okchain.crypto.keystore.CipherException;
+import com.okchain.crypto.keystore.KeyStoreUtils;
 import org.junit.Test;
 
 import java.io.File;

@@ -1,10 +1,10 @@
-package io.okchain.transaction;
+package com.okchain.transaction;
 
-import io.okchain.client.OKChainClient;
-import io.okchain.client.impl.OKChainClientImpl;
-import io.okchain.types.AccountInfo;
-import io.okchain.types.AddressInfo;
-import io.okchain.types.Token;
+import com.okchain.client.OKChainClient;
+import com.okchain.client.impl.OKChainClientImpl;
+import com.okchain.types.AccountInfo;
+import com.okchain.types.AddressInfo;
+import com.okchain.types.Token;
 import org.junit.Test;
 
 import java.util.ArrayList;

@@ -1,10 +1,10 @@
-package io.okchain.client;
+package com.okchain.client;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import io.okchain.client.impl.OKChainClientImpl;
-import io.okchain.crypto.keystore.CipherException;
-import io.okchain.types.*;
+import com.okchain.client.impl.OKChainClientImpl;
+import com.okchain.crypto.keystore.CipherException;
+import com.okchain.types.*;
 import org.junit.Assert;
 import org.junit.Test;
 
