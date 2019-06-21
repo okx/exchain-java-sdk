@@ -10,11 +10,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>io.cosmos</groupId>
-    <artifactId>cosmos-java-sdk</artifactId>
+    <groupId>com.okchain</groupId>
+    <artifactId>okchain-java-sdk</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
-    <name>cosmos-java-sdk</name>
+    <name>okchain-java-sdk</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
