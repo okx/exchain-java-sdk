@@ -6,7 +6,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 public class PostTransaction {
     private StdTransaction tx;
 
-    @JSONField(name = "return")
+    @JSONField(name = "mode")
     private String returnType;
 
     public PostTransaction() {
