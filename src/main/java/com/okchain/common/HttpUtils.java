@@ -44,7 +44,7 @@ public class HttpUtils {
     }
 
     public static String httpGet(String url) {
-        System.out.println("get:" + url);
+        //System.out.println("get:" + url);
         try {
             String res = sendGetData(url, "");
             return res;
@@ -57,8 +57,8 @@ public class HttpUtils {
     }
 
     public static String httpPost(String url, String data) {
-        System.out.println("post: " + url);
-        System.out.println("data: " + data);
+        //System.out.println("post: " + url);
+        //System.out.println("data: " + data);
         try {
             String res = sendPostDataByJson(url, data, "");
             return res;
