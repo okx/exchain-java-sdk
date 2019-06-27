@@ -47,7 +47,7 @@ public class BenchMarkTest {
             System.out.println("done " + i);
             account.setSequenceNumber(Integer.toString(Integer.parseInt(account.getSequenceNumber()) + 1));
         }
-        ExecutorService exec = Executors.newFixedThreadPool(30);
+        ExecutorService exec = Executors.newFixedThreadPool(20);
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < testNum * multiSendNum; i++) {
             //System.out.println(i);

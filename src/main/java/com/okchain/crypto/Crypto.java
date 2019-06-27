@@ -3,6 +3,7 @@ package com.okchain.crypto;
 
 import com.google.common.base.Splitter;
 import com.okchain.common.ConstantIF;
+import org.bitcoin.NativeSecp256k1Util;
 import org.bitcoinj.core.ECKey;
 import org.bitcoinj.core.Sha256Hash;
 import org.bitcoinj.core.Utils;
@@ -13,6 +14,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.List;
 
 
@@ -73,6 +75,22 @@ public class Crypto {
         System.arraycopy(Utils.bigIntegerToBytes(signature.r, 32), 0, result, 0, 32);
         System.arraycopy(Utils.bigIntegerToBytes(signature.s, 32), 0, result, 32, 32);
         return result;
+    }
+
+    public static boolean validateSig(byte[] msg, String pubKey, String sig) throws NoSuchAlgorithmException, NativeSecp256k1Util.AssertFailException {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] msgHash = digest.digest(msg);
+
+        byte[] sigBytes = Base64.getDecoder().decode(sig);
+        byte[] buf = new byte[32];
+        System.arraycopy(sigBytes, 0, buf, 0, 32);
+        BigInteger r = new BigInteger(buf);
+        System.arraycopy(sigBytes, 32, buf, 0, 32);
+        BigInteger s = new BigInteger(buf);
+        ECKey.ECDSASignature signature = new ECKey.ECDSASignature(r, s);
+
+        byte[] pubBytes = Base64.getDecoder().decode(pubKey);
+        return ECKey.verify(msgHash, signature, pubBytes);
     }
 
     public static String generatePubKeyHexFromPriv(String privateKey) {
