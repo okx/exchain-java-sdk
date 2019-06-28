@@ -2,7 +2,6 @@ package com.okchain.crypto;
 
 import com.okchain.crypto.keystore.CipherException;
 import com.okchain.crypto.keystore.KeyStoreUtils;
-import org.bitcoin.NativeSecp256k1Util;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -47,10 +46,8 @@ public class CryptoTest {
             String sigBase64 = Base64.getEncoder().encodeToString(sig);
             byte[] pub = Crypto.generatePubKeyFromPriv(priv);
             boolean res = Crypto.validateSig(msg, Base64.getEncoder().encodeToString(pub), sigBase64);
-            Assert.assertEquals(res, true);
+            Assert.assertEquals(true, res);
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (NativeSecp256k1Util.AssertFailException e) {
             e.printStackTrace();
         }
 

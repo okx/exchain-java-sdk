@@ -3,7 +3,6 @@ package com.okchain.crypto;
 
 import com.google.common.base.Splitter;
 import com.okchain.common.ConstantIF;
-import org.bitcoin.NativeSecp256k1Util;
 import org.bitcoinj.core.ECKey;
 import org.bitcoinj.core.Sha256Hash;
 import org.bitcoinj.core.Utils;
@@ -27,10 +26,10 @@ import java.util.List;
 public class Crypto {
 
     public static String generatePrivateKey() {
-        byte[] privateKey = new byte[32];
-        new SecureRandom().nextBytes(privateKey);
-        return Hex.toHexString(privateKey);
-
+        SecureRandom csprng = new SecureRandom();
+        byte[] randomBytes = new byte[32];
+        csprng.nextBytes(randomBytes);
+        return Hex.toHexString(randomBytes);
     }
 
     public static String generateMnemonic() {
@@ -77,20 +76,21 @@ public class Crypto {
         return result;
     }
 
-    public static boolean validateSig(byte[] msg, String pubKey, String sig) throws NoSuchAlgorithmException, NativeSecp256k1Util.AssertFailException {
+    public static boolean validateSig(byte[] msg, byte[] pubKey, byte[] sig) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] msgHash = digest.digest(msg);
 
-        byte[] sigBytes = Base64.getDecoder().decode(sig);
         byte[] buf = new byte[32];
-        System.arraycopy(sigBytes, 0, buf, 0, 32);
+        System.arraycopy(sig, 0, buf, 0, 32);
         BigInteger r = new BigInteger(buf);
-        System.arraycopy(sigBytes, 32, buf, 0, 32);
+        System.arraycopy(sig, 32, buf, 0, 32);
         BigInteger s = new BigInteger(buf);
         ECKey.ECDSASignature signature = new ECKey.ECDSASignature(r, s);
+        return ECKey.verify(msgHash, signature, pubKey);
+    }
 
-        byte[] pubBytes = Base64.getDecoder().decode(pubKey);
-        return ECKey.verify(msgHash, signature, pubBytes);
+    public static boolean validateSig(byte[] msg, String pubKey, String sig) throws NoSuchAlgorithmException {
+        return validateSig(msg, Base64.getDecoder().decode(pubKey), Base64.getDecoder().decode(sig));
     }
 
     public static String generatePubKeyHexFromPriv(String privateKey) {
