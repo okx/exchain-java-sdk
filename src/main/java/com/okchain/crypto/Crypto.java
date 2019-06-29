@@ -69,7 +69,6 @@ public class Crypto {
         byte[] msgHash = digest.digest(msg);
 
         ECKey.ECDSASignature signature = k.sign(Sha256Hash.wrap(msgHash));
-
         byte[] result = new byte[64];
         System.arraycopy(Utils.bigIntegerToBytes(signature.r, 32), 0, result, 0, 32);
         System.arraycopy(Utils.bigIntegerToBytes(signature.s, 32), 0, result, 32, 32);
@@ -82,9 +81,9 @@ public class Crypto {
 
         byte[] buf = new byte[32];
         System.arraycopy(sig, 0, buf, 0, 32);
-        BigInteger r = new BigInteger(buf);
+        BigInteger r = new BigInteger(1, buf);
         System.arraycopy(sig, 32, buf, 0, 32);
-        BigInteger s = new BigInteger(buf);
+        BigInteger s = new BigInteger(1, buf);
         ECKey.ECDSASignature signature = new ECKey.ECDSASignature(r, s);
         return ECKey.verify(msgHash, signature, pubKey);
     }

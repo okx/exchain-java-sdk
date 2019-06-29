@@ -2,6 +2,7 @@ package com.okchain.crypto;
 
 import com.okchain.crypto.keystore.CipherException;
 import com.okchain.crypto.keystore.KeyStoreUtils;
+import org.bouncycastle.util.encoders.Hex;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -22,8 +23,10 @@ public class CryptoTest {
     @Test
     public void testGenerateAddress() {
         String priv = Crypto.generatePrivateKey();
+        //String priv = "c4c451ce673485521f9c9b74b6d90f0da433ef7f012fa7f9db4def627dccd632";
         long startTime = System.currentTimeMillis();
         byte[] pub = Crypto.generatePubKeyFromPriv(priv);
+        System.out.println(Hex.toHexString(pub));
         try {
             String addr = AddressUtil.createNewAddressSecp256k1("okchain", pub);
             System.out.println(addr);
