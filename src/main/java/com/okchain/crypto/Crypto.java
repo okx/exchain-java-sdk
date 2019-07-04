@@ -7,6 +7,7 @@ import org.bitcoinj.core.ECKey;
 import org.bitcoinj.core.Sha256Hash;
 import org.bitcoinj.core.Utils;
 import org.bitcoinj.crypto.*;
+import org.bouncycastle.util.encoders.DecoderException;
 import org.bouncycastle.util.encoders.Hex;
 
 import java.math.BigInteger;
@@ -115,5 +116,18 @@ public class Crypto {
             e.printStackTrace();
             return "";
         }
+    }
+
+    public static boolean validPubKey(String pubKey) {
+        if (pubKey == null || pubKey.length() != 66) {
+            return false;
+        }
+        try {
+            Hex.decode(pubKey);
+        } catch (DecoderException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

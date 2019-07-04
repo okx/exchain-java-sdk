@@ -111,5 +111,23 @@ public class CryptoTest {
         keyStoreFile.delete();
     }
 
+    @Test
+    public void validPubKey() {
+        String priv = Crypto.generatePrivateKey();
+        String pub = Crypto.generatePubKeyHexFromPriv(priv);
+        Assert.assertTrue(Crypto.validPubKey(pub));
+        String pub2 = "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f";
+        Assert.assertTrue(Crypto.validPubKey(pub2));
+        String pub3 = "3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F";
+        Assert.assertTrue(Crypto.validPubKey(pub3));
+        String pub4 = "";
+        Assert.assertFalse(Crypto.validPubKey(pub4));
+        String pub5 = null;
+        Assert.assertFalse(Crypto.validPubKey(pub5));
+        String pub6 = "3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3f";
+        Assert.assertTrue(Crypto.validPubKey(pub6));
+        String pub7 = "3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3F3f3f";
+        Assert.assertFalse(Crypto.validPubKey(pub7));
+    }
 
 }
