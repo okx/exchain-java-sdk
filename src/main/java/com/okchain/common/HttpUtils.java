@@ -3,6 +3,7 @@ package com.okchain.common;
 import com.okchain.types.Pair;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -14,12 +15,22 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.SocketException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class HttpUtils {
+
+    static HttpPost m_httpPost = null;
+    static HttpGet  m_httpGet = null;
+    static CloseableHttpClient m_httpClient = HttpClients.createDefault();
 
     public static String httpGet(String url, ArrayList<Pair> pairs) {
         String params = "";
@@ -43,7 +54,7 @@ public class HttpUtils {
         return httpGet(url + "?" + params);
     }
 
-    public static String httpGet(String url) {
+    public static String httpGetDisable(String url) {
         //System.out.println("get:" + url);
         try {
             String res = sendGetData(url, "");
@@ -54,6 +65,38 @@ public class HttpUtils {
             return e.getMessage();
         }
 
+    }
+
+    public static String httpGet(String httpUrl){
+        BufferedReader reader = null;
+        String result = null;
+        StringBuffer sbf = new StringBuffer();
+
+
+        try {
+            URL url = new URL(httpUrl);
+            HttpURLConnection connection = null;
+            connection = (HttpURLConnection) url.openConnection();// 正常访问
+
+            connection.setConnectTimeout(5000);
+            connection.setRequestMethod("GET");
+
+            connection.connect();
+            InputStream is = connection.getInputStream();
+            reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            String strRead = null;
+            while ((strRead = reader.readLine()) != null) {
+                sbf.append(strRead);
+                sbf.append("\r\n");
+            }
+            reader.close();
+            result = sbf.toString();
+        } catch (SocketException e) {
+            System.out.println("Connection timed out: connect");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public static String httpPost(String url, String data) {
@@ -75,7 +118,7 @@ public class HttpUtils {
     public static String sendPostDataByMap(String url, Map<String, String> map, String encoding) throws ClientProtocolException, IOException {
         String result = "";
 
-        CloseableHttpClient httpClient = HttpClients.createDefault();
+        CloseableHttpClient httpClient = m_httpClient;
         HttpPost httpPost = new HttpPost(url);
 
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -105,8 +148,11 @@ public class HttpUtils {
     public static String sendPostDataByJson(String url, String json, String encoding) throws ClientProtocolException, IOException {
         String result = "";
 
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpPost httpPost = new HttpPost(url);
+        CloseableHttpClient httpClient = m_httpClient;
+        if(m_httpPost == null){
+            m_httpPost = new HttpPost(url);
+        }
+        HttpPost httpPost = m_httpPost;
 
         StringEntity stringEntity = new StringEntity(json, ContentType.APPLICATION_JSON);
         stringEntity.setContentEncoding("utf-8");
@@ -127,9 +173,12 @@ public class HttpUtils {
     private static String sendGetData(String url, String encoding) throws ClientProtocolException, IOException {
         String result = "";
 
-        CloseableHttpClient httpClient = HttpClients.createDefault();
+        CloseableHttpClient httpClient = m_httpClient;
 
-        HttpGet httpGet = new HttpGet(url);
+        if(m_httpGet == null){
+            m_httpGet = new HttpGet(url);
+        }
+        HttpGet httpGet = m_httpGet;
         httpGet.addHeader("Content-type", "application/json");
         CloseableHttpResponse response = httpClient.execute(httpGet);
 
@@ -137,7 +186,7 @@ public class HttpUtils {
 //            result = EntityUtils.toString(response.getEntity(), "utf-8");
 //        }
         result = EntityUtils.toString(response.getEntity(), "utf-8");
-        response.close();
+    //    response.close();
 
         return result;
     }
