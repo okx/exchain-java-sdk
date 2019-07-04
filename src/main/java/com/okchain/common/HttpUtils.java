@@ -118,7 +118,7 @@ public class HttpUtils {
     public static String sendPostDataByMap(String url, Map<String, String> map, String encoding) throws ClientProtocolException, IOException {
         String result = "";
 
-        CloseableHttpClient httpClient = m_httpClient;
+        CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(url);
 
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -148,7 +148,7 @@ public class HttpUtils {
     public static String sendPostDataByJson(String url, String json, String encoding) throws ClientProtocolException, IOException {
         String result = "";
 
-        CloseableHttpClient httpClient = m_httpClient;
+        CloseableHttpClient httpClient = HttpClients.createDefault();
         if(m_httpPost == null){
             m_httpPost = new HttpPost(url);
         }
