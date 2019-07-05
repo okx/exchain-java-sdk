@@ -13,6 +13,7 @@ import org.bouncycastle.util.encoders.Hex;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class BuildTransaction {
     public static String generatePlaceOrderTransaction(AccountInfo account, String side, String product, String price, String quantity, String memo) {
 
@@ -51,7 +52,7 @@ public class BuildTransaction {
         SignData signData = new SignData(account.getAccountNumber(), ConstantIF.CHAIN_ID, fee, memo, new IMsg[]{signMsg}, account.getSequenceNumber());
         try {
             String signDataJson = JSONObject.toJSONString(signData);
-            //System.out.println("signData: " + signDataJson);
+            System.out.println("signData: " + signDataJson);
             Signature signature = sign(signDataJson.getBytes(), account.getPrivateKey());
             //组装签名结构
             List<Signature> signatures = new ArrayList<>();

@@ -52,14 +52,14 @@ public class OKChainClientImpl implements OKChainClient {
     }
 
     public AddressInfo getAddressInfo(String privateKey) throws NullPointerException {
-        if (privateKey.equals("")) throw new NullPointerException("empty prvateKey");
+        if (privateKey.equals("")) throw new NullPointerException("empty privateKey");
         String pubKey = Crypto.generatePubKeyHexFromPriv(privateKey);
         String address = Crypto.generateAddressFromPub(pubKey);
         return new AddressInfo(privateKey, pubKey, address);
     }
 
     public AccountInfo getAccountInfo(String privateKey) throws NullPointerException {
-        if (privateKey.equals("")) throw new NullPointerException("empty prvateKey");
+        if (privateKey.equals("")) throw new NullPointerException("empty privateKey");
         AddressInfo addressInfo = getAddressInfo(privateKey);
         JSONObject accountJson = JSON.parseObject(getAccountPrivate(addressInfo.getUserAddress()));
         String sequence = getSequance(accountJson);
@@ -166,9 +166,13 @@ public class OKChainClientImpl implements OKChainClient {
         return JSON.parseObject(res, BaseModel.class);
     }
 
-    public BaseModel getAccountALLTokens(String address) throws NullPointerException {
+    public BaseModel getAccountALLTokens(String address, String show) throws NullPointerException {
         if (address.equals("")) throw new NullPointerException("empty address");
-        return queryRequest(backend + ConstantIF.GET_ACCOUNT_ALL_TOKENS_URL_PATH + address, null);
+        ArrayList<Pair> pairs = new ArrayList<>();
+        if (!show.equals("")) {
+            pairs.add(new Pair("show", show));
+        }
+        return queryRequest(backend + ConstantIF.GET_ACCOUNT_ALL_TOKENS_URL_PATH + address, pairs);
     }
 
     public BaseModel getAccountToken(String address, String symbol) throws NullPointerException {

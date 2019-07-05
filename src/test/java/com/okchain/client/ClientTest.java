@@ -183,7 +183,8 @@ public class ClientTest {
     public void getAccountALLTokens() {
         OKChainClient okc = generateClient();
         String address = this.address;
-        BaseModel resJson = okc.getAccountALLTokens(address);
+        String show = "all";
+        BaseModel resJson = okc.getAccountALLTokens(address, show);
         String res = JSON.toJSON(resJson).toString();
         System.out.println(res);
         Assert.assertEquals("0", resJson.getCode());
