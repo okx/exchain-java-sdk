@@ -15,6 +15,16 @@ import java.util.List;
 
 
 public class BuildTransaction {
+    private static String mode = "sync";
+
+    public static String getMode() {
+        return mode;
+    }
+
+    public static void setMode(String mode) {
+        BuildTransaction.mode = mode;
+    }
+
     public static String generatePlaceOrderTransaction(AccountInfo account, String side, String product, String price, String quantity, String memo) {
 
         IMsg msg = new MsgNewOrder("", "", price, product, quantity, account.getUserAddress(), side);
@@ -60,7 +70,7 @@ public class BuildTransaction {
             StdTransaction stdTransaction = new StdTransaction(new IMsg[]{stdMsg}, fee, signatures, memo);
             //组装待广播交易结构
 
-            PostTransaction postTransaction = new PostTransaction(stdTransaction, "block");
+            PostTransaction postTransaction = new PostTransaction(stdTransaction, mode);
             return JSON.toJSONString(postTransaction);
 
         } catch (Exception e) {

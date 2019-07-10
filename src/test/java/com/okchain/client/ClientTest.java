@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.okchain.client.impl.OKChainClientImpl;
 import com.okchain.crypto.keystore.CipherException;
+import com.okchain.transaction.BuildTransaction;
 import com.okchain.types.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -110,7 +111,11 @@ public class ClientTest {
 
         JSONObject resJson = okc.sendSendTransaction(account, to, amountList, memo);
         System.out.println(resJson.toString());
-        Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
+        Object code = resJson.get("code");
+        Object err = resJson.get("error");
+        Assert.assertNull(code);
+        Assert.assertNull(err);
+        //Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
     }
 
     @Test
@@ -123,6 +128,7 @@ public class ClientTest {
         String price = "0.10000000";
         String quantity = "1.00000000";
         String memo = "";
+        BuildTransaction.setMode("block");
         RequestPlaceOrderParams parms = new RequestPlaceOrderParams(price, product, quantity, side);
 
         JSONObject resJson = okc.sendPlaceOrderTransaction(account, parms, memo);
@@ -165,7 +171,11 @@ public class ClientTest {
 
         JSONObject resJson = okc.sendMultiSendTransaction(account, transfers, memo);
         System.out.println(resJson.toString());
-        Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
+        Object code = resJson.get("code");
+        Object err = resJson.get("error");
+        Assert.assertNull(code);
+        Assert.assertNull(err);
+        //Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
     }
 
     private OKChainClient generateClient() {
