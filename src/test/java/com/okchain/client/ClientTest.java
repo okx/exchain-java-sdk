@@ -17,7 +17,7 @@ import java.util.List;
 public class ClientTest {
     private static String privateKey = "c4c451ce673485521f9c9b74b6d90f0da433ef7f012fa7f9db4def627dccd632";
     private static String url = "http://127.0.0.1:26659";
-    private static String address = "okchain152p8xmejhza7wuhhzut88vkakdgasqwlw2qjcf";
+    private static String address = "okchain1n55exyav6txhhmx07l73ea5jvrmam6fhmz9yaw";
     private static String mnemonic = "total lottery arena when pudding best candy until army spoil drill pool";
 
     @Test
