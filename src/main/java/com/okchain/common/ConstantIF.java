@@ -34,5 +34,17 @@ public interface ConstantIF {
 
     public static String GET_TRANSACTIONS_URL_PATH = "/transactions";
 
+    public static String RPC_METHOD_TX_SEND_BLOCK = "broadcast_tx_commit";
+
+    public static String RPC_METHOD_TX_SEND_SYNC = "broadcast_tx_sync";
+
+    public static String RPC_METHOD_TX_SEND_ASYNC = "broadcast_tx_async";
+
+    public static String TX_SEND_MODE_BLOCK = "block";
+
+    public static String TX_SEND_MODE_SYNC = "sync";
+
+    public static String TX_SEND_MODE_ASYNC = "async";
+
 
 }

@@ -15,7 +15,7 @@ import java.util.List;
 
 
 public class BuildTransaction {
-    private static String mode = "sync";
+    private static String mode = ConstantIF.TX_SEND_MODE_SYNC;
 
     public static String getMode() {
         return mode;
