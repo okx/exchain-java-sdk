@@ -1,0 +1,55 @@
+syntax = "proto3";
+option java_package = "com.okchain.proto";
+
+message StdTransaction {
+    repeated bytes msgs = 1;
+    Fee fee = 2;
+    repeated Signature signatures = 3;
+    string memo = 4;
+}
+
+message Fee {
+    string gas = 1;
+    repeated Token amount = 2;
+}
+
+message Signature {
+    bytes pubkey = 1;
+    string signature = 2;
+}
+
+message Token {
+    string amount = 1;
+    string denom = 2;
+}
+
+message MsgSend {
+    string fromAddress = 1;
+    string toAddress = 2;
+    repeated Token amount = 3;
+}
+
+message MsgNewOrder {
+    string batchNumber = 1;
+    string depth = 2;
+    string price = 3;
+    string product = 4;
+    string quantity = 5;
+    string sender = 6;
+    string side = 7;
+}
+
+message MsgCancelOrder {
+    string orderId = 1;
+    string sender = 2;
+}
+
+message MsgMultiSend {
+    string from = 1;
+    repeated TransferUnit transfers = 2;
+}
+
+message TransferUnit {
+    repeated Token coins = 1;
+    string to = 2;
+}

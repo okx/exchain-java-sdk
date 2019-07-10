@@ -25,6 +25,12 @@
     </properties>
 
     <dependencies>
+        <!--protobuf -->
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.7.1</version>
+        </dependency>
         <dependency>
             <groupId>org.web3j</groupId>
             <artifactId>core</artifactId>

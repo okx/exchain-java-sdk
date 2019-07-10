@@ -14,8 +14,7 @@ public class MsgSend implements IMsg {
     @JSONField(name = "to_address")
     private String toAddress;
 
-    public MsgSend() {
-    }
+
 
     public MsgSend(String fromAddress, String toAddress, List<Token> amount) {
         this.fromAddress = fromAddress;

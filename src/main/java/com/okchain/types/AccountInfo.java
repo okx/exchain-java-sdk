@@ -37,4 +37,11 @@ public class AccountInfo extends AddressInfo {
         this.sequenceNumber = sequenceNumber;
     }
 
+    @Override
+    public String toString() {
+        return "AccountInfo{" +
+                "accountNumber='" + accountNumber + '\'' +
+                ", sequenceNumber='" + sequenceNumber + '\'' +
+                '}';
+    }
 }

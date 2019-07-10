@@ -15,14 +15,18 @@ import java.util.List;
 
 public class ClientTest {
     private static String privateKey = "c4c451ce673485521f9c9b74b6d90f0da433ef7f012fa7f9db4def627dccd632";
-    private static String url = "http://192.168.71.132:1317";
+    // rest服务，端口改为26659
+    private static String url = "http://127.0.0.1:26659";
     private static String address = "okchain152p8xmejhza7wuhhzut88vkakdgasqwlw2qjcf";
     private static String mnemonic = "total lottery arena when pudding best candy until army spoil drill pool";
 
     @Test
     public void createAddressInfo() {
+        // 根据url生成cli
         OKChainClient okc = generateClient();
+        // 先生成私钥，后由私钥生成公钥，由公钥生成地址
         AddressInfo addressInfo = okc.createAddressInfo();
+        //System.out.println(addressInfo);
         Assert.assertNotNull(addressInfo);
         Assert.assertNotNull(addressInfo.getUserAddress());
         Assert.assertNotNull(addressInfo.getPrivateKey());
@@ -32,6 +36,7 @@ public class ClientTest {
     @Test
     public void getAddressInfo() {
         OKChainClient okc = generateClient();
+        // 通过私钥获得公钥和地址
         AddressInfo addressInfo = okc.getAddressInfo(this.privateKey);
         Assert.assertNotNull(addressInfo);
         Assert.assertEquals(this.address, addressInfo.getUserAddress());
@@ -43,12 +48,14 @@ public class ClientTest {
     public void getAccountInfo() {
         OKChainClient okc = generateClient();
         AccountInfo accountInfo = okc.getAccountInfo(this.privateKey);
+        //System.out.println(accountInfo);
         Assert.assertNotNull(accountInfo);
         Assert.assertNotNull(accountInfo.getSequenceNumber());
         Assert.assertNotNull(accountInfo.getAccountNumber());
     }
 
     @Test
+    // 从助记词中获得私钥
     public void getPrivateKeyFromMnemonic() {
         OKChainClient okc = generateClient();
         String privateKey = okc.getPrivateKeyFromMnemonic(this.mnemonic);
@@ -58,7 +65,9 @@ public class ClientTest {
     @Test
     public void generateMnemonic() {
         OKChainClient okc = generateClient();
+        // 创建助记词
         String mnemonic = okc.generateMnemonic();
+        //System.out.println(mnemonic);
         String[] words = mnemonic.split(" ");
         Assert.assertEquals(12, words.length);
     }
@@ -69,7 +78,9 @@ public class ClientTest {
         String password = "jilei";
         String filename = "";
         try {
+            // 用私钥和密码生成KeyStore文件
             filename = okc.generateKeyStore(this.privateKey, password);
+            //System.out.println(filename);
             Assert.assertNotNull(filename);
             Assert.assertNotEquals("", filename);
         } catch (CipherException e) {
@@ -91,13 +102,20 @@ public class ClientTest {
             Assert.assertNull(e.getMessage());
         }
         File file = new File(filename);
+        //System.out.println(filename);
         file.delete();
     }
 
     @Test
     public void sendSendTransaction() {
         OKChainClient okc = generateClient();
+        // okc中包含两个东西：url和backend。
         AccountInfo account = generateAccountInfo(okc);
+        // generateAccountInfo会从测试类中拿到私钥
+        // generateAccountInfo中有函数getAccountInfo，getAccountInfo函数中
+        // getAddressInfo通过私钥找到公钥和ok地址
+        // account是从主网get到的ok addr上的一些信息
+
 
         String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
         String memo = "";
@@ -107,12 +125,50 @@ public class ClientTest {
         amount.setDenom("okb");
         amount.setAmount("1.00000000");
         amountList.add(amount);
-
+        // account是客户端的账户信息（通过私钥到公钥到OK地址然后向主网查询get该地址下的信息返回形成一个account）
+        // to是要转账给的ok地址
+        // amountList是要转账的集合
         JSONObject resJson = okc.sendSendTransaction(account, to, amountList, memo);
+        // resJson是主网收到转账后的答复json对象
         System.out.println(resJson.toString());
+        // 判断：resJson中第一级key——"logs"中，第一个元素中(第一个元素为一个新json对象)，key为"success的对应的值是否是true
         Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
     }
+    @Test
+    public void sendSendTransactions() {
+        OKChainClient okc = generateClient();
+        AccountInfo account = generateAccountInfo(okc);
+        List<String> tos = new ArrayList<>();
+        String memo ="";
+        // 创建第一笔交易
+        String to1 = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
+        tos.add(to1);
+        List<Token> amountList1 = new ArrayList<>();
+        Token amount1 = new Token();
+        amount1.setDenom("okb");
+        amount1.setAmount("10.00000000");
+        amountList1.add(amount1);
 
+        // 创建第二笔交易
+        List<Token> amountList2 = new ArrayList<>();
+        String to2 = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
+        tos.add(to2);
+        Token amount2 = new Token();
+        amount2.setDenom("okb");
+        amount2.setAmount("2.00000000");
+        amountList2.add(amount2);
+
+        List<List<Token>> amountLists = new ArrayList<>();
+        amountLists.add(amountList1);
+        amountLists.add(amountList2);
+
+        JSONObject resJson=okc.sendSendTransactions(account,tos,amountLists,memo);
+        // resJson是主网收到转账后的答复json对象
+        //System.out.println(resJson.toString());
+        // 判断：resJson中第一级key——"logs"中，第一个元素中(第一个元素为一个新json对象)，key为"success的对应的值是否是true
+        Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
+
+    }
     @Test
     public void testSendCancelOrderTransaction() {
         OKChainClient okc = generateClient();

@@ -34,4 +34,5 @@ public class AddressInfo {
     public void setUserAddress(String userAddress) {
         this.userAddress = userAddress;
     }
+
 }
