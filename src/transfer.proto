@@ -3,53 +3,67 @@ option java_package = "com.okchain.proto";
 
 message StdTransaction {
     repeated bytes msgs = 1;
-    Fee fee = 2;
-    repeated Signature signatures = 3;
-    string memo = 4;
+    //Fee fee = 2;
+    repeated Signature signatures = 2;
+    string memo = 3;
 }
 
 message Fee {
-    string gas = 1;
-    repeated Token amount = 2;
+    repeated Token amount = 1;
+    int64 gas = 2;
 }
 
 message Signature {
     bytes pubkey = 1;
-    string signature = 2;
+    bytes signature = 2;
 }
 
 message Token {
-    string amount = 1;
-    string denom = 2;
+    string denom = 1;
+    string amount = 2;
+
 }
 
 message MsgSend {
-    string fromAddress = 1;
-    string toAddress = 2;
+    bytes fromAddress = 1;
+    bytes toAddress = 2;
     repeated Token amount = 3;
 }
 
 message MsgNewOrder {
-    string batchNumber = 1;
-    string depth = 2;
-    string price = 3;
-    string product = 4;
+    bytes sender = 1;
+    string product = 2;
+    string side = 3;
+    string price = 4;
     string quantity = 5;
-    string sender = 6;
-    string side = 7;
+    string batchNumber = 6;
+    string depth = 7;
 }
 
 message MsgCancelOrder {
-    string orderId = 1;
-    string sender = 2;
+    bytes sender = 1;
+    string orderId = 2;
+
 }
 
 message MsgMultiSend {
-    string from = 1;
+    bytes from = 1;
     repeated TransferUnit transfers = 2;
 }
 
 message TransferUnit {
-    repeated Token coins = 1;
-    string to = 2;
+    bytes to = 1;
+    repeated Token coins = 2;
 }
+
+message BaseType {
+    int64 i = 1;
+    string s = 2;
+    repeated string ss = 3;
+    repeated Stu stus = 4;
+}
+
+message Stu {
+    int64 id = 1;
+}
+

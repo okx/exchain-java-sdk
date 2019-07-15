@@ -32,48 +32,55 @@ public final class Transfer {
     com.google.protobuf.ByteString getMsgs(int index);
 
     /**
-     * <code>.Fee fee = 2;</code>
-     */
-    boolean hasFee();
-    /**
-     * <code>.Fee fee = 2;</code>
-     */
-    com.okchain.proto.Transfer.Fee getFee();
-    /**
-     * <code>.Fee fee = 2;</code>
-     */
-    com.okchain.proto.Transfer.FeeOrBuilder getFeeOrBuilder();
-
-    /**
-     * <code>repeated .Signature signatures = 3;</code>
+     * <pre>
+     *Fee fee = 2;
+     * </pre>
+     *
+     * <code>repeated .Signature signatures = 2;</code>
      */
     java.util.List<com.okchain.proto.Transfer.Signature> 
         getSignaturesList();
     /**
-     * <code>repeated .Signature signatures = 3;</code>
+     * <pre>
+     *Fee fee = 2;
+     * </pre>
+     *
+     * <code>repeated .Signature signatures = 2;</code>
      */
     com.okchain.proto.Transfer.Signature getSignatures(int index);
     /**
-     * <code>repeated .Signature signatures = 3;</code>
+     * <pre>
+     *Fee fee = 2;
+     * </pre>
+     *
+     * <code>repeated .Signature signatures = 2;</code>
      */
     int getSignaturesCount();
     /**
-     * <code>repeated .Signature signatures = 3;</code>
+     * <pre>
+     *Fee fee = 2;
+     * </pre>
+     *
+     * <code>repeated .Signature signatures = 2;</code>
      */
     java.util.List<? extends com.okchain.proto.Transfer.SignatureOrBuilder> 
         getSignaturesOrBuilderList();
     /**
-     * <code>repeated .Signature signatures = 3;</code>
+     * <pre>
+     *Fee fee = 2;
+     * </pre>
+     *
+     * <code>repeated .Signature signatures = 2;</code>
      */
     com.okchain.proto.Transfer.SignatureOrBuilder getSignaturesOrBuilder(
         int index);
 
     /**
-     * <code>string memo = 4;</code>
+     * <code>string memo = 3;</code>
      */
     java.lang.String getMemo();
     /**
-     * <code>string memo = 4;</code>
+     * <code>string memo = 3;</code>
      */
     com.google.protobuf.ByteString
         getMemoBytes();
@@ -129,28 +136,15 @@ public final class Transfer {
               break;
             }
             case 18: {
-              com.okchain.proto.Transfer.Fee.Builder subBuilder = null;
-              if (fee_ != null) {
-                subBuilder = fee_.toBuilder();
-              }
-              fee_ = input.readMessage(com.okchain.proto.Transfer.Fee.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(fee_);
-                fee_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 26: {
-              if (!((mutable_bitField0_ & 0x00000004) != 0)) {
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
                 signatures_ = new java.util.ArrayList<com.okchain.proto.Transfer.Signature>();
-                mutable_bitField0_ |= 0x00000004;
+                mutable_bitField0_ |= 0x00000002;
               }
               signatures_.add(
                   input.readMessage(com.okchain.proto.Transfer.Signature.parser(), extensionRegistry));
               break;
             }
-            case 34: {
+            case 26: {
               java.lang.String s = input.readStringRequireUtf8();
 
               memo_ = s;
@@ -174,7 +168,7 @@ public final class Transfer {
         if (((mutable_bitField0_ & 0x00000001) != 0)) {
           msgs_ = java.util.Collections.unmodifiableList(msgs_); // C
         }
-        if (((mutable_bitField0_ & 0x00000004) != 0)) {
+        if (((mutable_bitField0_ & 0x00000002) != 0)) {
           signatures_ = java.util.Collections.unmodifiableList(signatures_);
         }
         this.unknownFields = unknownFields.build();
@@ -217,66 +211,65 @@ public final class Transfer {
       return msgs_.get(index);
     }
 
-    public static final int FEE_FIELD_NUMBER = 2;
-    private com.okchain.proto.Transfer.Fee fee_;
-    /**
-     * <code>.Fee fee = 2;</code>
-     */
-    public boolean hasFee() {
-      return fee_ != null;
-    }
-    /**
-     * <code>.Fee fee = 2;</code>
-     */
-    public com.okchain.proto.Transfer.Fee getFee() {
-      return fee_ == null ? com.okchain.proto.Transfer.Fee.getDefaultInstance() : fee_;
-    }
-    /**
-     * <code>.Fee fee = 2;</code>
-     */
-    public com.okchain.proto.Transfer.FeeOrBuilder getFeeOrBuilder() {
-      return getFee();
-    }
-
-    public static final int SIGNATURES_FIELD_NUMBER = 3;
+    public static final int SIGNATURES_FIELD_NUMBER = 2;
     private java.util.List<com.okchain.proto.Transfer.Signature> signatures_;
     /**
-     * <code>repeated .Signature signatures = 3;</code>
+     * <pre>
+     *Fee fee = 2;
+     * </pre>
+     *
+     * <code>repeated .Signature signatures = 2;</code>
      */
     public java.util.List<com.okchain.proto.Transfer.Signature> getSignaturesList() {
       return signatures_;
     }
     /**
-     * <code>repeated .Signature signatures = 3;</code>
+     * <pre>
+     *Fee fee = 2;
+     * </pre>
+     *
+     * <code>repeated .Signature signatures = 2;</code>
      */
     public java.util.List<? extends com.okchain.proto.Transfer.SignatureOrBuilder> 
         getSignaturesOrBuilderList() {
       return signatures_;
     }
     /**
-     * <code>repeated .Signature signatures = 3;</code>
+     * <pre>
+     *Fee fee = 2;
+     * </pre>
+     *
+     * <code>repeated .Signature signatures = 2;</code>
      */
     public int getSignaturesCount() {
       return signatures_.size();
     }
     /**
-     * <code>repeated .Signature signatures = 3;</code>
+     * <pre>
+     *Fee fee = 2;
+     * </pre>
+     *
+     * <code>repeated .Signature signatures = 2;</code>
      */
     public com.okchain.proto.Transfer.Signature getSignatures(int index) {
       return signatures_.get(index);
     }
     /**
-     * <code>repeated .Signature signatures = 3;</code>
+     * <pre>
+     *Fee fee = 2;
+     * </pre>
+     *
+     * <code>repeated .Signature signatures = 2;</code>
      */
     public com.okchain.proto.Transfer.SignatureOrBuilder getSignaturesOrBuilder(
         int index) {
       return signatures_.get(index);
     }
 
-    public static final int MEMO_FIELD_NUMBER = 4;
+    public static final int MEMO_FIELD_NUMBER = 3;
     private volatile java.lang.Object memo_;
     /**
-     * <code>string memo = 4;</code>
+     * <code>string memo = 3;</code>
      */
     public java.lang.String getMemo() {
       java.lang.Object ref = memo_;
@@ -291,7 +284,7 @@ public final class Transfer {
       }
     }
     /**
-     * <code>string memo = 4;</code>
+     * <code>string memo = 3;</code>
      */
     public com.google.protobuf.ByteString
         getMemoBytes() {
@@ -324,14 +317,11 @@ public final class Transfer {
       for (int i = 0; i < msgs_.size(); i++) {
         output.writeBytes(1, msgs_.get(i));
       }
-      if (fee_ != null) {
-        output.writeMessage(2, getFee());
-      }
       for (int i = 0; i < signatures_.size(); i++) {
-        output.writeMessage(3, signatures_.get(i));
+        output.writeMessage(2, signatures_.get(i));
       }
       if (!getMemoBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, memo_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, memo_);
       }
       unknownFields.writeTo(output);
     }
@@ -351,16 +341,12 @@ public final class Transfer {
         size += dataSize;
         size += 1 * getMsgsList().size();
       }
-      if (fee_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getFee());
-      }
       for (int i = 0; i < signatures_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, signatures_.get(i));
+          .computeMessageSize(2, signatures_.get(i));
       }
       if (!getMemoBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, memo_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, memo_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -379,11 +365,6 @@ public final class Transfer {
 
       if (!getMsgsList()
           .equals(other.getMsgsList())) return false;
-      if (hasFee() != other.hasFee()) return false;
-      if (hasFee()) {
-        if (!getFee()
-            .equals(other.getFee())) return false;
-      }
       if (!getSignaturesList()
           .equals(other.getSignaturesList())) return false;
       if (!getMemo()
@@ -402,10 +383,6 @@ public final class Transfer {
       if (getMsgsCount() > 0) {
         hash = (37 * hash) + MSGS_FIELD_NUMBER;
         hash = (53 * hash) + getMsgsList().hashCode();
-      }
-      if (hasFee()) {
-        hash = (37 * hash) + FEE_FIELD_NUMBER;
-        hash = (53 * hash) + getFee().hashCode();
       }
       if (getSignaturesCount() > 0) {
         hash = (37 * hash) + SIGNATURES_FIELD_NUMBER;
@@ -549,15 +526,9 @@ public final class Transfer {
         super.clear();
         msgs_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (feeBuilder_ == null) {
-          fee_ = null;
-        } else {
-          fee_ = null;
-          feeBuilder_ = null;
-        }
         if (signaturesBuilder_ == null) {
           signatures_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           signaturesBuilder_.clear();
         }
@@ -596,15 +567,10 @@ public final class Transfer {
           bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.msgs_ = msgs_;
-        if (feeBuilder_ == null) {
-          result.fee_ = fee_;
-        } else {
-          result.fee_ = feeBuilder_.build();
-        }
         if (signaturesBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) != 0)) {
+          if (((bitField0_ & 0x00000002) != 0)) {
             signatures_ = java.util.Collections.unmodifiableList(signatures_);
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.signatures_ = signatures_;
         } else {
@@ -670,14 +636,11 @@ public final class Transfer {
           }
           onChanged();
         }
-        if (other.hasFee()) {
-          mergeFee(other.getFee());
-        }
         if (signaturesBuilder_ == null) {
           if (!other.signatures_.isEmpty()) {
             if (signatures_.isEmpty()) {
               signatures_ = other.signatures_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureSignaturesIsMutable();
               signatures_.addAll(other.signatures_);
@@ -690,7 +653,7 @@ public final class Transfer {
               signaturesBuilder_.dispose();
               signaturesBuilder_ = null;
               signatures_ = other.signatures_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000002);
               signaturesBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getSignaturesFieldBuilder() : null;
@@ -806,129 +769,12 @@ public final class Transfer {
         return this;
       }
 
-      private com.okchain.proto.Transfer.Fee fee_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.okchain.proto.Transfer.Fee, com.okchain.proto.Transfer.Fee.Builder, com.okchain.proto.Transfer.FeeOrBuilder> feeBuilder_;
-      /**
-       * <code>.Fee fee = 2;</code>
-       */
-      public boolean hasFee() {
-        return feeBuilder_ != null || fee_ != null;
-      }
-      /**
-       * <code>.Fee fee = 2;</code>
-       */
-      public com.okchain.proto.Transfer.Fee getFee() {
-        if (feeBuilder_ == null) {
-          return fee_ == null ? com.okchain.proto.Transfer.Fee.getDefaultInstance() : fee_;
-        } else {
-          return feeBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.Fee fee = 2;</code>
-       */
-      public Builder setFee(com.okchain.proto.Transfer.Fee value) {
-        if (feeBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          fee_ = value;
-          onChanged();
-        } else {
-          feeBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.Fee fee = 2;</code>
-       */
-      public Builder setFee(
-          com.okchain.proto.Transfer.Fee.Builder builderForValue) {
-        if (feeBuilder_ == null) {
-          fee_ = builderForValue.build();
-          onChanged();
-        } else {
-          feeBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.Fee fee = 2;</code>
-       */
-      public Builder mergeFee(com.okchain.proto.Transfer.Fee value) {
-        if (feeBuilder_ == null) {
-          if (fee_ != null) {
-            fee_ =
-              com.okchain.proto.Transfer.Fee.newBuilder(fee_).mergeFrom(value).buildPartial();
-          } else {
-            fee_ = value;
-          }
-          onChanged();
-        } else {
-          feeBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.Fee fee = 2;</code>
-       */
-      public Builder clearFee() {
-        if (feeBuilder_ == null) {
-          fee_ = null;
-          onChanged();
-        } else {
-          fee_ = null;
-          feeBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.Fee fee = 2;</code>
-       */
-      public com.okchain.proto.Transfer.Fee.Builder getFeeBuilder() {
-        
-        onChanged();
-        return getFeeFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.Fee fee = 2;</code>
-       */
-      public com.okchain.proto.Transfer.FeeOrBuilder getFeeOrBuilder() {
-        if (feeBuilder_ != null) {
-          return feeBuilder_.getMessageOrBuilder();
-        } else {
-          return fee_ == null ?
-              com.okchain.proto.Transfer.Fee.getDefaultInstance() : fee_;
-        }
-      }
-      /**
-       * <code>.Fee fee = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.okchain.proto.Transfer.Fee, com.okchain.proto.Transfer.Fee.Builder, com.okchain.proto.Transfer.FeeOrBuilder> 
-          getFeeFieldBuilder() {
-        if (feeBuilder_ == null) {
-          feeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.okchain.proto.Transfer.Fee, com.okchain.proto.Transfer.Fee.Builder, com.okchain.proto.Transfer.FeeOrBuilder>(
-                  getFee(),
-                  getParentForChildren(),
-                  isClean());
-          fee_ = null;
-        }
-        return feeBuilder_;
-      }
-
       private java.util.List<com.okchain.proto.Transfer.Signature> signatures_ =
         java.util.Collections.emptyList();
       private void ensureSignaturesIsMutable() {
-        if (!((bitField0_ & 0x00000004) != 0)) {
+        if (!((bitField0_ & 0x00000002) != 0)) {
           signatures_ = new java.util.ArrayList<com.okchain.proto.Transfer.Signature>(signatures_);
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000002;
          }
       }
 
@@ -936,7 +782,11 @@ public final class Transfer {
           com.okchain.proto.Transfer.Signature, com.okchain.proto.Transfer.Signature.Builder, com.okchain.proto.Transfer.SignatureOrBuilder> signaturesBuilder_;
 
       /**
-       * <code>repeated .Signature signatures = 3;</code>
+       * <pre>
+       *Fee fee = 2;
+       * </pre>
+       *
+       * <code>repeated .Signature signatures = 2;</code>
        */
       public java.util.List<com.okchain.proto.Transfer.Signature> getSignaturesList() {
         if (signaturesBuilder_ == null) {
@@ -946,7 +796,11 @@ public final class Transfer {
         }
       }
       /**
-       * <code>repeated .Signature signatures = 3;</code>
+       * <pre>
+       *Fee fee = 2;
+       * </pre>
+       *
+       * <code>repeated .Signature signatures = 2;</code>
        */
       public int getSignaturesCount() {
         if (signaturesBuilder_ == null) {
@@ -956,7 +810,11 @@ public final class Transfer {
         }
       }
       /**
-       * <code>repeated .Signature signatures = 3;</code>
+       * <pre>
+       *Fee fee = 2;
+       * </pre>
+       *
+       * <code>repeated .Signature signatures = 2;</code>
        */
       public com.okchain.proto.Transfer.Signature getSignatures(int index) {
         if (signaturesBuilder_ == null) {
@@ -966,7 +824,11 @@ public final class Transfer {
         }
       }
       /**
-       * <code>repeated .Signature signatures = 3;</code>
+       * <pre>
+       *Fee fee = 2;
+       * </pre>
+       *
+       * <code>repeated .Signature signatures = 2;</code>
        */
       public Builder setSignatures(
           int index, com.okchain.proto.Transfer.Signature value) {
@@ -983,7 +845,11 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Signature signatures = 3;</code>
+       * <pre>
+       *Fee fee = 2;
+       * </pre>
+       *
+       * <code>repeated .Signature signatures = 2;</code>
        */
       public Builder setSignatures(
           int index, com.okchain.proto.Transfer.Signature.Builder builderForValue) {
@@ -997,7 +863,11 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Signature signatures = 3;</code>
+       * <pre>
+       *Fee fee = 2;
+       * </pre>
+       *
+       * <code>repeated .Signature signatures = 2;</code>
        */
       public Builder addSignatures(com.okchain.proto.Transfer.Signature value) {
         if (signaturesBuilder_ == null) {
@@ -1013,7 +883,11 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Signature signatures = 3;</code>
+       * <pre>
+       *Fee fee = 2;
+       * </pre>
+       *
+       * <code>repeated .Signature signatures = 2;</code>
        */
       public Builder addSignatures(
           int index, com.okchain.proto.Transfer.Signature value) {
@@ -1030,7 +904,11 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Signature signatures = 3;</code>
+       * <pre>
+       *Fee fee = 2;
+       * </pre>
+       *
+       * <code>repeated .Signature signatures = 2;</code>
        */
       public Builder addSignatures(
           com.okchain.proto.Transfer.Signature.Builder builderForValue) {
@@ -1044,7 +922,11 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Signature signatures = 3;</code>
+       * <pre>
+       *Fee fee = 2;
+       * </pre>
+       *
+       * <code>repeated .Signature signatures = 2;</code>
        */
       public Builder addSignatures(
           int index, com.okchain.proto.Transfer.Signature.Builder builderForValue) {
@@ -1058,7 +940,11 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Signature signatures = 3;</code>
+       * <pre>
+       *Fee fee = 2;
+       * </pre>
+       *
+       * <code>repeated .Signature signatures = 2;</code>
        */
       public Builder addAllSignatures(
           java.lang.Iterable<? extends com.okchain.proto.Transfer.Signature> values) {
@@ -1073,12 +959,16 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Signature signatures = 3;</code>
+       * <pre>
+       *Fee fee = 2;
+       * </pre>
+       *
+       * <code>repeated .Signature signatures = 2;</code>
        */
       public Builder clearSignatures() {
         if (signaturesBuilder_ == null) {
           signatures_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           signaturesBuilder_.clear();
@@ -1086,7 +976,11 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Signature signatures = 3;</code>
+       * <pre>
+       *Fee fee = 2;
+       * </pre>
+       *
+       * <code>repeated .Signature signatures = 2;</code>
        */
       public Builder removeSignatures(int index) {
         if (signaturesBuilder_ == null) {
@@ -1099,14 +993,22 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Signature signatures = 3;</code>
+       * <pre>
+       *Fee fee = 2;
+       * </pre>
+       *
+       * <code>repeated .Signature signatures = 2;</code>
        */
       public com.okchain.proto.Transfer.Signature.Builder getSignaturesBuilder(
           int index) {
         return getSignaturesFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .Signature signatures = 3;</code>
+       * <pre>
+       *Fee fee = 2;
+       * </pre>
+       *
+       * <code>repeated .Signature signatures = 2;</code>
        */
       public com.okchain.proto.Transfer.SignatureOrBuilder getSignaturesOrBuilder(
           int index) {
@@ -1116,7 +1018,11 @@ public final class Transfer {
         }
       }
       /**
-       * <code>repeated .Signature signatures = 3;</code>
+       * <pre>
+       *Fee fee = 2;
+       * </pre>
+       *
+       * <code>repeated .Signature signatures = 2;</code>
        */
       public java.util.List<? extends com.okchain.proto.Transfer.SignatureOrBuilder> 
            getSignaturesOrBuilderList() {
@@ -1127,14 +1033,22 @@ public final class Transfer {
         }
       }
       /**
-       * <code>repeated .Signature signatures = 3;</code>
+       * <pre>
+       *Fee fee = 2;
+       * </pre>
+       *
+       * <code>repeated .Signature signatures = 2;</code>
        */
       public com.okchain.proto.Transfer.Signature.Builder addSignaturesBuilder() {
         return getSignaturesFieldBuilder().addBuilder(
             com.okchain.proto.Transfer.Signature.getDefaultInstance());
       }
       /**
-       * <code>repeated .Signature signatures = 3;</code>
+       * <pre>
+       *Fee fee = 2;
+       * </pre>
+       *
+       * <code>repeated .Signature signatures = 2;</code>
        */
       public com.okchain.proto.Transfer.Signature.Builder addSignaturesBuilder(
           int index) {
@@ -1142,7 +1056,11 @@ public final class Transfer {
             index, com.okchain.proto.Transfer.Signature.getDefaultInstance());
       }
       /**
-       * <code>repeated .Signature signatures = 3;</code>
+       * <pre>
+       *Fee fee = 2;
+       * </pre>
+       *
+       * <code>repeated .Signature signatures = 2;</code>
        */
       public java.util.List<com.okchain.proto.Transfer.Signature.Builder> 
            getSignaturesBuilderList() {
@@ -1155,7 +1073,7 @@ public final class Transfer {
           signaturesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.okchain.proto.Transfer.Signature, com.okchain.proto.Transfer.Signature.Builder, com.okchain.proto.Transfer.SignatureOrBuilder>(
                   signatures_,
-                  ((bitField0_ & 0x00000004) != 0),
+                  ((bitField0_ & 0x00000002) != 0),
                   getParentForChildren(),
                   isClean());
           signatures_ = null;
@@ -1165,7 +1083,7 @@ public final class Transfer {
 
       private java.lang.Object memo_ = "";
       /**
-       * <code>string memo = 4;</code>
+       * <code>string memo = 3;</code>
        */
       public java.lang.String getMemo() {
         java.lang.Object ref = memo_;
@@ -1180,7 +1098,7 @@ public final class Transfer {
         }
       }
       /**
-       * <code>string memo = 4;</code>
+       * <code>string memo = 3;</code>
        */
       public com.google.protobuf.ByteString
           getMemoBytes() {
@@ -1196,7 +1114,7 @@ public final class Transfer {
         }
       }
       /**
-       * <code>string memo = 4;</code>
+       * <code>string memo = 3;</code>
        */
       public Builder setMemo(
           java.lang.String value) {
@@ -1209,7 +1127,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>string memo = 4;</code>
+       * <code>string memo = 3;</code>
        */
       public Builder clearMemo() {
         
@@ -1218,7 +1136,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>string memo = 4;</code>
+       * <code>string memo = 3;</code>
        */
       public Builder setMemoBytes(
           com.google.protobuf.ByteString value) {
@@ -1289,38 +1207,33 @@ public final class Transfer {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string gas = 1;</code>
-     */
-    java.lang.String getGas();
-    /**
-     * <code>string gas = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getGasBytes();
-
-    /**
-     * <code>repeated .Token amount = 2;</code>
+     * <code>repeated .Token amount = 1;</code>
      */
     java.util.List<com.okchain.proto.Transfer.Token> 
         getAmountList();
     /**
-     * <code>repeated .Token amount = 2;</code>
+     * <code>repeated .Token amount = 1;</code>
      */
     com.okchain.proto.Transfer.Token getAmount(int index);
     /**
-     * <code>repeated .Token amount = 2;</code>
+     * <code>repeated .Token amount = 1;</code>
      */
     int getAmountCount();
     /**
-     * <code>repeated .Token amount = 2;</code>
+     * <code>repeated .Token amount = 1;</code>
      */
     java.util.List<? extends com.okchain.proto.Transfer.TokenOrBuilder> 
         getAmountOrBuilderList();
     /**
-     * <code>repeated .Token amount = 2;</code>
+     * <code>repeated .Token amount = 1;</code>
      */
     com.okchain.proto.Transfer.TokenOrBuilder getAmountOrBuilder(
         int index);
+
+    /**
+     * <code>int64 gas = 2;</code>
+     */
+    long getGas();
   }
   /**
    * Protobuf type {@code Fee}
@@ -1335,7 +1248,6 @@ public final class Transfer {
       super(builder);
     }
     private Fee() {
-      gas_ = "";
       amount_ = java.util.Collections.emptyList();
     }
 
@@ -1364,18 +1276,17 @@ public final class Transfer {
               done = true;
               break;
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              gas_ = s;
-              break;
-            }
-            case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 amount_ = new java.util.ArrayList<com.okchain.proto.Transfer.Token>();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000001;
               }
               amount_.add(
                   input.readMessage(com.okchain.proto.Transfer.Token.parser(), extensionRegistry));
+              break;
+            }
+            case 16: {
+
+              gas_ = input.readInt64();
               break;
             }
             default: {
@@ -1393,7 +1304,7 @@ public final class Transfer {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) != 0)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           amount_ = java.util.Collections.unmodifiableList(amount_);
         }
         this.unknownFields = unknownFields.build();
@@ -1414,73 +1325,48 @@ public final class Transfer {
     }
 
     private int bitField0_;
-    public static final int GAS_FIELD_NUMBER = 1;
-    private volatile java.lang.Object gas_;
-    /**
-     * <code>string gas = 1;</code>
-     */
-    public java.lang.String getGas() {
-      java.lang.Object ref = gas_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        gas_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string gas = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getGasBytes() {
-      java.lang.Object ref = gas_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        gas_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int AMOUNT_FIELD_NUMBER = 2;
+    public static final int AMOUNT_FIELD_NUMBER = 1;
     private java.util.List<com.okchain.proto.Transfer.Token> amount_;
     /**
-     * <code>repeated .Token amount = 2;</code>
+     * <code>repeated .Token amount = 1;</code>
      */
     public java.util.List<com.okchain.proto.Transfer.Token> getAmountList() {
       return amount_;
     }
     /**
-     * <code>repeated .Token amount = 2;</code>
+     * <code>repeated .Token amount = 1;</code>
      */
     public java.util.List<? extends com.okchain.proto.Transfer.TokenOrBuilder> 
         getAmountOrBuilderList() {
       return amount_;
     }
     /**
-     * <code>repeated .Token amount = 2;</code>
+     * <code>repeated .Token amount = 1;</code>
      */
     public int getAmountCount() {
       return amount_.size();
     }
     /**
-     * <code>repeated .Token amount = 2;</code>
+     * <code>repeated .Token amount = 1;</code>
      */
     public com.okchain.proto.Transfer.Token getAmount(int index) {
       return amount_.get(index);
     }
     /**
-     * <code>repeated .Token amount = 2;</code>
+     * <code>repeated .Token amount = 1;</code>
      */
     public com.okchain.proto.Transfer.TokenOrBuilder getAmountOrBuilder(
         int index) {
       return amount_.get(index);
+    }
+
+    public static final int GAS_FIELD_NUMBER = 2;
+    private long gas_;
+    /**
+     * <code>int64 gas = 2;</code>
+     */
+    public long getGas() {
+      return gas_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1497,11 +1383,11 @@ public final class Transfer {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getGasBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, gas_);
-      }
       for (int i = 0; i < amount_.size(); i++) {
-        output.writeMessage(2, amount_.get(i));
+        output.writeMessage(1, amount_.get(i));
+      }
+      if (gas_ != 0L) {
+        output.writeInt64(2, gas_);
       }
       unknownFields.writeTo(output);
     }
@@ -1512,12 +1398,13 @@ public final class Transfer {
       if (size != -1) return size;
 
       size = 0;
-      if (!getGasBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, gas_);
-      }
       for (int i = 0; i < amount_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, amount_.get(i));
+          .computeMessageSize(1, amount_.get(i));
+      }
+      if (gas_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, gas_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1534,10 +1421,10 @@ public final class Transfer {
       }
       com.okchain.proto.Transfer.Fee other = (com.okchain.proto.Transfer.Fee) obj;
 
-      if (!getGas()
-          .equals(other.getGas())) return false;
       if (!getAmountList()
           .equals(other.getAmountList())) return false;
+      if (getGas()
+          != other.getGas()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -1549,12 +1436,13 @@ public final class Transfer {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + GAS_FIELD_NUMBER;
-      hash = (53 * hash) + getGas().hashCode();
       if (getAmountCount() > 0) {
         hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
         hash = (53 * hash) + getAmountList().hashCode();
       }
+      hash = (37 * hash) + GAS_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getGas());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1689,14 +1577,14 @@ public final class Transfer {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        gas_ = "";
-
         if (amountBuilder_ == null) {
           amount_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           amountBuilder_.clear();
         }
+        gas_ = 0L;
+
         return this;
       }
 
@@ -1725,16 +1613,16 @@ public final class Transfer {
         com.okchain.proto.Transfer.Fee result = new com.okchain.proto.Transfer.Fee(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        result.gas_ = gas_;
         if (amountBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) != 0)) {
+          if (((bitField0_ & 0x00000001) != 0)) {
             amount_ = java.util.Collections.unmodifiableList(amount_);
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000001);
           }
           result.amount_ = amount_;
         } else {
           result.amount_ = amountBuilder_.build();
         }
+        result.gas_ = gas_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1784,15 +1672,11 @@ public final class Transfer {
 
       public Builder mergeFrom(com.okchain.proto.Transfer.Fee other) {
         if (other == com.okchain.proto.Transfer.Fee.getDefaultInstance()) return this;
-        if (!other.getGas().isEmpty()) {
-          gas_ = other.gas_;
-          onChanged();
-        }
         if (amountBuilder_ == null) {
           if (!other.amount_.isEmpty()) {
             if (amount_.isEmpty()) {
               amount_ = other.amount_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000001);
             } else {
               ensureAmountIsMutable();
               amount_.addAll(other.amount_);
@@ -1805,7 +1689,7 @@ public final class Transfer {
               amountBuilder_.dispose();
               amountBuilder_ = null;
               amount_ = other.amount_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000001);
               amountBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getAmountFieldBuilder() : null;
@@ -1813,6 +1697,9 @@ public final class Transfer {
               amountBuilder_.addAllMessages(other.amount_);
             }
           }
+        }
+        if (other.getGas() != 0L) {
+          setGas(other.getGas());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1844,81 +1731,12 @@ public final class Transfer {
       }
       private int bitField0_;
 
-      private java.lang.Object gas_ = "";
-      /**
-       * <code>string gas = 1;</code>
-       */
-      public java.lang.String getGas() {
-        java.lang.Object ref = gas_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          gas_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string gas = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getGasBytes() {
-        java.lang.Object ref = gas_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          gas_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string gas = 1;</code>
-       */
-      public Builder setGas(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        gas_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string gas = 1;</code>
-       */
-      public Builder clearGas() {
-        
-        gas_ = getDefaultInstance().getGas();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string gas = 1;</code>
-       */
-      public Builder setGasBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        gas_ = value;
-        onChanged();
-        return this;
-      }
-
       private java.util.List<com.okchain.proto.Transfer.Token> amount_ =
         java.util.Collections.emptyList();
       private void ensureAmountIsMutable() {
-        if (!((bitField0_ & 0x00000002) != 0)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           amount_ = new java.util.ArrayList<com.okchain.proto.Transfer.Token>(amount_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000001;
          }
       }
 
@@ -1926,7 +1744,7 @@ public final class Transfer {
           com.okchain.proto.Transfer.Token, com.okchain.proto.Transfer.Token.Builder, com.okchain.proto.Transfer.TokenOrBuilder> amountBuilder_;
 
       /**
-       * <code>repeated .Token amount = 2;</code>
+       * <code>repeated .Token amount = 1;</code>
        */
       public java.util.List<com.okchain.proto.Transfer.Token> getAmountList() {
         if (amountBuilder_ == null) {
@@ -1936,7 +1754,7 @@ public final class Transfer {
         }
       }
       /**
-       * <code>repeated .Token amount = 2;</code>
+       * <code>repeated .Token amount = 1;</code>
        */
       public int getAmountCount() {
         if (amountBuilder_ == null) {
@@ -1946,7 +1764,7 @@ public final class Transfer {
         }
       }
       /**
-       * <code>repeated .Token amount = 2;</code>
+       * <code>repeated .Token amount = 1;</code>
        */
       public com.okchain.proto.Transfer.Token getAmount(int index) {
         if (amountBuilder_ == null) {
@@ -1956,7 +1774,7 @@ public final class Transfer {
         }
       }
       /**
-       * <code>repeated .Token amount = 2;</code>
+       * <code>repeated .Token amount = 1;</code>
        */
       public Builder setAmount(
           int index, com.okchain.proto.Transfer.Token value) {
@@ -1973,7 +1791,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Token amount = 2;</code>
+       * <code>repeated .Token amount = 1;</code>
        */
       public Builder setAmount(
           int index, com.okchain.proto.Transfer.Token.Builder builderForValue) {
@@ -1987,7 +1805,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Token amount = 2;</code>
+       * <code>repeated .Token amount = 1;</code>
        */
       public Builder addAmount(com.okchain.proto.Transfer.Token value) {
         if (amountBuilder_ == null) {
@@ -2003,7 +1821,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Token amount = 2;</code>
+       * <code>repeated .Token amount = 1;</code>
        */
       public Builder addAmount(
           int index, com.okchain.proto.Transfer.Token value) {
@@ -2020,7 +1838,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Token amount = 2;</code>
+       * <code>repeated .Token amount = 1;</code>
        */
       public Builder addAmount(
           com.okchain.proto.Transfer.Token.Builder builderForValue) {
@@ -2034,7 +1852,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Token amount = 2;</code>
+       * <code>repeated .Token amount = 1;</code>
        */
       public Builder addAmount(
           int index, com.okchain.proto.Transfer.Token.Builder builderForValue) {
@@ -2048,7 +1866,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Token amount = 2;</code>
+       * <code>repeated .Token amount = 1;</code>
        */
       public Builder addAllAmount(
           java.lang.Iterable<? extends com.okchain.proto.Transfer.Token> values) {
@@ -2063,12 +1881,12 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Token amount = 2;</code>
+       * <code>repeated .Token amount = 1;</code>
        */
       public Builder clearAmount() {
         if (amountBuilder_ == null) {
           amount_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
           amountBuilder_.clear();
@@ -2076,7 +1894,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Token amount = 2;</code>
+       * <code>repeated .Token amount = 1;</code>
        */
       public Builder removeAmount(int index) {
         if (amountBuilder_ == null) {
@@ -2089,14 +1907,14 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Token amount = 2;</code>
+       * <code>repeated .Token amount = 1;</code>
        */
       public com.okchain.proto.Transfer.Token.Builder getAmountBuilder(
           int index) {
         return getAmountFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .Token amount = 2;</code>
+       * <code>repeated .Token amount = 1;</code>
        */
       public com.okchain.proto.Transfer.TokenOrBuilder getAmountOrBuilder(
           int index) {
@@ -2106,7 +1924,7 @@ public final class Transfer {
         }
       }
       /**
-       * <code>repeated .Token amount = 2;</code>
+       * <code>repeated .Token amount = 1;</code>
        */
       public java.util.List<? extends com.okchain.proto.Transfer.TokenOrBuilder> 
            getAmountOrBuilderList() {
@@ -2117,14 +1935,14 @@ public final class Transfer {
         }
       }
       /**
-       * <code>repeated .Token amount = 2;</code>
+       * <code>repeated .Token amount = 1;</code>
        */
       public com.okchain.proto.Transfer.Token.Builder addAmountBuilder() {
         return getAmountFieldBuilder().addBuilder(
             com.okchain.proto.Transfer.Token.getDefaultInstance());
       }
       /**
-       * <code>repeated .Token amount = 2;</code>
+       * <code>repeated .Token amount = 1;</code>
        */
       public com.okchain.proto.Transfer.Token.Builder addAmountBuilder(
           int index) {
@@ -2132,7 +1950,7 @@ public final class Transfer {
             index, com.okchain.proto.Transfer.Token.getDefaultInstance());
       }
       /**
-       * <code>repeated .Token amount = 2;</code>
+       * <code>repeated .Token amount = 1;</code>
        */
       public java.util.List<com.okchain.proto.Transfer.Token.Builder> 
            getAmountBuilderList() {
@@ -2145,12 +1963,38 @@ public final class Transfer {
           amountBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.okchain.proto.Transfer.Token, com.okchain.proto.Transfer.Token.Builder, com.okchain.proto.Transfer.TokenOrBuilder>(
                   amount_,
-                  ((bitField0_ & 0x00000002) != 0),
+                  ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
           amount_ = null;
         }
         return amountBuilder_;
+      }
+
+      private long gas_ ;
+      /**
+       * <code>int64 gas = 2;</code>
+       */
+      public long getGas() {
+        return gas_;
+      }
+      /**
+       * <code>int64 gas = 2;</code>
+       */
+      public Builder setGas(long value) {
+        
+        gas_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 gas = 2;</code>
+       */
+      public Builder clearGas() {
+        
+        gas_ = 0L;
+        onChanged();
+        return this;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -2215,14 +2059,9 @@ public final class Transfer {
     com.google.protobuf.ByteString getPubkey();
 
     /**
-     * <code>string signature = 2;</code>
+     * <code>bytes signature = 2;</code>
      */
-    java.lang.String getSignature();
-    /**
-     * <code>string signature = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getSignatureBytes();
+    com.google.protobuf.ByteString getSignature();
   }
   /**
    * Protobuf type {@code Signature}
@@ -2238,7 +2077,7 @@ public final class Transfer {
     }
     private Signature() {
       pubkey_ = com.google.protobuf.ByteString.EMPTY;
-      signature_ = "";
+      signature_ = com.google.protobuf.ByteString.EMPTY;
     }
 
     @java.lang.Override
@@ -2271,9 +2110,8 @@ public final class Transfer {
               break;
             }
             case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
 
-              signature_ = s;
+              signature_ = input.readBytes();
               break;
             }
             default: {
@@ -2318,37 +2156,12 @@ public final class Transfer {
     }
 
     public static final int SIGNATURE_FIELD_NUMBER = 2;
-    private volatile java.lang.Object signature_;
+    private com.google.protobuf.ByteString signature_;
     /**
-     * <code>string signature = 2;</code>
+     * <code>bytes signature = 2;</code>
      */
-    public java.lang.String getSignature() {
-      java.lang.Object ref = signature_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        signature_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string signature = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getSignatureBytes() {
-      java.lang.Object ref = signature_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        signature_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.google.protobuf.ByteString getSignature() {
+      return signature_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -2368,8 +2181,8 @@ public final class Transfer {
       if (!pubkey_.isEmpty()) {
         output.writeBytes(1, pubkey_);
       }
-      if (!getSignatureBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, signature_);
+      if (!signature_.isEmpty()) {
+        output.writeBytes(2, signature_);
       }
       unknownFields.writeTo(output);
     }
@@ -2384,8 +2197,9 @@ public final class Transfer {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(1, pubkey_);
       }
-      if (!getSignatureBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, signature_);
+      if (!signature_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, signature_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2556,7 +2370,7 @@ public final class Transfer {
         super.clear();
         pubkey_ = com.google.protobuf.ByteString.EMPTY;
 
-        signature_ = "";
+        signature_ = com.google.protobuf.ByteString.EMPTY;
 
         return this;
       }
@@ -2637,9 +2451,8 @@ public final class Transfer {
         if (other.getPubkey() != com.google.protobuf.ByteString.EMPTY) {
           setPubkey(other.getPubkey());
         }
-        if (!other.getSignature().isEmpty()) {
-          signature_ = other.signature_;
-          onChanged();
+        if (other.getSignature() != com.google.protobuf.ByteString.EMPTY) {
+          setSignature(other.getSignature());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2699,43 +2512,17 @@ public final class Transfer {
         return this;
       }
 
-      private java.lang.Object signature_ = "";
+      private com.google.protobuf.ByteString signature_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>string signature = 2;</code>
+       * <code>bytes signature = 2;</code>
        */
-      public java.lang.String getSignature() {
-        java.lang.Object ref = signature_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          signature_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public com.google.protobuf.ByteString getSignature() {
+        return signature_;
       }
       /**
-       * <code>string signature = 2;</code>
+       * <code>bytes signature = 2;</code>
        */
-      public com.google.protobuf.ByteString
-          getSignatureBytes() {
-        java.lang.Object ref = signature_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          signature_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string signature = 2;</code>
-       */
-      public Builder setSignature(
-          java.lang.String value) {
+      public Builder setSignature(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -2745,25 +2532,11 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>string signature = 2;</code>
+       * <code>bytes signature = 2;</code>
        */
       public Builder clearSignature() {
         
         signature_ = getDefaultInstance().getSignature();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string signature = 2;</code>
-       */
-      public Builder setSignatureBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        signature_ = value;
         onChanged();
         return this;
       }
@@ -2825,24 +2598,24 @@ public final class Transfer {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string amount = 1;</code>
-     */
-    java.lang.String getAmount();
-    /**
-     * <code>string amount = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getAmountBytes();
-
-    /**
-     * <code>string denom = 2;</code>
+     * <code>string denom = 1;</code>
      */
     java.lang.String getDenom();
     /**
-     * <code>string denom = 2;</code>
+     * <code>string denom = 1;</code>
      */
     com.google.protobuf.ByteString
         getDenomBytes();
+
+    /**
+     * <code>string amount = 2;</code>
+     */
+    java.lang.String getAmount();
+    /**
+     * <code>string amount = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getAmountBytes();
   }
   /**
    * Protobuf type {@code Token}
@@ -2857,8 +2630,8 @@ public final class Transfer {
       super(builder);
     }
     private Token() {
-      amount_ = "";
       denom_ = "";
+      amount_ = "";
     }
 
     @java.lang.Override
@@ -2888,13 +2661,13 @@ public final class Transfer {
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              amount_ = s;
+              denom_ = s;
               break;
             }
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              denom_ = s;
+              amount_ = s;
               break;
             }
             default: {
@@ -2929,44 +2702,10 @@ public final class Transfer {
               com.okchain.proto.Transfer.Token.class, com.okchain.proto.Transfer.Token.Builder.class);
     }
 
-    public static final int AMOUNT_FIELD_NUMBER = 1;
-    private volatile java.lang.Object amount_;
-    /**
-     * <code>string amount = 1;</code>
-     */
-    public java.lang.String getAmount() {
-      java.lang.Object ref = amount_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        amount_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string amount = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getAmountBytes() {
-      java.lang.Object ref = amount_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        amount_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int DENOM_FIELD_NUMBER = 2;
+    public static final int DENOM_FIELD_NUMBER = 1;
     private volatile java.lang.Object denom_;
     /**
-     * <code>string denom = 2;</code>
+     * <code>string denom = 1;</code>
      */
     public java.lang.String getDenom() {
       java.lang.Object ref = denom_;
@@ -2981,7 +2720,7 @@ public final class Transfer {
       }
     }
     /**
-     * <code>string denom = 2;</code>
+     * <code>string denom = 1;</code>
      */
     public com.google.protobuf.ByteString
         getDenomBytes() {
@@ -2991,6 +2730,40 @@ public final class Transfer {
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
         denom_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int AMOUNT_FIELD_NUMBER = 2;
+    private volatile java.lang.Object amount_;
+    /**
+     * <code>string amount = 2;</code>
+     */
+    public java.lang.String getAmount() {
+      java.lang.Object ref = amount_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        amount_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string amount = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAmountBytes() {
+      java.lang.Object ref = amount_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        amount_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -3011,11 +2784,11 @@ public final class Transfer {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getAmountBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, amount_);
-      }
       if (!getDenomBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, denom_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, denom_);
+      }
+      if (!getAmountBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, amount_);
       }
       unknownFields.writeTo(output);
     }
@@ -3026,11 +2799,11 @@ public final class Transfer {
       if (size != -1) return size;
 
       size = 0;
-      if (!getAmountBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, amount_);
-      }
       if (!getDenomBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, denom_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, denom_);
+      }
+      if (!getAmountBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, amount_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3047,10 +2820,10 @@ public final class Transfer {
       }
       com.okchain.proto.Transfer.Token other = (com.okchain.proto.Transfer.Token) obj;
 
-      if (!getAmount()
-          .equals(other.getAmount())) return false;
       if (!getDenom()
           .equals(other.getDenom())) return false;
+      if (!getAmount()
+          .equals(other.getAmount())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -3062,10 +2835,10 @@ public final class Transfer {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
-      hash = (53 * hash) + getAmount().hashCode();
       hash = (37 * hash) + DENOM_FIELD_NUMBER;
       hash = (53 * hash) + getDenom().hashCode();
+      hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
+      hash = (53 * hash) + getAmount().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -3199,9 +2972,9 @@ public final class Transfer {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        amount_ = "";
-
         denom_ = "";
+
+        amount_ = "";
 
         return this;
       }
@@ -3229,8 +3002,8 @@ public final class Transfer {
       @java.lang.Override
       public com.okchain.proto.Transfer.Token buildPartial() {
         com.okchain.proto.Transfer.Token result = new com.okchain.proto.Transfer.Token(this);
-        result.amount_ = amount_;
         result.denom_ = denom_;
+        result.amount_ = amount_;
         onBuilt();
         return result;
       }
@@ -3279,12 +3052,12 @@ public final class Transfer {
 
       public Builder mergeFrom(com.okchain.proto.Transfer.Token other) {
         if (other == com.okchain.proto.Transfer.Token.getDefaultInstance()) return this;
-        if (!other.getAmount().isEmpty()) {
-          amount_ = other.amount_;
-          onChanged();
-        }
         if (!other.getDenom().isEmpty()) {
           denom_ = other.denom_;
+          onChanged();
+        }
+        if (!other.getAmount().isEmpty()) {
+          amount_ = other.amount_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -3316,78 +3089,9 @@ public final class Transfer {
         return this;
       }
 
-      private java.lang.Object amount_ = "";
-      /**
-       * <code>string amount = 1;</code>
-       */
-      public java.lang.String getAmount() {
-        java.lang.Object ref = amount_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          amount_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string amount = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getAmountBytes() {
-        java.lang.Object ref = amount_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          amount_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string amount = 1;</code>
-       */
-      public Builder setAmount(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        amount_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string amount = 1;</code>
-       */
-      public Builder clearAmount() {
-        
-        amount_ = getDefaultInstance().getAmount();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string amount = 1;</code>
-       */
-      public Builder setAmountBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        amount_ = value;
-        onChanged();
-        return this;
-      }
-
       private java.lang.Object denom_ = "";
       /**
-       * <code>string denom = 2;</code>
+       * <code>string denom = 1;</code>
        */
       public java.lang.String getDenom() {
         java.lang.Object ref = denom_;
@@ -3402,7 +3106,7 @@ public final class Transfer {
         }
       }
       /**
-       * <code>string denom = 2;</code>
+       * <code>string denom = 1;</code>
        */
       public com.google.protobuf.ByteString
           getDenomBytes() {
@@ -3418,7 +3122,7 @@ public final class Transfer {
         }
       }
       /**
-       * <code>string denom = 2;</code>
+       * <code>string denom = 1;</code>
        */
       public Builder setDenom(
           java.lang.String value) {
@@ -3431,7 +3135,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>string denom = 2;</code>
+       * <code>string denom = 1;</code>
        */
       public Builder clearDenom() {
         
@@ -3440,7 +3144,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>string denom = 2;</code>
+       * <code>string denom = 1;</code>
        */
       public Builder setDenomBytes(
           com.google.protobuf.ByteString value) {
@@ -3450,6 +3154,75 @@ public final class Transfer {
   checkByteStringIsUtf8(value);
         
         denom_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object amount_ = "";
+      /**
+       * <code>string amount = 2;</code>
+       */
+      public java.lang.String getAmount() {
+        java.lang.Object ref = amount_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          amount_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string amount = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAmountBytes() {
+        java.lang.Object ref = amount_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          amount_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string amount = 2;</code>
+       */
+      public Builder setAmount(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        amount_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string amount = 2;</code>
+       */
+      public Builder clearAmount() {
+        
+        amount_ = getDefaultInstance().getAmount();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string amount = 2;</code>
+       */
+      public Builder setAmountBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        amount_ = value;
         onChanged();
         return this;
       }
@@ -3511,24 +3284,14 @@ public final class Transfer {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string fromAddress = 1;</code>
+     * <code>bytes fromAddress = 1;</code>
      */
-    java.lang.String getFromAddress();
-    /**
-     * <code>string fromAddress = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getFromAddressBytes();
+    com.google.protobuf.ByteString getFromAddress();
 
     /**
-     * <code>string toAddress = 2;</code>
+     * <code>bytes toAddress = 2;</code>
      */
-    java.lang.String getToAddress();
-    /**
-     * <code>string toAddress = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getToAddressBytes();
+    com.google.protobuf.ByteString getToAddress();
 
     /**
      * <code>repeated .Token amount = 3;</code>
@@ -3567,8 +3330,8 @@ public final class Transfer {
       super(builder);
     }
     private MsgSend() {
-      fromAddress_ = "";
-      toAddress_ = "";
+      fromAddress_ = com.google.protobuf.ByteString.EMPTY;
+      toAddress_ = com.google.protobuf.ByteString.EMPTY;
       amount_ = java.util.Collections.emptyList();
     }
 
@@ -3597,15 +3360,13 @@ public final class Transfer {
               done = true;
               break;
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
 
-              fromAddress_ = s;
+              fromAddress_ = input.readBytes();
               break;
             }
             case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
 
-              toAddress_ = s;
+              toAddress_ = input.readBytes();
               break;
             }
             case 26: {
@@ -3654,71 +3415,21 @@ public final class Transfer {
 
     private int bitField0_;
     public static final int FROMADDRESS_FIELD_NUMBER = 1;
-    private volatile java.lang.Object fromAddress_;
+    private com.google.protobuf.ByteString fromAddress_;
     /**
-     * <code>string fromAddress = 1;</code>
+     * <code>bytes fromAddress = 1;</code>
      */
-    public java.lang.String getFromAddress() {
-      java.lang.Object ref = fromAddress_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        fromAddress_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string fromAddress = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getFromAddressBytes() {
-      java.lang.Object ref = fromAddress_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        fromAddress_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.google.protobuf.ByteString getFromAddress() {
+      return fromAddress_;
     }
 
     public static final int TOADDRESS_FIELD_NUMBER = 2;
-    private volatile java.lang.Object toAddress_;
+    private com.google.protobuf.ByteString toAddress_;
     /**
-     * <code>string toAddress = 2;</code>
+     * <code>bytes toAddress = 2;</code>
      */
-    public java.lang.String getToAddress() {
-      java.lang.Object ref = toAddress_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        toAddress_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string toAddress = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getToAddressBytes() {
-      java.lang.Object ref = toAddress_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        toAddress_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.google.protobuf.ByteString getToAddress() {
+      return toAddress_;
     }
 
     public static final int AMOUNT_FIELD_NUMBER = 3;
@@ -3770,11 +3481,11 @@ public final class Transfer {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getFromAddressBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, fromAddress_);
+      if (!fromAddress_.isEmpty()) {
+        output.writeBytes(1, fromAddress_);
       }
-      if (!getToAddressBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, toAddress_);
+      if (!toAddress_.isEmpty()) {
+        output.writeBytes(2, toAddress_);
       }
       for (int i = 0; i < amount_.size(); i++) {
         output.writeMessage(3, amount_.get(i));
@@ -3788,11 +3499,13 @@ public final class Transfer {
       if (size != -1) return size;
 
       size = 0;
-      if (!getFromAddressBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, fromAddress_);
+      if (!fromAddress_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, fromAddress_);
       }
-      if (!getToAddressBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, toAddress_);
+      if (!toAddress_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, toAddress_);
       }
       for (int i = 0; i < amount_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -3972,9 +3685,9 @@ public final class Transfer {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        fromAddress_ = "";
+        fromAddress_ = com.google.protobuf.ByteString.EMPTY;
 
-        toAddress_ = "";
+        toAddress_ = com.google.protobuf.ByteString.EMPTY;
 
         if (amountBuilder_ == null) {
           amount_ = java.util.Collections.emptyList();
@@ -4070,13 +3783,11 @@ public final class Transfer {
 
       public Builder mergeFrom(com.okchain.proto.Transfer.MsgSend other) {
         if (other == com.okchain.proto.Transfer.MsgSend.getDefaultInstance()) return this;
-        if (!other.getFromAddress().isEmpty()) {
-          fromAddress_ = other.fromAddress_;
-          onChanged();
+        if (other.getFromAddress() != com.google.protobuf.ByteString.EMPTY) {
+          setFromAddress(other.getFromAddress());
         }
-        if (!other.getToAddress().isEmpty()) {
-          toAddress_ = other.toAddress_;
-          onChanged();
+        if (other.getToAddress() != com.google.protobuf.ByteString.EMPTY) {
+          setToAddress(other.getToAddress());
         }
         if (amountBuilder_ == null) {
           if (!other.amount_.isEmpty()) {
@@ -4134,43 +3845,17 @@ public final class Transfer {
       }
       private int bitField0_;
 
-      private java.lang.Object fromAddress_ = "";
+      private com.google.protobuf.ByteString fromAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>string fromAddress = 1;</code>
+       * <code>bytes fromAddress = 1;</code>
        */
-      public java.lang.String getFromAddress() {
-        java.lang.Object ref = fromAddress_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          fromAddress_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public com.google.protobuf.ByteString getFromAddress() {
+        return fromAddress_;
       }
       /**
-       * <code>string fromAddress = 1;</code>
+       * <code>bytes fromAddress = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getFromAddressBytes() {
-        java.lang.Object ref = fromAddress_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          fromAddress_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string fromAddress = 1;</code>
-       */
-      public Builder setFromAddress(
-          java.lang.String value) {
+      public Builder setFromAddress(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -4180,7 +3865,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>string fromAddress = 1;</code>
+       * <code>bytes fromAddress = 1;</code>
        */
       public Builder clearFromAddress() {
         
@@ -4188,58 +3873,18 @@ public final class Transfer {
         onChanged();
         return this;
       }
-      /**
-       * <code>string fromAddress = 1;</code>
-       */
-      public Builder setFromAddressBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        fromAddress_ = value;
-        onChanged();
-        return this;
-      }
 
-      private java.lang.Object toAddress_ = "";
+      private com.google.protobuf.ByteString toAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>string toAddress = 2;</code>
+       * <code>bytes toAddress = 2;</code>
        */
-      public java.lang.String getToAddress() {
-        java.lang.Object ref = toAddress_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          toAddress_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public com.google.protobuf.ByteString getToAddress() {
+        return toAddress_;
       }
       /**
-       * <code>string toAddress = 2;</code>
+       * <code>bytes toAddress = 2;</code>
        */
-      public com.google.protobuf.ByteString
-          getToAddressBytes() {
-        java.lang.Object ref = toAddress_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          toAddress_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string toAddress = 2;</code>
-       */
-      public Builder setToAddress(
-          java.lang.String value) {
+      public Builder setToAddress(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -4249,25 +3894,11 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>string toAddress = 2;</code>
+       * <code>bytes toAddress = 2;</code>
        */
       public Builder clearToAddress() {
         
         toAddress_ = getDefaultInstance().getToAddress();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string toAddress = 2;</code>
-       */
-      public Builder setToAddressBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        toAddress_ = value;
         onChanged();
         return this;
       }
@@ -4569,44 +4200,39 @@ public final class Transfer {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string batchNumber = 1;</code>
+     * <code>bytes sender = 1;</code>
      */
-    java.lang.String getBatchNumber();
-    /**
-     * <code>string batchNumber = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getBatchNumberBytes();
+    com.google.protobuf.ByteString getSender();
 
     /**
-     * <code>string depth = 2;</code>
-     */
-    java.lang.String getDepth();
-    /**
-     * <code>string depth = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getDepthBytes();
-
-    /**
-     * <code>string price = 3;</code>
-     */
-    java.lang.String getPrice();
-    /**
-     * <code>string price = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getPriceBytes();
-
-    /**
-     * <code>string product = 4;</code>
+     * <code>string product = 2;</code>
      */
     java.lang.String getProduct();
     /**
-     * <code>string product = 4;</code>
+     * <code>string product = 2;</code>
      */
     com.google.protobuf.ByteString
         getProductBytes();
+
+    /**
+     * <code>string side = 3;</code>
+     */
+    java.lang.String getSide();
+    /**
+     * <code>string side = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getSideBytes();
+
+    /**
+     * <code>string price = 4;</code>
+     */
+    java.lang.String getPrice();
+    /**
+     * <code>string price = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getPriceBytes();
 
     /**
      * <code>string quantity = 5;</code>
@@ -4619,24 +4245,24 @@ public final class Transfer {
         getQuantityBytes();
 
     /**
-     * <code>string sender = 6;</code>
+     * <code>string batchNumber = 6;</code>
      */
-    java.lang.String getSender();
+    java.lang.String getBatchNumber();
     /**
-     * <code>string sender = 6;</code>
+     * <code>string batchNumber = 6;</code>
      */
     com.google.protobuf.ByteString
-        getSenderBytes();
+        getBatchNumberBytes();
 
     /**
-     * <code>string side = 7;</code>
+     * <code>string depth = 7;</code>
      */
-    java.lang.String getSide();
+    java.lang.String getDepth();
     /**
-     * <code>string side = 7;</code>
+     * <code>string depth = 7;</code>
      */
     com.google.protobuf.ByteString
-        getSideBytes();
+        getDepthBytes();
   }
   /**
    * Protobuf type {@code MsgNewOrder}
@@ -4651,13 +4277,13 @@ public final class Transfer {
       super(builder);
     }
     private MsgNewOrder() {
+      sender_ = com.google.protobuf.ByteString.EMPTY;
+      product_ = "";
+      side_ = "";
+      price_ = "";
+      quantity_ = "";
       batchNumber_ = "";
       depth_ = "";
-      price_ = "";
-      product_ = "";
-      quantity_ = "";
-      sender_ = "";
-      side_ = "";
     }
 
     @java.lang.Override
@@ -4685,27 +4311,26 @@ public final class Transfer {
               done = true;
               break;
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
 
-              batchNumber_ = s;
+              sender_ = input.readBytes();
               break;
             }
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              depth_ = s;
+              product_ = s;
               break;
             }
             case 26: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              price_ = s;
+              side_ = s;
               break;
             }
             case 34: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              product_ = s;
+              price_ = s;
               break;
             }
             case 42: {
@@ -4717,13 +4342,13 @@ public final class Transfer {
             case 50: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              sender_ = s;
+              batchNumber_ = s;
               break;
             }
             case 58: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              side_ = s;
+              depth_ = s;
               break;
             }
             default: {
@@ -4758,112 +4383,19 @@ public final class Transfer {
               com.okchain.proto.Transfer.MsgNewOrder.class, com.okchain.proto.Transfer.MsgNewOrder.Builder.class);
     }
 
-    public static final int BATCHNUMBER_FIELD_NUMBER = 1;
-    private volatile java.lang.Object batchNumber_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.google.protobuf.ByteString sender_;
     /**
-     * <code>string batchNumber = 1;</code>
+     * <code>bytes sender = 1;</code>
      */
-    public java.lang.String getBatchNumber() {
-      java.lang.Object ref = batchNumber_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        batchNumber_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string batchNumber = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getBatchNumberBytes() {
-      java.lang.Object ref = batchNumber_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        batchNumber_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.google.protobuf.ByteString getSender() {
+      return sender_;
     }
 
-    public static final int DEPTH_FIELD_NUMBER = 2;
-    private volatile java.lang.Object depth_;
-    /**
-     * <code>string depth = 2;</code>
-     */
-    public java.lang.String getDepth() {
-      java.lang.Object ref = depth_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        depth_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string depth = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getDepthBytes() {
-      java.lang.Object ref = depth_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        depth_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int PRICE_FIELD_NUMBER = 3;
-    private volatile java.lang.Object price_;
-    /**
-     * <code>string price = 3;</code>
-     */
-    public java.lang.String getPrice() {
-      java.lang.Object ref = price_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        price_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string price = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getPriceBytes() {
-      java.lang.Object ref = price_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        price_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int PRODUCT_FIELD_NUMBER = 4;
+    public static final int PRODUCT_FIELD_NUMBER = 2;
     private volatile java.lang.Object product_;
     /**
-     * <code>string product = 4;</code>
+     * <code>string product = 2;</code>
      */
     public java.lang.String getProduct() {
       java.lang.Object ref = product_;
@@ -4878,7 +4410,7 @@ public final class Transfer {
       }
     }
     /**
-     * <code>string product = 4;</code>
+     * <code>string product = 2;</code>
      */
     public com.google.protobuf.ByteString
         getProductBytes() {
@@ -4888,6 +4420,74 @@ public final class Transfer {
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
         product_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SIDE_FIELD_NUMBER = 3;
+    private volatile java.lang.Object side_;
+    /**
+     * <code>string side = 3;</code>
+     */
+    public java.lang.String getSide() {
+      java.lang.Object ref = side_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        side_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string side = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSideBytes() {
+      java.lang.Object ref = side_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        side_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PRICE_FIELD_NUMBER = 4;
+    private volatile java.lang.Object price_;
+    /**
+     * <code>string price = 4;</code>
+     */
+    public java.lang.String getPrice() {
+      java.lang.Object ref = price_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        price_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string price = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getPriceBytes() {
+      java.lang.Object ref = price_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        price_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -4928,68 +4528,68 @@ public final class Transfer {
       }
     }
 
-    public static final int SENDER_FIELD_NUMBER = 6;
-    private volatile java.lang.Object sender_;
+    public static final int BATCHNUMBER_FIELD_NUMBER = 6;
+    private volatile java.lang.Object batchNumber_;
     /**
-     * <code>string sender = 6;</code>
+     * <code>string batchNumber = 6;</code>
      */
-    public java.lang.String getSender() {
-      java.lang.Object ref = sender_;
+    public java.lang.String getBatchNumber() {
+      java.lang.Object ref = batchNumber_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        sender_ = s;
+        batchNumber_ = s;
         return s;
       }
     }
     /**
-     * <code>string sender = 6;</code>
+     * <code>string batchNumber = 6;</code>
      */
     public com.google.protobuf.ByteString
-        getSenderBytes() {
-      java.lang.Object ref = sender_;
+        getBatchNumberBytes() {
+      java.lang.Object ref = batchNumber_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        sender_ = b;
+        batchNumber_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int SIDE_FIELD_NUMBER = 7;
-    private volatile java.lang.Object side_;
+    public static final int DEPTH_FIELD_NUMBER = 7;
+    private volatile java.lang.Object depth_;
     /**
-     * <code>string side = 7;</code>
+     * <code>string depth = 7;</code>
      */
-    public java.lang.String getSide() {
-      java.lang.Object ref = side_;
+    public java.lang.String getDepth() {
+      java.lang.Object ref = depth_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        side_ = s;
+        depth_ = s;
         return s;
       }
     }
     /**
-     * <code>string side = 7;</code>
+     * <code>string depth = 7;</code>
      */
     public com.google.protobuf.ByteString
-        getSideBytes() {
-      java.lang.Object ref = side_;
+        getDepthBytes() {
+      java.lang.Object ref = depth_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        side_ = b;
+        depth_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -5010,26 +4610,26 @@ public final class Transfer {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getBatchNumberBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, batchNumber_);
-      }
-      if (!getDepthBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, depth_);
-      }
-      if (!getPriceBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, price_);
+      if (!sender_.isEmpty()) {
+        output.writeBytes(1, sender_);
       }
       if (!getProductBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, product_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, product_);
+      }
+      if (!getSideBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, side_);
+      }
+      if (!getPriceBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, price_);
       }
       if (!getQuantityBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, quantity_);
       }
-      if (!getSenderBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, sender_);
+      if (!getBatchNumberBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, batchNumber_);
       }
-      if (!getSideBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, side_);
+      if (!getDepthBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, depth_);
       }
       unknownFields.writeTo(output);
     }
@@ -5040,26 +4640,27 @@ public final class Transfer {
       if (size != -1) return size;
 
       size = 0;
-      if (!getBatchNumberBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, batchNumber_);
-      }
-      if (!getDepthBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, depth_);
-      }
-      if (!getPriceBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, price_);
+      if (!sender_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, sender_);
       }
       if (!getProductBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, product_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, product_);
+      }
+      if (!getSideBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, side_);
+      }
+      if (!getPriceBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, price_);
       }
       if (!getQuantityBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, quantity_);
       }
-      if (!getSenderBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, sender_);
+      if (!getBatchNumberBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, batchNumber_);
       }
-      if (!getSideBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, side_);
+      if (!getDepthBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, depth_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -5076,20 +4677,20 @@ public final class Transfer {
       }
       com.okchain.proto.Transfer.MsgNewOrder other = (com.okchain.proto.Transfer.MsgNewOrder) obj;
 
+      if (!getSender()
+          .equals(other.getSender())) return false;
+      if (!getProduct()
+          .equals(other.getProduct())) return false;
+      if (!getSide()
+          .equals(other.getSide())) return false;
+      if (!getPrice()
+          .equals(other.getPrice())) return false;
+      if (!getQuantity()
+          .equals(other.getQuantity())) return false;
       if (!getBatchNumber()
           .equals(other.getBatchNumber())) return false;
       if (!getDepth()
           .equals(other.getDepth())) return false;
-      if (!getPrice()
-          .equals(other.getPrice())) return false;
-      if (!getProduct()
-          .equals(other.getProduct())) return false;
-      if (!getQuantity()
-          .equals(other.getQuantity())) return false;
-      if (!getSender()
-          .equals(other.getSender())) return false;
-      if (!getSide()
-          .equals(other.getSide())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -5101,20 +4702,20 @@ public final class Transfer {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + SENDER_FIELD_NUMBER;
+      hash = (53 * hash) + getSender().hashCode();
+      hash = (37 * hash) + PRODUCT_FIELD_NUMBER;
+      hash = (53 * hash) + getProduct().hashCode();
+      hash = (37 * hash) + SIDE_FIELD_NUMBER;
+      hash = (53 * hash) + getSide().hashCode();
+      hash = (37 * hash) + PRICE_FIELD_NUMBER;
+      hash = (53 * hash) + getPrice().hashCode();
+      hash = (37 * hash) + QUANTITY_FIELD_NUMBER;
+      hash = (53 * hash) + getQuantity().hashCode();
       hash = (37 * hash) + BATCHNUMBER_FIELD_NUMBER;
       hash = (53 * hash) + getBatchNumber().hashCode();
       hash = (37 * hash) + DEPTH_FIELD_NUMBER;
       hash = (53 * hash) + getDepth().hashCode();
-      hash = (37 * hash) + PRICE_FIELD_NUMBER;
-      hash = (53 * hash) + getPrice().hashCode();
-      hash = (37 * hash) + PRODUCT_FIELD_NUMBER;
-      hash = (53 * hash) + getProduct().hashCode();
-      hash = (37 * hash) + QUANTITY_FIELD_NUMBER;
-      hash = (53 * hash) + getQuantity().hashCode();
-      hash = (37 * hash) + SENDER_FIELD_NUMBER;
-      hash = (53 * hash) + getSender().hashCode();
-      hash = (37 * hash) + SIDE_FIELD_NUMBER;
-      hash = (53 * hash) + getSide().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -5248,19 +4849,19 @@ public final class Transfer {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        batchNumber_ = "";
-
-        depth_ = "";
-
-        price_ = "";
+        sender_ = com.google.protobuf.ByteString.EMPTY;
 
         product_ = "";
 
+        side_ = "";
+
+        price_ = "";
+
         quantity_ = "";
 
-        sender_ = "";
+        batchNumber_ = "";
 
-        side_ = "";
+        depth_ = "";
 
         return this;
       }
@@ -5288,13 +4889,13 @@ public final class Transfer {
       @java.lang.Override
       public com.okchain.proto.Transfer.MsgNewOrder buildPartial() {
         com.okchain.proto.Transfer.MsgNewOrder result = new com.okchain.proto.Transfer.MsgNewOrder(this);
+        result.sender_ = sender_;
+        result.product_ = product_;
+        result.side_ = side_;
+        result.price_ = price_;
+        result.quantity_ = quantity_;
         result.batchNumber_ = batchNumber_;
         result.depth_ = depth_;
-        result.price_ = price_;
-        result.product_ = product_;
-        result.quantity_ = quantity_;
-        result.sender_ = sender_;
-        result.side_ = side_;
         onBuilt();
         return result;
       }
@@ -5343,32 +4944,31 @@ public final class Transfer {
 
       public Builder mergeFrom(com.okchain.proto.Transfer.MsgNewOrder other) {
         if (other == com.okchain.proto.Transfer.MsgNewOrder.getDefaultInstance()) return this;
-        if (!other.getBatchNumber().isEmpty()) {
-          batchNumber_ = other.batchNumber_;
+        if (other.getSender() != com.google.protobuf.ByteString.EMPTY) {
+          setSender(other.getSender());
+        }
+        if (!other.getProduct().isEmpty()) {
+          product_ = other.product_;
           onChanged();
         }
-        if (!other.getDepth().isEmpty()) {
-          depth_ = other.depth_;
+        if (!other.getSide().isEmpty()) {
+          side_ = other.side_;
           onChanged();
         }
         if (!other.getPrice().isEmpty()) {
           price_ = other.price_;
           onChanged();
         }
-        if (!other.getProduct().isEmpty()) {
-          product_ = other.product_;
-          onChanged();
-        }
         if (!other.getQuantity().isEmpty()) {
           quantity_ = other.quantity_;
           onChanged();
         }
-        if (!other.getSender().isEmpty()) {
-          sender_ = other.sender_;
+        if (!other.getBatchNumber().isEmpty()) {
+          batchNumber_ = other.batchNumber_;
           onChanged();
         }
-        if (!other.getSide().isEmpty()) {
-          side_ = other.side_;
+        if (!other.getDepth().isEmpty()) {
+          depth_ = other.depth_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -5400,216 +5000,38 @@ public final class Transfer {
         return this;
       }
 
-      private java.lang.Object batchNumber_ = "";
+      private com.google.protobuf.ByteString sender_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>string batchNumber = 1;</code>
+       * <code>bytes sender = 1;</code>
        */
-      public java.lang.String getBatchNumber() {
-        java.lang.Object ref = batchNumber_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          batchNumber_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public com.google.protobuf.ByteString getSender() {
+        return sender_;
       }
       /**
-       * <code>string batchNumber = 1;</code>
+       * <code>bytes sender = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getBatchNumberBytes() {
-        java.lang.Object ref = batchNumber_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          batchNumber_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string batchNumber = 1;</code>
-       */
-      public Builder setBatchNumber(
-          java.lang.String value) {
+      public Builder setSender(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        batchNumber_ = value;
+        sender_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string batchNumber = 1;</code>
+       * <code>bytes sender = 1;</code>
        */
-      public Builder clearBatchNumber() {
+      public Builder clearSender() {
         
-        batchNumber_ = getDefaultInstance().getBatchNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string batchNumber = 1;</code>
-       */
-      public Builder setBatchNumberBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        batchNumber_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object depth_ = "";
-      /**
-       * <code>string depth = 2;</code>
-       */
-      public java.lang.String getDepth() {
-        java.lang.Object ref = depth_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          depth_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string depth = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getDepthBytes() {
-        java.lang.Object ref = depth_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          depth_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string depth = 2;</code>
-       */
-      public Builder setDepth(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        depth_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string depth = 2;</code>
-       */
-      public Builder clearDepth() {
-        
-        depth_ = getDefaultInstance().getDepth();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string depth = 2;</code>
-       */
-      public Builder setDepthBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        depth_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object price_ = "";
-      /**
-       * <code>string price = 3;</code>
-       */
-      public java.lang.String getPrice() {
-        java.lang.Object ref = price_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          price_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string price = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getPriceBytes() {
-        java.lang.Object ref = price_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          price_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string price = 3;</code>
-       */
-      public Builder setPrice(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        price_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string price = 3;</code>
-       */
-      public Builder clearPrice() {
-        
-        price_ = getDefaultInstance().getPrice();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string price = 3;</code>
-       */
-      public Builder setPriceBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        price_ = value;
+        sender_ = getDefaultInstance().getSender();
         onChanged();
         return this;
       }
 
       private java.lang.Object product_ = "";
       /**
-       * <code>string product = 4;</code>
+       * <code>string product = 2;</code>
        */
       public java.lang.String getProduct() {
         java.lang.Object ref = product_;
@@ -5624,7 +5046,7 @@ public final class Transfer {
         }
       }
       /**
-       * <code>string product = 4;</code>
+       * <code>string product = 2;</code>
        */
       public com.google.protobuf.ByteString
           getProductBytes() {
@@ -5640,7 +5062,7 @@ public final class Transfer {
         }
       }
       /**
-       * <code>string product = 4;</code>
+       * <code>string product = 2;</code>
        */
       public Builder setProduct(
           java.lang.String value) {
@@ -5653,7 +5075,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>string product = 4;</code>
+       * <code>string product = 2;</code>
        */
       public Builder clearProduct() {
         
@@ -5662,7 +5084,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>string product = 4;</code>
+       * <code>string product = 2;</code>
        */
       public Builder setProductBytes(
           com.google.protobuf.ByteString value) {
@@ -5672,6 +5094,144 @@ public final class Transfer {
   checkByteStringIsUtf8(value);
         
         product_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object side_ = "";
+      /**
+       * <code>string side = 3;</code>
+       */
+      public java.lang.String getSide() {
+        java.lang.Object ref = side_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          side_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string side = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getSideBytes() {
+        java.lang.Object ref = side_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          side_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string side = 3;</code>
+       */
+      public Builder setSide(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        side_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string side = 3;</code>
+       */
+      public Builder clearSide() {
+        
+        side_ = getDefaultInstance().getSide();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string side = 3;</code>
+       */
+      public Builder setSideBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        side_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object price_ = "";
+      /**
+       * <code>string price = 4;</code>
+       */
+      public java.lang.String getPrice() {
+        java.lang.Object ref = price_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          price_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string price = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getPriceBytes() {
+        java.lang.Object ref = price_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          price_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string price = 4;</code>
+       */
+      public Builder setPrice(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        price_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string price = 4;</code>
+       */
+      public Builder clearPrice() {
+        
+        price_ = getDefaultInstance().getPrice();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string price = 4;</code>
+       */
+      public Builder setPriceBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        price_ = value;
         onChanged();
         return this;
       }
@@ -5745,140 +5305,140 @@ public final class Transfer {
         return this;
       }
 
-      private java.lang.Object sender_ = "";
+      private java.lang.Object batchNumber_ = "";
       /**
-       * <code>string sender = 6;</code>
+       * <code>string batchNumber = 6;</code>
        */
-      public java.lang.String getSender() {
-        java.lang.Object ref = sender_;
+      public java.lang.String getBatchNumber() {
+        java.lang.Object ref = batchNumber_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          sender_ = s;
+          batchNumber_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string sender = 6;</code>
+       * <code>string batchNumber = 6;</code>
        */
       public com.google.protobuf.ByteString
-          getSenderBytes() {
-        java.lang.Object ref = sender_;
+          getBatchNumberBytes() {
+        java.lang.Object ref = batchNumber_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          sender_ = b;
+          batchNumber_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string sender = 6;</code>
+       * <code>string batchNumber = 6;</code>
        */
-      public Builder setSender(
+      public Builder setBatchNumber(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        sender_ = value;
+        batchNumber_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string sender = 6;</code>
+       * <code>string batchNumber = 6;</code>
        */
-      public Builder clearSender() {
+      public Builder clearBatchNumber() {
         
-        sender_ = getDefaultInstance().getSender();
+        batchNumber_ = getDefaultInstance().getBatchNumber();
         onChanged();
         return this;
       }
       /**
-       * <code>string sender = 6;</code>
+       * <code>string batchNumber = 6;</code>
        */
-      public Builder setSenderBytes(
+      public Builder setBatchNumberBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        sender_ = value;
+        batchNumber_ = value;
         onChanged();
         return this;
       }
 
-      private java.lang.Object side_ = "";
+      private java.lang.Object depth_ = "";
       /**
-       * <code>string side = 7;</code>
+       * <code>string depth = 7;</code>
        */
-      public java.lang.String getSide() {
-        java.lang.Object ref = side_;
+      public java.lang.String getDepth() {
+        java.lang.Object ref = depth_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          side_ = s;
+          depth_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string side = 7;</code>
+       * <code>string depth = 7;</code>
        */
       public com.google.protobuf.ByteString
-          getSideBytes() {
-        java.lang.Object ref = side_;
+          getDepthBytes() {
+        java.lang.Object ref = depth_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          side_ = b;
+          depth_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string side = 7;</code>
+       * <code>string depth = 7;</code>
        */
-      public Builder setSide(
+      public Builder setDepth(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        side_ = value;
+        depth_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string side = 7;</code>
+       * <code>string depth = 7;</code>
        */
-      public Builder clearSide() {
+      public Builder clearDepth() {
         
-        side_ = getDefaultInstance().getSide();
+        depth_ = getDefaultInstance().getDepth();
         onChanged();
         return this;
       }
       /**
-       * <code>string side = 7;</code>
+       * <code>string depth = 7;</code>
        */
-      public Builder setSideBytes(
+      public Builder setDepthBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        side_ = value;
+        depth_ = value;
         onChanged();
         return this;
       }
@@ -5940,24 +5500,19 @@ public final class Transfer {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string orderId = 1;</code>
+     * <code>bytes sender = 1;</code>
+     */
+    com.google.protobuf.ByteString getSender();
+
+    /**
+     * <code>string orderId = 2;</code>
      */
     java.lang.String getOrderId();
     /**
-     * <code>string orderId = 1;</code>
+     * <code>string orderId = 2;</code>
      */
     com.google.protobuf.ByteString
         getOrderIdBytes();
-
-    /**
-     * <code>string sender = 2;</code>
-     */
-    java.lang.String getSender();
-    /**
-     * <code>string sender = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getSenderBytes();
   }
   /**
    * Protobuf type {@code MsgCancelOrder}
@@ -5972,8 +5527,8 @@ public final class Transfer {
       super(builder);
     }
     private MsgCancelOrder() {
+      sender_ = com.google.protobuf.ByteString.EMPTY;
       orderId_ = "";
-      sender_ = "";
     }
 
     @java.lang.Override
@@ -6001,15 +5556,14 @@ public final class Transfer {
               done = true;
               break;
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
 
-              orderId_ = s;
+              sender_ = input.readBytes();
               break;
             }
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              sender_ = s;
+              orderId_ = s;
               break;
             }
             default: {
@@ -6044,10 +5598,19 @@ public final class Transfer {
               com.okchain.proto.Transfer.MsgCancelOrder.class, com.okchain.proto.Transfer.MsgCancelOrder.Builder.class);
     }
 
-    public static final int ORDERID_FIELD_NUMBER = 1;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.google.protobuf.ByteString sender_;
+    /**
+     * <code>bytes sender = 1;</code>
+     */
+    public com.google.protobuf.ByteString getSender() {
+      return sender_;
+    }
+
+    public static final int ORDERID_FIELD_NUMBER = 2;
     private volatile java.lang.Object orderId_;
     /**
-     * <code>string orderId = 1;</code>
+     * <code>string orderId = 2;</code>
      */
     public java.lang.String getOrderId() {
       java.lang.Object ref = orderId_;
@@ -6062,7 +5625,7 @@ public final class Transfer {
       }
     }
     /**
-     * <code>string orderId = 1;</code>
+     * <code>string orderId = 2;</code>
      */
     public com.google.protobuf.ByteString
         getOrderIdBytes() {
@@ -6072,40 +5635,6 @@ public final class Transfer {
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
         orderId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int SENDER_FIELD_NUMBER = 2;
-    private volatile java.lang.Object sender_;
-    /**
-     * <code>string sender = 2;</code>
-     */
-    public java.lang.String getSender() {
-      java.lang.Object ref = sender_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        sender_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string sender = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getSenderBytes() {
-      java.lang.Object ref = sender_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        sender_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -6126,11 +5655,11 @@ public final class Transfer {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getOrderIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, orderId_);
+      if (!sender_.isEmpty()) {
+        output.writeBytes(1, sender_);
       }
-      if (!getSenderBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, sender_);
+      if (!getOrderIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, orderId_);
       }
       unknownFields.writeTo(output);
     }
@@ -6141,11 +5670,12 @@ public final class Transfer {
       if (size != -1) return size;
 
       size = 0;
-      if (!getOrderIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, orderId_);
+      if (!sender_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, sender_);
       }
-      if (!getSenderBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, sender_);
+      if (!getOrderIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, orderId_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -6162,10 +5692,10 @@ public final class Transfer {
       }
       com.okchain.proto.Transfer.MsgCancelOrder other = (com.okchain.proto.Transfer.MsgCancelOrder) obj;
 
-      if (!getOrderId()
-          .equals(other.getOrderId())) return false;
       if (!getSender()
           .equals(other.getSender())) return false;
+      if (!getOrderId()
+          .equals(other.getOrderId())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -6177,10 +5707,10 @@ public final class Transfer {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ORDERID_FIELD_NUMBER;
-      hash = (53 * hash) + getOrderId().hashCode();
       hash = (37 * hash) + SENDER_FIELD_NUMBER;
       hash = (53 * hash) + getSender().hashCode();
+      hash = (37 * hash) + ORDERID_FIELD_NUMBER;
+      hash = (53 * hash) + getOrderId().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -6314,9 +5844,9 @@ public final class Transfer {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        orderId_ = "";
+        sender_ = com.google.protobuf.ByteString.EMPTY;
 
-        sender_ = "";
+        orderId_ = "";
 
         return this;
       }
@@ -6344,8 +5874,8 @@ public final class Transfer {
       @java.lang.Override
       public com.okchain.proto.Transfer.MsgCancelOrder buildPartial() {
         com.okchain.proto.Transfer.MsgCancelOrder result = new com.okchain.proto.Transfer.MsgCancelOrder(this);
-        result.orderId_ = orderId_;
         result.sender_ = sender_;
+        result.orderId_ = orderId_;
         onBuilt();
         return result;
       }
@@ -6394,12 +5924,11 @@ public final class Transfer {
 
       public Builder mergeFrom(com.okchain.proto.Transfer.MsgCancelOrder other) {
         if (other == com.okchain.proto.Transfer.MsgCancelOrder.getDefaultInstance()) return this;
+        if (other.getSender() != com.google.protobuf.ByteString.EMPTY) {
+          setSender(other.getSender());
+        }
         if (!other.getOrderId().isEmpty()) {
           orderId_ = other.orderId_;
-          onChanged();
-        }
-        if (!other.getSender().isEmpty()) {
-          sender_ = other.sender_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -6431,9 +5960,38 @@ public final class Transfer {
         return this;
       }
 
+      private com.google.protobuf.ByteString sender_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>bytes sender = 1;</code>
+       */
+      public com.google.protobuf.ByteString getSender() {
+        return sender_;
+      }
+      /**
+       * <code>bytes sender = 1;</code>
+       */
+      public Builder setSender(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        sender_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bytes sender = 1;</code>
+       */
+      public Builder clearSender() {
+        
+        sender_ = getDefaultInstance().getSender();
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object orderId_ = "";
       /**
-       * <code>string orderId = 1;</code>
+       * <code>string orderId = 2;</code>
        */
       public java.lang.String getOrderId() {
         java.lang.Object ref = orderId_;
@@ -6448,7 +6006,7 @@ public final class Transfer {
         }
       }
       /**
-       * <code>string orderId = 1;</code>
+       * <code>string orderId = 2;</code>
        */
       public com.google.protobuf.ByteString
           getOrderIdBytes() {
@@ -6464,7 +6022,7 @@ public final class Transfer {
         }
       }
       /**
-       * <code>string orderId = 1;</code>
+       * <code>string orderId = 2;</code>
        */
       public Builder setOrderId(
           java.lang.String value) {
@@ -6477,7 +6035,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>string orderId = 1;</code>
+       * <code>string orderId = 2;</code>
        */
       public Builder clearOrderId() {
         
@@ -6486,7 +6044,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>string orderId = 1;</code>
+       * <code>string orderId = 2;</code>
        */
       public Builder setOrderIdBytes(
           com.google.protobuf.ByteString value) {
@@ -6496,75 +6054,6 @@ public final class Transfer {
   checkByteStringIsUtf8(value);
         
         orderId_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object sender_ = "";
-      /**
-       * <code>string sender = 2;</code>
-       */
-      public java.lang.String getSender() {
-        java.lang.Object ref = sender_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          sender_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string sender = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getSenderBytes() {
-        java.lang.Object ref = sender_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          sender_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string sender = 2;</code>
-       */
-      public Builder setSender(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        sender_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string sender = 2;</code>
-       */
-      public Builder clearSender() {
-        
-        sender_ = getDefaultInstance().getSender();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string sender = 2;</code>
-       */
-      public Builder setSenderBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        sender_ = value;
         onChanged();
         return this;
       }
@@ -6626,14 +6115,9 @@ public final class Transfer {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string from = 1;</code>
+     * <code>bytes from = 1;</code>
      */
-    java.lang.String getFrom();
-    /**
-     * <code>string from = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getFromBytes();
+    com.google.protobuf.ByteString getFrom();
 
     /**
      * <code>repeated .TransferUnit transfers = 2;</code>
@@ -6672,7 +6156,7 @@ public final class Transfer {
       super(builder);
     }
     private MsgMultiSend() {
-      from_ = "";
+      from_ = com.google.protobuf.ByteString.EMPTY;
       transfers_ = java.util.Collections.emptyList();
     }
 
@@ -6701,9 +6185,8 @@ public final class Transfer {
               done = true;
               break;
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
 
-              from_ = s;
+              from_ = input.readBytes();
               break;
             }
             case 18: {
@@ -6752,37 +6235,12 @@ public final class Transfer {
 
     private int bitField0_;
     public static final int FROM_FIELD_NUMBER = 1;
-    private volatile java.lang.Object from_;
+    private com.google.protobuf.ByteString from_;
     /**
-     * <code>string from = 1;</code>
+     * <code>bytes from = 1;</code>
      */
-    public java.lang.String getFrom() {
-      java.lang.Object ref = from_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        from_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string from = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getFromBytes() {
-      java.lang.Object ref = from_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        from_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.google.protobuf.ByteString getFrom() {
+      return from_;
     }
 
     public static final int TRANSFERS_FIELD_NUMBER = 2;
@@ -6834,8 +6292,8 @@ public final class Transfer {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getFromBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, from_);
+      if (!from_.isEmpty()) {
+        output.writeBytes(1, from_);
       }
       for (int i = 0; i < transfers_.size(); i++) {
         output.writeMessage(2, transfers_.get(i));
@@ -6849,8 +6307,9 @@ public final class Transfer {
       if (size != -1) return size;
 
       size = 0;
-      if (!getFromBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, from_);
+      if (!from_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, from_);
       }
       for (int i = 0; i < transfers_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -7026,7 +6485,7 @@ public final class Transfer {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        from_ = "";
+        from_ = com.google.protobuf.ByteString.EMPTY;
 
         if (transfersBuilder_ == null) {
           transfers_ = java.util.Collections.emptyList();
@@ -7121,9 +6580,8 @@ public final class Transfer {
 
       public Builder mergeFrom(com.okchain.proto.Transfer.MsgMultiSend other) {
         if (other == com.okchain.proto.Transfer.MsgMultiSend.getDefaultInstance()) return this;
-        if (!other.getFrom().isEmpty()) {
-          from_ = other.from_;
-          onChanged();
+        if (other.getFrom() != com.google.protobuf.ByteString.EMPTY) {
+          setFrom(other.getFrom());
         }
         if (transfersBuilder_ == null) {
           if (!other.transfers_.isEmpty()) {
@@ -7181,43 +6639,17 @@ public final class Transfer {
       }
       private int bitField0_;
 
-      private java.lang.Object from_ = "";
+      private com.google.protobuf.ByteString from_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>string from = 1;</code>
+       * <code>bytes from = 1;</code>
        */
-      public java.lang.String getFrom() {
-        java.lang.Object ref = from_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          from_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public com.google.protobuf.ByteString getFrom() {
+        return from_;
       }
       /**
-       * <code>string from = 1;</code>
+       * <code>bytes from = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getFromBytes() {
-        java.lang.Object ref = from_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          from_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string from = 1;</code>
-       */
-      public Builder setFrom(
-          java.lang.String value) {
+      public Builder setFrom(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -7227,25 +6659,11 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>string from = 1;</code>
+       * <code>bytes from = 1;</code>
        */
       public Builder clearFrom() {
         
         from_ = getDefaultInstance().getFrom();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string from = 1;</code>
-       */
-      public Builder setFromBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        from_ = value;
         onChanged();
         return this;
       }
@@ -7547,38 +6965,33 @@ public final class Transfer {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .Token coins = 1;</code>
+     * <code>bytes to = 1;</code>
+     */
+    com.google.protobuf.ByteString getTo();
+
+    /**
+     * <code>repeated .Token coins = 2;</code>
      */
     java.util.List<com.okchain.proto.Transfer.Token> 
         getCoinsList();
     /**
-     * <code>repeated .Token coins = 1;</code>
+     * <code>repeated .Token coins = 2;</code>
      */
     com.okchain.proto.Transfer.Token getCoins(int index);
     /**
-     * <code>repeated .Token coins = 1;</code>
+     * <code>repeated .Token coins = 2;</code>
      */
     int getCoinsCount();
     /**
-     * <code>repeated .Token coins = 1;</code>
+     * <code>repeated .Token coins = 2;</code>
      */
     java.util.List<? extends com.okchain.proto.Transfer.TokenOrBuilder> 
         getCoinsOrBuilderList();
     /**
-     * <code>repeated .Token coins = 1;</code>
+     * <code>repeated .Token coins = 2;</code>
      */
     com.okchain.proto.Transfer.TokenOrBuilder getCoinsOrBuilder(
         int index);
-
-    /**
-     * <code>string to = 2;</code>
-     */
-    java.lang.String getTo();
-    /**
-     * <code>string to = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getToBytes();
   }
   /**
    * Protobuf type {@code TransferUnit}
@@ -7593,8 +7006,8 @@ public final class Transfer {
       super(builder);
     }
     private TransferUnit() {
+      to_ = com.google.protobuf.ByteString.EMPTY;
       coins_ = java.util.Collections.emptyList();
-      to_ = "";
     }
 
     @java.lang.Override
@@ -7622,18 +7035,17 @@ public final class Transfer {
               done = true;
               break;
             case 10: {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                coins_ = new java.util.ArrayList<com.okchain.proto.Transfer.Token>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              coins_.add(
-                  input.readMessage(com.okchain.proto.Transfer.Token.parser(), extensionRegistry));
+
+              to_ = input.readBytes();
               break;
             }
             case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              to_ = s;
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+                coins_ = new java.util.ArrayList<com.okchain.proto.Transfer.Token>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              coins_.add(
+                  input.readMessage(com.okchain.proto.Transfer.Token.parser(), extensionRegistry));
               break;
             }
             default: {
@@ -7651,7 +7063,7 @@ public final class Transfer {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+        if (((mutable_bitField0_ & 0x00000002) != 0)) {
           coins_ = java.util.Collections.unmodifiableList(coins_);
         }
         this.unknownFields = unknownFields.build();
@@ -7672,73 +7084,48 @@ public final class Transfer {
     }
 
     private int bitField0_;
-    public static final int COINS_FIELD_NUMBER = 1;
+    public static final int TO_FIELD_NUMBER = 1;
+    private com.google.protobuf.ByteString to_;
+    /**
+     * <code>bytes to = 1;</code>
+     */
+    public com.google.protobuf.ByteString getTo() {
+      return to_;
+    }
+
+    public static final int COINS_FIELD_NUMBER = 2;
     private java.util.List<com.okchain.proto.Transfer.Token> coins_;
     /**
-     * <code>repeated .Token coins = 1;</code>
+     * <code>repeated .Token coins = 2;</code>
      */
     public java.util.List<com.okchain.proto.Transfer.Token> getCoinsList() {
       return coins_;
     }
     /**
-     * <code>repeated .Token coins = 1;</code>
+     * <code>repeated .Token coins = 2;</code>
      */
     public java.util.List<? extends com.okchain.proto.Transfer.TokenOrBuilder> 
         getCoinsOrBuilderList() {
       return coins_;
     }
     /**
-     * <code>repeated .Token coins = 1;</code>
+     * <code>repeated .Token coins = 2;</code>
      */
     public int getCoinsCount() {
       return coins_.size();
     }
     /**
-     * <code>repeated .Token coins = 1;</code>
+     * <code>repeated .Token coins = 2;</code>
      */
     public com.okchain.proto.Transfer.Token getCoins(int index) {
       return coins_.get(index);
     }
     /**
-     * <code>repeated .Token coins = 1;</code>
+     * <code>repeated .Token coins = 2;</code>
      */
     public com.okchain.proto.Transfer.TokenOrBuilder getCoinsOrBuilder(
         int index) {
       return coins_.get(index);
-    }
-
-    public static final int TO_FIELD_NUMBER = 2;
-    private volatile java.lang.Object to_;
-    /**
-     * <code>string to = 2;</code>
-     */
-    public java.lang.String getTo() {
-      java.lang.Object ref = to_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        to_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string to = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getToBytes() {
-      java.lang.Object ref = to_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        to_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
     }
 
     private byte memoizedIsInitialized = -1;
@@ -7755,11 +7142,11 @@ public final class Transfer {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (int i = 0; i < coins_.size(); i++) {
-        output.writeMessage(1, coins_.get(i));
+      if (!to_.isEmpty()) {
+        output.writeBytes(1, to_);
       }
-      if (!getToBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, to_);
+      for (int i = 0; i < coins_.size(); i++) {
+        output.writeMessage(2, coins_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -7770,12 +7157,13 @@ public final class Transfer {
       if (size != -1) return size;
 
       size = 0;
+      if (!to_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, to_);
+      }
       for (int i = 0; i < coins_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, coins_.get(i));
-      }
-      if (!getToBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, to_);
+          .computeMessageSize(2, coins_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -7792,10 +7180,10 @@ public final class Transfer {
       }
       com.okchain.proto.Transfer.TransferUnit other = (com.okchain.proto.Transfer.TransferUnit) obj;
 
-      if (!getCoinsList()
-          .equals(other.getCoinsList())) return false;
       if (!getTo()
           .equals(other.getTo())) return false;
+      if (!getCoinsList()
+          .equals(other.getCoinsList())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -7807,12 +7195,12 @@ public final class Transfer {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + TO_FIELD_NUMBER;
+      hash = (53 * hash) + getTo().hashCode();
       if (getCoinsCount() > 0) {
         hash = (37 * hash) + COINS_FIELD_NUMBER;
         hash = (53 * hash) + getCoinsList().hashCode();
       }
-      hash = (37 * hash) + TO_FIELD_NUMBER;
-      hash = (53 * hash) + getTo().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -7947,14 +7335,14 @@ public final class Transfer {
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        to_ = com.google.protobuf.ByteString.EMPTY;
+
         if (coinsBuilder_ == null) {
           coins_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           coinsBuilder_.clear();
         }
-        to_ = "";
-
         return this;
       }
 
@@ -7983,16 +7371,16 @@ public final class Transfer {
         com.okchain.proto.Transfer.TransferUnit result = new com.okchain.proto.Transfer.TransferUnit(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
+        result.to_ = to_;
         if (coinsBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0)) {
+          if (((bitField0_ & 0x00000002) != 0)) {
             coins_ = java.util.Collections.unmodifiableList(coins_);
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.coins_ = coins_;
         } else {
           result.coins_ = coinsBuilder_.build();
         }
-        result.to_ = to_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -8042,11 +7430,14 @@ public final class Transfer {
 
       public Builder mergeFrom(com.okchain.proto.Transfer.TransferUnit other) {
         if (other == com.okchain.proto.Transfer.TransferUnit.getDefaultInstance()) return this;
+        if (other.getTo() != com.google.protobuf.ByteString.EMPTY) {
+          setTo(other.getTo());
+        }
         if (coinsBuilder_ == null) {
           if (!other.coins_.isEmpty()) {
             if (coins_.isEmpty()) {
               coins_ = other.coins_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureCoinsIsMutable();
               coins_.addAll(other.coins_);
@@ -8059,7 +7450,7 @@ public final class Transfer {
               coinsBuilder_.dispose();
               coinsBuilder_ = null;
               coins_ = other.coins_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000002);
               coinsBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getCoinsFieldBuilder() : null;
@@ -8067,10 +7458,6 @@ public final class Transfer {
               coinsBuilder_.addAllMessages(other.coins_);
             }
           }
-        }
-        if (!other.getTo().isEmpty()) {
-          to_ = other.to_;
-          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -8102,12 +7489,41 @@ public final class Transfer {
       }
       private int bitField0_;
 
+      private com.google.protobuf.ByteString to_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>bytes to = 1;</code>
+       */
+      public com.google.protobuf.ByteString getTo() {
+        return to_;
+      }
+      /**
+       * <code>bytes to = 1;</code>
+       */
+      public Builder setTo(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        to_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bytes to = 1;</code>
+       */
+      public Builder clearTo() {
+        
+        to_ = getDefaultInstance().getTo();
+        onChanged();
+        return this;
+      }
+
       private java.util.List<com.okchain.proto.Transfer.Token> coins_ =
         java.util.Collections.emptyList();
       private void ensureCoinsIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
+        if (!((bitField0_ & 0x00000002) != 0)) {
           coins_ = new java.util.ArrayList<com.okchain.proto.Transfer.Token>(coins_);
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000002;
          }
       }
 
@@ -8115,7 +7531,7 @@ public final class Transfer {
           com.okchain.proto.Transfer.Token, com.okchain.proto.Transfer.Token.Builder, com.okchain.proto.Transfer.TokenOrBuilder> coinsBuilder_;
 
       /**
-       * <code>repeated .Token coins = 1;</code>
+       * <code>repeated .Token coins = 2;</code>
        */
       public java.util.List<com.okchain.proto.Transfer.Token> getCoinsList() {
         if (coinsBuilder_ == null) {
@@ -8125,7 +7541,7 @@ public final class Transfer {
         }
       }
       /**
-       * <code>repeated .Token coins = 1;</code>
+       * <code>repeated .Token coins = 2;</code>
        */
       public int getCoinsCount() {
         if (coinsBuilder_ == null) {
@@ -8135,7 +7551,7 @@ public final class Transfer {
         }
       }
       /**
-       * <code>repeated .Token coins = 1;</code>
+       * <code>repeated .Token coins = 2;</code>
        */
       public com.okchain.proto.Transfer.Token getCoins(int index) {
         if (coinsBuilder_ == null) {
@@ -8145,7 +7561,7 @@ public final class Transfer {
         }
       }
       /**
-       * <code>repeated .Token coins = 1;</code>
+       * <code>repeated .Token coins = 2;</code>
        */
       public Builder setCoins(
           int index, com.okchain.proto.Transfer.Token value) {
@@ -8162,7 +7578,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Token coins = 1;</code>
+       * <code>repeated .Token coins = 2;</code>
        */
       public Builder setCoins(
           int index, com.okchain.proto.Transfer.Token.Builder builderForValue) {
@@ -8176,7 +7592,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Token coins = 1;</code>
+       * <code>repeated .Token coins = 2;</code>
        */
       public Builder addCoins(com.okchain.proto.Transfer.Token value) {
         if (coinsBuilder_ == null) {
@@ -8192,7 +7608,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Token coins = 1;</code>
+       * <code>repeated .Token coins = 2;</code>
        */
       public Builder addCoins(
           int index, com.okchain.proto.Transfer.Token value) {
@@ -8209,7 +7625,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Token coins = 1;</code>
+       * <code>repeated .Token coins = 2;</code>
        */
       public Builder addCoins(
           com.okchain.proto.Transfer.Token.Builder builderForValue) {
@@ -8223,7 +7639,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Token coins = 1;</code>
+       * <code>repeated .Token coins = 2;</code>
        */
       public Builder addCoins(
           int index, com.okchain.proto.Transfer.Token.Builder builderForValue) {
@@ -8237,7 +7653,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Token coins = 1;</code>
+       * <code>repeated .Token coins = 2;</code>
        */
       public Builder addAllCoins(
           java.lang.Iterable<? extends com.okchain.proto.Transfer.Token> values) {
@@ -8252,12 +7668,12 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Token coins = 1;</code>
+       * <code>repeated .Token coins = 2;</code>
        */
       public Builder clearCoins() {
         if (coinsBuilder_ == null) {
           coins_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           coinsBuilder_.clear();
@@ -8265,7 +7681,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Token coins = 1;</code>
+       * <code>repeated .Token coins = 2;</code>
        */
       public Builder removeCoins(int index) {
         if (coinsBuilder_ == null) {
@@ -8278,14 +7694,14 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>repeated .Token coins = 1;</code>
+       * <code>repeated .Token coins = 2;</code>
        */
       public com.okchain.proto.Transfer.Token.Builder getCoinsBuilder(
           int index) {
         return getCoinsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .Token coins = 1;</code>
+       * <code>repeated .Token coins = 2;</code>
        */
       public com.okchain.proto.Transfer.TokenOrBuilder getCoinsOrBuilder(
           int index) {
@@ -8295,7 +7711,7 @@ public final class Transfer {
         }
       }
       /**
-       * <code>repeated .Token coins = 1;</code>
+       * <code>repeated .Token coins = 2;</code>
        */
       public java.util.List<? extends com.okchain.proto.Transfer.TokenOrBuilder> 
            getCoinsOrBuilderList() {
@@ -8306,14 +7722,14 @@ public final class Transfer {
         }
       }
       /**
-       * <code>repeated .Token coins = 1;</code>
+       * <code>repeated .Token coins = 2;</code>
        */
       public com.okchain.proto.Transfer.Token.Builder addCoinsBuilder() {
         return getCoinsFieldBuilder().addBuilder(
             com.okchain.proto.Transfer.Token.getDefaultInstance());
       }
       /**
-       * <code>repeated .Token coins = 1;</code>
+       * <code>repeated .Token coins = 2;</code>
        */
       public com.okchain.proto.Transfer.Token.Builder addCoinsBuilder(
           int index) {
@@ -8321,7 +7737,7 @@ public final class Transfer {
             index, com.okchain.proto.Transfer.Token.getDefaultInstance());
       }
       /**
-       * <code>repeated .Token coins = 1;</code>
+       * <code>repeated .Token coins = 2;</code>
        */
       public java.util.List<com.okchain.proto.Transfer.Token.Builder> 
            getCoinsBuilderList() {
@@ -8334,81 +7750,12 @@ public final class Transfer {
           coinsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.okchain.proto.Transfer.Token, com.okchain.proto.Transfer.Token.Builder, com.okchain.proto.Transfer.TokenOrBuilder>(
                   coins_,
-                  ((bitField0_ & 0x00000001) != 0),
+                  ((bitField0_ & 0x00000002) != 0),
                   getParentForChildren(),
                   isClean());
           coins_ = null;
         }
         return coinsBuilder_;
-      }
-
-      private java.lang.Object to_ = "";
-      /**
-       * <code>string to = 2;</code>
-       */
-      public java.lang.String getTo() {
-        java.lang.Object ref = to_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          to_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string to = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getToBytes() {
-        java.lang.Object ref = to_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          to_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string to = 2;</code>
-       */
-      public Builder setTo(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        to_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string to = 2;</code>
-       */
-      public Builder clearTo() {
-        
-        to_ = getDefaultInstance().getTo();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string to = 2;</code>
-       */
-      public Builder setToBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        to_ = value;
-        onChanged();
-        return this;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -8463,6 +7810,1654 @@ public final class Transfer {
 
   }
 
+  public interface BaseTypeOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:BaseType)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>int64 i = 1;</code>
+     */
+    long getI();
+
+    /**
+     * <code>string s = 2;</code>
+     */
+    java.lang.String getS();
+    /**
+     * <code>string s = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getSBytes();
+
+    /**
+     * <code>repeated string ss = 3;</code>
+     */
+    java.util.List<java.lang.String>
+        getSsList();
+    /**
+     * <code>repeated string ss = 3;</code>
+     */
+    int getSsCount();
+    /**
+     * <code>repeated string ss = 3;</code>
+     */
+    java.lang.String getSs(int index);
+    /**
+     * <code>repeated string ss = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getSsBytes(int index);
+
+    /**
+     * <code>repeated .Stu stus = 4;</code>
+     */
+    java.util.List<com.okchain.proto.Transfer.Stu> 
+        getStusList();
+    /**
+     * <code>repeated .Stu stus = 4;</code>
+     */
+    com.okchain.proto.Transfer.Stu getStus(int index);
+    /**
+     * <code>repeated .Stu stus = 4;</code>
+     */
+    int getStusCount();
+    /**
+     * <code>repeated .Stu stus = 4;</code>
+     */
+    java.util.List<? extends com.okchain.proto.Transfer.StuOrBuilder> 
+        getStusOrBuilderList();
+    /**
+     * <code>repeated .Stu stus = 4;</code>
+     */
+    com.okchain.proto.Transfer.StuOrBuilder getStusOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code BaseType}
+   */
+  public  static final class BaseType extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:BaseType)
+      BaseTypeOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use BaseType.newBuilder() to construct.
+    private BaseType(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private BaseType() {
+      s_ = "";
+      ss_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      stus_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private BaseType(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              i_ = input.readInt64();
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              s_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000004) != 0)) {
+                ss_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              ss_.add(s);
+              break;
+            }
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) != 0)) {
+                stus_ = new java.util.ArrayList<com.okchain.proto.Transfer.Stu>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              stus_.add(
+                  input.readMessage(com.okchain.proto.Transfer.Stu.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000004) != 0)) {
+          ss_ = ss_.getUnmodifiableView();
+        }
+        if (((mutable_bitField0_ & 0x00000008) != 0)) {
+          stus_ = java.util.Collections.unmodifiableList(stus_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.okchain.proto.Transfer.internal_static_BaseType_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.okchain.proto.Transfer.internal_static_BaseType_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.okchain.proto.Transfer.BaseType.class, com.okchain.proto.Transfer.BaseType.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int I_FIELD_NUMBER = 1;
+    private long i_;
+    /**
+     * <code>int64 i = 1;</code>
+     */
+    public long getI() {
+      return i_;
+    }
+
+    public static final int S_FIELD_NUMBER = 2;
+    private volatile java.lang.Object s_;
+    /**
+     * <code>string s = 2;</code>
+     */
+    public java.lang.String getS() {
+      java.lang.Object ref = s_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        s_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string s = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSBytes() {
+      java.lang.Object ref = s_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        s_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SS_FIELD_NUMBER = 3;
+    private com.google.protobuf.LazyStringList ss_;
+    /**
+     * <code>repeated string ss = 3;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getSsList() {
+      return ss_;
+    }
+    /**
+     * <code>repeated string ss = 3;</code>
+     */
+    public int getSsCount() {
+      return ss_.size();
+    }
+    /**
+     * <code>repeated string ss = 3;</code>
+     */
+    public java.lang.String getSs(int index) {
+      return ss_.get(index);
+    }
+    /**
+     * <code>repeated string ss = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSsBytes(int index) {
+      return ss_.getByteString(index);
+    }
+
+    public static final int STUS_FIELD_NUMBER = 4;
+    private java.util.List<com.okchain.proto.Transfer.Stu> stus_;
+    /**
+     * <code>repeated .Stu stus = 4;</code>
+     */
+    public java.util.List<com.okchain.proto.Transfer.Stu> getStusList() {
+      return stus_;
+    }
+    /**
+     * <code>repeated .Stu stus = 4;</code>
+     */
+    public java.util.List<? extends com.okchain.proto.Transfer.StuOrBuilder> 
+        getStusOrBuilderList() {
+      return stus_;
+    }
+    /**
+     * <code>repeated .Stu stus = 4;</code>
+     */
+    public int getStusCount() {
+      return stus_.size();
+    }
+    /**
+     * <code>repeated .Stu stus = 4;</code>
+     */
+    public com.okchain.proto.Transfer.Stu getStus(int index) {
+      return stus_.get(index);
+    }
+    /**
+     * <code>repeated .Stu stus = 4;</code>
+     */
+    public com.okchain.proto.Transfer.StuOrBuilder getStusOrBuilder(
+        int index) {
+      return stus_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (i_ != 0L) {
+        output.writeInt64(1, i_);
+      }
+      if (!getSBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, s_);
+      }
+      for (int i = 0; i < ss_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, ss_.getRaw(i));
+      }
+      for (int i = 0; i < stus_.size(); i++) {
+        output.writeMessage(4, stus_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (i_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, i_);
+      }
+      if (!getSBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, s_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < ss_.size(); i++) {
+          dataSize += computeStringSizeNoTag(ss_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getSsList().size();
+      }
+      for (int i = 0; i < stus_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, stus_.get(i));
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.okchain.proto.Transfer.BaseType)) {
+        return super.equals(obj);
+      }
+      com.okchain.proto.Transfer.BaseType other = (com.okchain.proto.Transfer.BaseType) obj;
+
+      if (getI()
+          != other.getI()) return false;
+      if (!getS()
+          .equals(other.getS())) return false;
+      if (!getSsList()
+          .equals(other.getSsList())) return false;
+      if (!getStusList()
+          .equals(other.getStusList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + I_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getI());
+      hash = (37 * hash) + S_FIELD_NUMBER;
+      hash = (53 * hash) + getS().hashCode();
+      if (getSsCount() > 0) {
+        hash = (37 * hash) + SS_FIELD_NUMBER;
+        hash = (53 * hash) + getSsList().hashCode();
+      }
+      if (getStusCount() > 0) {
+        hash = (37 * hash) + STUS_FIELD_NUMBER;
+        hash = (53 * hash) + getStusList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.okchain.proto.Transfer.BaseType parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.okchain.proto.Transfer.BaseType parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.BaseType parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.okchain.proto.Transfer.BaseType parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.BaseType parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.okchain.proto.Transfer.BaseType parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.BaseType parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.okchain.proto.Transfer.BaseType parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.BaseType parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.okchain.proto.Transfer.BaseType parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.BaseType parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.okchain.proto.Transfer.BaseType parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.okchain.proto.Transfer.BaseType prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code BaseType}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:BaseType)
+        com.okchain.proto.Transfer.BaseTypeOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.okchain.proto.Transfer.internal_static_BaseType_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.okchain.proto.Transfer.internal_static_BaseType_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.okchain.proto.Transfer.BaseType.class, com.okchain.proto.Transfer.BaseType.Builder.class);
+      }
+
+      // Construct using com.okchain.proto.Transfer.BaseType.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getStusFieldBuilder();
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        i_ = 0L;
+
+        s_ = "";
+
+        ss_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        if (stusBuilder_ == null) {
+          stus_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        } else {
+          stusBuilder_.clear();
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.okchain.proto.Transfer.internal_static_BaseType_descriptor;
+      }
+
+      @java.lang.Override
+      public com.okchain.proto.Transfer.BaseType getDefaultInstanceForType() {
+        return com.okchain.proto.Transfer.BaseType.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.okchain.proto.Transfer.BaseType build() {
+        com.okchain.proto.Transfer.BaseType result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.okchain.proto.Transfer.BaseType buildPartial() {
+        com.okchain.proto.Transfer.BaseType result = new com.okchain.proto.Transfer.BaseType(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.i_ = i_;
+        result.s_ = s_;
+        if (((bitField0_ & 0x00000004) != 0)) {
+          ss_ = ss_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        }
+        result.ss_ = ss_;
+        if (stusBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) != 0)) {
+            stus_ = java.util.Collections.unmodifiableList(stus_);
+            bitField0_ = (bitField0_ & ~0x00000008);
+          }
+          result.stus_ = stus_;
+        } else {
+          result.stus_ = stusBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.okchain.proto.Transfer.BaseType) {
+          return mergeFrom((com.okchain.proto.Transfer.BaseType)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.okchain.proto.Transfer.BaseType other) {
+        if (other == com.okchain.proto.Transfer.BaseType.getDefaultInstance()) return this;
+        if (other.getI() != 0L) {
+          setI(other.getI());
+        }
+        if (!other.getS().isEmpty()) {
+          s_ = other.s_;
+          onChanged();
+        }
+        if (!other.ss_.isEmpty()) {
+          if (ss_.isEmpty()) {
+            ss_ = other.ss_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+          } else {
+            ensureSsIsMutable();
+            ss_.addAll(other.ss_);
+          }
+          onChanged();
+        }
+        if (stusBuilder_ == null) {
+          if (!other.stus_.isEmpty()) {
+            if (stus_.isEmpty()) {
+              stus_ = other.stus_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+            } else {
+              ensureStusIsMutable();
+              stus_.addAll(other.stus_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.stus_.isEmpty()) {
+            if (stusBuilder_.isEmpty()) {
+              stusBuilder_.dispose();
+              stusBuilder_ = null;
+              stus_ = other.stus_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+              stusBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getStusFieldBuilder() : null;
+            } else {
+              stusBuilder_.addAllMessages(other.stus_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.okchain.proto.Transfer.BaseType parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.okchain.proto.Transfer.BaseType) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private long i_ ;
+      /**
+       * <code>int64 i = 1;</code>
+       */
+      public long getI() {
+        return i_;
+      }
+      /**
+       * <code>int64 i = 1;</code>
+       */
+      public Builder setI(long value) {
+        
+        i_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 i = 1;</code>
+       */
+      public Builder clearI() {
+        
+        i_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object s_ = "";
+      /**
+       * <code>string s = 2;</code>
+       */
+      public java.lang.String getS() {
+        java.lang.Object ref = s_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          s_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string s = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getSBytes() {
+        java.lang.Object ref = s_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          s_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string s = 2;</code>
+       */
+      public Builder setS(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        s_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string s = 2;</code>
+       */
+      public Builder clearS() {
+        
+        s_ = getDefaultInstance().getS();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string s = 2;</code>
+       */
+      public Builder setSBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        s_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList ss_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureSsIsMutable() {
+        if (!((bitField0_ & 0x00000004) != 0)) {
+          ss_ = new com.google.protobuf.LazyStringArrayList(ss_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+      /**
+       * <code>repeated string ss = 3;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getSsList() {
+        return ss_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string ss = 3;</code>
+       */
+      public int getSsCount() {
+        return ss_.size();
+      }
+      /**
+       * <code>repeated string ss = 3;</code>
+       */
+      public java.lang.String getSs(int index) {
+        return ss_.get(index);
+      }
+      /**
+       * <code>repeated string ss = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getSsBytes(int index) {
+        return ss_.getByteString(index);
+      }
+      /**
+       * <code>repeated string ss = 3;</code>
+       */
+      public Builder setSs(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureSsIsMutable();
+        ss_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string ss = 3;</code>
+       */
+      public Builder addSs(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureSsIsMutable();
+        ss_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string ss = 3;</code>
+       */
+      public Builder addAllSs(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureSsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, ss_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string ss = 3;</code>
+       */
+      public Builder clearSs() {
+        ss_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string ss = 3;</code>
+       */
+      public Builder addSsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureSsIsMutable();
+        ss_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.okchain.proto.Transfer.Stu> stus_ =
+        java.util.Collections.emptyList();
+      private void ensureStusIsMutable() {
+        if (!((bitField0_ & 0x00000008) != 0)) {
+          stus_ = new java.util.ArrayList<com.okchain.proto.Transfer.Stu>(stus_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.okchain.proto.Transfer.Stu, com.okchain.proto.Transfer.Stu.Builder, com.okchain.proto.Transfer.StuOrBuilder> stusBuilder_;
+
+      /**
+       * <code>repeated .Stu stus = 4;</code>
+       */
+      public java.util.List<com.okchain.proto.Transfer.Stu> getStusList() {
+        if (stusBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(stus_);
+        } else {
+          return stusBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .Stu stus = 4;</code>
+       */
+      public int getStusCount() {
+        if (stusBuilder_ == null) {
+          return stus_.size();
+        } else {
+          return stusBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .Stu stus = 4;</code>
+       */
+      public com.okchain.proto.Transfer.Stu getStus(int index) {
+        if (stusBuilder_ == null) {
+          return stus_.get(index);
+        } else {
+          return stusBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .Stu stus = 4;</code>
+       */
+      public Builder setStus(
+          int index, com.okchain.proto.Transfer.Stu value) {
+        if (stusBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureStusIsMutable();
+          stus_.set(index, value);
+          onChanged();
+        } else {
+          stusBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Stu stus = 4;</code>
+       */
+      public Builder setStus(
+          int index, com.okchain.proto.Transfer.Stu.Builder builderForValue) {
+        if (stusBuilder_ == null) {
+          ensureStusIsMutable();
+          stus_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          stusBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Stu stus = 4;</code>
+       */
+      public Builder addStus(com.okchain.proto.Transfer.Stu value) {
+        if (stusBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureStusIsMutable();
+          stus_.add(value);
+          onChanged();
+        } else {
+          stusBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Stu stus = 4;</code>
+       */
+      public Builder addStus(
+          int index, com.okchain.proto.Transfer.Stu value) {
+        if (stusBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureStusIsMutable();
+          stus_.add(index, value);
+          onChanged();
+        } else {
+          stusBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Stu stus = 4;</code>
+       */
+      public Builder addStus(
+          com.okchain.proto.Transfer.Stu.Builder builderForValue) {
+        if (stusBuilder_ == null) {
+          ensureStusIsMutable();
+          stus_.add(builderForValue.build());
+          onChanged();
+        } else {
+          stusBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Stu stus = 4;</code>
+       */
+      public Builder addStus(
+          int index, com.okchain.proto.Transfer.Stu.Builder builderForValue) {
+        if (stusBuilder_ == null) {
+          ensureStusIsMutable();
+          stus_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          stusBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Stu stus = 4;</code>
+       */
+      public Builder addAllStus(
+          java.lang.Iterable<? extends com.okchain.proto.Transfer.Stu> values) {
+        if (stusBuilder_ == null) {
+          ensureStusIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, stus_);
+          onChanged();
+        } else {
+          stusBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Stu stus = 4;</code>
+       */
+      public Builder clearStus() {
+        if (stusBuilder_ == null) {
+          stus_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+          onChanged();
+        } else {
+          stusBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Stu stus = 4;</code>
+       */
+      public Builder removeStus(int index) {
+        if (stusBuilder_ == null) {
+          ensureStusIsMutable();
+          stus_.remove(index);
+          onChanged();
+        } else {
+          stusBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Stu stus = 4;</code>
+       */
+      public com.okchain.proto.Transfer.Stu.Builder getStusBuilder(
+          int index) {
+        return getStusFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .Stu stus = 4;</code>
+       */
+      public com.okchain.proto.Transfer.StuOrBuilder getStusOrBuilder(
+          int index) {
+        if (stusBuilder_ == null) {
+          return stus_.get(index);  } else {
+          return stusBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .Stu stus = 4;</code>
+       */
+      public java.util.List<? extends com.okchain.proto.Transfer.StuOrBuilder> 
+           getStusOrBuilderList() {
+        if (stusBuilder_ != null) {
+          return stusBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(stus_);
+        }
+      }
+      /**
+       * <code>repeated .Stu stus = 4;</code>
+       */
+      public com.okchain.proto.Transfer.Stu.Builder addStusBuilder() {
+        return getStusFieldBuilder().addBuilder(
+            com.okchain.proto.Transfer.Stu.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Stu stus = 4;</code>
+       */
+      public com.okchain.proto.Transfer.Stu.Builder addStusBuilder(
+          int index) {
+        return getStusFieldBuilder().addBuilder(
+            index, com.okchain.proto.Transfer.Stu.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Stu stus = 4;</code>
+       */
+      public java.util.List<com.okchain.proto.Transfer.Stu.Builder> 
+           getStusBuilderList() {
+        return getStusFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.okchain.proto.Transfer.Stu, com.okchain.proto.Transfer.Stu.Builder, com.okchain.proto.Transfer.StuOrBuilder> 
+          getStusFieldBuilder() {
+        if (stusBuilder_ == null) {
+          stusBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.okchain.proto.Transfer.Stu, com.okchain.proto.Transfer.Stu.Builder, com.okchain.proto.Transfer.StuOrBuilder>(
+                  stus_,
+                  ((bitField0_ & 0x00000008) != 0),
+                  getParentForChildren(),
+                  isClean());
+          stus_ = null;
+        }
+        return stusBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:BaseType)
+    }
+
+    // @@protoc_insertion_point(class_scope:BaseType)
+    private static final com.okchain.proto.Transfer.BaseType DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.okchain.proto.Transfer.BaseType();
+    }
+
+    public static com.okchain.proto.Transfer.BaseType getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<BaseType>
+        PARSER = new com.google.protobuf.AbstractParser<BaseType>() {
+      @java.lang.Override
+      public BaseType parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new BaseType(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<BaseType> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<BaseType> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.okchain.proto.Transfer.BaseType getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface StuOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:Stu)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>int64 id = 1;</code>
+     */
+    long getId();
+  }
+  /**
+   * Protobuf type {@code Stu}
+   */
+  public  static final class Stu extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:Stu)
+      StuOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use Stu.newBuilder() to construct.
+    private Stu(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private Stu() {
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Stu(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              id_ = input.readInt64();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.okchain.proto.Transfer.internal_static_Stu_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.okchain.proto.Transfer.internal_static_Stu_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.okchain.proto.Transfer.Stu.class, com.okchain.proto.Transfer.Stu.Builder.class);
+    }
+
+    public static final int ID_FIELD_NUMBER = 1;
+    private long id_;
+    /**
+     * <code>int64 id = 1;</code>
+     */
+    public long getId() {
+      return id_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (id_ != 0L) {
+        output.writeInt64(1, id_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (id_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, id_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.okchain.proto.Transfer.Stu)) {
+        return super.equals(obj);
+      }
+      com.okchain.proto.Transfer.Stu other = (com.okchain.proto.Transfer.Stu) obj;
+
+      if (getId()
+          != other.getId()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getId());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.okchain.proto.Transfer.Stu parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.okchain.proto.Transfer.Stu parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.Stu parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.okchain.proto.Transfer.Stu parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.Stu parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.okchain.proto.Transfer.Stu parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.Stu parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.okchain.proto.Transfer.Stu parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.Stu parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.okchain.proto.Transfer.Stu parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.Stu parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.okchain.proto.Transfer.Stu parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.okchain.proto.Transfer.Stu prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code Stu}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:Stu)
+        com.okchain.proto.Transfer.StuOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.okchain.proto.Transfer.internal_static_Stu_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.okchain.proto.Transfer.internal_static_Stu_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.okchain.proto.Transfer.Stu.class, com.okchain.proto.Transfer.Stu.Builder.class);
+      }
+
+      // Construct using com.okchain.proto.Transfer.Stu.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        id_ = 0L;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.okchain.proto.Transfer.internal_static_Stu_descriptor;
+      }
+
+      @java.lang.Override
+      public com.okchain.proto.Transfer.Stu getDefaultInstanceForType() {
+        return com.okchain.proto.Transfer.Stu.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.okchain.proto.Transfer.Stu build() {
+        com.okchain.proto.Transfer.Stu result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.okchain.proto.Transfer.Stu buildPartial() {
+        com.okchain.proto.Transfer.Stu result = new com.okchain.proto.Transfer.Stu(this);
+        result.id_ = id_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.okchain.proto.Transfer.Stu) {
+          return mergeFrom((com.okchain.proto.Transfer.Stu)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.okchain.proto.Transfer.Stu other) {
+        if (other == com.okchain.proto.Transfer.Stu.getDefaultInstance()) return this;
+        if (other.getId() != 0L) {
+          setId(other.getId());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.okchain.proto.Transfer.Stu parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.okchain.proto.Transfer.Stu) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private long id_ ;
+      /**
+       * <code>int64 id = 1;</code>
+       */
+      public long getId() {
+        return id_;
+      }
+      /**
+       * <code>int64 id = 1;</code>
+       */
+      public Builder setId(long value) {
+        
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 id = 1;</code>
+       */
+      public Builder clearId() {
+        
+        id_ = 0L;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:Stu)
+    }
+
+    // @@protoc_insertion_point(class_scope:Stu)
+    private static final com.okchain.proto.Transfer.Stu DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.okchain.proto.Transfer.Stu();
+    }
+
+    public static com.okchain.proto.Transfer.Stu getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<Stu>
+        PARSER = new com.google.protobuf.AbstractParser<Stu>() {
+      @java.lang.Override
+      public Stu parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Stu(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<Stu> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Stu> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.okchain.proto.Transfer.Stu getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_StdTransaction_descriptor;
   private static final 
@@ -8508,6 +9503,16 @@ public final class Transfer {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_TransferUnit_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_BaseType_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_BaseType_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Stu_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Stu_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -8517,23 +9522,24 @@ public final class Transfer {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016transfer.proto\"_\n\016StdTransaction\022\014\n\004ms" +
-      "gs\030\001 \003(\014\022\021\n\003fee\030\002 \001(\0132\004.Fee\022\036\n\nsignature" +
-      "s\030\003 \003(\0132\n.Signature\022\014\n\004memo\030\004 \001(\t\"*\n\003Fee" +
-      "\022\013\n\003gas\030\001 \001(\t\022\026\n\006amount\030\002 \003(\0132\006.Token\".\n" +
-      "\tSignature\022\016\n\006pubkey\030\001 \001(\014\022\021\n\tsignature\030" +
-      "\002 \001(\t\"&\n\005Token\022\016\n\006amount\030\001 \001(\t\022\r\n\005denom\030" +
-      "\002 \001(\t\"I\n\007MsgSend\022\023\n\013fromAddress\030\001 \001(\t\022\021\n" +
-      "\ttoAddress\030\002 \001(\t\022\026\n\006amount\030\003 \003(\0132\006.Token" +
-      "\"\201\001\n\013MsgNewOrder\022\023\n\013batchNumber\030\001 \001(\t\022\r\n" +
-      "\005depth\030\002 \001(\t\022\r\n\005price\030\003 \001(\t\022\017\n\007product\030\004" +
-      " \001(\t\022\020\n\010quantity\030\005 \001(\t\022\016\n\006sender\030\006 \001(\t\022\014" +
-      "\n\004side\030\007 \001(\t\"1\n\016MsgCancelOrder\022\017\n\007orderI" +
-      "d\030\001 \001(\t\022\016\n\006sender\030\002 \001(\t\">\n\014MsgMultiSend\022" +
-      "\014\n\004from\030\001 \001(\t\022 \n\ttransfers\030\002 \003(\0132\r.Trans" +
-      "ferUnit\"1\n\014TransferUnit\022\025\n\005coins\030\001 \003(\0132\006" +
-      ".Token\022\n\n\002to\030\002 \001(\tB\023\n\021com.okchain.protob" +
-      "\006proto3"
+      "\n\016transfer.proto\"L\n\016StdTransaction\022\014\n\004ms" +
+      "gs\030\001 \003(\014\022\036\n\nsignatures\030\002 \003(\0132\n.Signature" +
+      "\022\014\n\004memo\030\003 \001(\t\"*\n\003Fee\022\026\n\006amount\030\001 \003(\0132\006." +
+      "Token\022\013\n\003gas\030\002 \001(\003\".\n\tSignature\022\016\n\006pubke" +
+      "y\030\001 \001(\014\022\021\n\tsignature\030\002 \001(\014\"&\n\005Token\022\r\n\005d" +
+      "enom\030\001 \001(\t\022\016\n\006amount\030\002 \001(\t\"I\n\007MsgSend\022\023\n" +
+      "\013fromAddress\030\001 \001(\014\022\021\n\ttoAddress\030\002 \001(\014\022\026\n" +
+      "\006amount\030\003 \003(\0132\006.Token\"\201\001\n\013MsgNewOrder\022\016\n" +
+      "\006sender\030\001 \001(\014\022\017\n\007product\030\002 \001(\t\022\014\n\004side\030\003" +
+      " \001(\t\022\r\n\005price\030\004 \001(\t\022\020\n\010quantity\030\005 \001(\t\022\023\n" +
+      "\013batchNumber\030\006 \001(\t\022\r\n\005depth\030\007 \001(\t\"1\n\016Msg" +
+      "CancelOrder\022\016\n\006sender\030\001 \001(\014\022\017\n\007orderId\030\002" +
+      " \001(\t\">\n\014MsgMultiSend\022\014\n\004from\030\001 \001(\014\022 \n\ttr" +
+      "ansfers\030\002 \003(\0132\r.TransferUnit\"1\n\014Transfer" +
+      "Unit\022\n\n\002to\030\001 \001(\014\022\025\n\005coins\030\002 \003(\0132\006.Token\"" +
+      "@\n\010BaseType\022\t\n\001i\030\001 \001(\003\022\t\n\001s\030\002 \001(\t\022\n\n\002ss\030" +
+      "\003 \003(\t\022\022\n\004stus\030\004 \003(\0132\004.Stu\"\021\n\003Stu\022\n\n\002id\030\001" +
+      " \001(\003B\023\n\021com.okchain.protob\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8552,13 +9558,13 @@ public final class Transfer {
     internal_static_StdTransaction_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_StdTransaction_descriptor,
-        new java.lang.String[] { "Msgs", "Fee", "Signatures", "Memo", });
+        new java.lang.String[] { "Msgs", "Signatures", "Memo", });
     internal_static_Fee_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_Fee_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Fee_descriptor,
-        new java.lang.String[] { "Gas", "Amount", });
+        new java.lang.String[] { "Amount", "Gas", });
     internal_static_Signature_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_Signature_fieldAccessorTable = new
@@ -8570,7 +9576,7 @@ public final class Transfer {
     internal_static_Token_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Token_descriptor,
-        new java.lang.String[] { "Amount", "Denom", });
+        new java.lang.String[] { "Denom", "Amount", });
     internal_static_MsgSend_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_MsgSend_fieldAccessorTable = new
@@ -8582,13 +9588,13 @@ public final class Transfer {
     internal_static_MsgNewOrder_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_MsgNewOrder_descriptor,
-        new java.lang.String[] { "BatchNumber", "Depth", "Price", "Product", "Quantity", "Sender", "Side", });
+        new java.lang.String[] { "Sender", "Product", "Side", "Price", "Quantity", "BatchNumber", "Depth", });
     internal_static_MsgCancelOrder_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_MsgCancelOrder_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_MsgCancelOrder_descriptor,
-        new java.lang.String[] { "OrderId", "Sender", });
+        new java.lang.String[] { "Sender", "OrderId", });
     internal_static_MsgMultiSend_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_MsgMultiSend_fieldAccessorTable = new
@@ -8600,7 +9606,19 @@ public final class Transfer {
     internal_static_TransferUnit_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_TransferUnit_descriptor,
-        new java.lang.String[] { "Coins", "To", });
+        new java.lang.String[] { "To", "Coins", });
+    internal_static_BaseType_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_BaseType_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_BaseType_descriptor,
+        new java.lang.String[] { "I", "S", "Ss", "Stus", });
+    internal_static_Stu_descriptor =
+      getDescriptor().getMessageTypes().get(10);
+    internal_static_Stu_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Stu_descriptor,
+        new java.lang.String[] { "Id", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

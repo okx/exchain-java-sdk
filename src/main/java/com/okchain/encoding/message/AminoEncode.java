@@ -37,6 +37,6 @@ public class AminoEncode {
     }
 
     public static byte[] encodeStdTransaction(Transfer.StdTransaction stdTransactionProto) throws IOException {
-        return EncodeUtils.aminoWrap(stdTransactionProto.toByteArray(), MessageType.StdTx.getTypePrefixBytes(), false);
+        return EncodeUtils.aminoWrap(stdTransactionProto.toByteArray(), MessageType.StdTx.getTypePrefixBytes(), true);
     }
 }

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.okchain.client.impl.OKChainClientImpl;
 import com.okchain.crypto.keystore.CipherException;
+import com.okchain.transaction.BuildTransaction;
 import com.okchain.types.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,8 +17,9 @@ import java.util.List;
 public class ClientTest {
     private static String privateKey = "c4c451ce673485521f9c9b74b6d90f0da433ef7f012fa7f9db4def627dccd632";
     // rest服务，端口改为26659
+
     private static String url = "http://127.0.0.1:26659";
-    private static String address = "okchain152p8xmejhza7wuhhzut88vkakdgasqwlw2qjcf";
+    private static String address = "okchain1n55exyav6txhhmx07l73ea5jvrmam6fhmz9yaw";
     private static String mnemonic = "total lottery arena when pudding best candy until army spoil drill pool";
 
     @Test
@@ -132,7 +134,12 @@ public class ClientTest {
         // resJson是主网收到转账后的答复json对象
         System.out.println(resJson.toString());
         // 判断：resJson中第一级key——"logs"中，第一个元素中(第一个元素为一个新json对象)，key为"success的对应的值是否是true
-        Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
+
+        Object code = resJson.get("code");
+        Object err = resJson.get("error");
+        Assert.assertNull(code);
+        Assert.assertNull(err);
+        //Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
     }
     @Test
     public void sendSendTransactions() {
@@ -179,6 +186,7 @@ public class ClientTest {
         String price = "0.10000000";
         String quantity = "1.00000000";
         String memo = "";
+        BuildTransaction.setMode("block");
         RequestPlaceOrderParams parms = new RequestPlaceOrderParams(price, product, quantity, side);
 
         JSONObject resJson = okc.sendPlaceOrderTransaction(account, parms, memo);
@@ -221,7 +229,11 @@ public class ClientTest {
 
         JSONObject resJson = okc.sendMultiSendTransaction(account, transfers, memo);
         System.out.println(resJson.toString());
-        Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
+        Object code = resJson.get("code");
+        Object err = resJson.get("error");
+        Assert.assertNull(code);
+        Assert.assertNull(err);
+        //Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
     }
 
     private OKChainClient generateClient() {
@@ -239,7 +251,8 @@ public class ClientTest {
     public void getAccountALLTokens() {
         OKChainClient okc = generateClient();
         String address = this.address;
-        BaseModel resJson = okc.getAccountALLTokens(address);
+        String show = "all";
+        BaseModel resJson = okc.getAccountALLTokens(address, show);
         String res = JSON.toJSON(resJson).toString();
         System.out.println(res);
         Assert.assertEquals("0", resJson.getCode());

@@ -8,6 +8,7 @@ import java.util.Arrays;
  * Binance dex standard transactiont types.
  */
 public enum MessageType {
+    BaseType(null),
     Send("C9EE213F"),
     MultiSend("3C1EDEF4"),
     NewOrder("C61D9893"),

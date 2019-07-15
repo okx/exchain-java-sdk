@@ -48,7 +48,7 @@ public interface OKChainClient {
 
     public AccountInfo getAccountInfo(String privateKey) throws NullPointerException;
 
-    public BaseModel getAccountALLTokens(String address) throws NullPointerException;
+    public BaseModel getAccountALLTokens(String address, String show) throws NullPointerException;
 
     public BaseModel getAccountToken(String address, String symbol) throws NullPointerException;
 

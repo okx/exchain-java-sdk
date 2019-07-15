@@ -70,8 +70,9 @@ public class CryptoTest {
     @Test
     public void generateKeyStore() {
         File file = new File("./");
+        String fileName = "";
         try {
-            KeyStoreUtils.generateNewWalletFile("jilei", file);
+            fileName = KeyStoreUtils.generateNewWalletFile("jilei", file);
         } catch (CipherException e) {
             e.printStackTrace();
         } catch (InvalidAlgorithmParameterException e) {
@@ -84,6 +85,8 @@ public class CryptoTest {
             e.printStackTrace();
         }
         file.delete();
+        File keyStoreFile = new File(fileName);
+        keyStoreFile.delete();
     }
 
     @Test
