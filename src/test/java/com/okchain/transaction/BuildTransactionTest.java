@@ -5,7 +5,6 @@ import com.okchain.client.impl.OKChainClientImpl;
 import com.okchain.types.AccountInfo;
 import com.okchain.types.AddressInfo;
 import com.okchain.types.Token;
-import com.okchain.types.TransferUnit;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -76,21 +75,22 @@ public class BuildTransactionTest {
         String transaction = BuildTransaction.generateSendTransaction(account, to, amountList, memo);
         System.out.println(transaction);
     }
-//    @Test
-//    public void testBuildAminoSendTx() throws IOException{
-//        AccountInfo account = generateAccountInfo();
-//
-//        String sequence = "52";
-//        String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
-//        String memo = "";
-//
-//        List<Token> amountList = new ArrayList<>();
-//        Token amount = new Token();
-//        amount.setDenom("okb");
-//        amount.setAmount("1.00000000");
-//        amountList.add(amount);
-//        BuildTransaction.generateAminoSendTransaction(account,to,amountList,memo);
-//    }
+
+    @Test
+    public void testBuildAminoSendTx() throws IOException {
+        AccountInfo account = generateAccountInfo();
+
+        String sequence = "52";
+        String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
+        String memo = "";
+
+        List<Token> amountList = new ArrayList<>();
+        Token amount = new Token();
+        amount.setDenom("okb");
+        amount.setAmount("1.00000000");
+        amountList.add(amount);
+        BuildTransaction.generateAminoSendTransaction(account, to, amountList, memo);
+    }
 
     @Test
     public void testBuildSendTxs() {

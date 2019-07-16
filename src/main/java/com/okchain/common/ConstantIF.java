@@ -46,5 +46,7 @@ public interface ConstantIF {
 
     public static String TX_SEND_MODE_ASYNC = "async";
 
+    public static String RPC_METHOD_QUERY = "abci_query";
+
 
 }

@@ -12,17 +12,9 @@ import com.okchain.types.TransferUnit;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.SocketException;
-import java.net.URL;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class BenchMarkTest {
     private static String privateKey = "c4c451ce673485521f9c9b74b6d90f0da433ef7f012fa7f9db4def627dccd632";
@@ -67,7 +59,7 @@ public class BenchMarkTest {
     }
 
     @Test
-    public void sendSendTransaction() {
+    public void sendSendTransaction() throws IOException {
         OKChainClient okc = generateClient();
         AccountInfo account = generateAccountInfo(okc);
         //List<AddressInfo> testAddrList = new ArrayList<>();

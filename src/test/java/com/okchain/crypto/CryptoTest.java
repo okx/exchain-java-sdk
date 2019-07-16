@@ -1,7 +1,11 @@
 package com.okchain.crypto;
 
+import com.alibaba.fastjson.JSON;
+import com.okchain.client.OKChainClient;
+import com.okchain.client.impl.OKChainClientImpl;
 import com.okchain.crypto.keystore.CipherException;
 import com.okchain.crypto.keystore.KeyStoreUtils;
+import com.okchain.types.AddressInfo;
 import org.bouncycastle.util.encoders.Hex;
 import org.junit.Assert;
 import org.junit.Test;
@@ -65,6 +69,19 @@ public class CryptoTest {
     public void generatePrivateKeyFromMnemonic() {
         String mnemonic = "total lottery arena when pudding best candy until army spoil drill pool";
         System.out.println(Crypto.generatePrivateKeyFromMnemonic(mnemonic));
+    }
+
+    @Test
+    public void generateKeyInfo() {
+        String mnemonic = "total lottery arena when pudding best candy until army spoil drill pool";
+        //String mnemonic = "gun exercise indoor eagle project copy actress field odor anchor transfer dignity";
+        String privateKey = Crypto.generatePrivateKeyFromMnemonic(mnemonic);
+        String url = "";
+        OKChainClient okc = OKChainClientImpl.getOKChainClient(url);
+        AddressInfo addressInfo = okc.getAddressInfo(privateKey);
+        String res = JSON.toJSONString(addressInfo);
+        System.out.println(res);
+
     }
 
     @Test

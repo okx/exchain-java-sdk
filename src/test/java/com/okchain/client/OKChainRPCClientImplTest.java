@@ -1,31 +1,41 @@
 package com.okchain.client;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.google.protobuf.ByteString;
 import com.okchain.client.impl.OKChainClientImpl;
 import com.okchain.client.impl.OKChainRPCClientImpl;
-import com.okchain.common.ConstantIF;
-import com.okchain.crypto.AddressUtil;
 import com.okchain.encoding.EncodeUtils;
-import com.okchain.encoding.message.AminoEncode;
+import com.okchain.encoding.message.MessageType;
 import com.okchain.proto.Transfer;
 import com.okchain.transaction.BuildTransaction;
-import com.okchain.types.*;
-import com.okchain.encoding.message.MessageType;
-
+import com.okchain.types.AccountInfo;
+import com.okchain.types.RequestPlaceOrderParams;
+import com.okchain.types.Token;
+import com.okchain.types.TransferUnit;
 import org.bouncycastle.util.encoders.Hex;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import java.util.Base64;
 import java.util.List;
 
 public class OKChainRPCClientImplTest {
-    private static String privateKey = "c4c451ce673485521f9c9b74b6d90f0da433ef7f012fa7f9db4def627dccd632";
+    private static String privateKey = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
     private static String url_rpc = "http://localhost:26657";//rpc
     private static String url_rest = "http://localhost:26659";//rest
+
+
+    @Test
+    public void getAccountInfo() {
+        OKChainRPCClientImpl okc = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
+        AccountInfo accountInfo = okc.getAccountInfo(this.privateKey);
+        System.out.println(JSON.toJSONString(accountInfo));
+        Assert.assertNotNull(accountInfo);
+        Assert.assertNotNull(accountInfo.getSequenceNumber());
+        Assert.assertNotNull(accountInfo.getAccountNumber());
+    }
 
     @Test
     public void sendRawBytes() {
@@ -36,7 +46,7 @@ public class OKChainRPCClientImplTest {
         OKChainClient okc = generateClient();
         AccountInfo account = generateAccountInfo(okc);
 
-        String res = client.sendTransaction(transactionData);
+        JSONObject res = client.sendTransaction(transactionData);
         System.out.println(res);
     }
 
@@ -52,7 +62,7 @@ public class OKChainRPCClientImplTest {
         OKChainClient okc = generateClient();
         AccountInfo account = generateAccountInfo(okc);
 
-        String res = client.sendTransaction(transactionData);
+        JSONObject res = client.sendTransaction(transactionData);
         System.out.println(res);
     }
 
@@ -68,10 +78,10 @@ public class OKChainRPCClientImplTest {
         String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
         String memo = "";
         List<Token> amountList = new ArrayList<>();
-        Token amount = new Token("5", "okb");
+        Token amount = new Token("5.00000000", "okb");
         amountList.add(amount);
         byte[] txRawBytes = BuildTransaction.generateAminoSendTransaction(account, to, amountList, memo);
-        String res = client.sendTransaction(txRawBytes);
+        JSONObject res = client.sendTransaction(txRawBytes);
         System.out.println(res);
     }
 
@@ -132,7 +142,7 @@ public class OKChainRPCClientImplTest {
         List<Token> amountList = new ArrayList<>();
         Token amount = new Token("1.00000000", "okb");
         amountList.add(amount);
-        String ret = client.sendSendTransaction(account, to, amountList, memo);
+        JSONObject ret = client.sendSendTransaction(account, to, amountList, memo);
         System.out.println(ret);
     }
 
@@ -146,7 +156,8 @@ public class OKChainRPCClientImplTest {
         String price = "1.123456789";
         String quantity = "1.00000000";
         String memo = "";
-        String ret = client.sendPlaceOrderTransaction(account, side, product, price, quantity, memo);
+        RequestPlaceOrderParams parms = new RequestPlaceOrderParams(price, product, quantity, side);
+        JSONObject ret = client.sendPlaceOrderTransaction(account, parms, memo);
         System.out.println(ret);
     }
 
@@ -157,7 +168,7 @@ public class OKChainRPCClientImplTest {
         AccountInfo account = generateAccountInfo(okc);
         String orderId = "ID0000065785-1";
         String memo = "";
-        String ret = client.sendCancelOrderTransaction(account, orderId, memo);
+        JSONObject ret = client.sendCancelOrderTransaction(account, orderId, memo);
         System.out.println(ret);
     }
 
@@ -180,7 +191,7 @@ public class OKChainRPCClientImplTest {
         amounts2.add(new Token("10.000000", "okb"));
         amounts2.add(new Token("50.000000", "okb"));
         transferUnits.add(new TransferUnit(amounts2, to2));
-        String ret = client.sendMultiSendTransaction(account, transferUnits, memo);
+        JSONObject ret = client.sendMultiSendTransaction(account, transferUnits, memo);
         System.out.println(ret);
     }
 }
