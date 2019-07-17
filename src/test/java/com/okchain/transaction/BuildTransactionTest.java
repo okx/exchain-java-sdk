@@ -2,6 +2,8 @@ package com.okchain.transaction;
 
 import com.okchain.client.OKChainClient;
 import com.okchain.client.impl.OKChainClientImpl;
+import com.okchain.common.ConstantIF;
+import com.okchain.common.jsonrpc.JSONRPCUtils;
 import com.okchain.types.AccountInfo;
 import com.okchain.types.AddressInfo;
 import com.okchain.types.Token;
@@ -10,6 +12,8 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class BuildTransactionTest {
     @Test
@@ -24,18 +28,22 @@ public class BuildTransactionTest {
         String transaction = BuildTransaction.generatePlaceOrderTransaction(account, side, product, price, quantity, memo);
         System.out.println(transaction);
     }
-  //  @Test
-//    public void testBuildAminoNewOrderTx() throws IOException {
-//        AccountInfo account = generateAccountInfo();
-//        String sequence = "50";
-//        String side = "BUY";
-//        String product = "xxb_okb";
-//        String price = "1.00000000";
-//        String quantity = "1.00000000";
-//        String memo = "";
-//        BuildTransaction.generateAminoPlaceOrderTransaction(account, side, product, price, quantity, memo);
-//
-//    }
+
+    @Test
+    public void testBuildAminoNewOrderTx() throws IOException {
+        AccountInfo account = generateAccountInfo();
+        String side = "BUY";
+        String product = "xxb_okb";
+        String price = "1.00000000";
+        String quantity = "1.00000000";
+        String memo = "";
+        byte[] tx = BuildTransaction.generateAminoPlaceOrderTransaction(account, side, product, price, quantity, memo);
+        String method = ConstantIF.RPC_METHOD_TX_SEND_ASYNC;
+        Map<String, Object> mp = new TreeMap<>();
+        mp.put("tx", tx);
+        String res = JSONRPCUtils.getRpcSendData(method, mp);
+        System.out.println(res);
+    }
 
     @Test
     public void testBuildCancelOrderTx() {
@@ -47,22 +55,25 @@ public class BuildTransactionTest {
         String transaction = BuildTransaction.generateCancelOrderTransaction(account, orderId, memo);
         System.out.println(transaction);
     }
-//    @Test
-//    public void testBuildAminoCancelOrderTx() throws IOException {
-//        AccountInfo account = generateAccountInfo();
-//
-//        String sequence = "51";
-//        String orderId = "ID0000065785-1";
-//        String memo = "";
-//        BuildTransaction.generateAminoCancelOrderTransaction(account, orderId, memo);
-//
-//    }
+
+    @Test
+    public void testBuildAminoCancelOrderTx() throws IOException {
+        AccountInfo account = generateAccountInfo();
+
+        String orderId = "ID0000065785-1";
+        String memo = "";
+        byte[] tx = BuildTransaction.generateAminoCancelOrderTransaction(account, orderId, memo);
+        String method = ConstantIF.RPC_METHOD_TX_SEND_ASYNC;
+        Map<String, Object> mp = new TreeMap<>();
+        mp.put("tx", tx);
+        String res = JSONRPCUtils.getRpcSendData(method, mp);
+        System.out.println(res);
+    }
 
     @Test
     public void testBuildSendTx() {
         AccountInfo account = generateAccountInfo();
 
-        String sequence = "52";
         String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
         String memo = "";
 
@@ -89,7 +100,13 @@ public class BuildTransactionTest {
         amount.setDenom("okb");
         amount.setAmount("1.00000000");
         amountList.add(amount);
-        BuildTransaction.generateAminoSendTransaction(account, to, amountList, memo);
+        byte[] tx = BuildTransaction.generateAminoSendTransaction(account, to, amountList, memo);
+
+        String method = ConstantIF.RPC_METHOD_TX_SEND_ASYNC;
+        Map<String, Object> mp = new TreeMap<>();
+        mp.put("tx", tx);
+        String res = JSONRPCUtils.getRpcSendData(method, mp);
+        System.out.println(res);
     }
 
     @Test
