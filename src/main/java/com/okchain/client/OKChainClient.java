@@ -64,6 +64,8 @@ public interface OKChainClient {
 
     public BaseModel getTickers(String count);
 
+    public BaseModel getMatches(String product, String start, String end, String page, String perPage) throws NullPointerException;
+
     public BaseModel getOrderListOpen(RequestOrderListOpenParams params) throws NullPointerException;
 
     public BaseModel getOrderListClosed(RequestOrderListClosedParams params) throws NullPointerException;

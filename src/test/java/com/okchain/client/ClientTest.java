@@ -2,7 +2,7 @@ package com.okchain.client;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.okchain.client.impl.OKChainRPCClientImpl;
+import com.okchain.client.impl.OKChainClientImpl;
 import com.okchain.crypto.keystore.CipherException;
 import com.okchain.transaction.BuildTransaction;
 import com.okchain.types.*;
@@ -20,7 +20,7 @@ public class ClientTest {
 
     private static String url = "http://127.0.0.1:26659";
     private static String rpcUrl = "http://127.0.0.1:26657";
-    private static String address = "okchain1n55exyav6txhhmx07l73ea5jvrmam6fhmz9yaw";
+    private static String address = "okchain1g7c3nvac7mjgn2m9mqllgat8wwd3aptdqket5k";
     private static String mnemonic = "total lottery arena when pudding best candy until army spoil drill pool";
 
     @Test
@@ -172,7 +172,7 @@ public class ClientTest {
 
         JSONObject resJson=okc.sendSendTransactions(account,tos,amountLists,memo);
         // resJson是主网收到转账后的答复json对象
-        //System.out.println(resJson.toString());
+        System.out.println(resJson.toString());
         // 判断：resJson中第一级key——"logs"中，第一个元素中(第一个元素为一个新json对象)，key为"success的对应的值是否是true
         Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
 
@@ -232,15 +232,15 @@ public class ClientTest {
         System.out.println(resJson.toString());
         Object code = resJson.get("code");
         Object err = resJson.get("error");
-        Assert.assertEquals(0, code);
+        Assert.assertNull(code);
         Assert.assertNull(err);
         //Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
     }
 
     private OKChainClient generateClient() {
         String url = this.url;
-        //OKChainClient okc = OKChainClientImpl.getOKChainClient(url);
-        OKChainClient okc = OKChainRPCClientImpl.getOKChainClient(rpcUrl);
+        OKChainClient okc = OKChainClientImpl.getOKChainClient(url);
+        //OKChainClient okc = OKChainRPCClientImpl.getOKChainClient(rpcUrl);
         return okc;
     }
 
@@ -326,6 +326,16 @@ public class ClientTest {
         OKChainClient okc = generateClient();
         String count = "10";
         BaseModel resJson = okc.getTickers(count);
+        String res = JSON.toJSON(resJson).toString();
+        System.out.println(res);
+        Assert.assertEquals("0", resJson.getCode());
+    }
+
+    @Test
+    public void getMatches() {
+        OKChainClient okc = generateClient();
+        String product = "xxb_okb";
+        BaseModel resJson = okc.getMatches(product, "", "", "", "");
         String res = JSON.toJSON(resJson).toString();
         System.out.println(res);
         Assert.assertEquals("0", resJson.getCode());

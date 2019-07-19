@@ -259,6 +259,16 @@ public class OKChainClientImpl implements OKChainClient {
         return queryRequest(backend + ConstantIF.GET_TICKERS_URL_PATH, pairs);
     }
 
+    public BaseModel getMatches(String product, String start, String end, String page, String perPage) throws NullPointerException {
+        if (product.equals("")) throw new NullPointerException("empty product");
+        ArrayList<Pair> pairs = new ArrayList<>();
+        pairs.add(new Pair("start", start));
+        pairs.add(new Pair("end", end));
+        pairs.add(new Pair("page", page));
+        pairs.add(new Pair("perPage", perPage));
+        return queryRequest(backend + ConstantIF.GET_MATCHES_URL_PATH, pairs);
+    }
+
 
     public BaseModel getOrderListOpen(RequestOrderListOpenParams params) throws NullPointerException {
         if (params.getAddress().equals("")) throw new NullPointerException("empty Address");
