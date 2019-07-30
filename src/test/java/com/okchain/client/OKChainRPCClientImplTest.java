@@ -8,10 +8,7 @@ import com.okchain.encoding.EncodeUtils;
 import com.okchain.encoding.message.MessageType;
 import com.okchain.proto.Transfer;
 import com.okchain.transaction.BuildTransaction;
-import com.okchain.types.AccountInfo;
-import com.okchain.types.RequestPlaceOrderParams;
-import com.okchain.types.Token;
-import com.okchain.types.TransferUnit;
+import com.okchain.types.*;
 import org.bouncycastle.util.encoders.Hex;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,10 +16,11 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 
 public class OKChainRPCClientImplTest {
-    private static String privateKey = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
+    private static String privateKey = "de0e9d9e7bac1366f7d8719a450dab03c9b704172ba43e0a25a7be1d51c69a87";
     private static String url_rpc = "http://localhost:26657";//rpc
     private static String url_rest = "http://localhost:26659";//rest
 
@@ -194,4 +192,210 @@ public class OKChainRPCClientImplTest {
         JSONObject ret = client.sendMultiSendTransaction(account, transferUnits, memo);
         System.out.println(ret);
     }
+
+    // added by michael.w 20190729
+    String Mnemo1 = "sustain hole urban away boy core lazy brick wait drive tiger tell";
+    String Name1 = "michael.w";
+    String Passwd1 = "12345678";
+    String Addr1 = "okchain1mm43akh88a3qendlmlzjldf8lkeynq68r8l6ts";
+
+    String Mnemo2 = "exotic general brisk blind beach unveil license emerge fee demand giraffe clinic";
+    String Name2 = "songyao";
+    String Passwd2 = "12345678";
+    String Addr2 = "okchain1qsc6ckz6uvrqdxg36p6rrwp25kyg4dtl8gdr92";
+
+    String Mnemo3 = "pulp promote shaft trial float patch quantum scene jealous reflect famous govern";
+    String Name3 = "2pac";
+    String Passwd3 = "12345678";
+    String Addr3 = "okchain1lx7udcmzx6lzuvpk6sdjlasz00p7jgwhfyx3dt";
+
+    // okchaincli tx send okchain1mm43akh88a3qendlmlzjldf8lkeynq68r8l6ts 10000okb --from jack -y
+    // 发新币
+    // okchaincli tx token issue -s gyc --desc "the coin of the coinless world" --total-supply 10000000 -w gyc --mintable true --from michael.w
+
+    @Test
+    public void testCreateAddressInfo() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+
+        AddressInfo addrInfo = client.createAddressInfo();
+        System.out.println(addrInfo.getPrivateKey());
+        System.out.println(addrInfo.getPublicKey());
+        System.out.println(addrInfo.getUserAddress());
+        Assert.assertNotNull(addrInfo);
+    }
+
+    @Test
+    public void testGenerateMnemonic() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        String Mnemonic = client.generateMnemonic();
+        System.out.println(Mnemonic);
+        Assert.assertNotNull(Mnemonic);
+
+    }
+
+    @Test
+    public void testGetPrivateKeyFromMnemonic() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        String privKey = client.getPrivateKeyFromMnemonic(Mnemo1);
+        System.out.println(privKey);
+        Assert.assertNotNull(privKey);
+        AddressInfo addrInfo = client.getAddressInfo(privKey);
+        System.out.println(addrInfo.getPrivateKey());
+        System.out.println(addrInfo.getPublicKey());
+        System.out.println(addrInfo.getUserAddress());
+        Assert.assertNotNull(addrInfo);
+
+
+    }
+
+    @Test
+    public void testGetAccountFromNode() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        JSONObject jo = client.getAccountFromNode(Addr1);
+        System.out.println(jo);
+        Assert.assertFalse(jo.containsKey("code"));
+    }
+
+    @Test
+    public void testGetAccountALLTokens() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        BaseModel bm = client.getAccountALLTokens(Addr1, "all");
+        System.out.println(bm);
+        Assert.assertNotNull(bm.getData());
+    }
+
+    @Test
+    public void testGetAccountToken() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        BaseModel bm = client.getAccountToken(Addr1, "gyc-779");
+        System.out.println(bm);
+        Assert.assertEquals(bm.getCode(), "0");
+    }
+
+    @Test
+    public void testGetTokens() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        BaseModel bm = client.getTokens();
+        System.out.println(bm);
+        Assert.assertEquals(bm.getCode(), "0");
+    }
+
+    @Test
+    public void testGetToken() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        BaseModel bm = client.getToken("gyc-779");
+        System.out.println(bm);
+        Assert.assertEquals(bm.getCode(), "0");
+    }
+
+    @Test
+    public void testGetProducts() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        BaseModel bm = client.getProducts();
+        System.out.println(bm);
+        Assert.assertEquals(bm.getCode(), "0");
+    }
+
+    @Test
+    public void testGetDepthBook() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        BaseModel bm = client.getDepthBook("xxb_okb");
+        System.out.println(bm);
+        Assert.assertEquals(bm.getCode(), "0");
+    }
+
+    @Test
+    public void testGetCandles() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        BaseModel bm = client.getCandles("60", "xxb_okb", "100");
+        System.out.println(bm);
+        Assert.assertEquals(bm.getCode(), "0");
+    }
+
+    @Test
+    public void testGetTickers() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        BaseModel bm = client.getTickers("10");
+        System.out.println(bm);
+        Assert.assertEquals(bm.getCode(), "0");
+    }
+
+    @Test
+    public void testGetMatches() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        // get the system time right now and convert it to String
+        String nowTimeStamp = String.valueOf(System.currentTimeMillis() / 1000);
+        BaseModel bm = client.getMatches("xxb_okb", "0", nowTimeStamp, "0", "10");
+        System.out.println(bm);
+        Assert.assertEquals(bm.getCode(), "0");
+    }
+
+    @Test
+    public void testGetOrderListOpen() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        String product = "xxb_okb";
+        String side = "BUY";
+        String start = "1";
+        // get the system time right now and convert it to String
+        String end = String.valueOf(System.currentTimeMillis() / 1000);
+        String page = "0";
+        String perPage = "10";
+        RequestOrderListOpenParams olop = new RequestOrderListOpenParams(product, Addr1, start, end, side, page, perPage);
+        BaseModel bm = client.getOrderListOpen(olop);
+        System.out.println(bm);
+        Assert.assertEquals(bm.getCode(), "0");
+    }
+
+    // added by michael.w 20190730
+    @Test
+    public void testGetOrderListClosed() {
+        // cancel a order first by okchaincli
+        // okchaincli tx order cancel ID0000029153-1 --from michael.w
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        String product = "xxb_okb";
+        String side = "BUY";
+        String start = "1";
+        // get the system time right now and convert it to String
+        String end = String.valueOf(System.currentTimeMillis() / 1000);
+        String page = "0";
+        String perPage = "10";
+        // if input hideNofill is not "true", we always treat it as "false"
+        String hideNoFill = "false";
+        RequestOrderListClosedParams olcp = new RequestOrderListClosedParams(product, Addr1, start, end, side, page, perPage, hideNoFill);
+        BaseModel bm = client.getOrderListClosed(olcp);
+        System.out.println(bm);
+        Assert.assertEquals(bm.getCode(), "0");
+    }
+
+    @Test
+    public void testGetDeals() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        String product = "xxb_okb";
+        String side = "BUY";
+        String start = "1";
+        // get the system time right now and convert it to String
+        String end = String.valueOf(System.currentTimeMillis() / 1000);
+        String page = "0";
+        String perPage = "10";
+        RequestDealsParams rdp = new RequestDealsParams(product, Addr1, start, end, side, page, perPage);
+        BaseModel bm = client.getDeals(rdp);
+        System.out.println(bm);
+        Assert.assertEquals(bm.getCode(), "0");
+    }
+
+    @Test
+    public void testGetTransactions() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        String type = "1";
+        String start = "1";
+        // get the system time right now and convert it to String
+        String end = String.valueOf(System.currentTimeMillis() / 1000);
+        String page = "0";
+        String perPage = "10";
+        RequestTransactionsParams rtp = new RequestTransactionsParams(Addr1, type, start, end, page, perPage);
+        BaseModel bm = client.getTransactions(rtp);
+        System.out.println(bm);
+        Assert.assertEquals(bm.getCode(), "0");
+    }
+
 }

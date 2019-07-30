@@ -42,4 +42,14 @@ public class BaseModel {
     public void setDetailMsg(String detailMsg) {
         this.detailMsg = detailMsg;
     }
+
+    @Override
+    public String toString() {
+        return "BaseModel{" +
+                "code='" + code + '\'' +
+                ", data='" + data + '\'' +
+                ", msg='" + msg + '\'' +
+                ", detailMsg='" + detailMsg + '\'' +
+                '}';
+    }
 }

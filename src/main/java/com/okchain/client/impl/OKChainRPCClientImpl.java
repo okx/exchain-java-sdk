@@ -37,31 +37,6 @@ public class OKChainRPCClientImpl implements OKChainClient {
         return oKChainRPCClientImpl;
     }
 
-    private String getAccountPrivate(String userAddress) {
-        Map<String, Object> dataMp = new TreeMap<>();
-        dataMp.put("Address", userAddress);
-        byte[] data = JSON.toJSONString(dataMp).getBytes();
-
-
-//        byte[] addrByte = AddressUtil.decodeAddress(userAddress);
-//        byte[] data = new byte[addrByte.length + 1];
-//        System.arraycopy(addrByte, 0, data, 1, addrByte.length);
-//        data[0] = 0x01;
-
-        Map<String, Object> mp = new TreeMap<>();
-        mp.put("data", Hex.toHexString(data).toUpperCase());
-        mp.put("height", "0");
-        mp.put("path", "custom/acc/account");
-        //mp.put("path", "/store/acc/key");
-        mp.put("prove", false);
-        String res = JSONRPCUtils.call(this.backend, ConstantIF.RPC_METHOD_QUERY, mp);
-        JSONObject obj = JSON.parseObject(res);
-        String accountBase64 = (String) obj.getJSONObject("result").getJSONObject("response").get("value");
-        //System.out.println(accountBase64);
-        String accountJson = new String(Base64.decode(accountBase64));
-        //System.out.println(accountJson);
-        return accountJson;
-    }
 
     public AddressInfo createAddressInfo() {
         String privateKey = Crypto.generatePrivateKey();
@@ -75,11 +50,6 @@ public class OKChainRPCClientImpl implements OKChainClient {
         return new AddressInfo(privateKey, pubKey, address);
     }
 
-    public JSONObject getAccountFromNode(String userAddress) throws NullPointerException {
-        if (userAddress.equals("")) throw new NullPointerException("empty userAddress");
-        JSONObject res = JSON.parseObject(getAccountPrivate(userAddress));
-        return res;
-    }
 
     private String getSequance(JSONObject account) {
         String res = (String) account.getJSONObject("value").get("sequence");
@@ -94,7 +64,8 @@ public class OKChainRPCClientImpl implements OKChainClient {
     public AccountInfo getAccountInfo(String privateKey) throws NullPointerException {
         if (privateKey.equals("")) throw new NullPointerException("empty privateKey");
         AddressInfo addressInfo = getAddressInfo(privateKey);
-        JSONObject accountJson = JSON.parseObject(getAccountPrivate(addressInfo.getUserAddress()));
+//        JSONObject accountJson = JSON.parseObject(getAccountPrivate(addressInfo.getUserAddress()));
+        JSONObject accountJson = getAccountFromNode(addressInfo.getUserAddress());
         String sequence = getSequance(accountJson);
         String accountNumber = getAccountNumber(accountJson);
         return new AccountInfo(addressInfo, accountNumber, sequence);
@@ -205,125 +176,235 @@ public class OKChainRPCClientImpl implements OKChainClient {
         if (parms.getSide().equals("")) throw new NullPointerException("empty Side");
     }
 
+
     private BaseModel queryRequest(String url, ArrayList<Pair> pairs) {
         String res = HttpUtils.httpGet(url, pairs);
         return JSON.parseObject(res, BaseModel.class);
     }
 
-    public BaseModel getAccountALLTokens(String address, String show) throws NullPointerException {
-        if (address.equals("")) throw new NullPointerException("empty address");
-        ArrayList<Pair> pairs = new ArrayList<>();
-        if (!show.equals("")) {
-            pairs.add(new Pair("show", show));
+    // added by michael.w 20190729
+    // convert type JSONObject 2 type BaseModel
+    private BaseModel JSONObject2BaseModel(JSONObject jo) {
+        JSONObject extractJSONObject = jo.getJSONObject("result").getJSONObject("response");
+        BaseModel bm = new BaseModel();
+
+        if (extractJSONObject.containsKey("code")) {
+            // if the rpc query fails
+            bm.setCode(extractJSONObject.getString("code"));
+            bm.setDetailMsg(extractJSONObject.getString("log"));
+        } else {
+            // if the rpc query succeeds
+            bm.setCode("0");
+            bm.setData(new String(Base64.decode((String) extractJSONObject.get("value"))));
         }
-        return queryRequest(backend + ConstantIF.GET_ACCOUNT_ALL_TOKENS_URL_PATH + address, pairs);
+        return bm;
     }
 
-    public BaseModel getAccountToken(String address, String symbol) throws NullPointerException {
-        if (address.equals("")) throw new NullPointerException("empty address");
+    // get the part from the return of function ABCIQuery
+    private JSONObject extractObject(JSONObject jo) {
+        JSONObject extractJSONObject = jo.getJSONObject("result").getJSONObject("response");
+        if (extractJSONObject.containsKey("code")) {
+            // if the rpc query fails
+            return extractJSONObject;
+        } else {
+            // if the rpc query succeeds
+            byte[] bz = Base64.decode((String) extractJSONObject.get("value"));
+            return JSON.parseObject(new String(bz));
+        }
+
+    }
+
+
+    private JSONObject ABCIQuery(String path, byte[] data, String rpcMethod) {
+        Map<String, Object> mp = new TreeMap<>();
+        if (data == null) {
+            mp.put("data", null);
+        } else {
+            mp.put("data", Hex.toHexString(data).toUpperCase());
+        }
+        mp.put("height", "0");
+        mp.put("path", path);
+        mp.put("prove", false);
+        String res = JSONRPCUtils.call(this.backend, rpcMethod, mp);
+        return JSON.parseObject(res);
+    }
+
+
+    public JSONObject getAccountFromNode(String addr) throws NullPointerException {
+        if (addr.equals("")) throw new NullPointerException("empty userAddress");
+        Map<String, Object> dataMp = new TreeMap<>();
+        dataMp.put("Address", addr);
+        byte[] data = JSON.toJSONString(dataMp).getBytes();
+        String path = "custom/acc/account";
+        return extractObject(ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY));
+    }
+
+    public BaseModel getAccountALLTokens(String addr, String show) throws NullPointerException {
+        if (addr.equals("")) throw new NullPointerException("empty address");
+        Map<String, Object> dataMp = new TreeMap<>();
+        dataMp.put("symbol", "");
+        dataMp.put("show", show);
+        byte[] data = JSON.toJSONString(dataMp).getBytes();
+        String path = "custom/token/accounts/" + addr;
+        JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
+        return JSONObject2BaseModel(jo);
+    }
+
+
+    public BaseModel getAccountToken(String addr, String symbol) throws NullPointerException {
+        if (addr.equals("")) throw new NullPointerException("empty address");
         if (symbol.equals("")) throw new NullPointerException("empty symbol");
-        ArrayList<Pair> pairs = new ArrayList<>();
-        pairs.add(new Pair("symbol", symbol));
-        return queryRequest(backend + ConstantIF.GET_ACCOUNT_TOKEN_URL_PATH + address, pairs);
+        Map<String, Object> dataMp = new TreeMap<>();
+        dataMp.put("symbol", symbol);
+        dataMp.put("show", "partial");
+        byte[] data = JSON.toJSONString(dataMp).getBytes();
+        String path = "custom/token/accounts/" + addr;
+        JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
+        return JSONObject2BaseModel(jo);
     }
 
     public BaseModel getTokens() {
-        return queryRequest(backend + ConstantIF.GET_TOKENS_URL_PATH, null);
+        String path = "custom/token/tokens";
+        JSONObject jo = ABCIQuery(path, null, ConstantIF.RPC_METHOD_QUERY);
+        return JSONObject2BaseModel(jo);
     }
 
 
     public BaseModel getToken(String symbol) throws NullPointerException {
         if (symbol.equals("")) throw new NullPointerException("empty symbol");
-        return queryRequest(backend + ConstantIF.GET_TOKEN_URL_PATH + symbol, null);
+        String path = "custom/token/info/" + symbol;
+        JSONObject jo = ABCIQuery(path, null, ConstantIF.RPC_METHOD_QUERY);
+        return JSONObject2BaseModel(jo);
     }
 
     public BaseModel getProducts() {
-        return queryRequest(backend + ConstantIF.GET_PRODUCTS_URL_PATH, null);
+        String path = "custom/token/products";
+        JSONObject jo = ABCIQuery(path, null, ConstantIF.RPC_METHOD_QUERY);
+        return JSONObject2BaseModel(jo);
     }
 
     public BaseModel getDepthBook(String product) throws NullPointerException {
         if (product.equals("")) throw new NullPointerException("empty product");
-        ArrayList<Pair> pairs = new ArrayList<>();
-        pairs.add(new Pair("product", product));
-        return queryRequest(backend + ConstantIF.GET_DEPTHBOOK_URL_PATH, pairs);
+        String path = "custom/order/depthbook";
+        Map<String, Object> dataMp = new TreeMap<>();
+        dataMp.put("Product", product);
+        // default size is 200
+        dataMp.put("Size", "200");
+        byte[] data = JSON.toJSONString(dataMp).getBytes();
+        JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
+        return JSONObject2BaseModel(jo);
+
     }
 
     public BaseModel getCandles(String granularity, String instrumentId, String size) throws NullPointerException {
         if (instrumentId.equals("")) throw new NullPointerException("empty product");
-        ArrayList<Pair> pairs = new ArrayList<>();
-        pairs.add(new Pair("granularity", granularity));
-        pairs.add(new Pair("size", size));
-        return queryRequest(backend + ConstantIF.GET_CANDLES_URL_PATH + instrumentId, pairs);
+        String path = "custom/backend/candles";
+        Map<String, Object> dataMp = new TreeMap<>();
+        dataMp.put("Product", instrumentId);
+        dataMp.put("Granularity", granularity);
+        dataMp.put("Size", size);
+        byte[] data = JSON.toJSONString(dataMp).getBytes();
+        JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
+        return JSONObject2BaseModel(jo);
+
     }
 
     public BaseModel getTickers(String count) {
-        ArrayList<Pair> pairs = new ArrayList<>();
-        pairs.add(new Pair("count", count));
-        return queryRequest(backend + ConstantIF.GET_TICKERS_URL_PATH, pairs);
+        String path = "custom/backend/tickers";
+        Map<String, Object> dataMp = new TreeMap<>();
+        dataMp.put("Product", "");
+        dataMp.put("Count", count);
+        dataMp.put("Sort", true);
+        byte[] data = JSON.toJSONString(dataMp).getBytes();
+        JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
+        return JSONObject2BaseModel(jo);
     }
 
+    // get the info of the product's record of transaction
     public BaseModel getMatches(String product, String start, String end, String page, String perPage) throws NullPointerException {
         if (product.equals("")) throw new NullPointerException("empty product");
-        ArrayList<Pair> pairs = new ArrayList<>();
-        pairs.add(new Pair("start", start));
-        pairs.add(new Pair("end", end));
-        pairs.add(new Pair("page", page));
-        pairs.add(new Pair("perPage", perPage));
-        return queryRequest(backend + ConstantIF.GET_MATCHES_URL_PATH, pairs);
-    }
+        String path = "custom/backend/matches";
+        Map<String, Object> dataMp = new TreeMap<>();
+        dataMp.put("Product", product);
+        dataMp.put("Start", start);
+        dataMp.put("End", end);
+        dataMp.put("Page", page);
+        dataMp.put("PerPage", perPage);
+        byte[] data = JSON.toJSONString(dataMp).getBytes();
+        JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
+        return JSONObject2BaseModel(jo);
 
+    }
 
     public BaseModel getOrderListOpen(RequestOrderListOpenParams params) throws NullPointerException {
         if (params.getAddress().equals("")) throw new NullPointerException("empty Address");
-        ArrayList<Pair> pairs = new ArrayList<>();
-        pairs.add(new Pair("product", params.getProduct()));
-        pairs.add(new Pair("address", params.getAddress()));
-        pairs.add(new Pair("side", params.getSide()));
-        pairs.add(new Pair("start", params.getStart()));
-        pairs.add(new Pair("end", params.getEnd()));
-        pairs.add(new Pair("page", params.getPage()));
-        pairs.add(new Pair("perPage", params.getPerPage()));
-        return queryRequest(backend + ConstantIF.GET_ORDERLIST_OPEN_URL_PATH, pairs);
-
+        String path = "custom/backend/orders/open";
+        Map<String, Object> dataMp = new TreeMap<>();
+        dataMp.put("Address", params.getAddress());
+        dataMp.put("Product", params.getProduct());
+        dataMp.put("Page", params.getPage());
+        dataMp.put("PerPage", params.getPerPage());
+        dataMp.put("Start", params.getStart());
+        dataMp.put("End", params.getEnd());
+        dataMp.put("Side", params.getSide());
+        dataMp.put("HideNoFill", false);
+        byte[] data = JSON.toJSONString(dataMp).getBytes();
+        JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
+        return JSONObject2BaseModel(jo);
     }
 
+    // added by michael.w 20190730
     public BaseModel getOrderListClosed(RequestOrderListClosedParams params) throws NullPointerException {
         if (params.getAddress().equals("")) throw new NullPointerException("empty Address");
-        ArrayList<Pair> pairs = new ArrayList<>();
-        pairs.add(new Pair("product", params.getProduct()));
-        pairs.add(new Pair("address", params.getAddress()));
-        pairs.add(new Pair("side", params.getSide()));
-        pairs.add(new Pair("start", params.getStart()));
-        pairs.add(new Pair("end", params.getEnd()));
-        pairs.add(new Pair("page", params.getPage()));
-        pairs.add(new Pair("perPage", params.getPerPage()));
-        pairs.add(new Pair("hideNoFill", params.getHideNoFill()));
-        return queryRequest(backend + ConstantIF.GET_ORDERLIST_CLOSED_URL_PATH, pairs);
+        String path = "custom/backend/orders/closed";
+        Map<String, Object> dataMp = new TreeMap<>();
+        dataMp.put("Product", params.getProduct());
+        dataMp.put("Address", params.getAddress());
+        dataMp.put("Side", params.getSide());
+        dataMp.put("Page", params.getPage());
+        dataMp.put("PerPage", params.getPerPage());
+        dataMp.put("Start", params.getStart());
+        dataMp.put("End", params.getEnd());
+        if (params.getHideNoFill() == "true") {
+            dataMp.put("HideNoFill", true);
+        } else {
+            dataMp.put("HideNoFill", false);
+        }
+        byte[] data = JSON.toJSONString(dataMp).getBytes();
+        JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
+        return JSONObject2BaseModel(jo);
     }
 
     public BaseModel getDeals(RequestDealsParams params) throws NullPointerException {
         if (params.getAddress().equals("")) throw new NullPointerException("empty Address");
-        ArrayList<Pair> pairs = new ArrayList<>();
-        pairs.add(new Pair("product", params.getProduct()));
-        pairs.add(new Pair("address", params.getAddress()));
-        pairs.add(new Pair("side", params.getSide()));
-        pairs.add(new Pair("start", params.getStart()));
-        pairs.add(new Pair("end", params.getEnd()));
-        pairs.add(new Pair("page", params.getPage()));
-        pairs.add(new Pair("perPage", params.getPerPage()));
-        return queryRequest(backend + ConstantIF.GET_DEALS_URL_PATH, pairs);
+        String path = "custom/backend/deals";
+        Map<String, Object> dataMp = new TreeMap<>();
+        dataMp.put("Address", params.getAddress());
+        dataMp.put("Product", params.getProduct());
+        dataMp.put("Page", params.getPage());
+        dataMp.put("PerPage", params.getPerPage());
+        dataMp.put("Start", params.getStart());
+        dataMp.put("End", params.getEnd());
+        dataMp.put("Side", params.getSide());
+        byte[] data = JSON.toJSONString(dataMp).getBytes();
+        JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
+        return JSONObject2BaseModel(jo);
+
     }
 
     public BaseModel getTransactions(RequestTransactionsParams params) throws NullPointerException {
         if (params.getAddress().equals("")) throw new NullPointerException("empty Address");
-        ArrayList<Pair> pairs = new ArrayList<>();
-        pairs.add(new Pair("address", params.getAddress()));
-        pairs.add(new Pair("type", params.getType()));
-        pairs.add(new Pair("start", params.getStart()));
-        pairs.add(new Pair("end", params.getEnd()));
-        pairs.add(new Pair("page", params.getPage()));
-        pairs.add(new Pair("perPage", params.getPerPage()));
-        return queryRequest(backend + ConstantIF.GET_TRANSACTIONS_URL_PATH, pairs);
+        String path = "custom/backend/deals";
+        Map<String, Object> dataMp = new TreeMap<>();
+        dataMp.put("Address", params.getAddress());
+        dataMp.put("Type", params.getType());
+        dataMp.put("End", params.getEnd());
+        dataMp.put("Page", params.getPage());
+        dataMp.put("PerPage", params.getPerPage());
+        dataMp.put("Start", params.getStart());
+        byte[] data = JSON.toJSONString(dataMp).getBytes();
+        JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
+        return JSONObject2BaseModel(jo);
     }
 
 }
