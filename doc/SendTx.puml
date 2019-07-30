@@ -1,0 +1,59 @@
+@startuml
+jmeter_thread_script -> SDK:invoke
+activate jmeter_thread_script
+SDK -> okchaind_REST_Module:请求 seq
+okchaind_REST_Module->TendermintCore:请求seq（进程内通信）
+TendermintCore -> DexApp:查询LevelDB或缓存
+DexApp --> TendermintCore:return req
+TendermintCore --> okchaind_REST_Module: return seq
+okchaind_REST_Module --> SDK:return seq
+SDK -> SDK : 根据脚本的配置生成不同的入参block/sync/async
+SDK -> jmeter_thread_script : return parameter
+deactivate jmeter_thread_script
+
+jmeter_thread_script -> okchaind_REST_Module: HTTP取样器发送REST请求(req1-async, req2-sync, req3-block)
+okchaind_REST_Module -> TendermintCore: tx1, tx2, tx3
+TendermintCore -> TendermintCore: tx1, tx2, tx3 precheck
+TendermintCore --> okchaind_REST_Module: precheck完成，返回tx1precheck结果
+okchaind_REST_Module --> jmeter_thread_script: 返回req1的结果
+
+'okchaind_REST_Module -> okchaind_REST_Module: 将rest请求解析成命令
+'okchaind_REST_Module -> okchaind_cli_Module:rpc(old),进程内通信(new)
+'okchaind_cli_Module -> okchaind_cli_Module:解析命令生成TX
+'okchaind_cli_Module -> TendermintCore: 提交tx
+
+'okchaind_REST_Module -> TendermintCore: tx2
+TendermintCore -> DexApp: tx1, tx2, tx3 checkTx
+DexApp --> TendermintCore:　tx2 checkTx返回
+TendermintCore --> okchaind_REST_Module: checkTx结束，返回checkTx tx2的结果
+okchaind_REST_Module --> jmeter_thread_script:返回req2的结果
+
+'okchaind_REST_Module -> TendermintCore: tx3
+'TendermintCore -> DexApp: tx3 checkTx
+'DexApp --> TendermintCore:　tx3 checkTx返回
+TendermintCore -> TendermintCore: 订阅tx3执行结果
+
+TendermintCore -> TendermintCore: 保存tx1,tx2,tx3到mempool(交易池)
+'activate TendermintCore
+TendermintCore -> TendermintCore: 广播tx1,tx2,tx3到网络
+
+
+TendermintCore -> TendermintCore: 打包/共识区块
+TendermintCore -> TendermintCore: ApplyBlock
+TendermintCore -> DexApp: BeginBlock
+DexApp -> TendermintCore: BeginBlock结束
+TendermintCore -> DexApp: DeliveTx,执行交易
+DexApp -> TendermintCore: DeliveTx结束
+TendermintCore -> DexApp: EndBlock
+DexApp -> TendermintCore: EndBlock结束
+TendermintCore -> DexApp: Commit
+DexApp-> TendermintCore: Commit结束
+
+TendermintCore -> okchaind_REST_Module: 发送 tx3 event
+okchaind_REST_Module -> jmeter_thread_script: 返回 req3 response
+
+'deactivate TendermintCore
+
+
+
+@enduml
