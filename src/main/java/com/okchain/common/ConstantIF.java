@@ -7,7 +7,8 @@ public interface ConstantIF {
     //String HD_PATH = "M/44H/118H/0H/0/0";
     String HD_PATH = "M/44H/996H/0H/0/0";
     //url path
-    String REST_PATH_PREFIX = "/okchain";
+    String REST_PATH_PREFIX = "/okchain/v1";
+    //String REST_PATH_PREFIX = "";
 
     String ACCOUNT_URL_PATH = REST_PATH_PREFIX + "/auth/accounts/";
     String TRANSACTION_URL_PATH = REST_PATH_PREFIX + "/txs";
