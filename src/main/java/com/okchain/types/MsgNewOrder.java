@@ -6,9 +6,9 @@ public class MsgNewOrder implements IMsg {
     public MsgNewOrder() {
     }
 
-    public MsgNewOrder(String batchNumber, String depth, String price, String product, String quantity, String sender, String side) {
-        this.batchNumber = batchNumber;
-        this.depth = depth;
+    public MsgNewOrder(String price, String product, String quantity, String sender, String side) {
+//        this.batchNumber = batchNumber;
+//        this.depth = depth;
         this.price = price;
         this.product = product;
         this.quantity = quantity;
@@ -56,27 +56,27 @@ public class MsgNewOrder implements IMsg {
         this.quantity = quantity;
     }
 
-    public String getBatchNumber() {
-        return batchNumber;
-    }
+//    public String getBatchNumber() {
+//        return batchNumber;
+//    }
+//
+//    public void setBatchNumber(String batchNumber) {
+//        this.batchNumber = batchNumber;
+//    }
+//
+//    public String getDepth() {
+//        return depth;
+//    }
+//
+//    public void setDepth(String depth) {
+//        this.depth = depth;
+//    }
 
-    public void setBatchNumber(String batchNumber) {
-        this.batchNumber = batchNumber;
-    }
-
-    public String getDepth() {
-        return depth;
-    }
-
-    public void setDepth(String depth) {
-        this.depth = depth;
-    }
-
-    @JSONField(name = "BatchNumber")
-    private String batchNumber;
-
-    @JSONField(name = "Depth")
-    private String depth;
+//    @JSONField(name = "BatchNumber")
+//    private String batchNumber;
+//
+//    @JSONField(name = "Depth")
+//    private String depth;
 
     @JSONField(name = "Price")
     private String price;    // price of the order

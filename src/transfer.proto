@@ -36,8 +36,8 @@ message MsgNewOrder {
     string side = 3;
     string price = 4;
     string quantity = 5;
-    string batchNumber = 6;
-    string depth = 7;
+    //string batchNumber = 6;
+    //string depth = 7;
 }
 
 message MsgCancelOrder {

@@ -3,23 +3,21 @@ package com.okchain.transaction;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.google.protobuf.ByteString;
 import com.okchain.common.ConstantIF;
 import com.okchain.crypto.AddressUtil;
 import com.okchain.crypto.Crypto;
 import com.okchain.encoding.EncodeUtils;
 import com.okchain.encoding.message.AminoEncode;
+import com.okchain.proto.Transfer;
 import com.okchain.types.*;
 import org.bouncycastle.util.Strings;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
-import com.google.protobuf.ByteString;
 
-import java.awt.font.TransformAttribute;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.okchain.proto.Transfer;
 
 public class BuildTransaction {
     private static String mode = ConstantIF.TX_SEND_MODE_SYNC;
@@ -34,14 +32,14 @@ public class BuildTransaction {
 
     public static String generatePlaceOrderTransaction(AccountInfo account, String side, String product, String price, String quantity, String memo) {
 
-        IMsg msg = new MsgNewOrder("", "", price, product, quantity, account.getUserAddress(), side);
+        IMsg msg = new MsgNewOrder(price, product, quantity, account.getUserAddress(), side);
         IMsg stdMsg = new MsgStd("order/new", msg);
         return buildTransaction(account, stdMsg, msg, memo);
     }
 
     // michael.w added 20190710
     public static byte[] generateAminoPlaceOrderTransaction(AccountInfo account, String side, String product, String price, String quantity, String memo) throws IOException {
-        IMsg msg = new MsgNewOrder("", "", price, product, quantity, account.getUserAddress(), side);
+        IMsg msg = new MsgNewOrder(price, product, quantity, account.getUserAddress(), side);
         // stdMsg to Proto and to ProtoBytes
         // first 2 get the protobytes of object MsgNewOrder
         Transfer.MsgNewOrder msgNewOrderProto = Transfer.MsgNewOrder.newBuilder()
