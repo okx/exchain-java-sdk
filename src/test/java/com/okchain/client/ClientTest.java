@@ -51,7 +51,6 @@ public class ClientTest {
     public void getAccountInfo() {
         OKChainClient okc = generateClient();
         AccountInfo accountInfo = okc.getAccountInfo(this.privateKey);
-        //System.out.println(accountInfo);
         Assert.assertNotNull(accountInfo);
         Assert.assertNotNull(accountInfo.getSequenceNumber());
         Assert.assertNotNull(accountInfo.getAccountNumber());
@@ -105,7 +104,6 @@ public class ClientTest {
             Assert.assertNull(e.getMessage());
         }
         File file = new File(filename);
-        //System.out.println(filename);
         file.delete();
     }
 

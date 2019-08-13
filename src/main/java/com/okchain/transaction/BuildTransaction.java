@@ -37,7 +37,6 @@ public class BuildTransaction {
         return buildTransaction(account, stdMsg, msg, memo);
     }
 
-    // michael.w added 20190710
     public static byte[] generateAminoPlaceOrderTransaction(AccountInfo account, String side, String product, String price, String quantity, String memo) throws IOException {
         IMsg msg = new MsgNewOrder(price, product, quantity, account.getUserAddress(), side);
         // stdMsg to Proto and to ProtoBytes
@@ -50,6 +49,8 @@ public class BuildTransaction {
                 .setQuantity(EncodeUtils.stringTo8(quantity))
                 .setSender(ByteString.copyFrom(AddressUtil.decodeAddress(account.getUserAddress())))
                 .setSide(side).build();
+
+        System.out.println(msgNewOrderProto);
         byte[] msgNewOrderAminoEncoded = AminoEncode.encodeMsgNewOrder(msgNewOrderProto);
         return buildAminoTransaction(account, msgNewOrderAminoEncoded, msg, memo);
 

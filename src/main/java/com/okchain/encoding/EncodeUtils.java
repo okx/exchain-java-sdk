@@ -2,8 +2,6 @@ package com.okchain.encoding;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectReader;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.protobuf.CodedOutputStream;
 import org.spongycastle.util.encoders.Hex;
 
@@ -67,10 +65,5 @@ public class EncodeUtils {
         return String.valueOf(encodeValue.longValue());
 
     }
-
-//    public static String longToString(long l) {
-//        return BigDecimal.valueOf(l).divide(MULTIPLY_FACTOR).toString();
-//    }
-
 
 }

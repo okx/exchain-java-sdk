@@ -22,9 +22,11 @@ public class AminoEncode {
     public static byte[] encodeMsgSend(Transfer.MsgSend msgSendProto) throws IOException {
         return EncodeUtils.aminoWrap(msgSendProto.toByteArray(), MessageType.Send.getTypePrefixBytes(), false);
     }
-    public static byte[] encodeMsgMultiSend(Transfer.MsgMultiSend msgMultiSendProto) throws IOException{
-        return EncodeUtils.aminoWrap(msgMultiSendProto.toByteArray(),MessageType.MultiSend.getTypePrefixBytes(),false);
+
+    public static byte[] encodeMsgMultiSend(Transfer.MsgMultiSend msgMultiSendProto) throws IOException {
+        return EncodeUtils.aminoWrap(msgMultiSendProto.toByteArray(), MessageType.MultiSend.getTypePrefixBytes(), false);
     }
+
     public static byte[] encodePubkey(String pubkey) {
         byte[] pubKey = Hex.decode(pubkey);
         byte[] pubKeyPrefix = MessageType.PubKey.getTypePrefixBytes();
