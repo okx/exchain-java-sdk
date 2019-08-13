@@ -15,61 +15,59 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClientTest {
-    private static String privateKey = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
-    // rest服务，端口改为26659
-
-    private static String url = "http://127.0.0.1:26659";
-    private static String rpcUrl = "http://127.0.0.1:26657";
-    private static String address = "okchain1g7c3nvac7mjgn2m9mqllgat8wwd3aptdqket5k";
-    private static String mnemonic = "total lottery arena when pudding best candy until army spoil drill pool";
+    private static String privateKey = "de0e9d9e7bac1366f7d8719a450dab03c9b704172ba43e0a25a7be1d51c69a87";
+    private static String mnemo = "sustain hole urban away boy core lazy brick wait drive tiger tell";
+    private static String addr = "okchain1mm43akh88a3qendlmlzjldf8lkeynq68r8l6ts";
+    private static String url_rest = "http://127.0.0.1:26659";
 
     @Test
     public void createAddressInfo() {
-        // 根据url生成cli
         OKChainClient okc = generateClient();
-        // 先生成私钥，后由私钥生成公钥，由公钥生成地址
-        AddressInfo addressInfo = okc.createAddressInfo();
-        //System.out.println(addressInfo);
-        Assert.assertNotNull(addressInfo);
-        Assert.assertNotNull(addressInfo.getUserAddress());
-        Assert.assertNotNull(addressInfo.getPrivateKey());
-        Assert.assertNotNull(addressInfo.getPublicKey());
+        AddressInfo addrInfo = okc.createAddressInfo();
+        System.out.println(addrInfo.getUserAddress());
+        System.out.println(addrInfo.getPrivateKey());
+        System.out.println(addrInfo.getPublicKey());
+        Assert.assertNotNull(addrInfo);
+        Assert.assertNotNull(addrInfo.getUserAddress());
+        Assert.assertNotNull(addrInfo.getPrivateKey());
+        Assert.assertNotNull(addrInfo.getPublicKey());
     }
 
     @Test
     public void getAddressInfo() {
         OKChainClient okc = generateClient();
-        // 通过私钥获得公钥和地址
-        AddressInfo addressInfo = okc.getAddressInfo(this.privateKey);
-        Assert.assertNotNull(addressInfo);
-        Assert.assertEquals(this.address, addressInfo.getUserAddress());
-        Assert.assertNotNull(addressInfo.getPrivateKey());
-        Assert.assertNotNull(addressInfo.getPublicKey());
+        AddressInfo addrInfo = okc.getAddressInfo(this.privateKey);
+        System.out.println(addrInfo.getUserAddress());
+        Assert.assertEquals(this.addr, addrInfo.getUserAddress());
+        Assert.assertNotNull(addrInfo.getPrivateKey());
+        Assert.assertNotNull(addrInfo.getPublicKey());
     }
 
     @Test
     public void getAccountInfo() {
         OKChainClient okc = generateClient();
         AccountInfo accountInfo = okc.getAccountInfo(this.privateKey);
+        System.out.println(accountInfo.getUserAddress());
+        System.out.println(accountInfo.getAccountNumber());
+        System.out.println(accountInfo.getSequenceNumber());
         Assert.assertNotNull(accountInfo);
         Assert.assertNotNull(accountInfo.getSequenceNumber());
         Assert.assertNotNull(accountInfo.getAccountNumber());
     }
 
     @Test
-    // 从助记词中获得私钥
     public void getPrivateKeyFromMnemonic() {
         OKChainClient okc = generateClient();
-        String privateKey = okc.getPrivateKeyFromMnemonic(this.mnemonic);
+        String privateKey = okc.getPrivateKeyFromMnemonic(this.mnemo);
+        System.out.println(privateKey);
         Assert.assertEquals(this.privateKey, privateKey);
     }
 
     @Test
     public void generateMnemonic() {
         OKChainClient okc = generateClient();
-        // 创建助记词
         String mnemonic = okc.generateMnemonic();
-        //System.out.println(mnemonic);
+        System.out.println(mnemonic);
         String[] words = mnemonic.split(" ");
         Assert.assertEquals(12, words.length);
     }
@@ -77,12 +75,10 @@ public class ClientTest {
     @Test
     public void getPrivateKeyFromKeyStore() {
         OKChainClient okc = generateClient();
-        String password = "jilei";
+        String password = "12345678";
         String filename = "";
         try {
-            // 用私钥和密码生成KeyStore文件
             filename = okc.generateKeyStore(this.privateKey, password);
-            //System.out.println(filename);
             Assert.assertNotNull(filename);
             Assert.assertNotEquals("", filename);
         } catch (CipherException e) {
@@ -110,14 +106,7 @@ public class ClientTest {
     @Test
     public void sendSendTransaction() throws IOException {
         OKChainClient okc = generateClient();
-        // okc中包含两个东西：url和backend。
         AccountInfo account = generateAccountInfo(okc);
-        // generateAccountInfo会从测试类中拿到私钥
-        // generateAccountInfo中有函数getAccountInfo，getAccountInfo函数中
-        // getAddressInfo通过私钥找到公钥和ok地址
-        // account是从主网get到的ok addr上的一些信息
-
-
         String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
         String memo = "";
 
@@ -126,19 +115,12 @@ public class ClientTest {
         amount.setDenom("okb");
         amount.setAmount("1.00000000");
         amountList.add(amount);
-        // account是客户端的账户信息（通过私钥到公钥到OK地址然后向主网查询get该地址下的信息返回形成一个account）
-        // to是要转账给的ok地址
-        // amountList是要转账的集合
         JSONObject resJson = okc.sendSendTransaction(account, to, amountList, memo);
-        // resJson是主网收到转账后的答复json对象
         System.out.println(resJson.toString());
-        // 判断：resJson中第一级key——"logs"中，第一个元素中(第一个元素为一个新json对象)，key为"success的对应的值是否是true
-
         Object code = resJson.get("code");
         Object err = resJson.get("error");
         Assert.assertNull(code);
         Assert.assertNull(err);
-        //Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
     }
     @Test
     public void sendSendTransactions() throws IOException {
@@ -146,7 +128,6 @@ public class ClientTest {
         AccountInfo account = generateAccountInfo(okc);
         List<String> tos = new ArrayList<>();
         String memo ="";
-        // 创建第一笔交易
         String to1 = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
         tos.add(to1);
         List<Token> amountList1 = new ArrayList<>();
@@ -155,7 +136,6 @@ public class ClientTest {
         amount1.setAmount("10.00000000");
         amountList1.add(amount1);
 
-        // 创建第二笔交易
         List<Token> amountList2 = new ArrayList<>();
         String to2 = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
         tos.add(to2);
@@ -169,9 +149,7 @@ public class ClientTest {
         amountLists.add(amountList2);
 
         JSONObject resJson=okc.sendSendTransactions(account,tos,amountLists,memo);
-        // resJson是主网收到转账后的答复json对象
         System.out.println(resJson.toString());
-        // 判断：resJson中第一级key——"logs"中，第一个元素中(第一个元素为一个新json对象)，key为"success的对应的值是否是true
         Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
 
     }
@@ -236,9 +214,8 @@ public class ClientTest {
     }
 
     private OKChainClient generateClient() {
-        String url = this.url;
+        String url = this.url_rest;
         OKChainClient okc = OKChainClientImpl.getOKChainClient(url);
-        //OKChainClient okc = OKChainRPCClientImpl.getOKChainClient(rpcUrl);
         return okc;
     }
 
@@ -250,7 +227,7 @@ public class ClientTest {
     @Test
     public void getAccountALLTokens() {
         OKChainClient okc = generateClient();
-        String address = this.address;
+        String address = this.addr;
         String show = "all";
         BaseModel resJson = okc.getAccountALLTokens(address, show);
         String res = JSON.toJSON(resJson).toString();
@@ -261,7 +238,7 @@ public class ClientTest {
     @Test
     public void getAccountToken() {
         OKChainClient okc = generateClient();
-        String address = this.address;
+        String address = this.addr;
         String symbol = "okb";
         BaseModel resJson = okc.getAccountToken(address, symbol);
         String res = JSON.toJSON(resJson).toString();
@@ -342,7 +319,7 @@ public class ClientTest {
     @Test
     public void getOrderListOpen() {
         OKChainClient okc = generateClient();
-        String address = this.address;
+        String address = this.addr;
         RequestOrderListOpenParams params = new RequestOrderListOpenParams(address);
         BaseModel resJson = okc.getOrderListOpen(params);
         String res = JSON.toJSON(resJson).toString();
@@ -353,7 +330,7 @@ public class ClientTest {
     @Test
     public void getOrderListClosed() {
         OKChainClient okc = generateClient();
-        String address = this.address;
+        String address = this.addr;
         RequestOrderListClosedParams params = new RequestOrderListClosedParams(address);
         BaseModel resJson = okc.getOrderListClosed(params);
         String res = JSON.toJSON(resJson).toString();
@@ -364,7 +341,7 @@ public class ClientTest {
     @Test
     public void getDeals() {
         OKChainClient okc = generateClient();
-        String address = this.address;
+        String address = this.addr;
         RequestDealsParams params = new RequestDealsParams(address);
         BaseModel resJson = okc.getDeals(params);
         String res = JSON.toJSON(resJson).toString();
@@ -375,7 +352,7 @@ public class ClientTest {
     @Test
     public void getTransactions() {
         OKChainClient okc = generateClient();
-        String address = this.address;
+        String address = this.addr;
         RequestTransactionsParams params = new RequestTransactionsParams(address);
         BaseModel resJson = okc.getTransactions(params);
         String res = JSON.toJSON(resJson).toString();
