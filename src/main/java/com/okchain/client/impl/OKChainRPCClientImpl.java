@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.okchain.client.OKChainClient;
 import com.okchain.common.ConstantIF;
-import com.okchain.common.HttpUtils;
 import com.okchain.common.jsonrpc.JSONRPCUtils;
 import com.okchain.crypto.Crypto;
 import com.okchain.crypto.keystore.CipherException;
@@ -16,7 +15,6 @@ import org.bouncycastle.util.encoders.Hex;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -156,12 +154,6 @@ public class OKChainRPCClientImpl implements OKChainClient {
         if (parms.getProduct().equals("")) throw new NullPointerException("empty Product");
         if (parms.getQuantity().equals("")) throw new NullPointerException("empty Quantity");
         if (parms.getSide().equals("")) throw new NullPointerException("empty Side");
-    }
-
-
-    private BaseModel queryRequest(String url, ArrayList<Pair> pairs) {
-        String res = HttpUtils.httpGet(url, pairs);
-        return JSON.parseObject(res, BaseModel.class);
     }
 
     // convert type JSONObject 2 type BaseModel

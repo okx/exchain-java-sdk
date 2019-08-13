@@ -1,7 +1,6 @@
 package com.okchain.transaction;
 
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.protobuf.ByteString;
 import com.okchain.common.ConstantIF;
@@ -30,12 +29,6 @@ public class BuildTransaction {
         BuildTransaction.mode = mode;
     }
 
-    public static String generatePlaceOrderTransaction(AccountInfo account, String side, String product, String price, String quantity, String memo) {
-
-        IMsg msg = new MsgNewOrder(price, product, quantity, account.getUserAddress(), side);
-        IMsg stdMsg = new MsgStd("order/new", msg);
-        return buildTransaction(account, stdMsg, msg, memo);
-    }
 
     public static byte[] generateAminoPlaceOrderTransaction(AccountInfo account, String side, String product, String price, String quantity, String memo) throws IOException {
         IMsg msg = new MsgNewOrder(price, product, quantity, account.getUserAddress(), side);
@@ -53,11 +46,6 @@ public class BuildTransaction {
 
     }
 
-    public static String generateCancelOrderTransaction(AccountInfo account, String orderId, String memo) {
-        IMsg msg = new MsgCancelOrder(account.getUserAddress(), orderId);
-        IMsg stdMsg = new MsgStd("order/cancel", msg);
-        return buildTransaction(account, stdMsg, msg, memo);
-    }
 
     public static byte[] generateAminoCancelOrderTransaction(AccountInfo account, String orderId, String memo) throws IOException {
         IMsg msg = new MsgCancelOrder(account.getUserAddress(), orderId);
@@ -68,11 +56,6 @@ public class BuildTransaction {
         return buildAminoTransaction(account, msgCancelOrderAminoEncoded, msg, memo);
     }
 
-    public static String generateSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) {
-        IMsg msg = new MsgSend(account.getUserAddress(), to, amount);
-        IMsg stdMsg = new MsgStd("token/Send", msg);
-        return buildTransaction(account, stdMsg, msg, memo);
-    }
 
     public static byte[] generateAminoSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) throws IOException {
         IMsg msg = new MsgSend(account.getUserAddress(), to, amount);
@@ -91,11 +74,6 @@ public class BuildTransaction {
         return buildAminoTransaction(account, msgSendAminoEncoded, msg, memo);
     }
 
-    public static String generateMultiSendTransaction(AccountInfo account, List<TransferUnit> transfers, String memo) {
-        IMsg msg = new MsgMultiSend(account.getUserAddress(), transfers);
-        IMsg stdMsg = new MsgStd("token/MultiSend", msg);
-        return buildTransaction(account, stdMsg, msg, memo);
-    }
 
     public static byte[] generateAminoMultiSendTransaction(AccountInfo account, List<TransferUnit> transfers, String memo) throws IOException {
         IMsg msg = new MsgMultiSend(account.getUserAddress(), transfers);
@@ -113,31 +91,6 @@ public class BuildTransaction {
 
         byte[] msgMultiSendAminoEncoded = AminoEncode.encodeMsgMultiSend(msgMultiSendBuilder.build());
         return buildAminoTransaction(account, msgMultiSendAminoEncoded, msg, memo);
-    }
-
-    private static String buildTransaction(AccountInfo account, IMsg stdMsg, IMsg signMsg, String memo) {
-        if (account.getAccountNumber() == "" || account.getSequenceNumber() == "") {
-
-        }
-        if (memo == null) {
-            memo = "";
-        }
-        Fee fee = generateFeeDefault();
-        SignData signData = new SignData(account.getAccountNumber(), ConstantIF.CHAIN_ID, fee, memo, new IMsg[]{signMsg}, account.getSequenceNumber());
-        try {
-            String signDataJson = JSONObject.toJSONString(signData);
-            System.out.println("signData: " + signDataJson);
-            Signature signature = sign(signDataJson.getBytes(), account.getPrivateKey());
-            List<Signature> signatures = new ArrayList<>();
-            signatures.add(signature);
-            StdTransaction stdTransaction = new StdTransaction(new IMsg[]{stdMsg}, fee, signatures, memo);
-            PostTransaction postTransaction = new PostTransaction(stdTransaction, mode);
-            return JSON.toJSONString(postTransaction);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
     }
 
     private static byte[] buildAminoTransaction(AccountInfo account, byte[] stdMsgProtoBytes, IMsg signMsg, String memo) {
