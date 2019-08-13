@@ -15,11 +15,6 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-
-/**
- * Taken from Ethereum web3j and redevelop it
- * https://github.com/web3j/web3j/blob/master/core/src/main/java/org/web3j/crypto/WalletUtils.java
- */
 public class KeyStoreUtils {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
@@ -85,16 +80,16 @@ public class KeyStoreUtils {
         return now.format(format) + walletFile.getAddress() + ".json";
     }
 
-    public static String getPrivateKeyFromKeyStoreFile(String keyStorePath,String passWord) throws IOException, CipherException {
+    public static String getPrivateKeyFromKeyStoreFile(String keyStorePath, String passWord) throws IOException, CipherException {
         File file = new File(keyStorePath);
-        KeyStoreFile keyStoreFile = objectMapper.readValue(file,KeyStoreFile.class);
-        String privatetKey = KeyStore.decrypt(passWord,keyStoreFile);
+        KeyStoreFile keyStoreFile = objectMapper.readValue(file, KeyStoreFile.class);
+        String privatetKey = KeyStore.decrypt(passWord, keyStoreFile);
         return privatetKey;
     }
 
-    public static String getPrivateKeyFromKeyStore(String keyStore,String passWord) throws IOException, CipherException {
-        KeyStoreFile keyStoreFile = objectMapper.readValue(keyStore,KeyStoreFile.class);
-        String privatetKey = KeyStore.decrypt(passWord,keyStoreFile);
+    public static String getPrivateKeyFromKeyStore(String keyStore, String passWord) throws IOException, CipherException {
+        KeyStoreFile keyStoreFile = objectMapper.readValue(keyStore, KeyStoreFile.class);
+        String privatetKey = KeyStore.decrypt(passWord, keyStoreFile);
         return privatetKey;
     }
 

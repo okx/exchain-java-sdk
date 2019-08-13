@@ -3,7 +3,6 @@ package com.okchain.common;
 import com.okchain.types.Pair;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -29,7 +28,7 @@ import java.util.Map;
 public class HttpUtils {
 
     static HttpPost m_httpPost = null;
-    static HttpGet  m_httpGet = null;
+    static HttpGet m_httpGet = null;
     static CloseableHttpClient m_httpClient = HttpClients.createDefault();
 
     public static String httpGet(String url, ArrayList<Pair> pairs) {
@@ -67,7 +66,7 @@ public class HttpUtils {
 
     }
 
-    public static String httpGet(String httpUrl){
+    public static String httpGet(String httpUrl) {
         BufferedReader reader = null;
         String result = null;
         StringBuffer sbf = new StringBuffer();
@@ -149,7 +148,7 @@ public class HttpUtils {
         String result = "";
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
-        if(m_httpPost == null){
+        if (m_httpPost == null) {
             m_httpPost = new HttpPost(url);
         }
         HttpPost httpPost = m_httpPost;
@@ -175,7 +174,7 @@ public class HttpUtils {
 
         CloseableHttpClient httpClient = m_httpClient;
 
-        if(m_httpGet == null){
+        if (m_httpGet == null) {
             m_httpGet = new HttpGet(url);
         }
         HttpGet httpGet = m_httpGet;
@@ -186,7 +185,7 @@ public class HttpUtils {
 //            result = EntityUtils.toString(response.getEntity(), "utf-8");
 //        }
         result = EntityUtils.toString(response.getEntity(), "utf-8");
-    //    response.close();
+        //    response.close();
 
         return result;
     }

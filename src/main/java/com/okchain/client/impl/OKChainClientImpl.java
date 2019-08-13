@@ -109,31 +109,9 @@ public class OKChainClientImpl implements OKChainClient {
     }
 
 
-    // michael.w added 20190708
     public JSONObject sendSendTransactions(AccountInfo account, List<String> tos, List<List<Token>>
             amounts, String memo) throws NullPointerException {
-        if (tos.size() != amounts.size()) {
-            System.out.println("the lengths of reciever addresses and amount are not the same");
-            return null;
-        }
-        // 检查这个账户不是空账户
-        checkAccountInfoValue(account);
-        // 检查收款地址不是空
-        for (int i = 0; i < tos.size(); i++) {
-            if (tos.get(i).equals("")) throw new NullPointerException("empty to");
-        }
-        // 检查转账金额是否为空
-        for (int i = 0; i < amounts.size(); i++) {
-            List<Token> amount = amounts.get(i);
-            if (amount == null || amount.isEmpty()) throw new NullPointerException("empty amount");
-        }
-        // 生成最终要发送到网络中的json串(String)
-        String data = BuildTransaction.generateSendTransactions(account, tos, amounts, memo);
-        // sendTransaction是用post请求将data(json串发到主网)
-        System.out.println(data);
-        return sendTransaction(data);
-        // return 主网给的答复：
-        // string{"height":"8539","txhash":"022BF9F1F67831843158596EACB72752F9E72EB6456B0B07A5183B7A597FF72E","raw_log":"[{\"msg_index\":\"0\",\"success\":true,\"log\":\"\"}]","logs":[{"msg_index":"0","success":true,"log":""}],"tags":[{"key":"fee","value":"0.01250000 okb"},{"key":"action","value":"send"}]}
+        return null;
     }
 
 

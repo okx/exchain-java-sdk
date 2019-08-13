@@ -1,11 +1,5 @@
 package com.okchain.types;
 
-/**
- * @program: coin-parent-sdk
- * @description:
- * @author: liqiang
- * @create: 2019-03-22 10:29
- **/
 public class Token {
 
     private String amount;

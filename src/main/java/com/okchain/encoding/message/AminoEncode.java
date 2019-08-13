@@ -2,14 +2,10 @@ package com.okchain.encoding.message;
 
 import com.okchain.encoding.EncodeUtils;
 import com.okchain.proto.Transfer;
-import com.okchain.types.Pubkey;
-import com.okchain.types.Signature;
 import org.bouncycastle.util.encoders.Hex;
 
 import java.io.IOException;
-import java.util.List;
 
-// write by michael.w 20190710
 public class AminoEncode {
     public static byte[] encodeMsgNewOrder(Transfer.MsgNewOrder msgNewOrderProto) throws IOException {
         return EncodeUtils.aminoWrap(msgNewOrderProto.toByteArray(), MessageType.NewOrder.getTypePrefixBytes(), false);
@@ -31,7 +27,7 @@ public class AminoEncode {
         byte[] pubKey = Hex.decode(pubkey);
         byte[] pubKeyPrefix = MessageType.PubKey.getTypePrefixBytes();
         byte[] pubKeyAminoEncoded = new byte[pubKey.length + pubKeyPrefix.length + 1];
-        // 从pubKeyPrefix的索引0开始向pubKeyAminoEncoded的索引0位置开始复制长度为pubKeyPrefix.length个字节
+        // copy 'pubKeyPrefix' into 'pubKeyAminoEncoded' starting from index 0 of 'pubKeyAminoEncoded' and go through 'pubKeyPrefix.length' bytes
         System.arraycopy(pubKeyPrefix, 0, pubKeyAminoEncoded, 0, pubKeyPrefix.length);
         pubKeyAminoEncoded[pubKeyPrefix.length] = (byte) 33;
         System.arraycopy(pubKey, 0, pubKeyAminoEncoded, pubKeyPrefix.length + 1, pubKey.length);

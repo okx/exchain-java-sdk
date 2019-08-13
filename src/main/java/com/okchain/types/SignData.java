@@ -3,19 +3,6 @@ package com.okchain.types;
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class SignData {
-    public SignData() {
-    }
-
-    public SignData(String accountNumber, String chainId, Fee fee, String memo, IMsg[] msgs, String sequence) {
-        this.accountNumber = accountNumber;
-        this.chainId = chainId;
-        this.fee = fee;
-        this.memo = memo;
-        this.msgs = msgs;
-        this.sequence = sequence;
-    }
-
-
     @JSONField(name = "account_number")
     private String accountNumber;
 
@@ -33,6 +20,16 @@ public class SignData {
 
     @JSONField(name = "sequence")
     private String sequence;
+
+    public SignData(String accountNumber, String chainId, Fee fee, String memo, IMsg[] msgs, String sequence) {
+        this.accountNumber = accountNumber;
+        this.chainId = chainId;
+        this.fee = fee;
+        this.memo = memo;
+        this.msgs = msgs;
+        this.sequence = sequence;
+    }
+
 
     public String getChainId() {
         return chainId;

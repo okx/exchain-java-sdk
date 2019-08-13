@@ -1,16 +1,14 @@
 package com.okchain.types;
 
 public class MsgStd implements IMsg {
-    public MsgStd() {
-    }
+    private String type;
+    private IMsg value;
 
     public MsgStd(String type, IMsg value) {
         this.type = type;
         this.value = value;
     }
 
-    private String type;
-    private IMsg value;
 
     public String getType() {
         return type;

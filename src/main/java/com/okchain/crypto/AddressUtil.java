@@ -1,6 +1,6 @@
 package com.okchain.crypto;
 
-import com.google.crypto.tink.subtle.Bech32;
+import com.okchain.crypto.Bech32;
 import io.common.crypto.encode.ConvertBits;
 import io.common.crypto.hash.Ripemd;
 import io.common.exception.AddressFormatException;
@@ -9,12 +9,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
-/**
- * @program: coin-parent-sdk
- * @description: 地址相关的工具
- * @author: xuqian
- * @create: 2019-05-28 11:31
- **/
 public class AddressUtil {
 
 

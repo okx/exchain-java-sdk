@@ -18,7 +18,8 @@ public class OKChainRPCClientImplTest {
     private static String privateKey = "de0e9d9e7bac1366f7d8719a450dab03c9b704172ba43e0a25a7be1d51c69a87";
     private static String mnemo = "sustain hole urban away boy core lazy brick wait drive tiger tell";
     private static String addr = "okchain1mm43akh88a3qendlmlzjldf8lkeynq68r8l6ts";
-    private static String url_rpc = "http://localhost:26657";//rpc
+    // rpc
+    private static String url_rpc = "http://localhost:26657";
 
 
     @Test

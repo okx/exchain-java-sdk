@@ -22,10 +22,6 @@ import java.util.UUID;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-/**
- * Taken from Ethereum web3j and redevelop it
- * https://github.com/web3j/web3j/blob/master/core/src/main/java/org/web3j/crypto/Wallet.java
- */
 public class KeyStore {
 
     private static final int N_LIGHT = 1 << 12;

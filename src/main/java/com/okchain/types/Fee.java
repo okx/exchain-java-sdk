@@ -2,12 +2,6 @@ package com.okchain.types;
 
 import java.util.List;
 
-/**
- * @program: coin-parent-sdk
- * @description:
- * @author: liqiang
- * @create: 2019-03-19 18:51
- **/
 
 public class Fee {
 

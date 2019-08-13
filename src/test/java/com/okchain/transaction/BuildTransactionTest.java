@@ -20,6 +20,7 @@ public class BuildTransactionTest {
     private static String restUrl = "http://127.0.0.1:26659";
     private static String rpcUrl = "http://127.0.0.1:26657";
     private static String privateKey = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
+
     @Test
     public void testBuildNewOrderTx() {
         AccountInfo account = generateAccountInfo();
@@ -113,43 +114,6 @@ public class BuildTransactionTest {
         System.out.println(res);
     }
 
-    @Test
-    public void testBuildSendTxs() {
-        AccountInfo account = generateAccountInfo();
-        List<String> tos = new ArrayList<>();
-
-
-        // create the first
-        String to1 = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
-        tos.add(to1);
-        String memo = "";
-
-        List<Token> amountList1 = new ArrayList<>();
-        Token amount1 = new Token();
-        amount1.setDenom("okb");
-        amount1.setAmount("10.00000000");
-        amountList1.add(amount1);
-
-        // 创建第二笔交易
-        List<Token> amountList2 = new ArrayList<>();
-        String to2 = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
-        tos.add(to2);
-        String memo2 = "";
-
-        Token amount2 = new Token();
-        amount2.setDenom("okb");
-        amount2.setAmount("2.00000000");
-        amountList2.add(amount2);
-
-        List<List<Token>> amountLists = new ArrayList<>();
-        amountLists.add(amountList1);
-        amountLists.add(amountList2);
-
-        //一次发送多笔交易
-        String transacations = BuildTransaction.generateSendTransactions(account, tos, amountLists, memo);
-        System.out.println(transacations);
-
-    }
 
     @Test
     public void testBuildAminoMultiSendTx() throws IOException {
