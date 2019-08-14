@@ -85,6 +85,15 @@ public class OKChainRPCClientImplTest {
         RequestPlaceOrderParams param = new RequestPlaceOrderParams(price, product, quantity, side);
         JSONObject ret = client.sendPlaceOrderTransaction(account, param, memo);
         System.out.println(ret);
+
+        String orderID = GetOrderID(ret);
+        System.out.println("orderID:" + orderID);
+    }
+
+    // get readable order-ID from the response
+    public String GetOrderID(JSONObject jo) {
+        String encodedId = jo.getJSONObject("deliver_tx").getJSONArray("tags").getJSONObject(1).getString("value");
+        return new String(Base64.getDecoder().decode(encodedId));
     }
 
     @Test
@@ -92,11 +101,12 @@ public class OKChainRPCClientImplTest {
         BuildTransaction.setMode("block");
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
         AccountInfo account = client.getAccountInfo(this.privateKey);
-
+        // u can get order-ID by placing a new order
         String orderId = "ID0000001845-1";
         String memo = "I love okb";
         JSONObject ret = client.sendCancelOrderTransaction(account, orderId, memo);
         System.out.println(ret);
+
     }
 
     @Test

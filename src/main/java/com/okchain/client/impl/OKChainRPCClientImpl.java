@@ -146,8 +146,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
     public String getPrivateKeyFromKeyStore(String keyStoreFilePath, String passWord) throws IOException, CipherException {
         return KeyStoreUtils.getPrivateKeyFromKeyStoreFile(keyStoreFilePath, passWord);
     }
-
-
+    
     private void checkPlaceOrderRequestParms(RequestPlaceOrderParams parms) {
         if (parms == null) throw new NullPointerException("empty PlaceOrderRequestParms");
         if (parms.getPrice().equals("")) throw new NullPointerException("empty Price");
