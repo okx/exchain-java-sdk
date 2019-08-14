@@ -4243,26 +4243,6 @@ public final class Transfer {
      */
     com.google.protobuf.ByteString
         getQuantityBytes();
-
-    /**
-     * <code>string batchNumber = 6;</code>
-     */
-    java.lang.String getBatchNumber();
-    /**
-     * <code>string batchNumber = 6;</code>
-     */
-    com.google.protobuf.ByteString
-        getBatchNumberBytes();
-
-    /**
-     * <code>string depth = 7;</code>
-     */
-    java.lang.String getDepth();
-    /**
-     * <code>string depth = 7;</code>
-     */
-    com.google.protobuf.ByteString
-        getDepthBytes();
   }
   /**
    * Protobuf type {@code MsgNewOrder}
@@ -4282,8 +4262,6 @@ public final class Transfer {
       side_ = "";
       price_ = "";
       quantity_ = "";
-      batchNumber_ = "";
-      depth_ = "";
     }
 
     @java.lang.Override
@@ -4337,18 +4315,6 @@ public final class Transfer {
               java.lang.String s = input.readStringRequireUtf8();
 
               quantity_ = s;
-              break;
-            }
-            case 50: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              batchNumber_ = s;
-              break;
-            }
-            case 58: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              depth_ = s;
               break;
             }
             default: {
@@ -4528,74 +4494,6 @@ public final class Transfer {
       }
     }
 
-    public static final int BATCHNUMBER_FIELD_NUMBER = 6;
-    private volatile java.lang.Object batchNumber_;
-    /**
-     * <code>string batchNumber = 6;</code>
-     */
-    public java.lang.String getBatchNumber() {
-      java.lang.Object ref = batchNumber_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        batchNumber_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string batchNumber = 6;</code>
-     */
-    public com.google.protobuf.ByteString
-        getBatchNumberBytes() {
-      java.lang.Object ref = batchNumber_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        batchNumber_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int DEPTH_FIELD_NUMBER = 7;
-    private volatile java.lang.Object depth_;
-    /**
-     * <code>string depth = 7;</code>
-     */
-    public java.lang.String getDepth() {
-      java.lang.Object ref = depth_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        depth_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string depth = 7;</code>
-     */
-    public com.google.protobuf.ByteString
-        getDepthBytes() {
-      java.lang.Object ref = depth_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        depth_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -4625,12 +4523,6 @@ public final class Transfer {
       if (!getQuantityBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, quantity_);
       }
-      if (!getBatchNumberBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, batchNumber_);
-      }
-      if (!getDepthBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, depth_);
-      }
       unknownFields.writeTo(output);
     }
 
@@ -4655,12 +4547,6 @@ public final class Transfer {
       }
       if (!getQuantityBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, quantity_);
-      }
-      if (!getBatchNumberBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, batchNumber_);
-      }
-      if (!getDepthBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, depth_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4687,10 +4573,6 @@ public final class Transfer {
           .equals(other.getPrice())) return false;
       if (!getQuantity()
           .equals(other.getQuantity())) return false;
-      if (!getBatchNumber()
-          .equals(other.getBatchNumber())) return false;
-      if (!getDepth()
-          .equals(other.getDepth())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -4712,10 +4594,6 @@ public final class Transfer {
       hash = (53 * hash) + getPrice().hashCode();
       hash = (37 * hash) + QUANTITY_FIELD_NUMBER;
       hash = (53 * hash) + getQuantity().hashCode();
-      hash = (37 * hash) + BATCHNUMBER_FIELD_NUMBER;
-      hash = (53 * hash) + getBatchNumber().hashCode();
-      hash = (37 * hash) + DEPTH_FIELD_NUMBER;
-      hash = (53 * hash) + getDepth().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -4859,10 +4737,6 @@ public final class Transfer {
 
         quantity_ = "";
 
-        batchNumber_ = "";
-
-        depth_ = "";
-
         return this;
       }
 
@@ -4894,8 +4768,6 @@ public final class Transfer {
         result.side_ = side_;
         result.price_ = price_;
         result.quantity_ = quantity_;
-        result.batchNumber_ = batchNumber_;
-        result.depth_ = depth_;
         onBuilt();
         return result;
       }
@@ -4961,14 +4833,6 @@ public final class Transfer {
         }
         if (!other.getQuantity().isEmpty()) {
           quantity_ = other.quantity_;
-          onChanged();
-        }
-        if (!other.getBatchNumber().isEmpty()) {
-          batchNumber_ = other.batchNumber_;
-          onChanged();
-        }
-        if (!other.getDepth().isEmpty()) {
-          depth_ = other.depth_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -5301,144 +5165,6 @@ public final class Transfer {
   checkByteStringIsUtf8(value);
         
         quantity_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object batchNumber_ = "";
-      /**
-       * <code>string batchNumber = 6;</code>
-       */
-      public java.lang.String getBatchNumber() {
-        java.lang.Object ref = batchNumber_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          batchNumber_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string batchNumber = 6;</code>
-       */
-      public com.google.protobuf.ByteString
-          getBatchNumberBytes() {
-        java.lang.Object ref = batchNumber_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          batchNumber_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string batchNumber = 6;</code>
-       */
-      public Builder setBatchNumber(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        batchNumber_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string batchNumber = 6;</code>
-       */
-      public Builder clearBatchNumber() {
-        
-        batchNumber_ = getDefaultInstance().getBatchNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string batchNumber = 6;</code>
-       */
-      public Builder setBatchNumberBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        batchNumber_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object depth_ = "";
-      /**
-       * <code>string depth = 7;</code>
-       */
-      public java.lang.String getDepth() {
-        java.lang.Object ref = depth_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          depth_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string depth = 7;</code>
-       */
-      public com.google.protobuf.ByteString
-          getDepthBytes() {
-        java.lang.Object ref = depth_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          depth_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string depth = 7;</code>
-       */
-      public Builder setDepth(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        depth_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string depth = 7;</code>
-       */
-      public Builder clearDepth() {
-        
-        depth_ = getDefaultInstance().getDepth();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string depth = 7;</code>
-       */
-      public Builder setDepthBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        depth_ = value;
         onChanged();
         return this;
       }
@@ -9529,17 +9255,16 @@ public final class Transfer {
       "y\030\001 \001(\014\022\021\n\tsignature\030\002 \001(\014\"&\n\005Token\022\r\n\005d" +
       "enom\030\001 \001(\t\022\016\n\006amount\030\002 \001(\t\"I\n\007MsgSend\022\023\n" +
       "\013fromAddress\030\001 \001(\014\022\021\n\ttoAddress\030\002 \001(\014\022\026\n" +
-      "\006amount\030\003 \003(\0132\006.Token\"\201\001\n\013MsgNewOrder\022\016\n" +
-      "\006sender\030\001 \001(\014\022\017\n\007product\030\002 \001(\t\022\014\n\004side\030\003" +
-      " \001(\t\022\r\n\005price\030\004 \001(\t\022\020\n\010quantity\030\005 \001(\t\022\023\n" +
-      "\013batchNumber\030\006 \001(\t\022\r\n\005depth\030\007 \001(\t\"1\n\016Msg" +
-      "CancelOrder\022\016\n\006sender\030\001 \001(\014\022\017\n\007orderId\030\002" +
-      " \001(\t\">\n\014MsgMultiSend\022\014\n\004from\030\001 \001(\014\022 \n\ttr" +
-      "ansfers\030\002 \003(\0132\r.TransferUnit\"1\n\014Transfer" +
-      "Unit\022\n\n\002to\030\001 \001(\014\022\025\n\005coins\030\002 \003(\0132\006.Token\"" +
-      "@\n\010BaseType\022\t\n\001i\030\001 \001(\003\022\t\n\001s\030\002 \001(\t\022\n\n\002ss\030" +
-      "\003 \003(\t\022\022\n\004stus\030\004 \003(\0132\004.Stu\"\021\n\003Stu\022\n\n\002id\030\001" +
-      " \001(\003B\023\n\021com.okchain.protob\006proto3"
+      "\006amount\030\003 \003(\0132\006.Token\"]\n\013MsgNewOrder\022\016\n\006" +
+      "sender\030\001 \001(\014\022\017\n\007product\030\002 \001(\t\022\014\n\004side\030\003 " +
+      "\001(\t\022\r\n\005price\030\004 \001(\t\022\020\n\010quantity\030\005 \001(\t\"1\n\016" +
+      "MsgCancelOrder\022\016\n\006sender\030\001 \001(\014\022\017\n\007orderI" +
+      "d\030\002 \001(\t\">\n\014MsgMultiSend\022\014\n\004from\030\001 \001(\014\022 \n" +
+      "\ttransfers\030\002 \003(\0132\r.TransferUnit\"1\n\014Trans" +
+      "ferUnit\022\n\n\002to\030\001 \001(\014\022\025\n\005coins\030\002 \003(\0132\006.Tok" +
+      "en\"@\n\010BaseType\022\t\n\001i\030\001 \001(\003\022\t\n\001s\030\002 \001(\t\022\n\n\002" +
+      "ss\030\003 \003(\t\022\022\n\004stus\030\004 \003(\0132\004.Stu\"\021\n\003Stu\022\n\n\002i" +
+      "d\030\001 \001(\003B\023\n\021com.okchain.protob\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -9588,7 +9313,7 @@ public final class Transfer {
     internal_static_MsgNewOrder_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_MsgNewOrder_descriptor,
-        new java.lang.String[] { "Sender", "Product", "Side", "Price", "Quantity", "BatchNumber", "Depth", });
+        new java.lang.String[] { "Sender", "Product", "Side", "Price", "Quantity", });
     internal_static_MsgCancelOrder_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_MsgCancelOrder_fieldAccessorTable = new

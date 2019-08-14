@@ -119,7 +119,7 @@ public class BuildTransactionTest {
         List<String> tos = new ArrayList<>();
 
 
-        // 创建一笔交易
+        // create the first
         String to1 = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
         tos.add(to1);
         String memo = "";

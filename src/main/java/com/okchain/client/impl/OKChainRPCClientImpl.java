@@ -37,7 +37,6 @@ public class OKChainRPCClientImpl implements OKChainClient {
         return oKChainRPCClientImpl;
     }
 
-
     public AddressInfo createAddressInfo() {
         String privateKey = Crypto.generatePrivateKey();
         return getAddressInfo(privateKey);
@@ -49,7 +48,6 @@ public class OKChainRPCClientImpl implements OKChainClient {
         String address = Crypto.generateAddressFromPub(pubKey);
         return new AddressInfo(privateKey, pubKey, address);
     }
-
 
     private String getSequance(JSONObject account) {
         String res = (String) account.getJSONObject("value").get("sequence");
@@ -64,7 +62,6 @@ public class OKChainRPCClientImpl implements OKChainClient {
     public AccountInfo getAccountInfo(String privateKey) throws NullPointerException {
         if (privateKey.equals("")) throw new NullPointerException("empty privateKey");
         AddressInfo addressInfo = getAddressInfo(privateKey);
-//        JSONObject accountJson = JSON.parseObject(getAccountPrivate(addressInfo.getUserAddress()));
         JSONObject accountJson = getAccountFromNode(addressInfo.getUserAddress());
         String sequence = getSequance(accountJson);
         String accountNumber = getAccountNumber(accountJson);
@@ -90,12 +87,10 @@ public class OKChainRPCClientImpl implements OKChainClient {
         Map<String, Object> mp = new TreeMap<>();
         mp.put("tx", data);
         String res = JSONRPCUtils.call(this.backend, method, mp);
-        System.out.println(res);
         JSONObject obj = JSON.parseObject(res).getJSONObject("result");
         return obj;
     }
 
-    // michael.w added 20190715
     public JSONObject sendSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) throws NullPointerException, IOException {
         checkAccountInfoValue(account);
         if (to.equals("")) throw new NullPointerException("Reciever address is empty.");
@@ -108,11 +103,10 @@ public class OKChainRPCClientImpl implements OKChainClient {
         return null;
     }
 
-
-    public JSONObject sendPlaceOrderTransaction(AccountInfo account, RequestPlaceOrderParams parms, String memo) throws IOException {
+    public JSONObject sendPlaceOrderTransaction(AccountInfo account, RequestPlaceOrderParams params, String memo) throws IOException {
         checkAccountInfoValue(account);
-        checkPlaceOrderRequestParms(parms);
-        byte[] data = BuildTransaction.generateAminoPlaceOrderTransaction(account, parms.getSide(), parms.getProduct(), parms.getPrice(), parms.getQuantity(), memo);
+        checkPlaceOrderRequestParms(params);
+        byte[] data = BuildTransaction.generateAminoPlaceOrderTransaction(account, params.getSide(), params.getProduct(), params.getPrice(), params.getQuantity(), memo);
         return sendTransaction(data);
     }
 
@@ -136,18 +130,6 @@ public class OKChainRPCClientImpl implements OKChainClient {
         if (account.getPrivateKey().equals("")) throw new NullPointerException("PrivateKey is empty.");
         if (account.getPublicKey().equals("")) throw new NullPointerException("PublicKey is empty.");
         if (account.getUserAddress().equals("")) throw new NullPointerException("UserAddress is empty.");
-        //        if (account.getPrivateKey().equals("")) return false;
-        //        if (account.getSequenceNumber().equals("") || account.getAccountNumber().equals("")) {
-        //            JSONObject accountJson = JSON.parseObject(account.getPrivateKey());
-        //            String sequence = getSequance(accountJson);
-        //            String accountNumber = getAccountNumber(accountJson);
-        //            if (sequence.equals("") || accountNumber.equals("")) return false;
-        //            if (account.getSequenceNumber().equals("")) account.setSequenceNumber(sequence);
-        //            if (account.getAccountNumber().equals(""))
-        // account.setAccountNumber(accountNumber);
-        //        }
-        //        return true;
-        //    }
     }
 
     public String getPrivateKeyFromMnemonic(String mnemonic) {
@@ -182,7 +164,6 @@ public class OKChainRPCClientImpl implements OKChainClient {
         return JSON.parseObject(res, BaseModel.class);
     }
 
-    // added by michael.w 20190729
     // convert type JSONObject 2 type BaseModel
     private BaseModel JSONObject2BaseModel(JSONObject jo) {
         JSONObject extractJSONObject = jo.getJSONObject("result").getJSONObject("response");
@@ -353,7 +334,6 @@ public class OKChainRPCClientImpl implements OKChainClient {
         return JSONObject2BaseModel(jo);
     }
 
-    // added by michael.w 20190730
     public BaseModel getOrderListClosed(RequestOrderListClosedParams params) throws NullPointerException {
         if (params.getAddress().equals("")) throw new NullPointerException("empty Address");
         String path = "custom/backend/orders/closed";

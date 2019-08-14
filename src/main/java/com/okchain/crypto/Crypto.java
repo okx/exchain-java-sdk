@@ -17,13 +17,6 @@ import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.List;
 
-
-/**
- * @program: coin-parent-sdk
- * @description:
- * @author: liqiang
- * @create: 2019-03-20 19:29
- **/
 public class Crypto {
 
     public static String generatePrivateKey() {

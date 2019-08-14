@@ -37,19 +37,17 @@ public class BuildTransaction {
         return buildTransaction(account, stdMsg, msg, memo);
     }
 
-    // michael.w added 20190710
     public static byte[] generateAminoPlaceOrderTransaction(AccountInfo account, String side, String product, String price, String quantity, String memo) throws IOException {
         IMsg msg = new MsgNewOrder(price, product, quantity, account.getUserAddress(), side);
         // stdMsg to Proto and to ProtoBytes
         // first 2 get the protobytes of object MsgNewOrder
         Transfer.MsgNewOrder msgNewOrderProto = Transfer.MsgNewOrder.newBuilder()
-                .setBatchNumber("")
-                .setDepth("")
                 .setPrice(EncodeUtils.stringTo8(price))
                 .setProduct(product)
                 .setQuantity(EncodeUtils.stringTo8(quantity))
                 .setSender(ByteString.copyFrom(AddressUtil.decodeAddress(account.getUserAddress())))
                 .setSide(side).build();
+
         byte[] msgNewOrderAminoEncoded = AminoEncode.encodeMsgNewOrder(msgNewOrderProto);
         return buildAminoTransaction(account, msgNewOrderAminoEncoded, msg, memo);
 
@@ -61,7 +59,6 @@ public class BuildTransaction {
         return buildTransaction(account, stdMsg, msg, memo);
     }
 
-    // michael.w added 20190710
     public static byte[] generateAminoCancelOrderTransaction(AccountInfo account, String orderId, String memo) throws IOException {
         IMsg msg = new MsgCancelOrder(account.getUserAddress(), orderId);
         Transfer.MsgCancelOrder msgCancelOrderProto = Transfer.MsgCancelOrder.newBuilder()
@@ -72,13 +69,11 @@ public class BuildTransaction {
     }
 
     public static String generateSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) {
-        // 从谁到谁 转多钱(List)
         IMsg msg = new MsgSend(account.getUserAddress(), to, amount);
         IMsg stdMsg = new MsgStd("token/Send", msg);
         return buildTransaction(account, stdMsg, msg, memo);
     }
 
-    // michael.w added 20190710
     public static byte[] generateAminoSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) throws IOException {
         IMsg msg = new MsgSend(account.getUserAddress(), to, amount);
         // stdMsg to Proto and to ProtoBytes
@@ -96,7 +91,6 @@ public class BuildTransaction {
         return buildAminoTransaction(account, msgSendAminoEncoded, msg, memo);
     }
 
-    // michael.w added 20190708
     public static String generateSendTransactions(AccountInfo account, List<String> tos, List<List<Token>> amounts, String memo) {
         if (tos.size() != amounts.size()) {
             return "the lengths of receiver addresses ,values and memos are not the same";

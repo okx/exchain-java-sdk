@@ -33,8 +33,6 @@ public class OKChainClientImpl implements OKChainClient {
         return okChainClient;
     }
 
-    // 通过ok addr，访问主网，返回有关该地址的一些属性信息
-    // 通过http的get方法访问主网，拿到关于该地址的一些信息，包括公钥、account_number和sequence(json串)
     private String getAccountPrivate(String userAddress) {
         String url = backend + ConstantIF.ACCOUNT_URL_PATH + userAddress;
         System.out.println(url);
@@ -63,10 +61,7 @@ public class OKChainClientImpl implements OKChainClient {
     public AccountInfo getAccountInfo(String privateKey) throws NullPointerException {
         if (privateKey.equals("")) throw new NullPointerException("empty privateKey");
         AddressInfo addressInfo = getAddressInfo(privateKey);
-        //System.out.println(getAccountPrivate(addressInfo.getUserAddress()));
 
-        // 将json串转为对象
-        // getAccountPrivate方法利用ok地址通过http的get方法访问主网，拿到关于该地址的一些信息，包括公钥、account_number和sequence(json串)
         JSONObject accountJson = JSON.parseObject(getAccountPrivate(addressInfo.getUserAddress()));
         String sequence = getSequance(accountJson);
         String accountNumber = getAccountNumber(accountJson);
@@ -101,19 +96,17 @@ public class OKChainClientImpl implements OKChainClient {
     }
 
     public JSONObject sendSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) throws NullPointerException {
-        // 检查这个账户不是空账户
+        // check whether the account is empty
         checkAccountInfoValue(account);
-        // 检查收款地址不是空
+        // check the receiver addr is empty
         if (to.equals("")) throw new NullPointerException("empty to");
         if (amount == null || amount.isEmpty()) throw new NullPointerException("empty amount");
+        // generate the final
         // 生成最终要发送到网络中的json串(String)
         String data = BuildTransaction.generateSendTransaction(account, to, amount, memo);
         // sendTransaction是用post请求将data(json串发到主网)
         return sendTransaction(data);
-        // return 主网给的答复：
-        // string{"height":"8539","txhash":"022BF9F1F67831843158596EACB72752F9E72EB6456B0B07A5183B7A597FF72E","raw_log":"[{\"msg_index\":\"0\",\"success\":true,\"log\":\"\"}]","logs":[{"msg_index":"0","success":true,"log":""}],"tags":[{"key":"fee","value":"0.01250000 okb"},{"key":"action","value":"send"}]}
     }
-
 
 
     // michael.w added 20190708
