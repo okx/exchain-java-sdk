@@ -3,12 +3,7 @@ package com.okchain.types;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-/**
- * @program: coin-parent-sdk
- * @description:
- * @author: liqiang
- * @create: 2019-03-19 18:52
- **/
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder(alphabetic = true)
 public class Pubkey {

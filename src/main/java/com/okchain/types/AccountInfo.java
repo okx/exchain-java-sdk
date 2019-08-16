@@ -1,8 +1,5 @@
 package com.okchain.types;
 
-/**
- * Created by oker on 2019/5/28.
- */
 public class AccountInfo extends AddressInfo {
 
 

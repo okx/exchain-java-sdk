@@ -5,16 +5,6 @@ import com.alibaba.fastjson.annotation.JSONField;
 import java.util.List;
 
 public class StdTransaction {
-    public StdTransaction() {
-    }
-
-    public StdTransaction(IMsg[] msgs, Fee fee, List<Signature> signatures, String memo) {
-        this.msgs = msgs;
-        this.fee = fee;
-        this.signatures = signatures;
-        this.memo = memo;
-    }
-
     @JSONField(name = "msg")
     private IMsg[] msgs;
 
@@ -23,6 +13,13 @@ public class StdTransaction {
     private List<Signature> signatures;
 
     private String memo;
+
+    public StdTransaction(IMsg[] msgs, Fee fee, List<Signature> signatures, String memo) {
+        this.msgs = msgs;
+        this.fee = fee;
+        this.signatures = signatures;
+        this.memo = memo;
+    }
 
     public IMsg[] getMsgs() {
         return msgs;

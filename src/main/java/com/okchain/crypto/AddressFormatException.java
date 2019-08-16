@@ -1,11 +1,5 @@
-package com.google.crypto.tink.subtle;
+package com.okchain.crypto;
 
-/**
- * @program: coin-parent-sdk
- * @description:
- * @author: liqiang
- * @create: 2018-12-17 11:18
- **/
 @SuppressWarnings("serial")
 public class AddressFormatException extends IllegalArgumentException {
     public AddressFormatException() {

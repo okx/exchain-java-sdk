@@ -9,9 +9,6 @@ public class PostTransaction {
     @JSONField(name = "mode")
     private String returnType;
 
-    public PostTransaction() {
-
-    }
     public PostTransaction(StdTransaction tx, String returnType) {
         this.tx = tx;
         this.returnType = returnType;

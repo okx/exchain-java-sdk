@@ -15,7 +15,6 @@ public class MsgSend implements IMsg {
     private String toAddress;
 
 
-
     public MsgSend(String fromAddress, String toAddress, List<Token> amount) {
         this.fromAddress = fromAddress;
         this.toAddress = toAddress;

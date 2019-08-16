@@ -1,8 +1,6 @@
 package com.okchain.types;
 
-/**
- * Created by xuqian on 2019/5/28.
- */
+
 public class BaseModel {
 
     private String code;

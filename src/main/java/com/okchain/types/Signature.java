@@ -4,12 +4,6 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-/**
- * @program: coin-parent-sdk
- * @description:
- * @author: liqiang
- * @create: 2019-03-19 18:51
- **/
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder(alphabetic = true)
 public class Signature {

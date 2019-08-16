@@ -1,7 +1,6 @@
 package com.okchain.transaction;
 
 import com.okchain.client.OKChainClient;
-import com.okchain.client.impl.OKChainClientImpl;
 import com.okchain.client.impl.OKChainRPCClientImpl;
 import com.okchain.common.ConstantIF;
 import com.okchain.common.jsonrpc.JSONRPCUtils;
@@ -17,21 +16,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class BuildTransactionTest {
-    private static String restUrl = "http://127.0.0.1:26659";
     private static String rpcUrl = "http://127.0.0.1:26657";
     private static String privateKey = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
-    @Test
-    public void testBuildNewOrderTx() {
-        AccountInfo account = generateAccountInfo();
-        String sequence = "50";
-        String side = "BUY";
-        String product = "xxb_okb";
-        String price = "1.00000000";
-        String quantity = "1.00000000";
-        String memo = "";
-        String transaction = BuildTransaction.generatePlaceOrderTransaction(account, side, product, price, quantity, memo);
-        System.out.println(transaction);
-    }
 
     @Test
     public void testBuildAminoNewOrderTx() throws IOException {
@@ -50,17 +36,6 @@ public class BuildTransactionTest {
     }
 
     @Test
-    public void testBuildCancelOrderTx() {
-        AccountInfo account = generateAccountInfo();
-
-        String sequence = "51";
-        String orderId = "ID0000065785-1";
-        String memo = "";
-        String transaction = BuildTransaction.generateCancelOrderTransaction(account, orderId, memo);
-        System.out.println(transaction);
-    }
-
-    @Test
     public void testBuildAminoCancelOrderTx() throws IOException {
         AccountInfo account = generateAccountInfoByRpc();
 
@@ -72,23 +47,6 @@ public class BuildTransactionTest {
         mp.put("tx", tx);
         String res = JSONRPCUtils.getRpcSendData(method, mp);
         System.out.println(res);
-    }
-
-    @Test
-    public void testBuildSendTx() {
-        AccountInfo account = generateAccountInfo();
-
-        String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
-        String memo = "";
-
-        List<Token> amountList = new ArrayList<>();
-        Token amount = new Token();
-        amount.setDenom("okb");
-        amount.setAmount("5.00000000");
-        amountList.add(amount);
-
-        String transaction = BuildTransaction.generateSendTransaction(account, to, amountList, memo);
-        System.out.println(transaction);
     }
 
     @Test
@@ -113,43 +71,6 @@ public class BuildTransactionTest {
         System.out.println(res);
     }
 
-    @Test
-    public void testBuildSendTxs() {
-        AccountInfo account = generateAccountInfo();
-        List<String> tos = new ArrayList<>();
-
-
-        // create the first
-        String to1 = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
-        tos.add(to1);
-        String memo = "";
-
-        List<Token> amountList1 = new ArrayList<>();
-        Token amount1 = new Token();
-        amount1.setDenom("okb");
-        amount1.setAmount("10.00000000");
-        amountList1.add(amount1);
-
-        // 创建第二笔交易
-        List<Token> amountList2 = new ArrayList<>();
-        String to2 = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
-        tos.add(to2);
-        String memo2 = "";
-
-        Token amount2 = new Token();
-        amount2.setDenom("okb");
-        amount2.setAmount("2.00000000");
-        amountList2.add(amount2);
-
-        List<List<Token>> amountLists = new ArrayList<>();
-        amountLists.add(amountList1);
-        amountLists.add(amountList2);
-
-        //一次发送多笔交易
-        String transacations = BuildTransaction.generateSendTransactions(account, tos, amountLists, memo);
-        System.out.println(transacations);
-
-    }
 
     @Test
     public void testBuildAminoMultiSendTx() throws IOException {
@@ -157,7 +78,7 @@ public class BuildTransactionTest {
         List<TransferUnit> transfers = new ArrayList<>();
         String memo = "";
 
-        // 创建一笔交易
+        // create 1st tx
         String to1 = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
         List<Token> amountList1 = new ArrayList<>();
         Token amount11 = new Token("10.00000000", "okb");
@@ -167,7 +88,7 @@ public class BuildTransactionTest {
         TransferUnit tu1 = new TransferUnit(amountList1, to1);
         transfers.add(tu1);
 
-        // 创建第二笔交易
+        // create 2nd tx
         List<Token> amountList2 = new ArrayList<>();
         String to2 = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
 
@@ -187,12 +108,6 @@ public class BuildTransactionTest {
         mp.put("tx", tx);
         String res = JSONRPCUtils.getRpcSendData(method, mp);
         System.out.println(res);
-    }
-
-    private AccountInfo generateAccountInfo() {
-        String url = restUrl;
-        OKChainClient okc = OKChainClientImpl.getOKChainClient(url);
-        return okc.getAccountInfo(privateKey);
     }
 
     private AccountInfo generateAccountInfoByRpc() {

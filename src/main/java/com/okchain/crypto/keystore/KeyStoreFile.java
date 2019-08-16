@@ -12,10 +12,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.io.IOException;
 
-/**
- *  Taken from Ethereum web3j and redevelop it
- *  https://github.com/web3j/web3j/blob/master/core/src/main/java/org/web3j/crypto/WalletFile.java
- */
 public class KeyStoreFile {
     private String address;
     private Crypto crypto;
@@ -42,7 +38,8 @@ public class KeyStoreFile {
         this.crypto = crypto;
     }
 
-    @JsonSetter("Crypto")  // older wallet files may have this attribute name
+    @JsonSetter("Crypto")
+    // older wallet files may have this attribute name
     public void setCryptoV1(Crypto crypto) {
         setCrypto(crypto);
     }

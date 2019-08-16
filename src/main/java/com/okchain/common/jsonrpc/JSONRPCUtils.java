@@ -18,7 +18,6 @@ public class JSONRPCUtils {
         String version = "2.0";
         RPCRequest rpcRequest = new RPCRequest(version, id, method, params);
         String data = JSON.toJSONString(rpcRequest);
-        //System.out.println(data);
         return data;
     }
 }

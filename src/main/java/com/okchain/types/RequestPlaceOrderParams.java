@@ -4,16 +4,20 @@ import com.alibaba.fastjson.annotation.JSONField;
 
 public class RequestPlaceOrderParams {
     @JSONField(name = "Price")
-    private String price;    // price of the order
+    // price of the order
+    private String price;
 
     @JSONField(name = "Product")
-    private String product;   // product for trading pair in full name of the tokens
+    // product for trading pair in full name of the tokens
+    private String product;
 
     @JSONField(name = "Quantity")
-    private String quantity;     // quantity of the order
+    // quantity of the order
+    private String quantity;
 
     @JSONField(name = "Side")
-    private String side;  // BUY/SELL
+    // BUY/SELL
+    private String side;
 
     public RequestPlaceOrderParams(String price, String product, String quantity, String side) {
         this.price = price;

@@ -3,12 +3,27 @@ package com.okchain.types;
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class MsgNewOrder implements IMsg {
-    public MsgNewOrder() {
-    }
+    @JSONField(name = "Price")
+    // price of the order
+    private String price;
+
+    @JSONField(name = "Product")
+    // product for trading pair in full name of the tokens
+    private String product;
+
+    @JSONField(name = "Quantity")
+    // quantity of the order
+    private String quantity;
+
+    @JSONField(name = "Sender")
+    // order maker address
+    private String sender;
+
+    @JSONField(name = "Side")
+    // BUY/SELL
+    private String side;
 
     public MsgNewOrder(String price, String product, String quantity, String sender, String side) {
-//        this.batchNumber = batchNumber;
-//        this.depth = depth;
         this.price = price;
         this.product = product;
         this.quantity = quantity;
@@ -56,41 +71,5 @@ public class MsgNewOrder implements IMsg {
         this.quantity = quantity;
     }
 
-//    public String getBatchNumber() {
-//        return batchNumber;
-//    }
-//
-//    public void setBatchNumber(String batchNumber) {
-//        this.batchNumber = batchNumber;
-//    }
-//
-//    public String getDepth() {
-//        return depth;
-//    }
-//
-//    public void setDepth(String depth) {
-//        this.depth = depth;
-//    }
-
-//    @JSONField(name = "BatchNumber")
-//    private String batchNumber;
-//
-//    @JSONField(name = "Depth")
-//    private String depth;
-
-    @JSONField(name = "Price")
-    private String price;    // price of the order
-
-    @JSONField(name = "Product")
-    private String product;   // product for trading pair in full name of the tokens
-
-    @JSONField(name = "Quantity")
-    private String quantity;     // quantity of the order
-
-    @JSONField(name = "Sender")
-    private String sender ; // order maker address
-
-    @JSONField(name = "Side")
-    private String side;  // BUY/SELL
 
 }
