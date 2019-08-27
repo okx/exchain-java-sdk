@@ -35,9 +35,22 @@ public class OKChainRPCClientImpl implements OKChainClient {
         return oKChainRPCClientImpl;
     }
 
+    // account
+
+    private String getSequance(JSONObject account) {
+        return (String) account.getJSONObject("value").get("sequence");
+    }
+
+    private String getAccountNumber(JSONObject account) {
+        return (String) account.getJSONObject("value").get("account_number");
+    }
+
+    public String getPrivateKeyFromMnemonic(String mnemonic) {
+        return Crypto.generatePrivateKeyFromMnemonic(mnemonic);
+    }
+
     public AddressInfo createAddressInfo() {
-        String privateKey = Crypto.generatePrivateKey();
-        return getAddressInfo(privateKey);
+        return getAddressInfo(Crypto.generatePrivateKey());
     }
 
     public AddressInfo getAddressInfo(String privateKey) throws NullPointerException {
@@ -47,14 +60,8 @@ public class OKChainRPCClientImpl implements OKChainClient {
         return new AddressInfo(privateKey, pubKey, address);
     }
 
-    private String getSequance(JSONObject account) {
-        String res = (String) account.getJSONObject("value").get("sequence");
-        return res;
-    }
-
-    private String getAccountNumber(JSONObject account) {
-        String res = (String) account.getJSONObject("value").get("account_number");
-        return res;
+    public AccountInfo createAccount() {
+        return new AccountInfo(createAddressInfo(), "0", "0");
     }
 
     public AccountInfo getAccountInfo(String privateKey) throws NullPointerException {
@@ -66,7 +73,27 @@ public class OKChainRPCClientImpl implements OKChainClient {
         return new AccountInfo(addressInfo, accountNumber, sequence);
     }
 
-    public JSONObject sendTransaction(byte[] data) {
+    public AccountInfo getAccountInfoFromMnemonic(String mnemo) throws NullPointerException {
+        if (mnemo.equals("")) throw new NullPointerException("empty mnemonic");
+        return getAccountInfo(getPrivateKeyFromMnemonic(mnemo));
+    }
+
+    public String generateMnemonic() {
+        return Crypto.generateMnemonic();
+    }
+
+    // transact
+
+    private void checkAccountInfoValue(AccountInfo account) {
+        if (account == null) throw new NullPointerException("AccountInfo is empty.");
+        if (account.getAccountNumber().equals("")) throw new NullPointerException("AccountNumber is empty.");
+        if (account.getSequenceNumber().equals("")) throw new NullPointerException("SequenceNumber is empty.");
+        if (account.getPrivateKey().equals("")) throw new NullPointerException("PrivateKey is empty.");
+        if (account.getPublicKey().equals("")) throw new NullPointerException("PublicKey is empty.");
+        if (account.getUserAddress().equals("")) throw new NullPointerException("UserAddress is empty.");
+    }
+
+    private JSONObject sendTransaction(byte[] data) {
         String method = "";
 
         switch (BuildTransaction.getMode()) {
@@ -89,16 +116,20 @@ public class OKChainRPCClientImpl implements OKChainClient {
         return obj;
     }
 
+    private void checkPlaceOrderRequestParms(RequestPlaceOrderParams parms) {
+        if (parms == null) throw new NullPointerException("empty PlaceOrderRequestParms");
+        if (parms.getPrice().equals("")) throw new NullPointerException("empty Price");
+        if (parms.getProduct().equals("")) throw new NullPointerException("empty Product");
+        if (parms.getQuantity().equals("")) throw new NullPointerException("empty Quantity");
+        if (parms.getSide().equals("")) throw new NullPointerException("empty Side");
+    }
+
     public JSONObject sendSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) throws NullPointerException, IOException {
         checkAccountInfoValue(account);
         if (to.equals("")) throw new NullPointerException("Reciever address is empty.");
         if (amount == null || amount.isEmpty()) throw new NullPointerException("Amount is empty.");
         byte[] data = BuildTransaction.generateAminoSendTransaction(account, to, amount, memo);
         return sendTransaction(data);
-    }
-
-    public JSONObject sendSendTransactions(AccountInfo account, List<String> tos, List<List<Token>> amount, String memo) throws NullPointerException, IOException {
-        return null;
     }
 
     public JSONObject sendPlaceOrderTransaction(AccountInfo account, RequestPlaceOrderParams params, String memo) throws IOException {
@@ -114,47 +145,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
         return sendTransaction(data);
     }
 
-    public JSONObject sendMultiSendTransaction(AccountInfo account, List<TransferUnit> transfers, String memo) throws IOException {
-        checkAccountInfoValue(account);
-        byte[] data = BuildTransaction.generateAminoMultiSendTransaction(account, transfers, memo);
-        return sendTransaction(data);
-
-    }
-
-    private void checkAccountInfoValue(AccountInfo account) {
-        if (account == null) throw new NullPointerException("AccountInfo is empty.");
-        if (account.getAccountNumber().equals("")) throw new NullPointerException("AccountNumber is empty.");
-        if (account.getSequenceNumber().equals("")) throw new NullPointerException("SequenceNumber is empty.");
-        if (account.getPrivateKey().equals("")) throw new NullPointerException("PrivateKey is empty.");
-        if (account.getPublicKey().equals("")) throw new NullPointerException("PublicKey is empty.");
-        if (account.getUserAddress().equals("")) throw new NullPointerException("UserAddress is empty.");
-    }
-
-    public String getPrivateKeyFromMnemonic(String mnemonic) {
-        return Crypto.generatePrivateKeyFromMnemonic(mnemonic);
-    }
-
-    public String generateMnemonic() {
-        return Crypto.generateMnemonic();
-    }
-
-    public String generateKeyStore(String privateKey, String passWord) throws CipherException, IOException {
-        File file = new File("./");
-        return KeyStoreUtils.generateWalletFile(passWord, privateKey, file, true);
-    }
-
-    public String getPrivateKeyFromKeyStore(String keyStoreFilePath, String passWord) throws IOException, CipherException {
-        return KeyStoreUtils.getPrivateKeyFromKeyStoreFile(keyStoreFilePath, passWord);
-    }
-    
-    private void checkPlaceOrderRequestParms(RequestPlaceOrderParams parms) {
-        if (parms == null) throw new NullPointerException("empty PlaceOrderRequestParms");
-        if (parms.getPrice().equals("")) throw new NullPointerException("empty Price");
-        if (parms.getProduct().equals("")) throw new NullPointerException("empty Product");
-        if (parms.getQuantity().equals("")) throw new NullPointerException("empty Quantity");
-        if (parms.getSide().equals("")) throw new NullPointerException("empty Side");
-    }
-
+    // query
     // convert type JSONObject 2 type BaseModel
     private BaseModel JSONObject2BaseModel(JSONObject jo) {
         JSONObject extractJSONObject = jo.getJSONObject("result").getJSONObject("response");
@@ -186,7 +177,6 @@ public class OKChainRPCClientImpl implements OKChainClient {
 
     }
 
-
     private JSONObject ABCIQuery(String path, byte[] data, String rpcMethod) {
         Map<String, Object> mp = new TreeMap<>();
         if (data == null) {
@@ -200,7 +190,6 @@ public class OKChainRPCClientImpl implements OKChainClient {
         String res = JSONRPCUtils.call(this.backend, rpcMethod, mp);
         return JSON.parseObject(res);
     }
-
 
     public JSONObject getAccountFromNode(String addr) throws NullPointerException {
         if (addr.equals("")) throw new NullPointerException("empty userAddress");
@@ -222,7 +211,6 @@ public class OKChainRPCClientImpl implements OKChainClient {
         return JSONObject2BaseModel(jo);
     }
 
-
     public BaseModel getAccountToken(String addr, String symbol) throws NullPointerException {
         if (addr.equals("")) throw new NullPointerException("empty address");
         if (symbol.equals("")) throw new NullPointerException("empty symbol");
@@ -240,7 +228,6 @@ public class OKChainRPCClientImpl implements OKChainClient {
         JSONObject jo = ABCIQuery(path, null, ConstantIF.RPC_METHOD_QUERY);
         return JSONObject2BaseModel(jo);
     }
-
 
     public BaseModel getToken(String symbol) throws NullPointerException {
         if (symbol.equals("")) throw new NullPointerException("empty symbol");

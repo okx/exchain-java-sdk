@@ -37,8 +37,11 @@ public class AccountInfo extends AddressInfo {
     @Override
     public String toString() {
         return "AccountInfo{" +
-                "accountNumber='" + accountNumber + '\'' +
-                ", sequenceNumber='" + sequenceNumber + '\'' +
+                "privateKey='" + super.getPrivateKey() + "\', " +
+                "publicKey='" + super.getPublicKey() + "\', " +
+                "address='" + super.getUserAddress() + "\', " +
+                "accountNumber='" + accountNumber + "\', " +
+                "sequenceNumber='" + sequenceNumber + "\'" +
                 '}';
     }
 }

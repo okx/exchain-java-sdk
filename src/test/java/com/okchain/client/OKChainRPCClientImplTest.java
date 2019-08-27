@@ -19,43 +19,49 @@ public class OKChainRPCClientImplTest {
     private static String mnemo = "sustain hole urban away boy core lazy brick wait drive tiger tell";
     private static String addr = "okchain1mm43akh88a3qendlmlzjldf8lkeynq68r8l6ts";
     // rpc
-    private static String url_rpc = "http://localhost:26657";
-
+    private static String url_rpc = "http://localhost:20157";
 
     @Test
-    public void getAccountInfo() {
+    public void testCreateAccount() {
+        OKChainRPCClientImpl okc = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
+        AccountInfo accountInfo = okc.createAccount();
+        Assert.assertNotNull(accountInfo);
+        System.out.println(accountInfo);
+    }
+
+    @Test
+    public void testGetAccountInfo() {
         OKChainRPCClientImpl okc = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
         AccountInfo accountInfo = okc.getAccountInfo(this.privateKey);
-        System.out.println(JSON.toJSONString(accountInfo));
-        Assert.assertNotNull(accountInfo);
+        Assert.assertNotNull(accountInfo.getPrivateKey());
         Assert.assertNotNull(accountInfo.getSequenceNumber());
         Assert.assertNotNull(accountInfo.getAccountNumber());
+        System.out.println(accountInfo);
     }
 
     @Test
-    public void getAddressInfo() {
+    public void testGetAccountInfoFromMnemonic(){
         OKChainRPCClientImpl okc = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
-        AddressInfo addrInfo = okc.getAddressInfo(this.privateKey);
-        System.out.println(addrInfo.getUserAddress());
-        Assert.assertNotNull(addrInfo);
+        AccountInfo accountInfo = okc.getAccountInfoFromMnemonic(this.mnemo);
+        Assert.assertNotNull(accountInfo.getPrivateKey());
+        Assert.assertNotNull(accountInfo.getSequenceNumber());
+        Assert.assertNotNull(accountInfo.getAccountNumber());
+        System.out.println(accountInfo);
     }
 
     @Test
-    public void sendRawBytes() {
-        String data = "b401f0625dee0a42c9ee213f0a148c88be1b29942b78c801b43a77dd1050f7ee316512145ab0c4b287f6aa0ab9bf27812351aa11cbfcb98e1a100a036f6b621209313030303030303030126a0a26eb5ae9872102f0fbeb512118816cc20854d6dc45f8e3094d580dfa8252573f0329278fc7a3c41240d7a28eda2aac0d0d9cddd5f7972c5b23a3d9bbe87d8fde95b68abe7099d7ae4064813d6960ea6b6f623244a08181736eb71009191acc8ab6772752489790817a";
-        byte[] transactionData = Hex.decode(data);
+    public void testGenerateMnemonic() {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
-        JSONObject res = client.sendTransaction(transactionData);
-        System.out.println(res);
+        String Mnemonic = client.generateMnemonic();
+        Assert.assertNotNull(Mnemonic);
+        System.out.println(Mnemonic);
     }
 
-    @Test
-    public void sendTransaction() {
-        String data = "tAHwYl3uCkI8Ht70ChSxLq0NxypP2pN1DUqKCoXeJPNCshImChT0uZ4HU4lve6xWlR9H8BEW8ZwDABIOCgNva2ISBzIyNTAwMDASagom61rphyED1C8GqfBLEgskTUfp2VjnZfYGiojlJuIBMJvj1XcLWd4SQLhEzVhqEyQE4JwkZojT7zMcHqYdtdqK6roZKvEN8gkLbKPqCTTn+bsmOcb4qr1BNe0/rVyxu14vQ6QTvT2UpQw=";
-        byte[] transactionData = Base64.getDecoder().decode(data);
-        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
-        JSONObject res = client.sendTransaction(transactionData);
-        System.out.println(res);
+    // transact
+    // get readable order-ID from the response
+    public String GetOrderID(JSONObject jo) {
+        String encodedId = jo.getJSONObject("deliver_tx").getJSONArray("tags").getJSONObject(1).getString("value");
+        return new String(java.util.Base64.getDecoder().decode(encodedId));
     }
 
     @Test
@@ -64,7 +70,7 @@ public class OKChainRPCClientImplTest {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
         AccountInfo account = client.getAccountInfo(this.privateKey);
         String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
-        String memo = "I love okb";
+        String memo = "send memo";
         List<Token> amountList = new ArrayList<>();
         Token amount = new Token("10.00000000", "okb");
         amountList.add(amount);
@@ -81,7 +87,7 @@ public class OKChainRPCClientImplTest {
         String product = "xxb_okb";
         String price = "1.10000000";
         String quantity = "1.22000000";
-        String memo = "I love okb";
+        String memo = "new order memo";
         RequestPlaceOrderParams param = new RequestPlaceOrderParams(price, product, quantity, side);
         JSONObject ret = client.sendPlaceOrderTransaction(account, param, memo);
         System.out.println(ret);
@@ -90,86 +96,19 @@ public class OKChainRPCClientImplTest {
         System.out.println("orderID:" + orderID);
     }
 
-    // get readable order-ID from the response
-    public String GetOrderID(JSONObject jo) {
-        String encodedId = jo.getJSONObject("deliver_tx").getJSONArray("tags").getJSONObject(1).getString("value");
-        return new String(Base64.getDecoder().decode(encodedId));
-    }
-
     @Test
     public void testSendCancelOrderTransaction() throws IOException {
         BuildTransaction.setMode("block");
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
         AccountInfo account = client.getAccountInfo(this.privateKey);
         // u can get order-ID by placing a new order
-        String orderId = "ID0000001845-1";
-        String memo = "I love okb";
+        String orderId = "ID0000045067-1";
+        String memo = "cancel order memo";
         JSONObject ret = client.sendCancelOrderTransaction(account, orderId, memo);
         System.out.println(ret);
-
     }
 
-    @Test
-    public void testSendMultiSendTransaction() throws IOException {
-        BuildTransaction.setMode("block");
-        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
-        AccountInfo account = client.getAccountInfo(this.privateKey);
-
-        List<TransferUnit> transferUnits = new ArrayList<>();
-        // create the 1st tx
-        String to1 = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
-        String memo = "";
-        List<Token> amounts1 = new ArrayList<>();
-        amounts1.add(new Token("1.90000000", "okb"));
-        transferUnits.add(new TransferUnit(amounts1, to1));
-        // create the 2nd tx
-        String to2 = "okchain1qsc6ckz6uvrqdxg36p6rrwp25kyg4dtl8gdr92";
-        List<Token> amounts2 = new ArrayList<>();
-        amounts2.add(new Token("10.10000000", "okb"));
-        transferUnits.add(new TransferUnit(amounts2, to2));
-        JSONObject ret = client.sendMultiSendTransaction(account, transferUnits, memo);
-        System.out.println(ret);
-    }
-
-    @Test
-    public void testCreateAddressInfo() {
-        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
-
-        AddressInfo addrInfo = client.createAddressInfo();
-        System.out.println(addrInfo.getPrivateKey());
-        System.out.println(addrInfo.getPublicKey());
-        System.out.println(addrInfo.getUserAddress());
-        Assert.assertNotNull(addrInfo);
-    }
-
-    @Test
-    public void testGenerateMnemonic() {
-        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
-        String Mnemonic = client.generateMnemonic();
-        System.out.println(Mnemonic);
-        Assert.assertNotNull(Mnemonic);
-    }
-
-    @Test
-    public void testGetPrivateKeyFromMnemonic() {
-        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
-        String privKey = client.getPrivateKeyFromMnemonic(this.mnemo);
-        System.out.println(privKey);
-        Assert.assertNotNull(privKey);
-        AddressInfo addrInfo = client.getAddressInfo(privKey);
-        System.out.println(addrInfo.getPrivateKey());
-        System.out.println(addrInfo.getPublicKey());
-        System.out.println(addrInfo.getUserAddress());
-        Assert.assertNotNull(addrInfo);
-    }
-
-    @Test
-    public void testGetAccountFromNode() {
-        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
-        JSONObject jo = client.getAccountFromNode(this.addr);
-        System.out.println(jo);
-        Assert.assertFalse(jo.containsKey("code"));
-    }
+    // query
 
     @Test
     public void testGetAccountALLTokens() {

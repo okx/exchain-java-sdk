@@ -11,15 +11,11 @@ import java.util.List;
 public interface OKChainClient {
 
 
-//    public static OKChainClient getOKChainClient(String backend) {
-//        return null;
-//    }
+    // account
 
-    //address api
+    public AccountInfo createAccount();
 
     public JSONObject getAccountFromNode(String userAddress) throws NullPointerException;
-
-    public AddressInfo createAddressInfo();
 
     public AddressInfo getAddressInfo(String privateKey) throws NullPointerException;
 
@@ -27,21 +23,15 @@ public interface OKChainClient {
 
     public String generateMnemonic();
 
-    public String generateKeyStore(String privateKey, String passWord) throws CipherException, IOException;
+    public AccountInfo getAccountInfoFromMnemonic(String mnemo);
 
-    public String getPrivateKeyFromKeyStore(String keyStoreFilePath, String passWord) throws IOException, CipherException;
-
-    //send transaction
+    // transact
 
     public JSONObject sendSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) throws NullPointerException, IOException;
-
-    public JSONObject sendSendTransactions(AccountInfo account, List<String> tos, List<List<Token>> amount, String memo) throws NullPointerException, IOException;
 
     public JSONObject sendPlaceOrderTransaction(AccountInfo account, RequestPlaceOrderParams parms, String memo) throws NullPointerException, IOException;
 
     public JSONObject sendCancelOrderTransaction(AccountInfo account, String orderId, String memo) throws NullPointerException, IOException;
-
-    public JSONObject sendMultiSendTransaction(AccountInfo account, List<TransferUnit> transfers, String memo) throws IOException;
 
 
     //query
