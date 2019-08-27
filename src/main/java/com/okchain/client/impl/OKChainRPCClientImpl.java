@@ -147,7 +147,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
 
     // query
     // convert type JSONObject 2 type BaseModel
-    private BaseModel JSONObject2BaseModel(JSONObject jo) {
+    private BaseModel queryJO2BM(JSONObject jo) {
         JSONObject extractJSONObject = jo.getJSONObject("result").getJSONObject("response");
         BaseModel bm = new BaseModel();
 
@@ -208,7 +208,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
         byte[] data = JSON.toJSONString(dataMp).getBytes();
         String path = "custom/token/accounts/" + addr;
         JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
-        return JSONObject2BaseModel(jo);
+        return queryJO2BM(jo);
     }
 
     public BaseModel getAccountToken(String addr, String symbol) throws NullPointerException {
@@ -220,26 +220,26 @@ public class OKChainRPCClientImpl implements OKChainClient {
         byte[] data = JSON.toJSONString(dataMp).getBytes();
         String path = "custom/token/accounts/" + addr;
         JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
-        return JSONObject2BaseModel(jo);
+        return queryJO2BM(jo);
     }
 
     public BaseModel getTokens() {
         String path = "custom/token/tokens";
         JSONObject jo = ABCIQuery(path, null, ConstantIF.RPC_METHOD_QUERY);
-        return JSONObject2BaseModel(jo);
+        return queryJO2BM(jo);
     }
 
     public BaseModel getToken(String symbol) throws NullPointerException {
         if (symbol.equals("")) throw new NullPointerException("empty symbol");
         String path = "custom/token/info/" + symbol;
         JSONObject jo = ABCIQuery(path, null, ConstantIF.RPC_METHOD_QUERY);
-        return JSONObject2BaseModel(jo);
+        return queryJO2BM(jo);
     }
 
     public BaseModel getProducts() {
         String path = "custom/token/products";
         JSONObject jo = ABCIQuery(path, null, ConstantIF.RPC_METHOD_QUERY);
-        return JSONObject2BaseModel(jo);
+        return queryJO2BM(jo);
     }
 
     public BaseModel getDepthBook(String product) throws NullPointerException {
@@ -251,7 +251,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
         dataMp.put("Size", "200");
         byte[] data = JSON.toJSONString(dataMp).getBytes();
         JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
-        return JSONObject2BaseModel(jo);
+        return queryJO2BM(jo);
 
     }
 
@@ -264,7 +264,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
         dataMp.put("Size", size);
         byte[] data = JSON.toJSONString(dataMp).getBytes();
         JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
-        return JSONObject2BaseModel(jo);
+        return queryJO2BM(jo);
 
     }
 
@@ -276,7 +276,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
         dataMp.put("Sort", true);
         byte[] data = JSON.toJSONString(dataMp).getBytes();
         JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
-        return JSONObject2BaseModel(jo);
+        return queryJO2BM(jo);
     }
 
     // get the info of the product's record of transaction
@@ -291,7 +291,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
         dataMp.put("PerPage", perPage);
         byte[] data = JSON.toJSONString(dataMp).getBytes();
         JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
-        return JSONObject2BaseModel(jo);
+        return queryJO2BM(jo);
 
     }
 
@@ -309,7 +309,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
         dataMp.put("HideNoFill", false);
         byte[] data = JSON.toJSONString(dataMp).getBytes();
         JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
-        return JSONObject2BaseModel(jo);
+        return queryJO2BM(jo);
     }
 
     public BaseModel getOrderListClosed(RequestOrderListClosedParams params) throws NullPointerException {
@@ -330,7 +330,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
         }
         byte[] data = JSON.toJSONString(dataMp).getBytes();
         JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
-        return JSONObject2BaseModel(jo);
+        return queryJO2BM(jo);
     }
 
     public BaseModel getDeals(RequestDealsParams params) throws NullPointerException {
@@ -346,7 +346,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
         dataMp.put("Side", params.getSide());
         byte[] data = JSON.toJSONString(dataMp).getBytes();
         JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
-        return JSONObject2BaseModel(jo);
+        return queryJO2BM(jo);
 
     }
 
@@ -362,7 +362,77 @@ public class OKChainRPCClientImpl implements OKChainClient {
         dataMp.put("Start", params.getStart());
         byte[] data = JSON.toJSONString(dataMp).getBytes();
         JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
-        return JSONObject2BaseModel(jo);
+        return queryJO2BM(jo);
+    }
+
+    // node query
+
+    private BaseModel nodeQueryJO2BM(JSONObject jo) {
+        BaseModel bm = new BaseModel();
+
+        if (jo.containsKey("error")) {
+            // if the rpc query fails
+            JSONObject tmpJO = jo.getJSONObject("error");
+            bm.setCode(tmpJO.getString("code"));
+            bm.setDetailMsg(tmpJO.getString("data"));
+        } else {
+            // if the rpc query succeeds
+            bm.setCode("0");
+            bm.setData(jo.getString("result"));
+        }
+        return bm;
+    }
+
+    public BaseModel queryCurrentBlock() {
+        Map<String, Object> mp = new TreeMap<>();
+        mp.put("height", null);
+        String res = JSONRPCUtils.call(this.backend, "block", mp);
+        return nodeQueryJO2BM(JSON.parseObject(res));
+    }
+
+    public BaseModel queryBlock(int height) {
+        Map<String, Object> mp = new TreeMap<>();
+        mp.put("height", String.valueOf(height));
+        String res = JSONRPCUtils.call(this.backend, "block", mp);
+        return nodeQueryJO2BM(JSON.parseObject(res));
+    }
+
+    public BaseModel queryTx(String txHash, boolean prove) {
+        Map<String, Object> mp = new TreeMap<>();
+        mp.put("hash", Hex.decode(txHash.toUpperCase()));
+        mp.put("prove", prove);
+        String res = JSONRPCUtils.call(this.backend, "tx", mp);
+        return nodeQueryJO2BM(JSON.parseObject(res));
+    }
+
+    public BaseModel queryProposals() {
+        String path = "custom/gov/proposals";
+        Map<String, Object> mp = new TreeMap<>();
+        mp.put("Voter", "");
+        mp.put("Depositor", "");
+        mp.put("ProposalStatus", "");
+        mp.put("Limit", "0");
+        byte[] data = JSON.toJSONString(mp).getBytes();
+        JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
+        return queryJO2BM(jo);
+    }
+
+    public BaseModel queryProposalByID(int proposalID) throws Exception {
+        if (proposalID < 1) throw new Exception("proposalID can't be less than 1");
+        String path = "custom/gov/proposal";
+        Map<String, Object> mp = new TreeMap<>();
+        mp.put("ProposalID", String.valueOf(proposalID));
+
+        byte[] data = JSON.toJSONString(mp).getBytes();
+        JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
+        return queryJO2BM(jo);
+    }
+
+    public BaseModel queryCurrentValidators() {
+        Map<String, Object> mp = new TreeMap<>();
+        mp.put("height",  null);
+        String res = JSONRPCUtils.call(this.backend, "validators", mp);
+        return nodeQueryJO2BM(JSON.parseObject(res));
     }
 
 }

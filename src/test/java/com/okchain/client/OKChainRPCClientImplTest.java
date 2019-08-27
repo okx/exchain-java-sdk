@@ -40,7 +40,7 @@ public class OKChainRPCClientImplTest {
     }
 
     @Test
-    public void testGetAccountInfoFromMnemonic(){
+    public void testGetAccountInfoFromMnemonic() {
         OKChainRPCClientImpl okc = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
         AccountInfo accountInfo = okc.getAccountInfoFromMnemonic(this.mnemo);
         Assert.assertNotNull(accountInfo.getPrivateKey());
@@ -250,4 +250,55 @@ public class OKChainRPCClientImplTest {
         Assert.assertEquals(bm.getCode(), "0");
     }
 
+    //node query
+
+    @Test
+    public void testQueryCurrentBlock() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
+        BaseModel bm = client.queryCurrentBlock();
+        System.out.println(bm);
+        Assert.assertEquals(bm.getCode(), "0");
+    }
+
+    @Test
+    public void testQueryBlock() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
+        BaseModel bm = client.queryBlock(1024);
+        System.out.println(bm);
+        Assert.assertEquals(bm.getCode(), "0");
+    }
+
+    @Test
+    public void testQueryTx() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
+        String txHash = "F6D87D7074E10429470B684842FBB88AE3EC4E2D950F198549A2B2AE8814926C";
+        BaseModel bm = client.queryTx(txHash, true);
+        System.out.println(bm);
+        Assert.assertEquals(bm.getCode(), "0");
+    }
+
+    @Test
+    public void testQueryProposals() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
+        BaseModel bm = client.queryProposals();
+        System.out.println(bm);
+        Assert.assertEquals(bm.getCode(), "0");
+    }
+
+    @Test
+    public void testQueryProposalByID() throws Exception {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
+        int proposalID = 1;
+        BaseModel bm = client.queryProposalByID(proposalID);
+        System.out.println(bm);
+        Assert.assertEquals(bm.getCode(), "0");
+    }
+
+    @Test
+    public void testQueryCurrentValidators() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
+        BaseModel bm = client.queryCurrentValidators();
+        System.out.println(bm);
+        Assert.assertEquals(bm.getCode(), "0");
+    }
 }
