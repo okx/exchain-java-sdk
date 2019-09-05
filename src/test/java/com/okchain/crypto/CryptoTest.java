@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import com.okchain.crypto.io.cosmos.util.AddressUtil;
 import java.util.Base64;
 
 public class CryptoTest {
@@ -22,8 +23,8 @@ public class CryptoTest {
 
     @Test
     public void testGenerateAddress() {
-        String priv = Crypto.generatePrivateKey();
-        //String priv = "c4c451ce673485521f9c9b74b6d90f0da433ef7f012fa7f9db4def627dccd632";
+//        String priv = Crypto.generatePrivateKey();
+        String priv = "c4c451ce673485521f9c9b74b6d90f0da433ef7f012fa7f9db4def627dccd632";
         long startTime = System.currentTimeMillis();
         byte[] pub = Crypto.generatePubKeyFromPriv(priv);
         System.out.println(Hex.toHexString(pub));

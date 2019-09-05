@@ -9,6 +9,7 @@ import org.bitcoinj.core.Utils;
 import org.bitcoinj.crypto.*;
 import org.bouncycastle.util.encoders.DecoderException;
 import org.bouncycastle.util.encoders.Hex;
+import com.okchain.crypto.io.cosmos.util.AddressUtil;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

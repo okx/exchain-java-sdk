@@ -19,7 +19,11 @@ public class OKChainRPCClientImplTest {
     private static String mnemo = "sustain hole urban away boy core lazy brick wait drive tiger tell";
     private static String addr = "okchain1mm43akh88a3qendlmlzjldf8lkeynq68r8l6ts";
     // rpc
-    private static String url_rpc = "http://localhost:20157";
+//    private static String url_rpc = "http://localhost:20157";
+    private static String url_rpc = "http://kong-proxy.test-d-okex.svc.test.local:8443/okchain/v1/rpc";
+//    private static String url_rpc = "http://192.168.13.128:26667";
+    private static String queryAddr="okchain1a3xgd3ymuh282fwwawkk9jceml8pex5q0llrhn";
+    private static String queryAddr1="okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
 
     @Test
     public void testCreateAccount() {
@@ -113,7 +117,7 @@ public class OKChainRPCClientImplTest {
     @Test
     public void testGetAccountALLTokens() {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
-        BaseModel bm = client.getAccountALLTokens(this.addr, "all");
+        BaseModel bm = client.getAccountALLTokens(this.queryAddr1, "all");
         System.out.println(bm);
         Assert.assertNotNull(bm.getData());
     }
@@ -153,7 +157,7 @@ public class OKChainRPCClientImplTest {
     @Test
     public void testGetDepthBook() {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
-        BaseModel bm = client.getDepthBook("xxb_okb");
+        BaseModel bm = client.getDepthBook("btc-c9f_okb");
         System.out.println(bm);
         Assert.assertEquals(bm.getCode(), "0");
     }
@@ -161,7 +165,7 @@ public class OKChainRPCClientImplTest {
     @Test
     public void testGetCandles() {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
-        BaseModel bm = client.getCandles("60", "xxb_okb", "100");
+        BaseModel bm = client.getCandles("60", "eos-1e7_okb", "100");
         System.out.println(bm);
         Assert.assertEquals(bm.getCode(), "0");
     }
