@@ -3,6 +3,7 @@ package com.okchain.client;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.okchain.client.impl.OKChainRPCClientImpl;
+import com.okchain.common.HttpUtils;
 import com.okchain.transaction.BuildTransaction;
 import com.okchain.types.*;
 import org.bouncycastle.util.encoders.Hex;
@@ -15,12 +16,12 @@ import java.util.Base64;
 import java.util.List;
 
 public class OKChainRPCClientImplTest {
-    private static String privateKey = "de0e9d9e7bac1366f7d8719a450dab03c9b704172ba43e0a25a7be1d51c69a87";
-    private static String mnemo = "sustain hole urban away boy core lazy brick wait drive tiger tell";
-    private static String addr = "okchain1mm43akh88a3qendlmlzjldf8lkeynq68r8l6ts";
+    private static String privateKey = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
+    private static String mnemo = "total lottery arena when pudding best candy until army spoil drill pool";
+    private static String addr = "okchain1g7c3nvac7mjgn2m9mqllgat8wwd3aptdqket5k";
     // rpc
 //    private static String url_rpc = "http://localhost:20157";
-    private static String url_rpc = "http://kong-proxy.test-d-okex.svc.test.local:8443/okchain/v1/rpc";
+    private static String url_rpc = "https://okexbeta.bafang.com/okchain/v1/rpc";
 //    private static String url_rpc = "http://192.168.13.128:26667";
     private static String queryAddr="okchain1a3xgd3ymuh282fwwawkk9jceml8pex5q0llrhn";
     private static String queryAddr1="okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
@@ -125,7 +126,7 @@ public class OKChainRPCClientImplTest {
     @Test
     public void testGetAccountToken() {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
-        BaseModel bm = client.getAccountToken(this.addr, "gyc-3b3");
+        BaseModel bm = client.getAccountToken(this.addr, "okb");
         System.out.println(bm);
         Assert.assertEquals(bm.getCode(), "0");
     }
@@ -141,7 +142,7 @@ public class OKChainRPCClientImplTest {
     @Test
     public void testGetToken() {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
-        BaseModel bm = client.getToken("gyc-3b3");
+        BaseModel bm = client.getToken("okb");
         System.out.println(bm);
         Assert.assertEquals(bm.getCode(), "0");
     }
@@ -216,7 +217,7 @@ public class OKChainRPCClientImplTest {
         String page = "0";
         String perPage = "10";
         // if input hideNofill is not "true", we always treat it as "false"
-        String hideNoFill = "false";
+        String hideNoFill = "0";
         RequestOrderListClosedParams olcp = new RequestOrderListClosedParams(product, this.addr, start, end, side, page, perPage, hideNoFill);
         BaseModel bm = client.getOrderListClosed(olcp);
         System.out.println(bm);
@@ -305,4 +306,6 @@ public class OKChainRPCClientImplTest {
         System.out.println(bm);
         Assert.assertEquals(bm.getCode(), "0");
     }
+
+
 }

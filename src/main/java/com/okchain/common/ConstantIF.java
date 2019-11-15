@@ -1,6 +1,8 @@
 package com.okchain.common;
 
 public interface ConstantIF {
+    int DECIMAL_N = 8;
+
     String CHAIN_ID = "okchain";
 
     String ADDRESS_PREFIX = "okchain";

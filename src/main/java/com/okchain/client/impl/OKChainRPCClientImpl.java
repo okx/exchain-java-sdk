@@ -4,17 +4,22 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.okchain.client.OKChainClient;
 import com.okchain.common.ConstantIF;
+import com.okchain.common.StrUtils;
 import com.okchain.common.jsonrpc.JSONRPCUtils;
 import com.okchain.crypto.Crypto;
 import com.okchain.crypto.keystore.CipherException;
 import com.okchain.crypto.keystore.KeyStoreUtils;
+import com.okchain.exception.InvalidFormatException;
 import com.okchain.transaction.BuildTransaction;
 import com.okchain.types.*;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
+import org.omg.CORBA.DynAnyPackage.Invalid;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Struct;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -86,11 +91,18 @@ public class OKChainRPCClientImpl implements OKChainClient {
 
     private void checkAccountInfoValue(AccountInfo account) {
         if (account == null) throw new NullPointerException("AccountInfo is empty.");
-        if (account.getAccountNumber().equals("")) throw new NullPointerException("AccountNumber is empty.");
-        if (account.getSequenceNumber().equals("")) throw new NullPointerException("SequenceNumber is empty.");
-        if (account.getPrivateKey().equals("")) throw new NullPointerException("PrivateKey is empty.");
-        if (account.getPublicKey().equals("")) throw new NullPointerException("PublicKey is empty.");
-        if (account.getUserAddress().equals("")) throw new NullPointerException("UserAddress is empty.");
+        if (account.getAccountNumber()==null||account.getAccountNumber().equals("")) throw new NullPointerException("AccountNumber is empty.");
+        if (account.getSequenceNumber()==null||account.getSequenceNumber().equals("")) throw new NullPointerException("SequenceNumber is empty.");
+        if (account.getPrivateKey()==null||account.getPrivateKey().equals("")) throw new NullPointerException("PrivateKey is empty.");
+        if (account.getPublicKey()==null||account.getPublicKey().equals("")) throw new NullPointerException("PublicKey is empty.");
+        if (account.getUserAddress()==null||account.getUserAddress().equals("")) throw new NullPointerException("UserAddress is empty.");
+
+        Crypto.validateAddress(account.getUserAddress());
+        Crypto.validatePrivateKey(account.getPrivateKey());
+        if (!Crypto.validPubKey(account.getPublicKey())) throw new InvalidFormatException("invalid pubkey");
+        if (!StrUtils.isNumeric(account.getAccountNumber())) throw new InvalidFormatException("invalid accountNumber");
+        if (!StrUtils.isNumeric(account.getSequenceNumber())) throw new InvalidFormatException("invalid sequenceNumber");
+
     }
 
     private JSONObject sendTransaction(byte[] data) {
@@ -118,14 +130,26 @@ public class OKChainRPCClientImpl implements OKChainClient {
 
     private void checkPlaceOrderRequestParms(RequestPlaceOrderParams parms) {
         if (parms == null) throw new NullPointerException("empty PlaceOrderRequestParms");
-        if (parms.getPrice().equals("")) throw new NullPointerException("empty Price");
-        if (parms.getProduct().equals("")) throw new NullPointerException("empty Product");
-        if (parms.getQuantity().equals("")) throw new NullPointerException("empty Quantity");
-        if (parms.getSide().equals("")) throw new NullPointerException("empty Side");
+        if (parms.getPrice()==null||parms.getPrice().equals("")) throw new NullPointerException("empty Price");
+        if (parms.getProduct()==null||parms.getProduct().equals("")) throw new NullPointerException("empty Product");
+        if (parms.getQuantity()==null||parms.getQuantity().equals("")) throw new NullPointerException("empty Quantity");
+        if (parms.getSide()==null||parms.getSide().equals("")) throw new NullPointerException("empty Side");
+
+        if (!StrUtils.isDecimal(parms.getPrice(), ConstantIF.DECIMAL_N)) throw new InvalidFormatException("invalid price, need " + ConstantIF.DECIMAL_N +" decimals after .");
+        if (!StrUtils.isDecimal(parms.getQuantity(), ConstantIF.DECIMAL_N)) throw new InvalidFormatException("invalid quantity, need " + ConstantIF.DECIMAL_N +" decimals after .");
+        if (!StrUtils.isProduct(parms.getProduct())) throw new InvalidFormatException("invalid product");
+        if (!StrUtils.isProductSide(parms.getSide())) throw new InvalidFormatException("invalid product side");
     }
 
     public JSONObject sendSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) throws NullPointerException, IOException {
         checkAccountInfoValue(account);
+        Crypto.validateAddress(to);
+        if (amount ==null) throw new NullPointerException("amount should not be null");
+        Iterator<Token> it=amount.iterator();
+        while(it.hasNext()) {
+            Token t=it.next();
+            if (!StrUtils.isDecimal(t.getAmount(), ConstantIF.DECIMAL_N)) throw new InvalidFormatException("invalid amount, need " + ConstantIF.DECIMAL_N +" decimals after .");
+        }
         if (to.equals("")) throw new NullPointerException("Reciever address is empty.");
         if (amount == null || amount.isEmpty()) throw new NullPointerException("Amount is empty.");
         byte[] data = BuildTransaction.generateAminoSendTransaction(account, to, amount, memo);
@@ -192,7 +216,8 @@ public class OKChainRPCClientImpl implements OKChainClient {
     }
 
     public JSONObject getAccountFromNode(String addr) throws NullPointerException {
-        if (addr.equals("")) throw new NullPointerException("empty userAddress");
+        if (addr == null || addr.equals("")) throw new NullPointerException("empty userAddress");
+        Crypto.validateAddress(addr);
         Map<String, Object> dataMp = new TreeMap<>();
         dataMp.put("Address", addr);
         byte[] data = JSON.toJSONString(dataMp).getBytes();
@@ -201,7 +226,9 @@ public class OKChainRPCClientImpl implements OKChainClient {
     }
 
     public BaseModel getAccountALLTokens(String addr, String show) throws NullPointerException {
-        if (addr.equals("")) throw new NullPointerException("empty address");
+        if (addr==null||addr.equals("")) throw new NullPointerException("empty address");
+        Crypto.validateAddress(addr);
+        if (show !="all" && show != "partial" && show != "") throw new InvalidFormatException("invalid show param,should be 'all' or 'partial'");
         Map<String, Object> dataMp = new TreeMap<>();
         dataMp.put("symbol", "");
         dataMp.put("show", show);
@@ -212,8 +239,10 @@ public class OKChainRPCClientImpl implements OKChainClient {
     }
 
     public BaseModel getAccountToken(String addr, String symbol) throws NullPointerException {
+        Crypto.validateAddress(addr);
         if (addr.equals("")) throw new NullPointerException("empty address");
         if (symbol.equals("")) throw new NullPointerException("empty symbol");
+
         Map<String, Object> dataMp = new TreeMap<>();
         dataMp.put("symbol", symbol);
         dataMp.put("show", "partial");
@@ -230,7 +259,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
     }
 
     public BaseModel getToken(String symbol) throws NullPointerException {
-        if (symbol.equals("")) throw new NullPointerException("empty symbol");
+        if (symbol==null||symbol.equals("")) throw new NullPointerException("empty symbol");
         String path = "custom/token/info/" + symbol;
         JSONObject jo = ABCIQuery(path, null, ConstantIF.RPC_METHOD_QUERY);
         return queryJO2BM(jo);
@@ -243,6 +272,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
     }
 
     public BaseModel getDepthBook(String product) throws NullPointerException {
+        if (!StrUtils.isProduct(product)) throw new InvalidFormatException("invalid product");
         if (product.equals("")) throw new NullPointerException("empty product");
         String path = "custom/order/depthbook";
         Map<String, Object> dataMp = new TreeMap<>();
@@ -255,11 +285,14 @@ public class OKChainRPCClientImpl implements OKChainClient {
 
     }
 
-    public BaseModel getCandles(String granularity, String instrumentId, String size) throws NullPointerException {
-        if (instrumentId.equals("")) throw new NullPointerException("empty product");
+    public BaseModel getCandles(String granularity, String product, String size) throws NullPointerException {
+        if (size!=""&&!StrUtils.isNumeric(size)) throw new InvalidFormatException("invalid size");
+        if (granularity!=""&&!StrUtils.isNumeric(granularity)) throw new InvalidFormatException("invalid granularity");
+        if (!StrUtils.isProduct(product)) throw new InvalidFormatException("invalid product");
+
         String path = "custom/backend/candles";
         Map<String, Object> dataMp = new TreeMap<>();
-        dataMp.put("Product", instrumentId);
+        dataMp.put("Product", product);
         dataMp.put("Granularity", granularity);
         dataMp.put("Size", size);
         byte[] data = JSON.toJSONString(dataMp).getBytes();
@@ -269,6 +302,8 @@ public class OKChainRPCClientImpl implements OKChainClient {
     }
 
     public BaseModel getTickers(String count) {
+        if (count!=""&&!StrUtils.isNumeric(count)) throw new InvalidFormatException("invalid count");
+
         String path = "custom/backend/tickers";
         Map<String, Object> dataMp = new TreeMap<>();
         dataMp.put("Product", "");
@@ -279,9 +314,18 @@ public class OKChainRPCClientImpl implements OKChainClient {
         return queryJO2BM(jo);
     }
 
+    private void validateStartEndPagePerPage(String start, String end, String page, String perPage) {
+        if (start!=""&&!StrUtils.isNumeric(start)) throw new InvalidFormatException("invalid start");
+        if (end!=""&&!StrUtils.isNumeric(end)) throw new InvalidFormatException("invalid end");
+        if (page!=""&&!StrUtils.isNumeric(page)) throw new InvalidFormatException("invalid page");
+        if (perPage!=""&&!StrUtils.isNumeric(perPage)) throw new InvalidFormatException("invalid perPage");
+    }
     // get the info of the product's record of transaction
     public BaseModel getMatches(String product, String start, String end, String page, String perPage) throws NullPointerException {
-        if (product.equals("")) throw new NullPointerException("empty product");
+        if (!StrUtils.isProduct(product)) throw new InvalidFormatException("invalid product");
+        validateStartEndPagePerPage(start,end,page,perPage);
+
+
         String path = "custom/backend/matches";
         Map<String, Object> dataMp = new TreeMap<>();
         dataMp.put("Product", product);
@@ -296,7 +340,11 @@ public class OKChainRPCClientImpl implements OKChainClient {
     }
 
     public BaseModel getOrderListOpen(RequestOrderListOpenParams params) throws NullPointerException {
-        if (params.getAddress().equals("")) throw new NullPointerException("empty Address");
+        validateStartEndPagePerPage(params.getStart(),params.getEnd(),params.getPage(),params.getPerPage());
+        Crypto.validateAddress(params.getAddress());
+        if (params.getProduct()!=""&&!StrUtils.isProduct(params.getProduct())) throw new InvalidFormatException("invalid product");
+        if (params.getSide()!="" && !StrUtils.isProductSide(params.getSide())) throw new InvalidFormatException("invalid side");
+
         String path = "custom/backend/orders/open";
         Map<String, Object> dataMp = new TreeMap<>();
         dataMp.put("Address", params.getAddress());
@@ -313,7 +361,13 @@ public class OKChainRPCClientImpl implements OKChainClient {
     }
 
     public BaseModel getOrderListClosed(RequestOrderListClosedParams params) throws NullPointerException {
-        if (params.getAddress().equals("")) throw new NullPointerException("empty Address");
+        validateStartEndPagePerPage(params.getStart(),params.getEnd(),params.getPage(),params.getPerPage());
+        Crypto.validateAddress(params.getAddress());
+        if (params.getProduct()!="" && !StrUtils.isProduct(params.getProduct())) throw new InvalidFormatException("invalid product");
+        if (params.getSide()!="" && !StrUtils.isProductSide(params.getSide())) throw new InvalidFormatException("invalid side");
+        if (params.getHideNoFill()!=""&&params.getHideNoFill()!="0"&&params.getHideNoFill()!="1") throw new InvalidFormatException("invalid param hideNoFill");
+
+
         String path = "custom/backend/orders/closed";
         Map<String, Object> dataMp = new TreeMap<>();
         dataMp.put("Product", params.getProduct());
@@ -334,7 +388,11 @@ public class OKChainRPCClientImpl implements OKChainClient {
     }
 
     public BaseModel getDeals(RequestDealsParams params) throws NullPointerException {
-        if (params.getAddress().equals("")) throw new NullPointerException("empty Address");
+        validateStartEndPagePerPage(params.getStart(),params.getEnd(),params.getPage(),params.getPerPage());
+        Crypto.validateAddress(params.getAddress());
+        if (params.getProduct()!=""&&!StrUtils.isProduct(params.getProduct())) throw new InvalidFormatException("invalid product");
+        if (params.getSide()!="" && !StrUtils.isProductSide(params.getSide())) throw new InvalidFormatException("invalid side");
+
         String path = "custom/backend/deals";
         Map<String, Object> dataMp = new TreeMap<>();
         dataMp.put("Address", params.getAddress());
@@ -351,7 +409,10 @@ public class OKChainRPCClientImpl implements OKChainClient {
     }
 
     public BaseModel getTransactions(RequestTransactionsParams params) throws NullPointerException {
-        if (params.getAddress().equals("")) throw new NullPointerException("empty Address");
+        validateStartEndPagePerPage(params.getStart(),params.getEnd(),params.getPage(),params.getPerPage());
+        Crypto.validateAddress(params.getAddress());
+        if (params.getType()!=""&&params.getType()!="1"&&params.getType()!="2"&&params.getType()!="3") throw new InvalidFormatException("invalid type");
+
         String path = "custom/backend/deals";
         Map<String, Object> dataMp = new TreeMap<>();
         dataMp.put("Address", params.getAddress());

@@ -65,7 +65,9 @@ public class CryptoTest {
     @Test
     public void generatePrivateKeyFromMnemonic() {
         String mnemonic = "total lottery arena when pudding best candy until army spoil drill pool";
-        System.out.println(Crypto.generatePrivateKeyFromMnemonic(mnemonic));
+        String priv = Crypto.generatePrivateKeyFromMnemonic(mnemonic);
+        System.out.println(priv);
+        System.out.println(Crypto.generateAddressFromPriv(priv));
     }
 
 
