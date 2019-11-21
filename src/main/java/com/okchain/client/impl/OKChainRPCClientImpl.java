@@ -13,14 +13,12 @@ import com.okchain.exception.InvalidFormatException;
 import com.okchain.exception.OKChainException;
 import com.okchain.transaction.BuildTransaction;
 import com.okchain.types.*;
-import com.sun.javaws.exceptions.ErrorCodeResponseException;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
-import org.omg.CORBA.DynAnyPackage.Invalid;
+
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Struct;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
