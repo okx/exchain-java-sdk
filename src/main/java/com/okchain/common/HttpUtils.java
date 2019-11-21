@@ -1,5 +1,6 @@
 package com.okchain.common;
 
+import com.okchain.exception.OKChainException;
 import com.okchain.types.Pair;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -104,12 +105,8 @@ public class HttpUtils {
         try {
             String res = sendPostDataByJson(url, data, "");
             return res;
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-            return e.getMessage();
         } catch (IOException e) {
-            e.printStackTrace();
-            return e.getMessage();
+            throw new OKChainException(e.getMessage());
         }
 
     }
