@@ -4,12 +4,14 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.okchain.client.impl.OKChainRPCClientImpl;
 import com.okchain.common.HttpUtils;
+import com.okchain.crypto.keystore.CipherException;
 import com.okchain.transaction.BuildTransaction;
 import com.okchain.types.*;
 import org.bouncycastle.util.encoders.Hex;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -17,6 +19,8 @@ import java.util.List;
 
 public class OKChainRPCClientImplTest {
     private static String privateKey = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
+    private static String privateKey2 = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011885";
+
     private static String mnemo = "total lottery arena when pudding best candy until army spoil drill pool";
     private static String addr = "okchain1g7c3nvac7mjgn2m9mqllgat8wwd3aptdqket5k";
     // rpc
@@ -37,7 +41,14 @@ public class OKChainRPCClientImplTest {
     @Test
     public void testGetAccountInfo() {
         OKChainRPCClientImpl okc = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
-        AccountInfo accountInfo = okc.getAccountInfo(this.privateKey);
+        AccountInfo accountInfo;
+        try{
+            accountInfo = okc.getAccountInfo(this.privateKey+"1");
+            Assert.assertFalse(true);
+        }catch (Exception e){
+
+        }
+        accountInfo = okc.getAccountInfo(this.privateKey);
         Assert.assertNotNull(accountInfo.getPrivateKey());
         Assert.assertNotNull(accountInfo.getSequenceNumber());
         Assert.assertNotNull(accountInfo.getAccountNumber());
@@ -60,6 +71,37 @@ public class OKChainRPCClientImplTest {
         String Mnemonic = client.generateMnemonic();
         Assert.assertNotNull(Mnemonic);
         System.out.println(Mnemonic);
+    }
+
+    @Test
+    public void getPrivateKeyFromKeyStore() {
+        OKChainClient okc = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
+        String password = "jilei";
+        String filename = "";
+        try {
+            filename = okc.generateKeyStore(this.privateKey, password);
+            Assert.assertNotNull(filename);
+            Assert.assertNotEquals("", filename);
+        } catch (CipherException e) {
+            e.printStackTrace();
+            Assert.assertNull(e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+            Assert.assertNull(e.getMessage());
+        }
+        try {
+            String privateKey = okc.getPrivateKeyFromKeyStore(filename, password);
+            System.out.println(privateKey);
+            Assert.assertEquals(privateKey, this.privateKey);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Assert.assertNull(e.getMessage());
+        } catch (CipherException e) {
+            e.printStackTrace();
+            Assert.assertNull(e.getMessage());
+        }
+        File file = new File(filename);
+        file.delete();
     }
 
     // transact

@@ -147,11 +147,23 @@ public class Crypto {
       throw new InvalidFormatException("invalid Address");
     if (addr.length() != ConstantIF.ADDRESS_PREFIX.length() + 1 + 38)
       throw new InvalidFormatException("invalid Address length");
-    AddressUtil.decodeAddress(addr);
+    try{
+      AddressUtil.decodeAddress(addr);
+    }catch (Exception e){
+      throw new InvalidFormatException("invalid Address");
+    }
+
   }
 
   public static void validatePrivateKey(String privateKey) {
-    if (privateKey == null || Hex.decode(privateKey).length != privateKeyLength)
+    byte[] len;
+    try{
+      len = Hex.decode(privateKey);
+    }catch (Exception e){
+      throw new InvalidFormatException("invalid privateKey");
+    }
+
+    if (privateKey == null || len.length != privateKeyLength)
       throw new InvalidFormatException("invalid privateKey");
   }
 }

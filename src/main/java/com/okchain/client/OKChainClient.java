@@ -25,6 +25,9 @@ public interface OKChainClient {
 
     public AccountInfo getAccountInfoFromMnemonic(String mnemo);
 
+    public String generateKeyStore(String privateKey, String passWord) throws CipherException, IOException;
+
+    public String getPrivateKeyFromKeyStore(String keyStoreFilePath, String passWord) throws IOException, CipherException;
     // transact
 
     public JSONObject sendSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) throws NullPointerException, IOException;

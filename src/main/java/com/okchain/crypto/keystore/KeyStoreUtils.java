@@ -4,9 +4,11 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.okchain.crypto.Crypto;
+import com.okchain.exception.InvalidFormatException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InvalidClassException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -82,6 +84,9 @@ public class KeyStoreUtils {
 
     public static String getPrivateKeyFromKeyStoreFile(String keyStorePath, String passWord) throws IOException, CipherException {
         File file = new File(keyStorePath);
+        if (!file.exists()){
+            throw new InvalidFormatException("keyStorePath is not exist");
+        }
         KeyStoreFile keyStoreFile = objectMapper.readValue(file, KeyStoreFile.class);
         String privatetKey = KeyStore.decrypt(passWord, keyStoreFile);
         return privatetKey;

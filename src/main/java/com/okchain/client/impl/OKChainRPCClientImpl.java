@@ -10,8 +10,10 @@ import com.okchain.crypto.Crypto;
 import com.okchain.crypto.keystore.CipherException;
 import com.okchain.crypto.keystore.KeyStoreUtils;
 import com.okchain.exception.InvalidFormatException;
+import com.okchain.exception.OKChainException;
 import com.okchain.transaction.BuildTransaction;
 import com.okchain.types.*;
+import com.sun.javaws.exceptions.ErrorCodeResponseException;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
 import org.omg.CORBA.DynAnyPackage.Invalid;
@@ -59,7 +61,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
     }
 
     public AddressInfo getAddressInfo(String privateKey) throws NullPointerException {
-        if (privateKey.equals("")) throw new NullPointerException("empty privateKey");
+        Crypto.validatePrivateKey(privateKey);
         String pubKey = Crypto.generatePubKeyHexFromPriv(privateKey);
         String address = Crypto.generateAddressFromPub(pubKey);
         return new AddressInfo(privateKey, pubKey, address);
@@ -70,11 +72,18 @@ public class OKChainRPCClientImpl implements OKChainClient {
     }
 
     public AccountInfo getAccountInfo(String privateKey) throws NullPointerException {
-        if (privateKey.equals("")) throw new NullPointerException("empty privateKey");
         AddressInfo addressInfo = getAddressInfo(privateKey);
         JSONObject accountJson = getAccountFromNode(addressInfo.getUserAddress());
-        String sequence = getSequance(accountJson);
-        String accountNumber = getAccountNumber(accountJson);
+        System.out.println(accountJson);
+        String sequence;
+        String accountNumber;
+        try{
+            sequence = getSequance(accountJson);
+            accountNumber = getAccountNumber(accountJson);
+        }catch (Exception e){
+            throw new OKChainException("account not exist on OKChain");
+        }
+
         return new AccountInfo(addressInfo, accountNumber, sequence);
     }
 
@@ -87,6 +96,21 @@ public class OKChainRPCClientImpl implements OKChainClient {
         return Crypto.generateMnemonic();
     }
 
+    public String generateKeyStore(String privateKey, String passWord) throws CipherException, IOException {
+        if(passWord.length() > 30) {
+            throw new InvalidFormatException("length of password need <= 30");
+        }
+        Crypto.validatePrivateKey(privateKey);
+        File file = new File("./");
+        return KeyStoreUtils.generateWalletFile(passWord, privateKey, file, true);
+    }
+
+    public String getPrivateKeyFromKeyStore(String keyStoreFilePath, String passWord) throws IOException, CipherException {
+        if(passWord.length() > 30) {
+            throw new InvalidFormatException("length of password need <= 30");
+        }
+        return KeyStoreUtils.getPrivateKeyFromKeyStoreFile(keyStoreFilePath, passWord);
+    }
     // transact
 
     private void checkAccountInfoValue(AccountInfo account) {
@@ -145,13 +169,13 @@ public class OKChainRPCClientImpl implements OKChainClient {
         checkAccountInfoValue(account);
         Crypto.validateAddress(to);
         if (amount ==null) throw new NullPointerException("amount should not be null");
+        if (amount.isEmpty()) throw new NullPointerException("Amount is empty.");
         Iterator<Token> it=amount.iterator();
         while(it.hasNext()) {
             Token t=it.next();
             if (!StrUtils.isDecimal(t.getAmount(), ConstantIF.DECIMAL_N)) throw new InvalidFormatException("invalid amount, need " + ConstantIF.DECIMAL_N +" decimals after .");
         }
-        if (to.equals("")) throw new NullPointerException("Reciever address is empty.");
-        if (amount == null || amount.isEmpty()) throw new NullPointerException("Amount is empty.");
+
         byte[] data = BuildTransaction.generateAminoSendTransaction(account, to, amount, memo);
         return sendTransaction(data);
     }
