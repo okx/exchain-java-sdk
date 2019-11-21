@@ -187,6 +187,8 @@ public class OKChainRPCClientImpl implements OKChainClient {
 
     public JSONObject sendCancelOrderTransaction(AccountInfo account, String orderId, String memo) throws IOException {
         checkAccountInfoValue(account);
+        if (orderId==null||orderId=="") throw new InvalidFormatException("empty orderId");
+        if (orderId.length()>30) throw new InvalidFormatException("the length of orderId is too long");
         byte[] data = BuildTransaction.generateAminoCancelOrderTransaction(account, orderId, memo);
         return sendTransaction(data);
     }
