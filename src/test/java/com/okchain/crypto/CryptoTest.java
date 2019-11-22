@@ -76,7 +76,7 @@ public class CryptoTest {
         File file = new File("./");
         String fileName = "";
         try {
-            fileName = KeyStoreUtils.generateNewWalletFile("jilei", file);
+            fileName = KeyStoreUtils.generateNewWalletFile("1234567", file);
         } catch (CipherException e) {
             e.printStackTrace();
         } catch (InvalidAlgorithmParameterException e) {
@@ -96,7 +96,7 @@ public class CryptoTest {
     @Test
     public void getPrivatekeyFromKeyStore() {
         File file = new File("./");
-        String password = "jilei";
+        String password = "1234567";
         String filename = "";
         try {
             filename = KeyStoreUtils.generateWalletFile(password, "c4c451ce673485521f9c9b74b6d90f0da433ef7f012fa7f9db4def627dccd632", file, true);
@@ -117,6 +117,7 @@ public class CryptoTest {
         File keyStoreFile = new File(filename);
         keyStoreFile.delete();
     }
+
 
     @Test
     public void validPubKey() {

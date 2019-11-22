@@ -76,7 +76,7 @@ public class OKChainRPCClientImplTest {
     @Test
     public void getPrivateKeyFromKeyStore() {
         OKChainClient okc = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
-        String password = "jilei";
+        String password = "1234567";
         String filename = "";
         try {
             filename = okc.generateKeyStore(this.privateKey, password);
