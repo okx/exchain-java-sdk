@@ -79,7 +79,7 @@ public class KeyStoreUtils {
         DateTimeFormatter format = DateTimeFormatter.ofPattern(
                 "'UTC--'yyyy-MM-dd'T'HH-mm-ss.nVV'--'");
         ZonedDateTime now = ZonedDateTime.now(ZoneOffset.UTC);
-        return now.format(format) + walletFile.getAddress() + ".json";
+        return now.format(format) + walletFile.getAddress() + ".txt";
     }
 
     public static String getPrivateKeyFromKeyStoreFile(String keyStorePath, String passWord) throws IOException, CipherException {

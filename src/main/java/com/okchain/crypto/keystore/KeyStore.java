@@ -5,7 +5,6 @@ import org.bouncycastle.crypto.digests.SHA256Digest;
 import org.bouncycastle.crypto.generators.PKCS5S2ParametersGenerator;
 import org.bouncycastle.crypto.generators.SCrypt;
 import org.bouncycastle.crypto.params.KeyParameter;
-import org.bouncycastle.jcajce.provider.digest.Keccak;
 import org.bouncycastle.util.encoders.Hex;
 
 import javax.crypto.BadPaddingException;
@@ -16,6 +15,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.UUID;
@@ -147,15 +147,27 @@ public class KeyStore {
         return sha3(result);
     }
 
-    public static byte[] sha3(byte[] input, int offset, int length) {
-        Keccak.DigestKeccak kecc = new Keccak.Digest256();
-        kecc.update(input, offset, length);
-        return kecc.digest();
+    //    public static byte[] sha3(byte[] input, int offset, int length) {
+//        Keccak.DigestKeccak kecc = new Keccak.Digest256();
+//        kecc.update(input, offset, length);
+//        return kecc.digest();
+//    }
+//
+//    public static byte[] sha3(byte[] input) {
+//        return sha3(input, 0, input.length);
+//    }
+    public static byte[] sha3(byte[] input) {
+        //return sha3(input, 0, input.length);
+        MessageDigest digest = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        byte[] msgHash = digest.digest(input);
+        return msgHash;
     }
 
-    public static byte[] sha3(byte[] input) {
-        return sha3(input, 0, input.length);
-    }
 
     public static String decrypt(String password, KeyStoreFile walletFile)
             throws CipherException {
