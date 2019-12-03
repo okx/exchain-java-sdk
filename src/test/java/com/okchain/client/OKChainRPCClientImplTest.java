@@ -107,8 +107,7 @@ public class OKChainRPCClientImplTest {
     // transact
     // get readable order-ID from the response
     public String GetOrderID(JSONObject jo) {
-        String encodedId = jo.getJSONObject("deliver_tx").getJSONArray("tags").getJSONObject(1).getString("value");
-        return new String(java.util.Base64.getDecoder().decode(encodedId));
+        return jo.getString("order_id");
     }
 
     @Test
@@ -119,7 +118,7 @@ public class OKChainRPCClientImplTest {
         String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
         String memo = "send memo";
         List<Token> amountList = new ArrayList<>();
-        Token amount = new Token("10.00000000", "okb");
+        Token amount = new Token("1.00000000", "okb");
         amountList.add(amount);
         JSONObject ret = client.sendSendTransaction(account, to, amountList, memo);
         System.out.println(ret);
@@ -127,11 +126,11 @@ public class OKChainRPCClientImplTest {
 
     @Test
     public void testSendPlaceOrderTransaction() throws IOException {
-        BuildTransaction.setMode("block");
+        BuildTransaction.setMode("sync");
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
         AccountInfo account = client.getAccountInfo(this.privateKey);
         String side = "BUY";
-        String product = "xxb_okb";
+        String product = "dash-86_okb";
         String price = "1.10000000";
         String quantity = "1.22000000";
         String memo = "new order memo";
@@ -145,7 +144,7 @@ public class OKChainRPCClientImplTest {
 
     @Test
     public void testSendCancelOrderTransaction() throws IOException {
-        BuildTransaction.setMode("block");
+        BuildTransaction.setMode("sync");
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
         AccountInfo account = client.getAccountInfo(this.privateKey);
         // u can get order-ID by placing a new order

@@ -1,6 +1,7 @@
 package com.okchain.client.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.okchain.client.OKChainClient;
 import com.okchain.common.ConstantIF;
@@ -13,6 +14,7 @@ import com.okchain.exception.InvalidFormatException;
 import com.okchain.exception.OKChainException;
 import com.okchain.transaction.BuildTransaction;
 import com.okchain.types.*;
+
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
 
@@ -147,7 +149,65 @@ public class OKChainRPCClientImpl implements OKChainClient {
         mp.put("tx", data);
         String res = JSONRPCUtils.call(this.backend, method, mp);
         JSONObject obj = JSON.parseObject(res).getJSONObject("result");
-        return obj;
+
+        JSONObject resObj = new JSONObject();
+        JSONObject execObj;
+        resObj.put("txhash", obj.getString("hash"));
+        if (method.equals(ConstantIF.RPC_METHOD_TX_SEND_BLOCK)) {
+            resObj.put("height", obj.getIntValue("height"));
+            if (!obj.getJSONObject("check_tx").containsKey("code")) {
+                System.out.println("yes");
+                execObj = obj.getJSONObject("deliver_tx");
+            }else {
+                execObj = obj.getJSONObject("check_tx");
+            }
+            if (execObj.containsKey("log")) {
+                String rawLog = execObj.getString("log");
+                System.out.println(rawLog);
+                resObj.put("raw_log", rawLog);
+                JSONArray logObj = JSONObject.parseArray(rawLog);
+                resObj.put("logs", logObj);
+            }
+            if (execObj.containsKey("code")) {
+                resObj.put("code", execObj.get("code"));
+            }
+            if (execObj.containsKey("data")) {
+                resObj.put("data", Hex.toHexString(execObj.getBytes("data")));
+            }
+            if (execObj.containsKey("info")) {
+                resObj.put("info", execObj.get("info"));
+            }
+            if (execObj.containsKey("tags")) {
+                JSONArray tags = execObj.getJSONArray("tags");
+                JSONArray otags = new JSONArray();
+                int i;
+                for (i=0;i<tags.size();i++){
+                    JSONObject tag = new JSONObject();
+                    tag.put("key", new String(tags.getJSONObject(i).getBytes("key")));
+                    tag.put("value", new String(tags.getJSONObject(i).getBytes("value")));
+                    otags.add(tag);
+                }
+                resObj.put("tags", otags);
+            }
+            if (execObj.containsKey("codespace")) {
+                resObj.put("codespace", execObj.get("codespace"));
+            }
+        }else {
+            if (obj.containsKey("log")) {
+                String rawLog = obj.getString("log");
+                resObj.put("raw_log", rawLog);
+                JSONArray logObj = JSONObject.parseArray(rawLog);
+                resObj.put("logs", logObj);
+            }
+            if (obj.containsKey("code")) {
+                resObj.put("code", obj.get("code"));
+            }
+            if (obj.containsKey("data")) {
+                resObj.put("data", Hex.toHexString(obj.getBytes("data")));
+            }
+        }
+
+        return resObj;
     }
 
     private void checkPlaceOrderRequestParms(RequestPlaceOrderParams parms) {
@@ -182,15 +242,50 @@ public class OKChainRPCClientImpl implements OKChainClient {
         checkAccountInfoValue(account);
         checkPlaceOrderRequestParms(params);
         byte[] data = BuildTransaction.generateAminoPlaceOrderTransaction(account, params.getSide(), params.getProduct(), params.getPrice(), params.getQuantity(), memo);
-        return sendTransaction(data);
+        JSONObject res = sendTransaction(data);
+        setOrderMsg(res);
+        res.put("client_oid", account.getSequenceNumber());
+        int i;
+        String orderId = "";
+        if (res.containsKey("tags")){
+            JSONArray tags = res.getJSONArray("tags");
+            System.out.println(tags);
+            for (i=0;i<tags.size();i++){
+                JSONObject tag = tags.getJSONObject(i);
+                if (tag.getString("key").equals("orderId")){
+                    orderId = tag.getString("value");
+                    break;
+                }
+            }
+        }
+        res.put("order_id", orderId);
+
+        return res;
+    }
+
+    private void setOrderMsg(JSONObject res) {
+        if (res.containsKey("code") && res.getIntValue("code") != 0) {
+            res.put("error_code", res.getIntValue("code"));
+            res.put("error_message", res.getJSONArray("logs").getJSONObject(0).getString("log"));
+            res.put("result", false);
+        }else {
+            res.put("error_code", 0);
+            res.put("error_message", "");
+            res.put("result", true);
+        }
     }
 
     public JSONObject sendCancelOrderTransaction(AccountInfo account, String orderId, String memo) throws IOException {
         checkAccountInfoValue(account);
-        if (orderId==null||orderId=="") throw new InvalidFormatException("empty orderId");
+        if (orderId==null||orderId.equals("")) throw new InvalidFormatException("empty orderId");
         if (orderId.length()>30) throw new InvalidFormatException("the length of orderId is too long");
         byte[] data = BuildTransaction.generateAminoCancelOrderTransaction(account, orderId, memo);
-        return sendTransaction(data);
+        JSONObject res = sendTransaction(data);
+        setOrderMsg(res);
+        res.put("order_id", orderId);
+        res.put("client_oid", account.getSequenceNumber());
+
+        return res;
     }
 
     // query
@@ -252,7 +347,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
     public BaseModel getAccountALLTokens(String addr, String show) throws NullPointerException {
         if (addr==null||addr.equals("")) throw new NullPointerException("empty address");
         Crypto.validateAddress(addr);
-        if (show !="all" && show != "partial" && show != "") throw new InvalidFormatException("invalid show param,should be 'all' or 'partial'");
+        if (!show.equals("all") && !show.equals("partial") && !show.equals("")) throw new InvalidFormatException("invalid show param,should be 'all' or 'partial'");
         Map<String, Object> dataMp = new TreeMap<>();
         dataMp.put("symbol", "");
         dataMp.put("show", show);
@@ -401,7 +496,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
         dataMp.put("PerPage", params.getPerPage());
         dataMp.put("Start", params.getStart());
         dataMp.put("End", params.getEnd());
-        if (params.getHideNoFill() == "true") {
+        if (params.getHideNoFill().equals("true")) {
             dataMp.put("HideNoFill", true);
         } else {
             dataMp.put("HideNoFill", false);
