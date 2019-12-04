@@ -67,5 +67,11 @@ public interface OKChainClient {
 
     public BaseModel getTransactions(RequestTransactionsParams params) throws NullPointerException;
 
+    public String getTickersV2(String instrumentId);
 
-}
+    public String getInstrumentsV2();
+
+    public String getOrderListOpenV2(String instrument_id, String after, String before, int limit) throws NullPointerException;
+
+    public String getOrderV2(String order_id);
+    }

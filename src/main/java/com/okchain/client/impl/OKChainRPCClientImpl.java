@@ -3,6 +3,7 @@ package com.okchain.client.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.okchain.client.OKChainClient;
 import com.okchain.common.ConstantIF;
 import com.okchain.common.StrUtils;
@@ -530,7 +531,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
     public BaseModel getTransactions(RequestTransactionsParams params) throws NullPointerException {
         validateStartEndPagePerPage(params.getStart(),params.getEnd(),params.getPage(),params.getPerPage());
         Crypto.validateAddress(params.getAddress());
-        if (params.getType()!=""&&params.getType()!="1"&&params.getType()!="2"&&params.getType()!="3") throw new InvalidFormatException("invalid type");
+        if (!params.getType().equals("")&&!params.getType().equals("1")&&!params.getType().equals("2")&&!params.getType().equals("3")) throw new InvalidFormatException("invalid type");
 
         String path = "custom/backend/deals";
         Map<String, Object> dataMp = new TreeMap<>();
@@ -614,5 +615,55 @@ public class OKChainRPCClientImpl implements OKChainClient {
         String res = JSONRPCUtils.call(this.backend, "validators", mp);
         return nodeQueryJO2BM(JSON.parseObject(res));
     }
+
+    public String getTickersV2(String instrumentId) {
+        if (!StrUtils.isProduct(instrumentId)) throw new InvalidFormatException("invalid instrumentId");
+
+        String path = "custom/backend/tickersV2";
+        Map<String, Object> dataMp = new TreeMap<>();
+        dataMp.put("Product", instrumentId);
+        dataMp.put("Count", "");
+        dataMp.put("Sort", true);
+        byte[] data = JSON.toJSONString(dataMp).getBytes();
+        JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
+        return queryJO2BM(jo).getData();
+    }
+
+    public String getInstrumentsV2() {
+        String path = "custom/backend/instrumentsV2";
+        JSONObject jo = ABCIQuery(path, null, ConstantIF.RPC_METHOD_QUERY);
+        return queryJO2BM(jo).getData();
+    }
+
+    public String getOrderListOpenV2(String instrument_id, String after, String before, int limit) throws NullPointerException {
+        if (!StrUtils.isProduct(instrument_id)) throw new InvalidFormatException("invalid instrument_id");
+        if (after == null) throw new InvalidFormatException("invalid after");
+        if (before == null) throw new InvalidFormatException("invalid before");
+        if (limit < 0) throw new InvalidFormatException("invalid limit");
+
+        String path = "custom/backend/orderPendingV2";
+        Map<String, Object> dataMp = new TreeMap<>();
+        dataMp.put("Product", instrument_id);
+        dataMp.put("After", after);
+        dataMp.put("Before", before);
+        dataMp.put("Limit", limit+"");
+        byte[] data = JSON.toJSONString(dataMp).getBytes();
+        JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
+        return queryJO2BM(jo).getData();
+    }
+
+    public String getOrderV2(String order_id) {
+        if (order_id == null || order_id.equals("")) throw new InvalidFormatException("invalid order_id");
+
+        String path = "custom/backend/orderV2";
+        Map<String, Object> dataMp = new TreeMap<>();
+        dataMp.put("OrderId", order_id);
+
+        byte[] data = JSON.toJSONString(dataMp).getBytes();
+        JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
+        return queryJO2BM(jo).getData();
+    }
+
+
 
 }

@@ -1,7 +1,8 @@
-package com.okchain.client;
+package com.okchain.client.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.okchain.client.OKChainClient;
 import com.okchain.client.impl.OKChainRPCClientImpl;
 import com.okchain.common.HttpUtils;
 import com.okchain.crypto.keystore.CipherException;
@@ -25,8 +26,8 @@ public class OKChainRPCClientImplTest {
     private static String addr = "okchain1g7c3nvac7mjgn2m9mqllgat8wwd3aptdqket5k";
     // rpc
     //private static String url_rpc = "http://localhost:26657";
-    private static String url_rpc = "https://okexbeta.bafang.com/okchain/v1/rpc";
-//    private static String url_rpc = "http://192.168.13.128:26667";
+//    private static String url_rpc = "https://okexbeta.bafang.com/okchain/v1/rpc";
+    private static String url_rpc = "http://192.168.13.125:20157";
     private static String queryAddr="okchain1a3xgd3ymuh282fwwawkk9jceml8pex5q0llrhn";
     private static String queryAddr1="okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
 
@@ -126,11 +127,11 @@ public class OKChainRPCClientImplTest {
 
     @Test
     public void testSendPlaceOrderTransaction() throws IOException {
-        BuildTransaction.setMode("sync");
+        BuildTransaction.setMode("block");
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
         AccountInfo account = client.getAccountInfo(this.privateKey);
-        String side = "BUY";
-        String product = "dash-86_okb";
+        String side = "SELL";
+        String product = "btc-c9f_okb";
         String price = "1.10000000";
         String quantity = "1.22000000";
         String memo = "new order memo";
@@ -348,5 +349,32 @@ public class OKChainRPCClientImplTest {
         Assert.assertEquals(bm.getCode(), "0");
     }
 
+  @Test
+  public void getTickersV2() {
+      OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
+      String bm = client.getTickersV2("btc-c9f_okb");
+      System.out.println(bm);
 
+  }
+
+  @Test
+  public void getInstrumentsV2() {
+      OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
+      String bm = client.getInstrumentsV2();
+      System.out.println(bm);
+  }
+
+  @Test
+  public void getOrderListOpenV2() {
+      OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
+      String bm = client.getOrderListOpenV2("btc-c9f_okb", "", "", 100);
+      System.out.println(bm);
+  }
+
+  @Test
+  public void getOrderV2() {
+      OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
+      String bm = client.getOrderV2("ID0000012498-1");
+      System.out.println(bm);
+  }
 }
