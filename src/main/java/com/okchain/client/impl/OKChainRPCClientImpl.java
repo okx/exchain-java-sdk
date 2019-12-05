@@ -243,50 +243,15 @@ public class OKChainRPCClientImpl implements OKChainClient {
         checkAccountInfoValue(account);
         checkPlaceOrderRequestParms(params);
         byte[] data = BuildTransaction.generateAminoPlaceOrderTransaction(account, params.getSide(), params.getProduct(), params.getPrice(), params.getQuantity(), memo);
-        JSONObject res = sendTransaction(data);
-        setOrderMsg(res);
-        res.put("client_oid", account.getSequenceNumber());
-        int i;
-        String orderId = "";
-        if (res.containsKey("tags")){
-            JSONArray tags = res.getJSONArray("tags");
-            System.out.println(tags);
-            for (i=0;i<tags.size();i++){
-                JSONObject tag = tags.getJSONObject(i);
-                if (tag.getString("key").equals("orderId")){
-                    orderId = tag.getString("value");
-                    break;
-                }
-            }
-        }
-        res.put("order_id", orderId);
-
-        return res;
-    }
-
-    private void setOrderMsg(JSONObject res) {
-        if (res.containsKey("code") && res.getIntValue("code") != 0) {
-            res.put("error_code", res.getIntValue("code"));
-            res.put("error_message", res.getJSONArray("logs").getJSONObject(0).getString("log"));
-            res.put("result", false);
-        }else {
-            res.put("error_code", 0);
-            res.put("error_message", "");
-            res.put("result", true);
-        }
+        return sendTransaction(data);
     }
 
     public JSONObject sendCancelOrderTransaction(AccountInfo account, String orderId, String memo) throws IOException {
         checkAccountInfoValue(account);
-        if (orderId==null||orderId.equals("")) throw new InvalidFormatException("empty orderId");
+        if (orderId==null||orderId=="") throw new InvalidFormatException("empty orderId");
         if (orderId.length()>30) throw new InvalidFormatException("the length of orderId is too long");
         byte[] data = BuildTransaction.generateAminoCancelOrderTransaction(account, orderId, memo);
-        JSONObject res = sendTransaction(data);
-        setOrderMsg(res);
-        res.put("order_id", orderId);
-        res.put("client_oid", account.getSequenceNumber());
-
-        return res;
+        return sendTransaction(data);
     }
 
     // query
@@ -664,6 +629,54 @@ public class OKChainRPCClientImpl implements OKChainClient {
         return queryJO2BM(jo).getData();
     }
 
+    public JSONObject sendPlaceOrderTransactionV2(AccountInfo account, RequestPlaceOrderParams params, String memo) throws IOException {
+        checkAccountInfoValue(account);
+        checkPlaceOrderRequestParms(params);
+        byte[] data = BuildTransaction.generateAminoPlaceOrderTransaction(account, params.getSide(), params.getProduct(), params.getPrice(), params.getQuantity(), memo);
+        JSONObject res = sendTransaction(data);
+        setOrderMsg(res);
+        res.put("client_oid", account.getSequenceNumber());
+        int i;
+        String orderId = "";
+        if (res.containsKey("tags")){
+            JSONArray tags = res.getJSONArray("tags");
+            System.out.println(tags);
+            for (i=0;i<tags.size();i++){
+                JSONObject tag = tags.getJSONObject(i);
+                if (tag.getString("key").equals("orderId")){
+                    orderId = tag.getString("value");
+                    break;
+                }
+            }
+        }
+        res.put("order_id", orderId);
 
+        return res;
+    }
+
+    private void setOrderMsg(JSONObject res) {
+        if (res.containsKey("code") && res.getIntValue("code") != 0) {
+            res.put("error_code", res.getIntValue("code"));
+            res.put("error_message", res.getJSONArray("logs").getJSONObject(0).getString("log"));
+            res.put("result", false);
+        }else {
+            res.put("error_code", 0);
+            res.put("error_message", "");
+            res.put("result", true);
+        }
+    }
+
+    public JSONObject sendCancelOrderTransactionV2(AccountInfo account, String orderId, String memo) throws IOException {
+        checkAccountInfoValue(account);
+        if (orderId==null||orderId.equals("")) throw new InvalidFormatException("empty orderId");
+        if (orderId.length()>30) throw new InvalidFormatException("the length of orderId is too long");
+        byte[] data = BuildTransaction.generateAminoCancelOrderTransaction(account, orderId, memo);
+        JSONObject res = sendTransaction(data);
+        setOrderMsg(res);
+        res.put("order_id", orderId);
+        res.put("client_oid", account.getSequenceNumber());
+
+        return res;
+    }
 
 }

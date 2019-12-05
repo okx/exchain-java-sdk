@@ -74,4 +74,9 @@ public interface OKChainClient {
     public String getOrderListOpenV2(String instrument_id, String after, String before, int limit) throws NullPointerException;
 
     public String getOrderV2(String order_id);
-    }
+
+    public JSONObject sendPlaceOrderTransactionV2(AccountInfo account, RequestPlaceOrderParams parms, String memo) throws NullPointerException, IOException;
+
+    public JSONObject sendCancelOrderTransactionV2(AccountInfo account, String orderId, String memo) throws NullPointerException, IOException;
+
+}
