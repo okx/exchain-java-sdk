@@ -8,8 +8,10 @@ public enum MessageType {
     MultiSend("3C1EDEF4"),
     NewOrder("C61D9893"),
     CancelOrder("AE30E5D6"),
+    MultiNewOrder("0AB2A87C"),
+    MultiCancelOrder("89234E28"),
     PubKey("EB5AE987"),
-    StdTx("F0625DEE");
+    StdTx("282816A9");
 
     private byte[] typePrefixBytes;
 

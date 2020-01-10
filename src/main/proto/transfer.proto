@@ -65,3 +65,19 @@ message Stu {
     int64 id = 1;
 }
 
+message MultiNewOrderItem {
+    string product = 1;
+    string side = 2;
+    string price = 3;
+    string quantity = 4;
+}
+
+message MsgMultiNewOrder {
+    bytes sender = 1;
+    repeated MultiNewOrderItem orderItems = 2;
+}
+
+message MsgMultiCancelOrder {
+    bytes sender = 1;
+    repeated string orderIdItems = 2;
+}

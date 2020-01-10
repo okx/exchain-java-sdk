@@ -25,9 +25,9 @@ public class OKChainRPCClientImplTest {
     private static String mnemo = "total lottery arena when pudding best candy until army spoil drill pool";
     private static String addr = "okchain1g7c3nvac7mjgn2m9mqllgat8wwd3aptdqket5k";
     // rpc
-    //private static String url_rpc = "http://localhost:26657";
+    private static String url_rpc = "http://localhost:26657";
 //    private static String url_rpc = "https://okexbeta.bafang.com/okchain/v1/rpc";
-    private static String url_rpc = "http://192.168.13.125:20157";
+//    private static String url_rpc = "http://192.168.13.125:20157";
     private static String queryAddr="okchain1a3xgd3ymuh282fwwawkk9jceml8pex5q0llrhn";
     private static String queryAddr1="okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
 
@@ -117,9 +117,9 @@ public class OKChainRPCClientImplTest {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
         AccountInfo account = client.getAccountInfo(privateKey);
         String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
-        String memo = "send memo";
+        String memo = "";
         List<Token> amountList = new ArrayList<>();
-        Token amount = new Token("1.00000000", "okb");
+        Token amount = new Token("1.00000000", "xxb");
         amountList.add(amount);
         JSONObject ret = client.sendSendTransaction(account, to, amountList, memo);
         System.out.println(ret);
@@ -130,8 +130,8 @@ public class OKChainRPCClientImplTest {
         BuildTransaction.setMode("block");
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
         AccountInfo account = client.getAccountInfo(privateKey);
-        String side = "SELL";
-        String product = "btc-c9f_okb";
+        String side = "BUY";
+        String product = "xxb_okt";
         String price = "1.10000000";
         String quantity = "1.22000000";
         String memo = "new order memo";
@@ -145,15 +145,17 @@ public class OKChainRPCClientImplTest {
 
     @Test
     public void testSendCancelOrderTransaction() throws IOException {
-        BuildTransaction.setMode("sync");
+        BuildTransaction.setMode("block");
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
         AccountInfo account = client.getAccountInfo(privateKey);
         // u can get order-ID by placing a new order
-        String orderId = "ID0000045067-1";
+        String orderId = "ID0000001970-1";
         String memo = "cancel order memo";
         JSONObject ret = client.sendCancelOrderTransaction(account, orderId, memo);
         System.out.println(ret);
     }
+
+
 
     // query
 
@@ -374,7 +376,7 @@ public class OKChainRPCClientImplTest {
   @Test
   public void getOrderV2() {
       OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
-      String bm = client.getOrderV2("ID0000012498-1");
+      String bm = client.getOrderV2("ID0000000006-1");
       System.out.println(bm);
   }
 
@@ -383,8 +385,8 @@ public class OKChainRPCClientImplTest {
         BuildTransaction.setMode("block");
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
         AccountInfo account = client.getAccountInfo(privateKey);
-        String side = "SELL";
-        String product = "btc-c9f_okb";
+        String side = "BUY";
+        String product = "xxb_okt";
         String price = "1.10000000";
         String quantity = "1.22000000";
         String memo = "new order memo";
@@ -398,13 +400,53 @@ public class OKChainRPCClientImplTest {
 
     @Test
     public void testSendCancelOrderTransactionV2() throws IOException {
-        BuildTransaction.setMode("sync");
+        BuildTransaction.setMode("block");
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
         AccountInfo account = client.getAccountInfo(privateKey);
         // u can get order-ID by placing a new order
-        String orderId = "ID0000045067-1";
+        String orderId = "ID0000001777-1";
         String memo = "cancel order memo";
         JSONObject ret = client.sendCancelOrderTransactionV2(account, orderId, memo);
         System.out.println(ret);
     }
+
+
+    @Test
+    public void testSendMultiPlaceOrderTransaction() throws IOException {
+        BuildTransaction.setMode("block");
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        AccountInfo account = client.getAccountInfo(privateKey);
+        String side = "BUY";
+        String product = "xxb_okt";
+        String price = "1.10000000";
+        String quantity = "1.22000000";
+        String memo = "new order memo";
+        MultiNewOrderItem param = new MultiNewOrderItem(price, product, quantity, side);
+        MultiNewOrderItem param2 = new MultiNewOrderItem(price, product, quantity, side);
+        List<MultiNewOrderItem> items = new ArrayList<>();
+        items.add(param);
+        items.add(param2);
+        JSONObject ret = client.sendMultiPlaceOrderTransactionV2(account, items, memo);
+        System.out.println(ret);
+
+        String orderID = GetOrderID(ret);
+        System.out.println("orderID:" + orderID);
+    }
+
+    @Test
+    public void testSendMultiCancelOrderTransaction() throws IOException {
+        BuildTransaction.setMode("block");
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        AccountInfo account = client.getAccountInfo(privateKey);
+        // u can get order-ID by placing a new order
+        String orderId = "ID0000000698-1";
+        String orderId2 = "ID0000000294-2";
+        String memo = "cancel order memo";
+        List<String> orderIditems = new ArrayList<>();
+        orderIditems.add(orderId);
+        orderIditems.add(orderId2);
+        JSONObject ret = client.sendMultiCancelOrderTransactionV2(account, orderIditems, memo);
+        System.out.println(ret);
+    }
+
 }

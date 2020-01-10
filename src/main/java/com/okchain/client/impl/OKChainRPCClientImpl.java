@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ser.Serializers;
+import com.google.gson.JsonObject;
 import com.okchain.client.OKChainClient;
 import com.okchain.common.ConstantIF;
 import com.okchain.common.StrUtils;
@@ -18,14 +19,13 @@ import com.okchain.types.*;
 
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
+import org.jetbrains.annotations.NotNull;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class OKChainRPCClientImpl implements OKChainClient {
     private String backend;
@@ -82,6 +82,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
             sequence = getSequance(accountJson);
             accountNumber = getAccountNumber(accountJson);
         }catch (Exception e){
+            //System.out.println(e.getMessage());
             throw new OKChainException("account not exist on OKChain");
         }
 
@@ -150,30 +151,48 @@ public class OKChainRPCClientImpl implements OKChainClient {
         mp.put("tx", data);
         String res = JSONRPCUtils.call(this.backend, method, mp);
         JSONObject obj = JSON.parseObject(res).getJSONObject("result");
-
+        //System.out.println(obj);
         JSONObject resObj = new JSONObject();
         JSONObject execObj;
         resObj.put("txhash", obj.getString("hash"));
         if (method.equals(ConstantIF.RPC_METHOD_TX_SEND_BLOCK)) {
             resObj.put("height", obj.getIntValue("height"));
-            if (!obj.getJSONObject("check_tx").containsKey("code")) {
+            if (obj.getJSONObject("check_tx").containsKey("code")&&obj.getJSONObject("check_tx").getIntValue("code")!=0) {
                 System.out.println("yes");
-                execObj = obj.getJSONObject("deliver_tx");
-            }else {
                 execObj = obj.getJSONObject("check_tx");
+            }else {
+                execObj = obj.getJSONObject("deliver_tx");
             }
+            //System.out.println(execObj);
             if (execObj.containsKey("log")) {
                 String rawLog = execObj.getString("log");
-                System.out.println(rawLog);
+                //System.out.println(rawLog);
                 resObj.put("raw_log", rawLog);
-                JSONArray logObj = JSONObject.parseArray(rawLog);
-                resObj.put("logs", logObj);
+                try{
+                    JSONArray logObj = JSONObject.parseArray(rawLog);
+                    resObj.put("logs", logObj);
+                }catch (Exception e){
+                    try{
+                        JSONObject logObj = JSONObject.parseObject(rawLog);
+                        JSONArray arr = new JSONArray();
+                        arr.add(logObj);
+                        resObj.put("logs", arr);
+                        //System.out.println(arr);
+                    }catch (Exception e2){
+                        resObj.put("logs", rawLog);
+                    }
+
+                }
+
+
             }
             if (execObj.containsKey("code")) {
                 resObj.put("code", execObj.get("code"));
             }
+
             if (execObj.containsKey("data")) {
-                resObj.put("data", Hex.toHexString(execObj.getBytes("data")));
+                if (execObj.get("data") == null) resObj.put("data", null);
+                else resObj.put("data", Hex.toHexString(execObj.getBytes("data")));
             }
             if (execObj.containsKey("info")) {
                 resObj.put("info", execObj.get("info"));
@@ -189,6 +208,28 @@ public class OKChainRPCClientImpl implements OKChainClient {
                     otags.add(tag);
                 }
                 resObj.put("tags", otags);
+            }
+            if (execObj.containsKey("events")) {
+                JSONArray events = execObj.getJSONArray("events");
+                JSONArray newEvents = new JSONArray();
+                for (int i=0;i<events.size();i++) {
+                    JSONObject event = events.getJSONObject(i);
+                    JSONObject newEvent = new JSONObject();
+                    //System.out.println(event);
+                    newEvent.put("type", event.getString("type"));
+                    JSONArray attributes = event.getJSONArray("attributes");
+                    JSONArray newAttributes = new JSONArray();
+                    newEvent.put("attributes", newAttributes);
+                    for (int j=0;j<attributes.size();j++) {
+                        JSONObject attribute = attributes.getJSONObject(j);
+                        JSONObject newAttribute = new JSONObject();
+                        newAttribute.put("key", new String(Base64.decode(attribute.getString("key"))));
+                        newAttribute.put("value", new String(Base64.decode(attribute.getString("value"))));
+                        newAttributes.add(newAttribute);
+                    }
+                    newEvents.add(newEvent);
+                }
+                resObj.put("events", newEvents);
             }
             if (execObj.containsKey("codespace")) {
                 resObj.put("codespace", execObj.get("codespace"));
@@ -236,6 +277,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
         }
 
         byte[] data = BuildTransaction.generateAminoSendTransaction(account, to, amount, memo);
+        System.out.println(Hex.toHexString(data));
         return sendTransaction(data);
     }
 
@@ -274,8 +316,10 @@ public class OKChainRPCClientImpl implements OKChainClient {
 
     // get the part from the return of function ABCIQuery
     private JSONObject extractObject(JSONObject jo) {
+        //System.out.println("xxx");
+        //System.out.println(jo);
         JSONObject extractJSONObject = jo.getJSONObject("result").getJSONObject("response");
-        if (extractJSONObject.containsKey("code")) {
+        if (extractJSONObject.containsKey("code")&&extractJSONObject.getIntValue("code")!=0) {
             // if the rpc query fails
             return extractJSONObject;
         } else {
@@ -636,17 +680,21 @@ public class OKChainRPCClientImpl implements OKChainClient {
         JSONObject res = sendTransaction(data);
         setOrderMsg(res);
         res.put("client_oid", account.getSequenceNumber());
-        int i;
         String orderId = "";
-        if (res.containsKey("tags")){
-            JSONArray tags = res.getJSONArray("tags");
-            System.out.println(tags);
-            for (i=0;i<tags.size();i++){
-                JSONObject tag = tags.getJSONObject(i);
-                if (tag.getString("key").equals("orderId")){
-                    orderId = tag.getString("value");
-                    break;
+        if (res.containsKey("events")){
+            JSONArray events = res.getJSONArray("events");
+            System.out.println(events);
+            for (int i=0;i<events.size();i++){
+                JSONArray attributes = events.getJSONObject(i).getJSONArray("attributes");
+                for (int j=0;j<attributes.size();j++) {
+                    JSONObject attribute = attributes.getJSONObject(j);
+                    if (attribute.getString("key").equals("orderId")){
+                        orderId = attribute.getString("value");
+                        break;
+                    }
                 }
+                if (!orderId.equals("")) break;
+
             }
         }
         res.put("order_id", orderId);
@@ -657,7 +705,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
     private void setOrderMsg(JSONObject res) {
         if (res.containsKey("code") && res.getIntValue("code") != 0) {
             res.put("error_code", res.getIntValue("code"));
-            res.put("error_message", res.getJSONArray("logs").getJSONObject(0).getString("log"));
+            res.put("error_message", res.get("logs"));
             res.put("result", false);
         }else {
             res.put("error_code", 0);
@@ -679,4 +727,72 @@ public class OKChainRPCClientImpl implements OKChainClient {
         return res;
     }
 
+    public JSONObject sendMultiPlaceOrderTransactionV2(AccountInfo account, List<MultiNewOrderItem> items, String memo) throws IOException {
+        checkAccountInfoValue(account);
+        for (MultiNewOrderItem item : items){
+            RequestPlaceOrderParams params = new RequestPlaceOrderParams(item.getPrice(), item.getProduct(), item.getQuantity(), item.getSide());
+            checkPlaceOrderRequestParms(params);
+        }
+
+        byte[] data = BuildTransaction.generateAminoMultiPlaceOrderTransaction(account, items, memo);
+        JSONObject res = sendTransaction(data);
+        setOrderMsg(res);
+        res.put("client_oid", account.getSequenceNumber());
+        int i;
+        ArrayList<String> orderIdMap = new ArrayList<>();
+        if (res.containsKey("events")){
+            JSONArray events = res.getJSONArray("events");
+            System.out.println(events);
+            for (i=0;i<events.size();i++){
+                JSONArray attributes = events.getJSONObject(i).getJSONArray("attributes");
+                for (int j=0;j<attributes.size();j++) {
+                    JSONObject attribute = attributes.getJSONObject(j);
+                    if (attribute.getString("key").equals("orderId")){
+                        String orderId = attribute.getString("value");
+                        orderIdMap.add(orderId);
+                    }
+                }
+
+            }
+        }
+        res.put("order_id", orderIdMap);
+
+        return res;
+    }
+
+    public JSONObject sendMultiCancelOrderTransactionV2(AccountInfo account, List<String> orderIdItems, String memo) throws IOException {
+        checkAccountInfoValue(account);
+        for (String orderId : orderIdItems) {
+            if (orderId==null||orderId.equals("")) throw new InvalidFormatException("empty orderId");
+            if (orderId.length()>30) throw new InvalidFormatException("the length of orderId is too long");
+        }
+
+        byte[] data = BuildTransaction.generateAminoMultiCancelOrderTransaction(account, orderIdItems, memo);
+        JSONObject res = sendTransaction(data);
+        setOrderMsg(res);
+        //res.put("order_id", orderIdItems);
+        res.put("client_oid", account.getSequenceNumber());
+
+        int i;
+        ArrayList<String> orderIdMap = new ArrayList<>();
+        if (res.containsKey("events")){
+            JSONArray events = res.getJSONArray("events");
+            //System.out.println(events);
+            for (i=0;i<events.size();i++){
+                JSONArray attributes = events.getJSONObject(i).getJSONArray("attributes");
+                for (int j = 0; j < attributes.size(); j++) {
+                    JSONObject attribute = attributes.getJSONObject(j);
+                    if (attribute.getString("key").startsWith("ID")) {
+                        orderIdMap.add(attribute.getString("key"));
+                        // break;
+                    }
+                }
+            }
+        }
+        res.put("order_id", orderIdMap);
+
+        return res;
+    }
+
 }
+

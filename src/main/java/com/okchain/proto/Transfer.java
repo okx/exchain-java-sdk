@@ -128,7 +128,7 @@ public final class Transfer {
               done = true;
               break;
             case 10: {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
                 msgs_ = new java.util.ArrayList<com.google.protobuf.ByteString>();
                 mutable_bitField0_ |= 0x00000001;
               }
@@ -136,7 +136,7 @@ public final class Transfer {
               break;
             }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 signatures_ = new java.util.ArrayList<com.okchain.proto.Transfer.Signature>();
                 mutable_bitField0_ |= 0x00000002;
               }
@@ -151,7 +151,7 @@ public final class Transfer {
               break;
             }
             default: {
-              if (!parseUnknownField(
+              if (!parseUnknownFieldProto3(
                   input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
@@ -165,10 +165,10 @@ public final class Transfer {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          msgs_ = java.util.Collections.unmodifiableList(msgs_); // C
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          msgs_ = java.util.Collections.unmodifiableList(msgs_);
         }
-        if (((mutable_bitField0_ & 0x00000002) != 0)) {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           signatures_ = java.util.Collections.unmodifiableList(signatures_);
         }
         this.unknownFields = unknownFields.build();
@@ -363,14 +363,15 @@ public final class Transfer {
       }
       com.okchain.proto.Transfer.StdTransaction other = (com.okchain.proto.Transfer.StdTransaction) obj;
 
-      if (!getMsgsList()
-          .equals(other.getMsgsList())) return false;
-      if (!getSignaturesList()
-          .equals(other.getSignaturesList())) return false;
-      if (!getMemo()
-          .equals(other.getMemo())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
+      boolean result = true;
+      result = result && getMsgsList()
+          .equals(other.getMsgsList());
+      result = result && getSignaturesList()
+          .equals(other.getSignaturesList());
+      result = result && getMemo()
+          .equals(other.getMemo());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
     }
 
     @java.lang.Override
@@ -562,13 +563,13 @@ public final class Transfer {
         com.okchain.proto.Transfer.StdTransaction result = new com.okchain.proto.Transfer.StdTransaction(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        if (((bitField0_ & 0x00000001) != 0)) {
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
           msgs_ = java.util.Collections.unmodifiableList(msgs_);
           bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.msgs_ = msgs_;
         if (signaturesBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) != 0)) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
             signatures_ = java.util.Collections.unmodifiableList(signatures_);
             bitField0_ = (bitField0_ & ~0x00000002);
           }
@@ -584,35 +585,35 @@ public final class Transfer {
 
       @java.lang.Override
       public Builder clone() {
-        return super.clone();
+        return (Builder) super.clone();
       }
       @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.setField(field, value);
+        return (Builder) super.setField(field, value);
       }
       @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
+        return (Builder) super.clearField(field);
       }
       @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
+        return (Builder) super.clearOneof(oneof);
       }
       @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
+        return (Builder) super.setRepeatedField(field, index, value);
       }
       @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.addRepeatedField(field, value);
+        return (Builder) super.addRepeatedField(field, value);
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -698,7 +699,7 @@ public final class Transfer {
 
       private java.util.List<com.google.protobuf.ByteString> msgs_ = java.util.Collections.emptyList();
       private void ensureMsgsIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
           msgs_ = new java.util.ArrayList<com.google.protobuf.ByteString>(msgs_);
           bitField0_ |= 0x00000001;
          }
@@ -708,8 +709,7 @@ public final class Transfer {
        */
       public java.util.List<com.google.protobuf.ByteString>
           getMsgsList() {
-        return ((bitField0_ & 0x00000001) != 0) ?
-                 java.util.Collections.unmodifiableList(msgs_) : msgs_;
+        return java.util.Collections.unmodifiableList(msgs_);
       }
       /**
        * <code>repeated bytes msgs = 1;</code>
@@ -772,7 +772,7 @@ public final class Transfer {
       private java.util.List<com.okchain.proto.Transfer.Signature> signatures_ =
         java.util.Collections.emptyList();
       private void ensureSignaturesIsMutable() {
-        if (!((bitField0_ & 0x00000002) != 0)) {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           signatures_ = new java.util.ArrayList<com.okchain.proto.Transfer.Signature>(signatures_);
           bitField0_ |= 0x00000002;
          }
@@ -1073,7 +1073,7 @@ public final class Transfer {
           signaturesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.okchain.proto.Transfer.Signature, com.okchain.proto.Transfer.Signature.Builder, com.okchain.proto.Transfer.SignatureOrBuilder>(
                   signatures_,
-                  ((bitField0_ & 0x00000002) != 0),
+                  ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
           signatures_ = null;
@@ -1152,7 +1152,7 @@ public final class Transfer {
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       @java.lang.Override
@@ -1249,6 +1249,7 @@ public final class Transfer {
     }
     private Fee() {
       amount_ = java.util.Collections.emptyList();
+      gas_ = 0L;
     }
 
     @java.lang.Override
@@ -1276,7 +1277,7 @@ public final class Transfer {
               done = true;
               break;
             case 10: {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
                 amount_ = new java.util.ArrayList<com.okchain.proto.Transfer.Token>();
                 mutable_bitField0_ |= 0x00000001;
               }
@@ -1290,7 +1291,7 @@ public final class Transfer {
               break;
             }
             default: {
-              if (!parseUnknownField(
+              if (!parseUnknownFieldProto3(
                   input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
@@ -1304,7 +1305,7 @@ public final class Transfer {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           amount_ = java.util.Collections.unmodifiableList(amount_);
         }
         this.unknownFields = unknownFields.build();
@@ -1421,12 +1422,13 @@ public final class Transfer {
       }
       com.okchain.proto.Transfer.Fee other = (com.okchain.proto.Transfer.Fee) obj;
 
-      if (!getAmountList()
-          .equals(other.getAmountList())) return false;
-      if (getGas()
-          != other.getGas()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
+      boolean result = true;
+      result = result && getAmountList()
+          .equals(other.getAmountList());
+      result = result && (getGas()
+          == other.getGas());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
     }
 
     @java.lang.Override
@@ -1614,7 +1616,7 @@ public final class Transfer {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (amountBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0)) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
             amount_ = java.util.Collections.unmodifiableList(amount_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
@@ -1630,35 +1632,35 @@ public final class Transfer {
 
       @java.lang.Override
       public Builder clone() {
-        return super.clone();
+        return (Builder) super.clone();
       }
       @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.setField(field, value);
+        return (Builder) super.setField(field, value);
       }
       @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
+        return (Builder) super.clearField(field);
       }
       @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
+        return (Builder) super.clearOneof(oneof);
       }
       @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
+        return (Builder) super.setRepeatedField(field, index, value);
       }
       @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.addRepeatedField(field, value);
+        return (Builder) super.addRepeatedField(field, value);
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1734,7 +1736,7 @@ public final class Transfer {
       private java.util.List<com.okchain.proto.Transfer.Token> amount_ =
         java.util.Collections.emptyList();
       private void ensureAmountIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
           amount_ = new java.util.ArrayList<com.okchain.proto.Transfer.Token>(amount_);
           bitField0_ |= 0x00000001;
          }
@@ -1963,7 +1965,7 @@ public final class Transfer {
           amountBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.okchain.proto.Transfer.Token, com.okchain.proto.Transfer.Token.Builder, com.okchain.proto.Transfer.TokenOrBuilder>(
                   amount_,
-                  ((bitField0_ & 0x00000001) != 0),
+                  ((bitField0_ & 0x00000001) == 0x00000001),
                   getParentForChildren(),
                   isClean());
           amount_ = null;
@@ -1999,7 +2001,7 @@ public final class Transfer {
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       @java.lang.Override
@@ -2115,7 +2117,7 @@ public final class Transfer {
               break;
             }
             default: {
-              if (!parseUnknownField(
+              if (!parseUnknownFieldProto3(
                   input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
@@ -2216,12 +2218,13 @@ public final class Transfer {
       }
       com.okchain.proto.Transfer.Signature other = (com.okchain.proto.Transfer.Signature) obj;
 
-      if (!getPubkey()
-          .equals(other.getPubkey())) return false;
-      if (!getSignature()
-          .equals(other.getSignature())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
+      boolean result = true;
+      result = result && getPubkey()
+          .equals(other.getPubkey());
+      result = result && getSignature()
+          .equals(other.getSignature());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
     }
 
     @java.lang.Override
@@ -2406,35 +2409,35 @@ public final class Transfer {
 
       @java.lang.Override
       public Builder clone() {
-        return super.clone();
+        return (Builder) super.clone();
       }
       @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.setField(field, value);
+        return (Builder) super.setField(field, value);
       }
       @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
+        return (Builder) super.clearField(field);
       }
       @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
+        return (Builder) super.clearOneof(oneof);
       }
       @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
+        return (Builder) super.setRepeatedField(field, index, value);
       }
       @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.addRepeatedField(field, value);
+        return (Builder) super.addRepeatedField(field, value);
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2543,7 +2546,7 @@ public final class Transfer {
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       @java.lang.Override
@@ -2671,7 +2674,7 @@ public final class Transfer {
               break;
             }
             default: {
-              if (!parseUnknownField(
+              if (!parseUnknownFieldProto3(
                   input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
@@ -2820,12 +2823,13 @@ public final class Transfer {
       }
       com.okchain.proto.Transfer.Token other = (com.okchain.proto.Transfer.Token) obj;
 
-      if (!getDenom()
-          .equals(other.getDenom())) return false;
-      if (!getAmount()
-          .equals(other.getAmount())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
+      boolean result = true;
+      result = result && getDenom()
+          .equals(other.getDenom());
+      result = result && getAmount()
+          .equals(other.getAmount());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
     }
 
     @java.lang.Override
@@ -3010,35 +3014,35 @@ public final class Transfer {
 
       @java.lang.Override
       public Builder clone() {
-        return super.clone();
+        return (Builder) super.clone();
       }
       @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.setField(field, value);
+        return (Builder) super.setField(field, value);
       }
       @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
+        return (Builder) super.clearField(field);
       }
       @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
+        return (Builder) super.clearOneof(oneof);
       }
       @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
+        return (Builder) super.setRepeatedField(field, index, value);
       }
       @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.addRepeatedField(field, value);
+        return (Builder) super.addRepeatedField(field, value);
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -3229,7 +3233,7 @@ public final class Transfer {
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       @java.lang.Override
@@ -3370,7 +3374,7 @@ public final class Transfer {
               break;
             }
             case 26: {
-              if (!((mutable_bitField0_ & 0x00000004) != 0)) {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 amount_ = new java.util.ArrayList<com.okchain.proto.Transfer.Token>();
                 mutable_bitField0_ |= 0x00000004;
               }
@@ -3379,7 +3383,7 @@ public final class Transfer {
               break;
             }
             default: {
-              if (!parseUnknownField(
+              if (!parseUnknownFieldProto3(
                   input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
@@ -3393,7 +3397,7 @@ public final class Transfer {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000004) != 0)) {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           amount_ = java.util.Collections.unmodifiableList(amount_);
         }
         this.unknownFields = unknownFields.build();
@@ -3526,14 +3530,15 @@ public final class Transfer {
       }
       com.okchain.proto.Transfer.MsgSend other = (com.okchain.proto.Transfer.MsgSend) obj;
 
-      if (!getFromAddress()
-          .equals(other.getFromAddress())) return false;
-      if (!getToAddress()
-          .equals(other.getToAddress())) return false;
-      if (!getAmountList()
-          .equals(other.getAmountList())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
+      boolean result = true;
+      result = result && getFromAddress()
+          .equals(other.getFromAddress());
+      result = result && getToAddress()
+          .equals(other.getToAddress());
+      result = result && getAmountList()
+          .equals(other.getAmountList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
     }
 
     @java.lang.Override
@@ -3726,7 +3731,7 @@ public final class Transfer {
         result.fromAddress_ = fromAddress_;
         result.toAddress_ = toAddress_;
         if (amountBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) != 0)) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
             amount_ = java.util.Collections.unmodifiableList(amount_);
             bitField0_ = (bitField0_ & ~0x00000004);
           }
@@ -3741,35 +3746,35 @@ public final class Transfer {
 
       @java.lang.Override
       public Builder clone() {
-        return super.clone();
+        return (Builder) super.clone();
       }
       @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.setField(field, value);
+        return (Builder) super.setField(field, value);
       }
       @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
+        return (Builder) super.clearField(field);
       }
       @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
+        return (Builder) super.clearOneof(oneof);
       }
       @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
+        return (Builder) super.setRepeatedField(field, index, value);
       }
       @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.addRepeatedField(field, value);
+        return (Builder) super.addRepeatedField(field, value);
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -3906,7 +3911,7 @@ public final class Transfer {
       private java.util.List<com.okchain.proto.Transfer.Token> amount_ =
         java.util.Collections.emptyList();
       private void ensureAmountIsMutable() {
-        if (!((bitField0_ & 0x00000004) != 0)) {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
           amount_ = new java.util.ArrayList<com.okchain.proto.Transfer.Token>(amount_);
           bitField0_ |= 0x00000004;
          }
@@ -4135,7 +4140,7 @@ public final class Transfer {
           amountBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.okchain.proto.Transfer.Token, com.okchain.proto.Transfer.Token.Builder, com.okchain.proto.Transfer.TokenOrBuilder>(
                   amount_,
-                  ((bitField0_ & 0x00000004) != 0),
+                  ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
                   isClean());
           amount_ = null;
@@ -4145,7 +4150,7 @@ public final class Transfer {
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       @java.lang.Override
@@ -4318,7 +4323,7 @@ public final class Transfer {
               break;
             }
             default: {
-              if (!parseUnknownField(
+              if (!parseUnknownFieldProto3(
                   input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
@@ -4563,18 +4568,19 @@ public final class Transfer {
       }
       com.okchain.proto.Transfer.MsgNewOrder other = (com.okchain.proto.Transfer.MsgNewOrder) obj;
 
-      if (!getSender()
-          .equals(other.getSender())) return false;
-      if (!getProduct()
-          .equals(other.getProduct())) return false;
-      if (!getSide()
-          .equals(other.getSide())) return false;
-      if (!getPrice()
-          .equals(other.getPrice())) return false;
-      if (!getQuantity()
-          .equals(other.getQuantity())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
+      boolean result = true;
+      result = result && getSender()
+          .equals(other.getSender());
+      result = result && getProduct()
+          .equals(other.getProduct());
+      result = result && getSide()
+          .equals(other.getSide());
+      result = result && getPrice()
+          .equals(other.getPrice());
+      result = result && getQuantity()
+          .equals(other.getQuantity());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
     }
 
     @java.lang.Override
@@ -4774,35 +4780,35 @@ public final class Transfer {
 
       @java.lang.Override
       public Builder clone() {
-        return super.clone();
+        return (Builder) super.clone();
       }
       @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.setField(field, value);
+        return (Builder) super.setField(field, value);
       }
       @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
+        return (Builder) super.clearField(field);
       }
       @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
+        return (Builder) super.clearOneof(oneof);
       }
       @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
+        return (Builder) super.setRepeatedField(field, index, value);
       }
       @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.addRepeatedField(field, value);
+        return (Builder) super.addRepeatedField(field, value);
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -5171,7 +5177,7 @@ public final class Transfer {
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       @java.lang.Override
@@ -5293,7 +5299,7 @@ public final class Transfer {
               break;
             }
             default: {
-              if (!parseUnknownField(
+              if (!parseUnknownFieldProto3(
                   input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
@@ -5418,12 +5424,13 @@ public final class Transfer {
       }
       com.okchain.proto.Transfer.MsgCancelOrder other = (com.okchain.proto.Transfer.MsgCancelOrder) obj;
 
-      if (!getSender()
-          .equals(other.getSender())) return false;
-      if (!getOrderId()
-          .equals(other.getOrderId())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
+      boolean result = true;
+      result = result && getSender()
+          .equals(other.getSender());
+      result = result && getOrderId()
+          .equals(other.getOrderId());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
     }
 
     @java.lang.Override
@@ -5608,35 +5615,35 @@ public final class Transfer {
 
       @java.lang.Override
       public Builder clone() {
-        return super.clone();
+        return (Builder) super.clone();
       }
       @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.setField(field, value);
+        return (Builder) super.setField(field, value);
       }
       @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
+        return (Builder) super.clearField(field);
       }
       @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
+        return (Builder) super.clearOneof(oneof);
       }
       @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
+        return (Builder) super.setRepeatedField(field, index, value);
       }
       @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.addRepeatedField(field, value);
+        return (Builder) super.addRepeatedField(field, value);
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -5786,7 +5793,7 @@ public final class Transfer {
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       @java.lang.Override
@@ -5916,7 +5923,7 @@ public final class Transfer {
               break;
             }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 transfers_ = new java.util.ArrayList<com.okchain.proto.Transfer.TransferUnit>();
                 mutable_bitField0_ |= 0x00000002;
               }
@@ -5925,7 +5932,7 @@ public final class Transfer {
               break;
             }
             default: {
-              if (!parseUnknownField(
+              if (!parseUnknownFieldProto3(
                   input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
@@ -5939,7 +5946,7 @@ public final class Transfer {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) != 0)) {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           transfers_ = java.util.Collections.unmodifiableList(transfers_);
         }
         this.unknownFields = unknownFields.build();
@@ -6056,12 +6063,13 @@ public final class Transfer {
       }
       com.okchain.proto.Transfer.MsgMultiSend other = (com.okchain.proto.Transfer.MsgMultiSend) obj;
 
-      if (!getFrom()
-          .equals(other.getFrom())) return false;
-      if (!getTransfersList()
-          .equals(other.getTransfersList())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
+      boolean result = true;
+      result = result && getFrom()
+          .equals(other.getFrom());
+      result = result && getTransfersList()
+          .equals(other.getTransfersList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
     }
 
     @java.lang.Override
@@ -6249,7 +6257,7 @@ public final class Transfer {
         int to_bitField0_ = 0;
         result.from_ = from_;
         if (transfersBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) != 0)) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
             transfers_ = java.util.Collections.unmodifiableList(transfers_);
             bitField0_ = (bitField0_ & ~0x00000002);
           }
@@ -6264,35 +6272,35 @@ public final class Transfer {
 
       @java.lang.Override
       public Builder clone() {
-        return super.clone();
+        return (Builder) super.clone();
       }
       @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.setField(field, value);
+        return (Builder) super.setField(field, value);
       }
       @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
+        return (Builder) super.clearField(field);
       }
       @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
+        return (Builder) super.clearOneof(oneof);
       }
       @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
+        return (Builder) super.setRepeatedField(field, index, value);
       }
       @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.addRepeatedField(field, value);
+        return (Builder) super.addRepeatedField(field, value);
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -6397,7 +6405,7 @@ public final class Transfer {
       private java.util.List<com.okchain.proto.Transfer.TransferUnit> transfers_ =
         java.util.Collections.emptyList();
       private void ensureTransfersIsMutable() {
-        if (!((bitField0_ & 0x00000002) != 0)) {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           transfers_ = new java.util.ArrayList<com.okchain.proto.Transfer.TransferUnit>(transfers_);
           bitField0_ |= 0x00000002;
          }
@@ -6626,7 +6634,7 @@ public final class Transfer {
           transfersBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.okchain.proto.Transfer.TransferUnit, com.okchain.proto.Transfer.TransferUnit.Builder, com.okchain.proto.Transfer.TransferUnitOrBuilder>(
                   transfers_,
-                  ((bitField0_ & 0x00000002) != 0),
+                  ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
           transfers_ = null;
@@ -6636,7 +6644,7 @@ public final class Transfer {
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       @java.lang.Override
@@ -6766,7 +6774,7 @@ public final class Transfer {
               break;
             }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 coins_ = new java.util.ArrayList<com.okchain.proto.Transfer.Token>();
                 mutable_bitField0_ |= 0x00000002;
               }
@@ -6775,7 +6783,7 @@ public final class Transfer {
               break;
             }
             default: {
-              if (!parseUnknownField(
+              if (!parseUnknownFieldProto3(
                   input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
@@ -6789,7 +6797,7 @@ public final class Transfer {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) != 0)) {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           coins_ = java.util.Collections.unmodifiableList(coins_);
         }
         this.unknownFields = unknownFields.build();
@@ -6906,12 +6914,13 @@ public final class Transfer {
       }
       com.okchain.proto.Transfer.TransferUnit other = (com.okchain.proto.Transfer.TransferUnit) obj;
 
-      if (!getTo()
-          .equals(other.getTo())) return false;
-      if (!getCoinsList()
-          .equals(other.getCoinsList())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
+      boolean result = true;
+      result = result && getTo()
+          .equals(other.getTo());
+      result = result && getCoinsList()
+          .equals(other.getCoinsList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
     }
 
     @java.lang.Override
@@ -7099,7 +7108,7 @@ public final class Transfer {
         int to_bitField0_ = 0;
         result.to_ = to_;
         if (coinsBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) != 0)) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
             coins_ = java.util.Collections.unmodifiableList(coins_);
             bitField0_ = (bitField0_ & ~0x00000002);
           }
@@ -7114,35 +7123,35 @@ public final class Transfer {
 
       @java.lang.Override
       public Builder clone() {
-        return super.clone();
+        return (Builder) super.clone();
       }
       @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.setField(field, value);
+        return (Builder) super.setField(field, value);
       }
       @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
+        return (Builder) super.clearField(field);
       }
       @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
+        return (Builder) super.clearOneof(oneof);
       }
       @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
+        return (Builder) super.setRepeatedField(field, index, value);
       }
       @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.addRepeatedField(field, value);
+        return (Builder) super.addRepeatedField(field, value);
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -7247,7 +7256,7 @@ public final class Transfer {
       private java.util.List<com.okchain.proto.Transfer.Token> coins_ =
         java.util.Collections.emptyList();
       private void ensureCoinsIsMutable() {
-        if (!((bitField0_ & 0x00000002) != 0)) {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           coins_ = new java.util.ArrayList<com.okchain.proto.Transfer.Token>(coins_);
           bitField0_ |= 0x00000002;
          }
@@ -7476,7 +7485,7 @@ public final class Transfer {
           coinsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.okchain.proto.Transfer.Token, com.okchain.proto.Transfer.Token.Builder, com.okchain.proto.Transfer.TokenOrBuilder>(
                   coins_,
-                  ((bitField0_ & 0x00000002) != 0),
+                  ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
           coins_ = null;
@@ -7486,7 +7495,7 @@ public final class Transfer {
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       @java.lang.Override
@@ -7611,6 +7620,7 @@ public final class Transfer {
       super(builder);
     }
     private BaseType() {
+      i_ = 0L;
       s_ = "";
       ss_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       stus_ = java.util.Collections.emptyList();
@@ -7653,7 +7663,7 @@ public final class Transfer {
             }
             case 26: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000004) != 0)) {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 ss_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000004;
               }
@@ -7661,7 +7671,7 @@ public final class Transfer {
               break;
             }
             case 34: {
-              if (!((mutable_bitField0_ & 0x00000008) != 0)) {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
                 stus_ = new java.util.ArrayList<com.okchain.proto.Transfer.Stu>();
                 mutable_bitField0_ |= 0x00000008;
               }
@@ -7670,7 +7680,7 @@ public final class Transfer {
               break;
             }
             default: {
-              if (!parseUnknownField(
+              if (!parseUnknownFieldProto3(
                   input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
@@ -7684,10 +7694,10 @@ public final class Transfer {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000004) != 0)) {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           ss_ = ss_.getUnmodifiableView();
         }
-        if (((mutable_bitField0_ & 0x00000008) != 0)) {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           stus_ = java.util.Collections.unmodifiableList(stus_);
         }
         this.unknownFields = unknownFields.build();
@@ -7884,16 +7894,17 @@ public final class Transfer {
       }
       com.okchain.proto.Transfer.BaseType other = (com.okchain.proto.Transfer.BaseType) obj;
 
-      if (getI()
-          != other.getI()) return false;
-      if (!getS()
-          .equals(other.getS())) return false;
-      if (!getSsList()
-          .equals(other.getSsList())) return false;
-      if (!getStusList()
-          .equals(other.getStusList())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
+      boolean result = true;
+      result = result && (getI()
+          == other.getI());
+      result = result && getS()
+          .equals(other.getS());
+      result = result && getSsList()
+          .equals(other.getSsList());
+      result = result && getStusList()
+          .equals(other.getStusList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
     }
 
     @java.lang.Override
@@ -8092,13 +8103,13 @@ public final class Transfer {
         int to_bitField0_ = 0;
         result.i_ = i_;
         result.s_ = s_;
-        if (((bitField0_ & 0x00000004) != 0)) {
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
           ss_ = ss_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000004);
         }
         result.ss_ = ss_;
         if (stusBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) != 0)) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
             stus_ = java.util.Collections.unmodifiableList(stus_);
             bitField0_ = (bitField0_ & ~0x00000008);
           }
@@ -8113,35 +8124,35 @@ public final class Transfer {
 
       @java.lang.Override
       public Builder clone() {
-        return super.clone();
+        return (Builder) super.clone();
       }
       @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.setField(field, value);
+        return (Builder) super.setField(field, value);
       }
       @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
+        return (Builder) super.clearField(field);
       }
       @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
+        return (Builder) super.clearOneof(oneof);
       }
       @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
+        return (Builder) super.setRepeatedField(field, index, value);
       }
       @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.addRepeatedField(field, value);
+        return (Builder) super.addRepeatedField(field, value);
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -8325,7 +8336,7 @@ public final class Transfer {
 
       private com.google.protobuf.LazyStringList ss_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureSsIsMutable() {
-        if (!((bitField0_ & 0x00000004) != 0)) {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
           ss_ = new com.google.protobuf.LazyStringArrayList(ss_);
           bitField0_ |= 0x00000004;
          }
@@ -8420,7 +8431,7 @@ public final class Transfer {
       private java.util.List<com.okchain.proto.Transfer.Stu> stus_ =
         java.util.Collections.emptyList();
       private void ensureStusIsMutable() {
-        if (!((bitField0_ & 0x00000008) != 0)) {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
           stus_ = new java.util.ArrayList<com.okchain.proto.Transfer.Stu>(stus_);
           bitField0_ |= 0x00000008;
          }
@@ -8649,7 +8660,7 @@ public final class Transfer {
           stusBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.okchain.proto.Transfer.Stu, com.okchain.proto.Transfer.Stu.Builder, com.okchain.proto.Transfer.StuOrBuilder>(
                   stus_,
-                  ((bitField0_ & 0x00000008) != 0),
+                  ((bitField0_ & 0x00000008) == 0x00000008),
                   getParentForChildren(),
                   isClean());
           stus_ = null;
@@ -8659,7 +8670,7 @@ public final class Transfer {
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       @java.lang.Override
@@ -8731,6 +8742,7 @@ public final class Transfer {
       super(builder);
     }
     private Stu() {
+      id_ = 0L;
     }
 
     @java.lang.Override
@@ -8763,7 +8775,7 @@ public final class Transfer {
               break;
             }
             default: {
-              if (!parseUnknownField(
+              if (!parseUnknownFieldProto3(
                   input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
@@ -8848,10 +8860,11 @@ public final class Transfer {
       }
       com.okchain.proto.Transfer.Stu other = (com.okchain.proto.Transfer.Stu) obj;
 
-      if (getId()
-          != other.getId()) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
+      boolean result = true;
+      result = result && (getId()
+          == other.getId());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
     }
 
     @java.lang.Override
@@ -9032,35 +9045,35 @@ public final class Transfer {
 
       @java.lang.Override
       public Builder clone() {
-        return super.clone();
+        return (Builder) super.clone();
       }
       @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.setField(field, value);
+        return (Builder) super.setField(field, value);
       }
       @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
+        return (Builder) super.clearField(field);
       }
       @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
+        return (Builder) super.clearOneof(oneof);
       }
       @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
+        return (Builder) super.setRepeatedField(field, index, value);
       }
       @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return super.addRepeatedField(field, value);
+        return (Builder) super.addRepeatedField(field, value);
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -9134,7 +9147,7 @@ public final class Transfer {
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
       @java.lang.Override
@@ -9179,6 +9192,2491 @@ public final class Transfer {
 
     @java.lang.Override
     public com.okchain.proto.Transfer.Stu getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface MultiNewOrderItemOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:MultiNewOrderItem)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string product = 1;</code>
+     */
+    java.lang.String getProduct();
+    /**
+     * <code>string product = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getProductBytes();
+
+    /**
+     * <code>string side = 2;</code>
+     */
+    java.lang.String getSide();
+    /**
+     * <code>string side = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getSideBytes();
+
+    /**
+     * <code>string price = 3;</code>
+     */
+    java.lang.String getPrice();
+    /**
+     * <code>string price = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getPriceBytes();
+
+    /**
+     * <code>string quantity = 4;</code>
+     */
+    java.lang.String getQuantity();
+    /**
+     * <code>string quantity = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getQuantityBytes();
+  }
+  /**
+   * Protobuf type {@code MultiNewOrderItem}
+   */
+  public  static final class MultiNewOrderItem extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:MultiNewOrderItem)
+      MultiNewOrderItemOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use MultiNewOrderItem.newBuilder() to construct.
+    private MultiNewOrderItem(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private MultiNewOrderItem() {
+      product_ = "";
+      side_ = "";
+      price_ = "";
+      quantity_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private MultiNewOrderItem(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              product_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              side_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              price_ = s;
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              quantity_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.okchain.proto.Transfer.internal_static_MultiNewOrderItem_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.okchain.proto.Transfer.internal_static_MultiNewOrderItem_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.okchain.proto.Transfer.MultiNewOrderItem.class, com.okchain.proto.Transfer.MultiNewOrderItem.Builder.class);
+    }
+
+    public static final int PRODUCT_FIELD_NUMBER = 1;
+    private volatile java.lang.Object product_;
+    /**
+     * <code>string product = 1;</code>
+     */
+    public java.lang.String getProduct() {
+      java.lang.Object ref = product_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        product_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string product = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getProductBytes() {
+      java.lang.Object ref = product_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        product_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SIDE_FIELD_NUMBER = 2;
+    private volatile java.lang.Object side_;
+    /**
+     * <code>string side = 2;</code>
+     */
+    public java.lang.String getSide() {
+      java.lang.Object ref = side_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        side_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string side = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSideBytes() {
+      java.lang.Object ref = side_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        side_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PRICE_FIELD_NUMBER = 3;
+    private volatile java.lang.Object price_;
+    /**
+     * <code>string price = 3;</code>
+     */
+    public java.lang.String getPrice() {
+      java.lang.Object ref = price_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        price_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string price = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getPriceBytes() {
+      java.lang.Object ref = price_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        price_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int QUANTITY_FIELD_NUMBER = 4;
+    private volatile java.lang.Object quantity_;
+    /**
+     * <code>string quantity = 4;</code>
+     */
+    public java.lang.String getQuantity() {
+      java.lang.Object ref = quantity_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        quantity_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string quantity = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getQuantityBytes() {
+      java.lang.Object ref = quantity_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        quantity_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getProductBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, product_);
+      }
+      if (!getSideBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, side_);
+      }
+      if (!getPriceBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, price_);
+      }
+      if (!getQuantityBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, quantity_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getProductBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, product_);
+      }
+      if (!getSideBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, side_);
+      }
+      if (!getPriceBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, price_);
+      }
+      if (!getQuantityBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, quantity_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.okchain.proto.Transfer.MultiNewOrderItem)) {
+        return super.equals(obj);
+      }
+      com.okchain.proto.Transfer.MultiNewOrderItem other = (com.okchain.proto.Transfer.MultiNewOrderItem) obj;
+
+      boolean result = true;
+      result = result && getProduct()
+          .equals(other.getProduct());
+      result = result && getSide()
+          .equals(other.getSide());
+      result = result && getPrice()
+          .equals(other.getPrice());
+      result = result && getQuantity()
+          .equals(other.getQuantity());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + PRODUCT_FIELD_NUMBER;
+      hash = (53 * hash) + getProduct().hashCode();
+      hash = (37 * hash) + SIDE_FIELD_NUMBER;
+      hash = (53 * hash) + getSide().hashCode();
+      hash = (37 * hash) + PRICE_FIELD_NUMBER;
+      hash = (53 * hash) + getPrice().hashCode();
+      hash = (37 * hash) + QUANTITY_FIELD_NUMBER;
+      hash = (53 * hash) + getQuantity().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.okchain.proto.Transfer.MultiNewOrderItem parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.okchain.proto.Transfer.MultiNewOrderItem parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.MultiNewOrderItem parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.okchain.proto.Transfer.MultiNewOrderItem parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.MultiNewOrderItem parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.okchain.proto.Transfer.MultiNewOrderItem parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.MultiNewOrderItem parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.okchain.proto.Transfer.MultiNewOrderItem parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.MultiNewOrderItem parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.okchain.proto.Transfer.MultiNewOrderItem parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.MultiNewOrderItem parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.okchain.proto.Transfer.MultiNewOrderItem parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.okchain.proto.Transfer.MultiNewOrderItem prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code MultiNewOrderItem}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:MultiNewOrderItem)
+        com.okchain.proto.Transfer.MultiNewOrderItemOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.okchain.proto.Transfer.internal_static_MultiNewOrderItem_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.okchain.proto.Transfer.internal_static_MultiNewOrderItem_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.okchain.proto.Transfer.MultiNewOrderItem.class, com.okchain.proto.Transfer.MultiNewOrderItem.Builder.class);
+      }
+
+      // Construct using com.okchain.proto.Transfer.MultiNewOrderItem.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        product_ = "";
+
+        side_ = "";
+
+        price_ = "";
+
+        quantity_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.okchain.proto.Transfer.internal_static_MultiNewOrderItem_descriptor;
+      }
+
+      @java.lang.Override
+      public com.okchain.proto.Transfer.MultiNewOrderItem getDefaultInstanceForType() {
+        return com.okchain.proto.Transfer.MultiNewOrderItem.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.okchain.proto.Transfer.MultiNewOrderItem build() {
+        com.okchain.proto.Transfer.MultiNewOrderItem result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.okchain.proto.Transfer.MultiNewOrderItem buildPartial() {
+        com.okchain.proto.Transfer.MultiNewOrderItem result = new com.okchain.proto.Transfer.MultiNewOrderItem(this);
+        result.product_ = product_;
+        result.side_ = side_;
+        result.price_ = price_;
+        result.quantity_ = quantity_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.okchain.proto.Transfer.MultiNewOrderItem) {
+          return mergeFrom((com.okchain.proto.Transfer.MultiNewOrderItem)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.okchain.proto.Transfer.MultiNewOrderItem other) {
+        if (other == com.okchain.proto.Transfer.MultiNewOrderItem.getDefaultInstance()) return this;
+        if (!other.getProduct().isEmpty()) {
+          product_ = other.product_;
+          onChanged();
+        }
+        if (!other.getSide().isEmpty()) {
+          side_ = other.side_;
+          onChanged();
+        }
+        if (!other.getPrice().isEmpty()) {
+          price_ = other.price_;
+          onChanged();
+        }
+        if (!other.getQuantity().isEmpty()) {
+          quantity_ = other.quantity_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.okchain.proto.Transfer.MultiNewOrderItem parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.okchain.proto.Transfer.MultiNewOrderItem) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object product_ = "";
+      /**
+       * <code>string product = 1;</code>
+       */
+      public java.lang.String getProduct() {
+        java.lang.Object ref = product_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          product_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string product = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getProductBytes() {
+        java.lang.Object ref = product_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          product_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string product = 1;</code>
+       */
+      public Builder setProduct(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        product_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string product = 1;</code>
+       */
+      public Builder clearProduct() {
+        
+        product_ = getDefaultInstance().getProduct();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string product = 1;</code>
+       */
+      public Builder setProductBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        product_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object side_ = "";
+      /**
+       * <code>string side = 2;</code>
+       */
+      public java.lang.String getSide() {
+        java.lang.Object ref = side_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          side_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string side = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getSideBytes() {
+        java.lang.Object ref = side_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          side_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string side = 2;</code>
+       */
+      public Builder setSide(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        side_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string side = 2;</code>
+       */
+      public Builder clearSide() {
+        
+        side_ = getDefaultInstance().getSide();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string side = 2;</code>
+       */
+      public Builder setSideBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        side_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object price_ = "";
+      /**
+       * <code>string price = 3;</code>
+       */
+      public java.lang.String getPrice() {
+        java.lang.Object ref = price_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          price_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string price = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getPriceBytes() {
+        java.lang.Object ref = price_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          price_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string price = 3;</code>
+       */
+      public Builder setPrice(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        price_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string price = 3;</code>
+       */
+      public Builder clearPrice() {
+        
+        price_ = getDefaultInstance().getPrice();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string price = 3;</code>
+       */
+      public Builder setPriceBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        price_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object quantity_ = "";
+      /**
+       * <code>string quantity = 4;</code>
+       */
+      public java.lang.String getQuantity() {
+        java.lang.Object ref = quantity_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          quantity_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string quantity = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getQuantityBytes() {
+        java.lang.Object ref = quantity_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          quantity_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string quantity = 4;</code>
+       */
+      public Builder setQuantity(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        quantity_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string quantity = 4;</code>
+       */
+      public Builder clearQuantity() {
+        
+        quantity_ = getDefaultInstance().getQuantity();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string quantity = 4;</code>
+       */
+      public Builder setQuantityBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        quantity_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:MultiNewOrderItem)
+    }
+
+    // @@protoc_insertion_point(class_scope:MultiNewOrderItem)
+    private static final com.okchain.proto.Transfer.MultiNewOrderItem DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.okchain.proto.Transfer.MultiNewOrderItem();
+    }
+
+    public static com.okchain.proto.Transfer.MultiNewOrderItem getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<MultiNewOrderItem>
+        PARSER = new com.google.protobuf.AbstractParser<MultiNewOrderItem>() {
+      @java.lang.Override
+      public MultiNewOrderItem parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new MultiNewOrderItem(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<MultiNewOrderItem> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<MultiNewOrderItem> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.okchain.proto.Transfer.MultiNewOrderItem getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface MsgMultiNewOrderOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:MsgMultiNewOrder)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>bytes sender = 1;</code>
+     */
+    com.google.protobuf.ByteString getSender();
+
+    /**
+     * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+     */
+    java.util.List<com.okchain.proto.Transfer.MultiNewOrderItem> 
+        getOrderItemsList();
+    /**
+     * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+     */
+    com.okchain.proto.Transfer.MultiNewOrderItem getOrderItems(int index);
+    /**
+     * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+     */
+    int getOrderItemsCount();
+    /**
+     * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+     */
+    java.util.List<? extends com.okchain.proto.Transfer.MultiNewOrderItemOrBuilder> 
+        getOrderItemsOrBuilderList();
+    /**
+     * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+     */
+    com.okchain.proto.Transfer.MultiNewOrderItemOrBuilder getOrderItemsOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code MsgMultiNewOrder}
+   */
+  public  static final class MsgMultiNewOrder extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:MsgMultiNewOrder)
+      MsgMultiNewOrderOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use MsgMultiNewOrder.newBuilder() to construct.
+    private MsgMultiNewOrder(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private MsgMultiNewOrder() {
+      sender_ = com.google.protobuf.ByteString.EMPTY;
+      orderItems_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private MsgMultiNewOrder(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+
+              sender_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                orderItems_ = new java.util.ArrayList<com.okchain.proto.Transfer.MultiNewOrderItem>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              orderItems_.add(
+                  input.readMessage(com.okchain.proto.Transfer.MultiNewOrderItem.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          orderItems_ = java.util.Collections.unmodifiableList(orderItems_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.okchain.proto.Transfer.internal_static_MsgMultiNewOrder_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.okchain.proto.Transfer.internal_static_MsgMultiNewOrder_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.okchain.proto.Transfer.MsgMultiNewOrder.class, com.okchain.proto.Transfer.MsgMultiNewOrder.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.google.protobuf.ByteString sender_;
+    /**
+     * <code>bytes sender = 1;</code>
+     */
+    public com.google.protobuf.ByteString getSender() {
+      return sender_;
+    }
+
+    public static final int ORDERITEMS_FIELD_NUMBER = 2;
+    private java.util.List<com.okchain.proto.Transfer.MultiNewOrderItem> orderItems_;
+    /**
+     * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+     */
+    public java.util.List<com.okchain.proto.Transfer.MultiNewOrderItem> getOrderItemsList() {
+      return orderItems_;
+    }
+    /**
+     * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+     */
+    public java.util.List<? extends com.okchain.proto.Transfer.MultiNewOrderItemOrBuilder> 
+        getOrderItemsOrBuilderList() {
+      return orderItems_;
+    }
+    /**
+     * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+     */
+    public int getOrderItemsCount() {
+      return orderItems_.size();
+    }
+    /**
+     * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+     */
+    public com.okchain.proto.Transfer.MultiNewOrderItem getOrderItems(int index) {
+      return orderItems_.get(index);
+    }
+    /**
+     * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+     */
+    public com.okchain.proto.Transfer.MultiNewOrderItemOrBuilder getOrderItemsOrBuilder(
+        int index) {
+      return orderItems_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!sender_.isEmpty()) {
+        output.writeBytes(1, sender_);
+      }
+      for (int i = 0; i < orderItems_.size(); i++) {
+        output.writeMessage(2, orderItems_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!sender_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, sender_);
+      }
+      for (int i = 0; i < orderItems_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, orderItems_.get(i));
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.okchain.proto.Transfer.MsgMultiNewOrder)) {
+        return super.equals(obj);
+      }
+      com.okchain.proto.Transfer.MsgMultiNewOrder other = (com.okchain.proto.Transfer.MsgMultiNewOrder) obj;
+
+      boolean result = true;
+      result = result && getSender()
+          .equals(other.getSender());
+      result = result && getOrderItemsList()
+          .equals(other.getOrderItemsList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + SENDER_FIELD_NUMBER;
+      hash = (53 * hash) + getSender().hashCode();
+      if (getOrderItemsCount() > 0) {
+        hash = (37 * hash) + ORDERITEMS_FIELD_NUMBER;
+        hash = (53 * hash) + getOrderItemsList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.okchain.proto.Transfer.MsgMultiNewOrder parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiNewOrder parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiNewOrder parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiNewOrder parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiNewOrder parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiNewOrder parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiNewOrder parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiNewOrder parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiNewOrder parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiNewOrder parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiNewOrder parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiNewOrder parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.okchain.proto.Transfer.MsgMultiNewOrder prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code MsgMultiNewOrder}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:MsgMultiNewOrder)
+        com.okchain.proto.Transfer.MsgMultiNewOrderOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.okchain.proto.Transfer.internal_static_MsgMultiNewOrder_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.okchain.proto.Transfer.internal_static_MsgMultiNewOrder_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.okchain.proto.Transfer.MsgMultiNewOrder.class, com.okchain.proto.Transfer.MsgMultiNewOrder.Builder.class);
+      }
+
+      // Construct using com.okchain.proto.Transfer.MsgMultiNewOrder.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getOrderItemsFieldBuilder();
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        sender_ = com.google.protobuf.ByteString.EMPTY;
+
+        if (orderItemsBuilder_ == null) {
+          orderItems_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          orderItemsBuilder_.clear();
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.okchain.proto.Transfer.internal_static_MsgMultiNewOrder_descriptor;
+      }
+
+      @java.lang.Override
+      public com.okchain.proto.Transfer.MsgMultiNewOrder getDefaultInstanceForType() {
+        return com.okchain.proto.Transfer.MsgMultiNewOrder.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.okchain.proto.Transfer.MsgMultiNewOrder build() {
+        com.okchain.proto.Transfer.MsgMultiNewOrder result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.okchain.proto.Transfer.MsgMultiNewOrder buildPartial() {
+        com.okchain.proto.Transfer.MsgMultiNewOrder result = new com.okchain.proto.Transfer.MsgMultiNewOrder(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.sender_ = sender_;
+        if (orderItemsBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            orderItems_ = java.util.Collections.unmodifiableList(orderItems_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.orderItems_ = orderItems_;
+        } else {
+          result.orderItems_ = orderItemsBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.okchain.proto.Transfer.MsgMultiNewOrder) {
+          return mergeFrom((com.okchain.proto.Transfer.MsgMultiNewOrder)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.okchain.proto.Transfer.MsgMultiNewOrder other) {
+        if (other == com.okchain.proto.Transfer.MsgMultiNewOrder.getDefaultInstance()) return this;
+        if (other.getSender() != com.google.protobuf.ByteString.EMPTY) {
+          setSender(other.getSender());
+        }
+        if (orderItemsBuilder_ == null) {
+          if (!other.orderItems_.isEmpty()) {
+            if (orderItems_.isEmpty()) {
+              orderItems_ = other.orderItems_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureOrderItemsIsMutable();
+              orderItems_.addAll(other.orderItems_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.orderItems_.isEmpty()) {
+            if (orderItemsBuilder_.isEmpty()) {
+              orderItemsBuilder_.dispose();
+              orderItemsBuilder_ = null;
+              orderItems_ = other.orderItems_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              orderItemsBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getOrderItemsFieldBuilder() : null;
+            } else {
+              orderItemsBuilder_.addAllMessages(other.orderItems_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.okchain.proto.Transfer.MsgMultiNewOrder parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.okchain.proto.Transfer.MsgMultiNewOrder) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.google.protobuf.ByteString sender_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>bytes sender = 1;</code>
+       */
+      public com.google.protobuf.ByteString getSender() {
+        return sender_;
+      }
+      /**
+       * <code>bytes sender = 1;</code>
+       */
+      public Builder setSender(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        sender_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bytes sender = 1;</code>
+       */
+      public Builder clearSender() {
+        
+        sender_ = getDefaultInstance().getSender();
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.okchain.proto.Transfer.MultiNewOrderItem> orderItems_ =
+        java.util.Collections.emptyList();
+      private void ensureOrderItemsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          orderItems_ = new java.util.ArrayList<com.okchain.proto.Transfer.MultiNewOrderItem>(orderItems_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.okchain.proto.Transfer.MultiNewOrderItem, com.okchain.proto.Transfer.MultiNewOrderItem.Builder, com.okchain.proto.Transfer.MultiNewOrderItemOrBuilder> orderItemsBuilder_;
+
+      /**
+       * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+       */
+      public java.util.List<com.okchain.proto.Transfer.MultiNewOrderItem> getOrderItemsList() {
+        if (orderItemsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(orderItems_);
+        } else {
+          return orderItemsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+       */
+      public int getOrderItemsCount() {
+        if (orderItemsBuilder_ == null) {
+          return orderItems_.size();
+        } else {
+          return orderItemsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+       */
+      public com.okchain.proto.Transfer.MultiNewOrderItem getOrderItems(int index) {
+        if (orderItemsBuilder_ == null) {
+          return orderItems_.get(index);
+        } else {
+          return orderItemsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+       */
+      public Builder setOrderItems(
+          int index, com.okchain.proto.Transfer.MultiNewOrderItem value) {
+        if (orderItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureOrderItemsIsMutable();
+          orderItems_.set(index, value);
+          onChanged();
+        } else {
+          orderItemsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+       */
+      public Builder setOrderItems(
+          int index, com.okchain.proto.Transfer.MultiNewOrderItem.Builder builderForValue) {
+        if (orderItemsBuilder_ == null) {
+          ensureOrderItemsIsMutable();
+          orderItems_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          orderItemsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+       */
+      public Builder addOrderItems(com.okchain.proto.Transfer.MultiNewOrderItem value) {
+        if (orderItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureOrderItemsIsMutable();
+          orderItems_.add(value);
+          onChanged();
+        } else {
+          orderItemsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+       */
+      public Builder addOrderItems(
+          int index, com.okchain.proto.Transfer.MultiNewOrderItem value) {
+        if (orderItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureOrderItemsIsMutable();
+          orderItems_.add(index, value);
+          onChanged();
+        } else {
+          orderItemsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+       */
+      public Builder addOrderItems(
+          com.okchain.proto.Transfer.MultiNewOrderItem.Builder builderForValue) {
+        if (orderItemsBuilder_ == null) {
+          ensureOrderItemsIsMutable();
+          orderItems_.add(builderForValue.build());
+          onChanged();
+        } else {
+          orderItemsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+       */
+      public Builder addOrderItems(
+          int index, com.okchain.proto.Transfer.MultiNewOrderItem.Builder builderForValue) {
+        if (orderItemsBuilder_ == null) {
+          ensureOrderItemsIsMutable();
+          orderItems_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          orderItemsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+       */
+      public Builder addAllOrderItems(
+          java.lang.Iterable<? extends com.okchain.proto.Transfer.MultiNewOrderItem> values) {
+        if (orderItemsBuilder_ == null) {
+          ensureOrderItemsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, orderItems_);
+          onChanged();
+        } else {
+          orderItemsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+       */
+      public Builder clearOrderItems() {
+        if (orderItemsBuilder_ == null) {
+          orderItems_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          orderItemsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+       */
+      public Builder removeOrderItems(int index) {
+        if (orderItemsBuilder_ == null) {
+          ensureOrderItemsIsMutable();
+          orderItems_.remove(index);
+          onChanged();
+        } else {
+          orderItemsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+       */
+      public com.okchain.proto.Transfer.MultiNewOrderItem.Builder getOrderItemsBuilder(
+          int index) {
+        return getOrderItemsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+       */
+      public com.okchain.proto.Transfer.MultiNewOrderItemOrBuilder getOrderItemsOrBuilder(
+          int index) {
+        if (orderItemsBuilder_ == null) {
+          return orderItems_.get(index);  } else {
+          return orderItemsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+       */
+      public java.util.List<? extends com.okchain.proto.Transfer.MultiNewOrderItemOrBuilder> 
+           getOrderItemsOrBuilderList() {
+        if (orderItemsBuilder_ != null) {
+          return orderItemsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(orderItems_);
+        }
+      }
+      /**
+       * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+       */
+      public com.okchain.proto.Transfer.MultiNewOrderItem.Builder addOrderItemsBuilder() {
+        return getOrderItemsFieldBuilder().addBuilder(
+            com.okchain.proto.Transfer.MultiNewOrderItem.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+       */
+      public com.okchain.proto.Transfer.MultiNewOrderItem.Builder addOrderItemsBuilder(
+          int index) {
+        return getOrderItemsFieldBuilder().addBuilder(
+            index, com.okchain.proto.Transfer.MultiNewOrderItem.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .MultiNewOrderItem orderItems = 2;</code>
+       */
+      public java.util.List<com.okchain.proto.Transfer.MultiNewOrderItem.Builder> 
+           getOrderItemsBuilderList() {
+        return getOrderItemsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.okchain.proto.Transfer.MultiNewOrderItem, com.okchain.proto.Transfer.MultiNewOrderItem.Builder, com.okchain.proto.Transfer.MultiNewOrderItemOrBuilder> 
+          getOrderItemsFieldBuilder() {
+        if (orderItemsBuilder_ == null) {
+          orderItemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.okchain.proto.Transfer.MultiNewOrderItem, com.okchain.proto.Transfer.MultiNewOrderItem.Builder, com.okchain.proto.Transfer.MultiNewOrderItemOrBuilder>(
+                  orderItems_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          orderItems_ = null;
+        }
+        return orderItemsBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:MsgMultiNewOrder)
+    }
+
+    // @@protoc_insertion_point(class_scope:MsgMultiNewOrder)
+    private static final com.okchain.proto.Transfer.MsgMultiNewOrder DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.okchain.proto.Transfer.MsgMultiNewOrder();
+    }
+
+    public static com.okchain.proto.Transfer.MsgMultiNewOrder getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<MsgMultiNewOrder>
+        PARSER = new com.google.protobuf.AbstractParser<MsgMultiNewOrder>() {
+      @java.lang.Override
+      public MsgMultiNewOrder parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new MsgMultiNewOrder(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<MsgMultiNewOrder> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<MsgMultiNewOrder> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.okchain.proto.Transfer.MsgMultiNewOrder getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface MsgMultiCancelOrderOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:MsgMultiCancelOrder)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>bytes sender = 1;</code>
+     */
+    com.google.protobuf.ByteString getSender();
+
+    /**
+     * <code>repeated string orderIdItems = 2;</code>
+     */
+    java.util.List<java.lang.String>
+        getOrderIdItemsList();
+    /**
+     * <code>repeated string orderIdItems = 2;</code>
+     */
+    int getOrderIdItemsCount();
+    /**
+     * <code>repeated string orderIdItems = 2;</code>
+     */
+    java.lang.String getOrderIdItems(int index);
+    /**
+     * <code>repeated string orderIdItems = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getOrderIdItemsBytes(int index);
+  }
+  /**
+   * Protobuf type {@code MsgMultiCancelOrder}
+   */
+  public  static final class MsgMultiCancelOrder extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:MsgMultiCancelOrder)
+      MsgMultiCancelOrderOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use MsgMultiCancelOrder.newBuilder() to construct.
+    private MsgMultiCancelOrder(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private MsgMultiCancelOrder() {
+      sender_ = com.google.protobuf.ByteString.EMPTY;
+      orderIdItems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private MsgMultiCancelOrder(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+
+              sender_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                orderIdItems_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              orderIdItems_.add(s);
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          orderIdItems_ = orderIdItems_.getUnmodifiableView();
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.okchain.proto.Transfer.internal_static_MsgMultiCancelOrder_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.okchain.proto.Transfer.internal_static_MsgMultiCancelOrder_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.okchain.proto.Transfer.MsgMultiCancelOrder.class, com.okchain.proto.Transfer.MsgMultiCancelOrder.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.google.protobuf.ByteString sender_;
+    /**
+     * <code>bytes sender = 1;</code>
+     */
+    public com.google.protobuf.ByteString getSender() {
+      return sender_;
+    }
+
+    public static final int ORDERIDITEMS_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList orderIdItems_;
+    /**
+     * <code>repeated string orderIdItems = 2;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getOrderIdItemsList() {
+      return orderIdItems_;
+    }
+    /**
+     * <code>repeated string orderIdItems = 2;</code>
+     */
+    public int getOrderIdItemsCount() {
+      return orderIdItems_.size();
+    }
+    /**
+     * <code>repeated string orderIdItems = 2;</code>
+     */
+    public java.lang.String getOrderIdItems(int index) {
+      return orderIdItems_.get(index);
+    }
+    /**
+     * <code>repeated string orderIdItems = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getOrderIdItemsBytes(int index) {
+      return orderIdItems_.getByteString(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!sender_.isEmpty()) {
+        output.writeBytes(1, sender_);
+      }
+      for (int i = 0; i < orderIdItems_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, orderIdItems_.getRaw(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!sender_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, sender_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < orderIdItems_.size(); i++) {
+          dataSize += computeStringSizeNoTag(orderIdItems_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getOrderIdItemsList().size();
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.okchain.proto.Transfer.MsgMultiCancelOrder)) {
+        return super.equals(obj);
+      }
+      com.okchain.proto.Transfer.MsgMultiCancelOrder other = (com.okchain.proto.Transfer.MsgMultiCancelOrder) obj;
+
+      boolean result = true;
+      result = result && getSender()
+          .equals(other.getSender());
+      result = result && getOrderIdItemsList()
+          .equals(other.getOrderIdItemsList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + SENDER_FIELD_NUMBER;
+      hash = (53 * hash) + getSender().hashCode();
+      if (getOrderIdItemsCount() > 0) {
+        hash = (37 * hash) + ORDERIDITEMS_FIELD_NUMBER;
+        hash = (53 * hash) + getOrderIdItemsList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.okchain.proto.Transfer.MsgMultiCancelOrder parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiCancelOrder parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiCancelOrder parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiCancelOrder parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiCancelOrder parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiCancelOrder parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiCancelOrder parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiCancelOrder parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiCancelOrder parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiCancelOrder parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiCancelOrder parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.okchain.proto.Transfer.MsgMultiCancelOrder parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.okchain.proto.Transfer.MsgMultiCancelOrder prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code MsgMultiCancelOrder}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:MsgMultiCancelOrder)
+        com.okchain.proto.Transfer.MsgMultiCancelOrderOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.okchain.proto.Transfer.internal_static_MsgMultiCancelOrder_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.okchain.proto.Transfer.internal_static_MsgMultiCancelOrder_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.okchain.proto.Transfer.MsgMultiCancelOrder.class, com.okchain.proto.Transfer.MsgMultiCancelOrder.Builder.class);
+      }
+
+      // Construct using com.okchain.proto.Transfer.MsgMultiCancelOrder.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        sender_ = com.google.protobuf.ByteString.EMPTY;
+
+        orderIdItems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.okchain.proto.Transfer.internal_static_MsgMultiCancelOrder_descriptor;
+      }
+
+      @java.lang.Override
+      public com.okchain.proto.Transfer.MsgMultiCancelOrder getDefaultInstanceForType() {
+        return com.okchain.proto.Transfer.MsgMultiCancelOrder.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.okchain.proto.Transfer.MsgMultiCancelOrder build() {
+        com.okchain.proto.Transfer.MsgMultiCancelOrder result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.okchain.proto.Transfer.MsgMultiCancelOrder buildPartial() {
+        com.okchain.proto.Transfer.MsgMultiCancelOrder result = new com.okchain.proto.Transfer.MsgMultiCancelOrder(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.sender_ = sender_;
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          orderIdItems_ = orderIdItems_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.orderIdItems_ = orderIdItems_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.okchain.proto.Transfer.MsgMultiCancelOrder) {
+          return mergeFrom((com.okchain.proto.Transfer.MsgMultiCancelOrder)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.okchain.proto.Transfer.MsgMultiCancelOrder other) {
+        if (other == com.okchain.proto.Transfer.MsgMultiCancelOrder.getDefaultInstance()) return this;
+        if (other.getSender() != com.google.protobuf.ByteString.EMPTY) {
+          setSender(other.getSender());
+        }
+        if (!other.orderIdItems_.isEmpty()) {
+          if (orderIdItems_.isEmpty()) {
+            orderIdItems_ = other.orderIdItems_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureOrderIdItemsIsMutable();
+            orderIdItems_.addAll(other.orderIdItems_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.okchain.proto.Transfer.MsgMultiCancelOrder parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.okchain.proto.Transfer.MsgMultiCancelOrder) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.google.protobuf.ByteString sender_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>bytes sender = 1;</code>
+       */
+      public com.google.protobuf.ByteString getSender() {
+        return sender_;
+      }
+      /**
+       * <code>bytes sender = 1;</code>
+       */
+      public Builder setSender(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        sender_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bytes sender = 1;</code>
+       */
+      public Builder clearSender() {
+        
+        sender_ = getDefaultInstance().getSender();
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList orderIdItems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureOrderIdItemsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          orderIdItems_ = new com.google.protobuf.LazyStringArrayList(orderIdItems_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated string orderIdItems = 2;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getOrderIdItemsList() {
+        return orderIdItems_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string orderIdItems = 2;</code>
+       */
+      public int getOrderIdItemsCount() {
+        return orderIdItems_.size();
+      }
+      /**
+       * <code>repeated string orderIdItems = 2;</code>
+       */
+      public java.lang.String getOrderIdItems(int index) {
+        return orderIdItems_.get(index);
+      }
+      /**
+       * <code>repeated string orderIdItems = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getOrderIdItemsBytes(int index) {
+        return orderIdItems_.getByteString(index);
+      }
+      /**
+       * <code>repeated string orderIdItems = 2;</code>
+       */
+      public Builder setOrderIdItems(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureOrderIdItemsIsMutable();
+        orderIdItems_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string orderIdItems = 2;</code>
+       */
+      public Builder addOrderIdItems(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureOrderIdItemsIsMutable();
+        orderIdItems_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string orderIdItems = 2;</code>
+       */
+      public Builder addAllOrderIdItems(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureOrderIdItemsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, orderIdItems_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string orderIdItems = 2;</code>
+       */
+      public Builder clearOrderIdItems() {
+        orderIdItems_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string orderIdItems = 2;</code>
+       */
+      public Builder addOrderIdItemsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureOrderIdItemsIsMutable();
+        orderIdItems_.add(value);
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:MsgMultiCancelOrder)
+    }
+
+    // @@protoc_insertion_point(class_scope:MsgMultiCancelOrder)
+    private static final com.okchain.proto.Transfer.MsgMultiCancelOrder DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.okchain.proto.Transfer.MsgMultiCancelOrder();
+    }
+
+    public static com.okchain.proto.Transfer.MsgMultiCancelOrder getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<MsgMultiCancelOrder>
+        PARSER = new com.google.protobuf.AbstractParser<MsgMultiCancelOrder>() {
+      @java.lang.Override
+      public MsgMultiCancelOrder parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new MsgMultiCancelOrder(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<MsgMultiCancelOrder> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<MsgMultiCancelOrder> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.okchain.proto.Transfer.MsgMultiCancelOrder getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -9239,6 +11737,21 @@ public final class Transfer {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Stu_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_MultiNewOrderItem_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_MultiNewOrderItem_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_MsgMultiNewOrder_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_MsgMultiNewOrder_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_MsgMultiCancelOrder_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_MsgMultiCancelOrder_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -9264,7 +11777,13 @@ public final class Transfer {
       "ferUnit\022\n\n\002to\030\001 \001(\014\022\025\n\005coins\030\002 \003(\0132\006.Tok" +
       "en\"@\n\010BaseType\022\t\n\001i\030\001 \001(\003\022\t\n\001s\030\002 \001(\t\022\n\n\002" +
       "ss\030\003 \003(\t\022\022\n\004stus\030\004 \003(\0132\004.Stu\"\021\n\003Stu\022\n\n\002i" +
-      "d\030\001 \001(\003B\023\n\021com.okchain.protob\006proto3"
+      "d\030\001 \001(\003\"S\n\021MultiNewOrderItem\022\017\n\007product\030" +
+      "\001 \001(\t\022\014\n\004side\030\002 \001(\t\022\r\n\005price\030\003 \001(\t\022\020\n\010qu" +
+      "antity\030\004 \001(\t\"J\n\020MsgMultiNewOrder\022\016\n\006send" +
+      "er\030\001 \001(\014\022&\n\norderItems\030\002 \003(\0132\022.MultiNewO" +
+      "rderItem\";\n\023MsgMultiCancelOrder\022\016\n\006sende" +
+      "r\030\001 \001(\014\022\024\n\014orderIdItems\030\002 \003(\tB\023\n\021com.okc" +
+      "hain.protob\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -9344,6 +11863,24 @@ public final class Transfer {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Stu_descriptor,
         new java.lang.String[] { "Id", });
+    internal_static_MultiNewOrderItem_descriptor =
+      getDescriptor().getMessageTypes().get(11);
+    internal_static_MultiNewOrderItem_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_MultiNewOrderItem_descriptor,
+        new java.lang.String[] { "Product", "Side", "Price", "Quantity", });
+    internal_static_MsgMultiNewOrder_descriptor =
+      getDescriptor().getMessageTypes().get(12);
+    internal_static_MsgMultiNewOrder_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_MsgMultiNewOrder_descriptor,
+        new java.lang.String[] { "Sender", "OrderItems", });
+    internal_static_MsgMultiCancelOrder_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_MsgMultiCancelOrder_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_MsgMultiCancelOrder_descriptor,
+        new java.lang.String[] { "Sender", "OrderIdItems", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

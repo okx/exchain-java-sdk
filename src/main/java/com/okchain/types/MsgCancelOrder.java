@@ -3,10 +3,9 @@ package com.okchain.types;
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class MsgCancelOrder implements IMsg {
-    @JSONField(name = "OrderId")
+    @JSONField(name = "order_id")
     public String orderId;
 
-    @JSONField(name = "Sender")
     public String sender;
 
     public MsgCancelOrder(String sender, String orderId) {

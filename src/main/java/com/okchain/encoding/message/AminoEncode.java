@@ -23,6 +23,14 @@ public class AminoEncode {
         return EncodeUtils.aminoWrap(msgMultiSendProto.toByteArray(), MessageType.MultiSend.getTypePrefixBytes(), false);
     }
 
+    public static byte[] encodeMsgMultiNewOrder(Transfer.MsgMultiNewOrder msgMultiNewOrder) throws IOException {
+        return EncodeUtils.aminoWrap(msgMultiNewOrder.toByteArray(), MessageType.MultiNewOrder.getTypePrefixBytes(), false);
+    }
+
+    public static byte[] encodeMsgMultiCancelOrder(Transfer.MsgMultiCancelOrder msgMultiCancelOrder) throws IOException {
+        return EncodeUtils.aminoWrap(msgMultiCancelOrder.toByteArray(), MessageType.MultiCancelOrder.getTypePrefixBytes(), false);
+    }
+
     public static byte[] encodePubkey(String pubkey) {
         byte[] pubKey = Hex.decode(pubkey);
         byte[] pubKeyPrefix = MessageType.PubKey.getTypePrefixBytes();

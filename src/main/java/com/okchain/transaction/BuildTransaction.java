@@ -1,6 +1,7 @@
 package com.okchain.transaction;
 
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.protobuf.ByteString;
 import com.okchain.common.ConstantIF;
@@ -47,6 +48,25 @@ public class BuildTransaction {
 
     }
 
+    public static byte[] generateAminoMultiPlaceOrderTransaction(AccountInfo account, List<MultiNewOrderItem> items, String memo) throws IOException {
+        IMsg msg = new MsgMultiNewOrder(account.getUserAddress(), items);
+        // stdMsg to Proto and to ProtoBytes
+        // first 2 get the protobytes of object MsgNewOrder
+        Transfer.MsgMultiNewOrder.Builder msgMultiNewOrderBuilder = Transfer.MsgMultiNewOrder.newBuilder();
+        for (MultiNewOrderItem item : items) {
+            Transfer.MultiNewOrderItem.Builder itemBuilder = Transfer.MultiNewOrderItem.newBuilder();
+            itemBuilder.setSide(item.getSide());
+            itemBuilder.setProduct(item.getProduct());
+            itemBuilder.setPrice(EncodeUtils.stringTo8(item.getPrice()));
+            itemBuilder.setQuantity(EncodeUtils.stringTo8(item.getQuantity()));
+            msgMultiNewOrderBuilder.addOrderItems(itemBuilder.build());
+        }
+        msgMultiNewOrderBuilder.setSender(ByteString.copyFrom(AddressUtil.decodeAddress(account.getUserAddress())));
+        byte[] msgMultiNewOrderAminoEncoded = AminoEncode.encodeMsgMultiNewOrder(msgMultiNewOrderBuilder.build());
+        return buildAminoTransaction(account, msgMultiNewOrderAminoEncoded, msg, memo);
+
+    }
+
 
     public static byte[] generateAminoCancelOrderTransaction(AccountInfo account, String orderId, String memo) throws IOException {
         IMsg msg = new MsgCancelOrder(account.getUserAddress(), orderId);
@@ -54,6 +74,17 @@ public class BuildTransaction {
                 .setOrderId(orderId)
                 .setSender(ByteString.copyFrom(AddressUtil.decodeAddress(account.getUserAddress()))).build();
         byte[] msgCancelOrderAminoEncoded = AminoEncode.encodeMsgCancelOrder(msgCancelOrderProto);
+        return buildAminoTransaction(account, msgCancelOrderAminoEncoded, msg, memo);
+    }
+
+    public static byte[] generateAminoMultiCancelOrderTransaction(AccountInfo account, List<String> orderIdMap, String memo) throws IOException {
+        IMsg msg = new MsgMultiCancelOrder(account.getUserAddress(), orderIdMap);
+        Transfer.MsgMultiCancelOrder.Builder msgMultiCancelOrderBuilder = Transfer.MsgMultiCancelOrder.newBuilder()
+                .setSender(ByteString.copyFrom(AddressUtil.decodeAddress(account.getUserAddress())));
+        for (String orderId : orderIdMap) {
+            msgMultiCancelOrderBuilder.addOrderIdItems(orderId);
+        }
+        byte[] msgCancelOrderAminoEncoded = AminoEncode.encodeMsgMultiCancelOrder(msgMultiCancelOrderBuilder.build());
         return buildAminoTransaction(account, msgCancelOrderAminoEncoded, msg, memo);
     }
 
@@ -94,8 +125,10 @@ public class BuildTransaction {
         return buildAminoTransaction(account, msgMultiSendAminoEncoded, msg, memo);
     }
 
+
+
     private static byte[] buildAminoTransaction(AccountInfo account, byte[] stdMsgProtoBytes, IMsg signMsg, String memo) {
-        if (account.getAccountNumber() == "" || account.getSequenceNumber() == "") {
+        if (account.getAccountNumber().equals("") || account.getSequenceNumber().equals("")) {
             throw new NullPointerException("account error!");
         }
         if (memo == null) {
@@ -106,6 +139,7 @@ public class BuildTransaction {
         Fee fee = generateFeeDefault();
         // prepare for sign
         SignData signData = new SignData(account.getAccountNumber(), ConstantIF.CHAIN_ID, fee, memo, new IMsg[]{signMsg}, account.getSequenceNumber());
+        System.out.println("signData:" + JSON.toJSONString(signData));
         try {
             // object 2 json string
             String signDataJson = JSONObject.toJSONString(signData);

@@ -2,7 +2,7 @@ package com.okchain.types;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
-public class MsgNewOrder implements IMsg {
+public class MultiNewOrderItem {
     // price of the order
     private String price;
 
@@ -12,26 +12,14 @@ public class MsgNewOrder implements IMsg {
     // quantity of the order
     private String quantity;
 
-    // order maker address
-    private String sender;
-
     // BUY/SELL
     private String side;
 
-    public MsgNewOrder(String price, String product, String quantity, String sender, String side) {
+    public MultiNewOrderItem(String price, String product, String quantity, String side) {
         this.price = price;
         this.product = product;
         this.quantity = quantity;
-        this.sender = sender;
         this.side = side;
-    }
-
-    public String getSender() {
-        return sender;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
     }
 
     public String getProduct() {
@@ -65,6 +53,4 @@ public class MsgNewOrder implements IMsg {
     public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
-
-
 }
