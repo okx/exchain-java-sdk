@@ -6,8 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class BenchMarkTest {
-    private static String url_rpc = "https://okexbeta.bafang.com/okchain/v1/rpc";
-    //private static String url_rpc = "http://3.13.150.20:26657";
+    private static String url_rpc = "http://127.0.0.1:26657";
     @Test
     public void testGetToken() {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
