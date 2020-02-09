@@ -11,15 +11,11 @@ import java.util.List;
 public interface OKChainClient {
 
 
-//    public static OKChainClient getOKChainClient(String backend) {
-//        return null;
-//    }
+    // account
 
-    //address api
+    public AccountInfo createAccount();
 
     public JSONObject getAccountFromNode(String userAddress) throws NullPointerException;
-
-    public AddressInfo createAddressInfo();
 
     public AddressInfo getAddressInfo(String privateKey) throws NullPointerException;
 
@@ -27,21 +23,18 @@ public interface OKChainClient {
 
     public String generateMnemonic();
 
+    public AccountInfo getAccountInfoFromMnemonic(String mnemo);
+
     public String generateKeyStore(String privateKey, String passWord) throws CipherException, IOException;
 
     public String getPrivateKeyFromKeyStore(String keyStoreFilePath, String passWord) throws IOException, CipherException;
-
-    //send transaction
+    // transact
 
     public JSONObject sendSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) throws NullPointerException, IOException;
-
-    public JSONObject sendSendTransactions(AccountInfo account, List<String> tos, List<List<Token>> amount, String memo) throws NullPointerException, IOException;
 
     public JSONObject sendPlaceOrderTransaction(AccountInfo account, RequestPlaceOrderParams parms, String memo) throws NullPointerException, IOException;
 
     public JSONObject sendCancelOrderTransaction(AccountInfo account, String orderId, String memo) throws NullPointerException, IOException;
-
-    public JSONObject sendMultiSendTransaction(AccountInfo account, List<TransferUnit> transfers, String memo) throws IOException;
 
 
     //query
@@ -74,5 +67,16 @@ public interface OKChainClient {
 
     public BaseModel getTransactions(RequestTransactionsParams params) throws NullPointerException;
 
+    public String getTickersV2(String instrumentId);
+
+    public String getInstrumentsV2();
+
+    public String getOrderListOpenV2(String instrument_id, String after, String before, int limit) throws NullPointerException;
+
+    public String getOrderV2(String order_id);
+
+    public JSONObject sendPlaceOrderTransactionV2(AccountInfo account, RequestPlaceOrderParams parms, String memo) throws NullPointerException, IOException;
+
+    public JSONObject sendCancelOrderTransactionV2(AccountInfo account, String orderId, String memo) throws NullPointerException, IOException;
 
 }

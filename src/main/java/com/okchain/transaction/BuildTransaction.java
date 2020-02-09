@@ -4,10 +4,11 @@ package com.okchain.transaction;
 import com.alibaba.fastjson.JSONObject;
 import com.google.protobuf.ByteString;
 import com.okchain.common.ConstantIF;
-import com.okchain.crypto.AddressUtil;
 import com.okchain.crypto.Crypto;
+import com.okchain.crypto.io.cosmos.util.AddressUtil;
 import com.okchain.encoding.EncodeUtils;
 import com.okchain.encoding.message.AminoEncode;
+import com.okchain.exception.InvalidFormatException;
 import com.okchain.proto.Transfer;
 import com.okchain.types.*;
 import org.bouncycastle.util.Strings;
@@ -100,6 +101,7 @@ public class BuildTransaction {
         if (memo == null) {
             memo = "";
         }
+        if (memo.length()>ConstantIF.MAX_MEMO_LEN) throw new InvalidFormatException("length of memo is too long");
         // no fee temporarily
         Fee fee = generateFeeDefault();
         // prepare for sign

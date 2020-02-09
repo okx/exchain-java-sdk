@@ -12,7 +12,7 @@ public class EncodingTest {
     public void testAminoBaseType() throws IOException {
         Transfer.BaseType btProto = Transfer.BaseType.newBuilder()
                 .setI(500000000)
-                .setS("OKcoin")
+                .setS("okchain")
                 .addSs("btc").addSs("okb")
                 .addStus(Transfer.Stu.newBuilder().setId(500000000).build())
                 .addStus(Transfer.Stu.newBuilder().setId(500000000).build())

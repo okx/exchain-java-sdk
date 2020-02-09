@@ -68,24 +68,6 @@
     <orderEntry type="library" name="Maven: org.apache.neethi:neethi:3.0.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
-    <orderEntry type="library" name="Maven: io.common:signature-commomn-sdk:1.0.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: com.google.crypto.tink:tink:1.1.1" level="project" />
-    <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-core:1.11.166" level="project" />
-    <orderEntry type="library" name="Maven: software.amazon.ion:ion-java:1.0.2" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.6.7" level="project" />
-    <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-kms:1.11.166" level="project" />
-    <orderEntry type="library" name="Maven: com.amazonaws:jmespath-java:1.11.166" level="project" />
-    <orderEntry type="library" name="Maven: com.google.api-client:google-api-client:1.22.0" level="project" />
-    <orderEntry type="library" name="Maven: com.google.oauth-client:google-oauth-client:1.22.0" level="project" />
-    <orderEntry type="library" name="Maven: com.google.http-client:google-http-client:1.22.0" level="project" />
-    <orderEntry type="library" name="Maven: com.google.http-client:google-http-client-jackson2:1.22.0" level="project" />
-    <orderEntry type="library" name="Maven: com.google.apis:google-api-services-cloudkms:v1-rev9-1.22.0" level="project" />
-    <orderEntry type="library" name="Maven: com.google.auto.service:auto-service:1.0-rc4" level="project" />
-    <orderEntry type="library" name="Maven: com.google.auto:auto-common:0.8" level="project" />
-    <orderEntry type="library" name="Maven: org.json:json:20170516" level="project" />
-    <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-ext-jdk15on:1.55" level="project" />
-    <orderEntry type="library" name="Maven: net.i2p.crypto:eddsa:0.3.0" level="project" />
-    <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
     <orderEntry type="library" name="Maven: org.bitcoinj:bitcoinj-core:0.14.7" level="project" />
     <orderEntry type="library" name="Maven: com.madgag.spongycastle:core:1.51.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:18.0" level="project" />

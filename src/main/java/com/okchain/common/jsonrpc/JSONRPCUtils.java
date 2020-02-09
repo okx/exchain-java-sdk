@@ -3,6 +3,7 @@ package com.okchain.common.jsonrpc;
 import com.alibaba.fastjson.JSON;
 import com.okchain.common.HttpUtils;
 import com.okchain.common.jsonrpc.types.RPCRequest;
+import com.okchain.exception.OKChainException;
 
 import java.util.Map;
 
@@ -10,7 +11,13 @@ public class JSONRPCUtils {
 
     public static String call(String url, String method, Map<String, Object> params) {
         String data = getRpcSendData(method, params);
-        return HttpUtils.httpPost(url, data);
+        String res = HttpUtils.httpPost(url, data);
+        try{
+            JSON.parseObject(res);
+        }catch (Exception e){
+            throw new OKChainException(res);
+        }
+        return res;
     }
 
     public static String getRpcSendData(String method, Map<String, Object> params) {

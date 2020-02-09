@@ -1,5 +1,13 @@
-package com.okchain.crypto;
+package com.okchain.crypto.io.cosmos.exception;
 
+import com.okchain.crypto.io.cosmos.crypto.encode.Bech32;
+
+/**
+ * @program: cosmos-java-sdk
+ * @description:
+ * @author: liqiang
+ * @create: 2018-12-17 11:18
+ **/
 @SuppressWarnings("serial")
 public class AddressFormatException extends IllegalArgumentException {
     public AddressFormatException() {

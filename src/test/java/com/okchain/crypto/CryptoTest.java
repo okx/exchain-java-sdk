@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import com.okchain.crypto.io.cosmos.util.AddressUtil;
 import java.util.Base64;
 
 public class CryptoTest {
@@ -22,8 +23,8 @@ public class CryptoTest {
 
     @Test
     public void testGenerateAddress() {
-        String priv = Crypto.generatePrivateKey();
-        //String priv = "c4c451ce673485521f9c9b74b6d90f0da433ef7f012fa7f9db4def627dccd632";
+//        String priv = Crypto.generatePrivateKey();
+        String priv = "c4c451ce673485521f9c9b74b6d90f0da433ef7f012fa7f9db4def627dccd632";
         long startTime = System.currentTimeMillis();
         byte[] pub = Crypto.generatePubKeyFromPriv(priv);
         System.out.println(Hex.toHexString(pub));
@@ -64,7 +65,9 @@ public class CryptoTest {
     @Test
     public void generatePrivateKeyFromMnemonic() {
         String mnemonic = "total lottery arena when pudding best candy until army spoil drill pool";
-        System.out.println(Crypto.generatePrivateKeyFromMnemonic(mnemonic));
+        String priv = Crypto.generatePrivateKeyFromMnemonic(mnemonic);
+        System.out.println(priv);
+        System.out.println(Crypto.generateAddressFromPriv(priv));
     }
 
 
@@ -73,7 +76,7 @@ public class CryptoTest {
         File file = new File("./");
         String fileName = "";
         try {
-            fileName = KeyStoreUtils.generateNewWalletFile("jilei", file);
+            fileName = KeyStoreUtils.generateNewWalletFile("1234567", file);
         } catch (CipherException e) {
             e.printStackTrace();
         } catch (InvalidAlgorithmParameterException e) {
@@ -93,7 +96,7 @@ public class CryptoTest {
     @Test
     public void getPrivatekeyFromKeyStore() {
         File file = new File("./");
-        String password = "jilei";
+        String password = "1234567";
         String filename = "";
         try {
             filename = KeyStoreUtils.generateWalletFile(password, "c4c451ce673485521f9c9b74b6d90f0da433ef7f012fa7f9db4def627dccd632", file, true);
@@ -114,6 +117,7 @@ public class CryptoTest {
         File keyStoreFile = new File(filename);
         keyStoreFile.delete();
     }
+
 
     @Test
     public void validPubKey() {
