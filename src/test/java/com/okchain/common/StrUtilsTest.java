@@ -29,7 +29,7 @@ public class StrUtilsTest {
 
   @Test
   public void isProduct() {
-    Assert.assertTrue(StrUtils.isProduct("xxb_okb"));
+    Assert.assertTrue(StrUtils.isProduct("tokt_tusdk"));
     Assert.assertTrue(StrUtils.isProduct("1_2"));
     Assert.assertFalse(StrUtils.isProduct("xxb"));
     Assert.assertFalse(StrUtils.isProduct("xxb_"));
