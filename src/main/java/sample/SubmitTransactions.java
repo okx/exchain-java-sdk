@@ -12,8 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SubmitTransactions {
-  private static String url_rpc = "http://3.13.150.20:26657";
-  private static String privateKey = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
+    private static String url_rpc = "http://3.13.150.20:26657";
+    private static String privateKey =
+            "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
+    private static String mnemo =
+            "total lottery arena when pudding best candy until army spoil drill pool";
 
     public static void submitTransferTransaction() throws NullPointerException, IOException {
         BuildTransaction.setMode("block");
@@ -50,7 +53,16 @@ public class SubmitTransactions {
         JSONObject ret = client.sendCancelOrderTransaction(account, orderId, memo);
         System.out.println(ret);
     }
-  public static void main(String[] args) throws NullPointerException, IOException {
-      SubmitTransactions.submitPlaceOrderTransaction();
-  }
+
+    public static void getAccountInfo() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        AccountInfo account = client.getAccountInfo(privateKey);
+        System.out.println(account.toString());
+        AccountInfo accountFromMnemonic = client.getAccountInfoFromMnemonic(mnemo);
+        System.out.println(accountFromMnemonic.toString());
+    }
+
+    public static void main(String[] args) throws NullPointerException, IOException {
+        SubmitTransactions.submitPlaceOrderTransaction();
+    }
 }
