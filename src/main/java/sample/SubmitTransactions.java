@@ -18,6 +18,11 @@ public class SubmitTransactions {
     private static String mnemo =
             "total lottery arena when pudding best candy until army spoil drill pool";
 
+
+    /**
+     * Submit a transfer transaction to OKChain.
+     * @throws IOException
+     */
     public static void submitTransferTransaction() throws NullPointerException, IOException {
         BuildTransaction.setMode("block");
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
@@ -31,6 +36,10 @@ public class SubmitTransactions {
         System.out.println(ret);
     }
 
+    /**
+     * Submit a placeOrder transaction to OKChain.
+     * @throws IOException
+     */
     public static void submitPlaceOrderTransaction() throws IOException {
         BuildTransaction.setMode("block");
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
@@ -45,6 +54,11 @@ public class SubmitTransactions {
         System.out.println(ret);
     }
 
+    /**
+     * Submit a cancelOrder transaction to OKChain.
+     * @param orderId You can get orderId when exec submitPlaceOrderTransaction.
+     * @throws IOException
+     */
     public static void submitCancelOrderTransaction(String orderId) throws IOException {
         BuildTransaction.setMode("block");
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
@@ -54,6 +68,10 @@ public class SubmitTransactions {
         System.out.println(ret);
     }
 
+    /**
+     * Get AccountInfo with privateKey or mnemonic.
+     * This function will query the information of account from OKChain.
+     */
     public static void getAccountInfo() {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
         AccountInfo account = client.getAccountInfo(privateKey);
