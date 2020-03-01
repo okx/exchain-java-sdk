@@ -232,7 +232,7 @@ public class OKChainRPCClientImplTest {
     @Test
     public void testGetOrderListOpen() {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
-        String product = "xxb_okb";
+        String product = "tokt_tusdk";
         String side = "BUY";
         String start = "1";
         // get the system time right now and convert it to String
@@ -249,7 +249,7 @@ public class OKChainRPCClientImplTest {
     public void testGetOrderListClosed() {
         // cancel a order first by okchaincli
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
-        String product = "xxb_okb";
+        String product = "tokt_tusdk";
         String side = "BUY";
         String start = "1";
         // get the system time right now and convert it to String
@@ -267,7 +267,7 @@ public class OKChainRPCClientImplTest {
     @Test
     public void testGetDeals() {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
-        String product = "xxb_okb";
+        String product = "tokt_tusdk";
         String side = "BUY";
         String start = "1";
         // get the system time right now and convert it to String

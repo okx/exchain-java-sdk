@@ -1,6 +1,6 @@
 ## OKChain Java SDK
 
-The OKChain Java SDK seems like a useful lightweight Java library to interact with OKChain. The developers can invoke the api function inside. The Java SDK supports synchronous , asynchronous and blockmode requests.
+The OKChain Java SDK is a lightweight Java library to interact with OKChain. 
 
 ### 1.Components
 

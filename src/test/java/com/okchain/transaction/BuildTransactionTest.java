@@ -16,14 +16,14 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class BuildTransactionTest {
-    private static String rpcUrl = "http://127.0.0.1:26657";
+    private static String rpcUrl = "http://3.13.150.20:26657";
     private static String privateKey = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
 
     @Test
     public void testBuildAminoNewOrderTx() throws IOException {
         AccountInfo account = generateAccountInfoByRpc();
         String side = "BUY";
-        String product = "xxb_okb";
+        String product = "tokt_tusdk";
         String price = "1.00000000";
         String quantity = "1.00000000";
         String memo = "";
