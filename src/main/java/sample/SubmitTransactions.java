@@ -11,11 +11,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SendTransaction {
+public class SubmitTransactions {
   private static String url_rpc = "http://3.13.150.20:26657";
   private static String privateKey = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
 
-    public static void sendSendTransaction() throws NullPointerException, IOException {
+    public static void submitTransferTransaction() throws NullPointerException, IOException {
         BuildTransaction.setMode("block");
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
         AccountInfo account = client.getAccountInfo(privateKey);
@@ -28,7 +28,7 @@ public class SendTransaction {
         System.out.println(ret);
     }
 
-    public static void sendPlaceOrderTransaction() throws IOException {
+    public static void submitPlaceOrderTransaction() throws IOException {
         BuildTransaction.setMode("block");
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
         AccountInfo account = client.getAccountInfo(privateKey);
@@ -42,18 +42,15 @@ public class SendTransaction {
         System.out.println(ret);
     }
 
-    public static void sendCancelOrderTransaction() throws IOException {
+    public static void submitCancelOrderTransaction(String orderId) throws IOException {
         BuildTransaction.setMode("block");
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
         AccountInfo account = client.getAccountInfo(privateKey);
-        // u can get order-ID by placing a new order
-        String orderId = "ID0003039004-1";
         String memo = "cancel order memo";
         JSONObject ret = client.sendCancelOrderTransaction(account, orderId, memo);
         System.out.println(ret);
     }
   public static void main(String[] args) throws NullPointerException, IOException {
-    SendTransaction.sendPlaceOrderTransaction();
-
+      SubmitTransactions.submitPlaceOrderTransaction();
   }
 }
