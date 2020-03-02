@@ -157,17 +157,30 @@ public class OKChainRPCClientImpl implements OKChainClient {
         if (method.equals(ConstantIF.RPC_METHOD_TX_SEND_BLOCK)) {
             resObj.put("height", obj.getIntValue("height"));
             if (!obj.getJSONObject("check_tx").containsKey("code")) {
-                System.out.println("yes");
                 execObj = obj.getJSONObject("deliver_tx");
             }else {
                 execObj = obj.getJSONObject("check_tx");
             }
             if (execObj.containsKey("log")) {
                 String rawLog = execObj.getString("log");
-                System.out.println(rawLog);
+
                 resObj.put("raw_log", rawLog);
-                JSONArray logObj = JSONObject.parseArray(rawLog);
-                resObj.put("logs", logObj);
+                try{
+                    JSONArray logObj = JSONObject.parseArray(rawLog);
+                    resObj.put("logs", logObj);
+                }catch (Exception e){
+                    try{
+                        JSONObject logObj = JSONObject.parseObject(rawLog);
+                        JSONArray arr = new JSONArray();
+                        arr.add(logObj);
+                        resObj.put("logs", arr);
+                        //System.out.println(arr);
+                    }catch (Exception e2){
+                        resObj.put("logs", rawLog);
+                    }
+
+                }
+
             }
             if (execObj.containsKey("code")) {
                 resObj.put("code", execObj.get("code"));
@@ -196,9 +209,23 @@ public class OKChainRPCClientImpl implements OKChainClient {
         }else {
             if (obj.containsKey("log")) {
                 String rawLog = obj.getString("log");
+
                 resObj.put("raw_log", rawLog);
-                JSONArray logObj = JSONObject.parseArray(rawLog);
-                resObj.put("logs", logObj);
+                try{
+                    JSONArray logObj = JSONObject.parseArray(rawLog);
+                    resObj.put("logs", logObj);
+                }catch (Exception e){
+                    try{
+                        JSONObject logObj = JSONObject.parseObject(rawLog);
+                        JSONArray arr = new JSONArray();
+                        arr.add(logObj);
+                        resObj.put("logs", arr);
+                        //System.out.println(arr);
+                    }catch (Exception e2){
+                        resObj.put("logs", rawLog);
+                    }
+
+                }
             }
             if (obj.containsKey("code")) {
                 resObj.put("code", obj.get("code"));
