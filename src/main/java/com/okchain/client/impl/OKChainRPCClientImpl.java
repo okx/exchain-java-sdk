@@ -301,14 +301,13 @@ public class OKChainRPCClientImpl implements OKChainClient {
     private BaseModel queryJO2BM(JSONObject jo) {
         JSONObject extractJSONObject = jo.getJSONObject("result").getJSONObject("response");
         BaseModel bm = new BaseModel();
-
-        if (extractJSONObject.containsKey("code")) {
+        if (extractJSONObject.containsKey("code") && extractJSONObject.getIntValue("code") != 0) {
             // if the rpc query fails
-            bm.setCode(extractJSONObject.getString("code"));
+            bm.setCode(extractJSONObject.getIntValue("code"));
             bm.setDetailMsg(extractJSONObject.getString("log"));
         } else {
             // if the rpc query succeeds
-            bm.setCode("0");
+            bm.setCode(0);
             bm.setData(new String(Base64.decode((String) extractJSONObject.get("value"))));
         }
         return bm;
@@ -563,11 +562,11 @@ public class OKChainRPCClientImpl implements OKChainClient {
         if (jo.containsKey("error")) {
             // if the rpc query fails
             JSONObject tmpJO = jo.getJSONObject("error");
-            bm.setCode(tmpJO.getString("code"));
+            bm.setCode(tmpJO.getIntValue("code"));
             bm.setDetailMsg(tmpJO.getString("data"));
         } else {
             // if the rpc query succeeds
-            bm.setCode("0");
+            bm.setCode(0);
             bm.setData(jo.getString("result"));
         }
         return bm;
@@ -635,13 +634,13 @@ public class OKChainRPCClientImpl implements OKChainClient {
         dataMp.put("Sort", true);
         byte[] data = JSON.toJSONString(dataMp).getBytes();
         JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
-        return queryJO2BM(jo).getData();
+        return queryJO2BM(jo).toString();
     }
 
     public String getInstrumentsV2() {
         String path = "custom/backend/instrumentsV2";
         JSONObject jo = ABCIQuery(path, null, ConstantIF.RPC_METHOD_QUERY);
-        return queryJO2BM(jo).getData();
+        return queryJO2BM(jo).toString();
     }
 
     public String getOrderListOpenV2(String instrument_id, String after, String before, int limit) throws NullPointerException {
@@ -658,7 +657,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
         dataMp.put("Limit", limit+"");
         byte[] data = JSON.toJSONString(dataMp).getBytes();
         JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
-        return queryJO2BM(jo).getData();
+        return queryJO2BM(jo).toString();
     }
 
     public String getOrderV2(String order_id) {
@@ -670,7 +669,7 @@ public class OKChainRPCClientImpl implements OKChainClient {
 
         byte[] data = JSON.toJSONString(dataMp).getBytes();
         JSONObject jo = ABCIQuery(path, data, ConstantIF.RPC_METHOD_QUERY);
-        return queryJO2BM(jo).getData();
+        return queryJO2BM(jo).toString();
     }
 
     public JSONObject sendPlaceOrderTransactionV2(AccountInfo account, RequestPlaceOrderParams params, String memo) throws IOException {

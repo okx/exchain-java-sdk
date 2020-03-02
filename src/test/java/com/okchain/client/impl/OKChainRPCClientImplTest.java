@@ -170,9 +170,9 @@ public class OKChainRPCClientImplTest {
     @Test
     public void testGetAccountToken() {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
-        BaseModel bm = client.getAccountToken(addr, "okb");
+        BaseModel bm = client.getAccountToken(addr, "okt");
         System.out.println(bm);
-        Assert.assertEquals(bm.getCode(), "0");
+        Assert.assertEquals(bm.getCode(), 0);
     }
 
     @Test
@@ -180,15 +180,15 @@ public class OKChainRPCClientImplTest {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
         BaseModel bm = client.getTokens();
         System.out.println(bm);
-        Assert.assertEquals(bm.getCode(), "0");
+        Assert.assertEquals(bm.getCode(), 0);
     }
 
     @Test
     public void testGetToken() {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
-        BaseModel bm = client.getToken("okb");
+        BaseModel bm = client.getToken("okt");
         System.out.println(bm);
-        Assert.assertEquals(bm.getCode(), "0");
+        Assert.assertEquals(bm.getCode(), 0);
     }
 
     @Test
@@ -196,23 +196,23 @@ public class OKChainRPCClientImplTest {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
         BaseModel bm = client.getProducts();
         System.out.println(bm);
-        Assert.assertEquals(bm.getCode(), "0");
+        Assert.assertEquals(bm.getCode(), 0);
     }
 
     @Test
     public void testGetDepthBook() {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
-        BaseModel bm = client.getDepthBook("btc-c9f_okb");
+        BaseModel bm = client.getDepthBook("xxb_okt");
         System.out.println(bm);
-        Assert.assertEquals(bm.getCode(), "0");
+        Assert.assertEquals(bm.getCode(), 0);
     }
 
     @Test
     public void testGetCandles() {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
-        BaseModel bm = client.getCandles("60", "eos-1e7_okb", "100");
+        BaseModel bm = client.getCandles("60", "eos-1e7_okt", "100");
         System.out.println(bm);
-        Assert.assertEquals(bm.getCode(), "0");
+        Assert.assertEquals(bm.getCode(), 0);
     }
 
     @Test
@@ -220,7 +220,7 @@ public class OKChainRPCClientImplTest {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
         BaseModel bm = client.getTickers("10");
         System.out.println(bm);
-        Assert.assertEquals(bm.getCode(), "0");
+        Assert.assertEquals(bm.getCode(), 0);
     }
 
     @Test
@@ -228,15 +228,15 @@ public class OKChainRPCClientImplTest {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
         // get the system time right now and convert it to String
         String nowTimeStamp = String.valueOf(System.currentTimeMillis() / 1000);
-        BaseModel bm = client.getMatches("xxb_okb", "0", nowTimeStamp, "0", "10");
+        BaseModel bm = client.getMatches("xxb_okt", "0", nowTimeStamp, "0", "10");
         System.out.println(bm);
-        Assert.assertEquals(bm.getCode(), "0");
+        Assert.assertEquals(bm.getCode(), 0);
     }
 
     @Test
     public void testGetOrderListOpen() {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
-        String product = "xxb_okb";
+        String product = "xxb_okt";
         String side = "BUY";
         String start = "1";
         // get the system time right now and convert it to String
@@ -246,14 +246,14 @@ public class OKChainRPCClientImplTest {
         RequestOrderListOpenParams olop = new RequestOrderListOpenParams(product, addr, start, end, side, page, perPage);
         BaseModel bm = client.getOrderListOpen(olop);
         System.out.println(bm);
-        Assert.assertEquals(bm.getCode(), "0");
+        Assert.assertEquals(bm.getCode(), 0);
     }
 
     @Test
     public void testGetOrderListClosed() {
         // cancel a order first by okchaincli
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
-        String product = "xxb_okb";
+        String product = "xxb_okt";
         String side = "BUY";
         String start = "1";
         // get the system time right now and convert it to String
@@ -265,13 +265,13 @@ public class OKChainRPCClientImplTest {
         RequestOrderListClosedParams olcp = new RequestOrderListClosedParams(product, addr, start, end, side, page, perPage, hideNoFill);
         BaseModel bm = client.getOrderListClosed(olcp);
         System.out.println(bm);
-        Assert.assertEquals(bm.getCode(), "0");
+        Assert.assertEquals(bm.getCode(), 0);
     }
 
     @Test
     public void testGetDeals() {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
-        String product = "xxb_okb";
+        String product = "xxb_okt";
         String side = "BUY";
         String start = "1";
         // get the system time right now and convert it to String
@@ -281,7 +281,7 @@ public class OKChainRPCClientImplTest {
         RequestDealsParams rdp = new RequestDealsParams(product, addr, start, end, side, page, perPage);
         BaseModel bm = client.getDeals(rdp);
         System.out.println(bm);
-        Assert.assertEquals(bm.getCode(), "0");
+        Assert.assertEquals(bm.getCode(), 0);
     }
 
     @Test
@@ -296,7 +296,7 @@ public class OKChainRPCClientImplTest {
         RequestTransactionsParams rtp = new RequestTransactionsParams(addr, type, start, end, page, perPage);
         BaseModel bm = client.getTransactions(rtp);
         System.out.println(bm);
-        Assert.assertEquals(bm.getCode(), "0");
+        Assert.assertEquals(bm.getCode(), 0);
     }
 
     //node query
@@ -306,7 +306,7 @@ public class OKChainRPCClientImplTest {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
         BaseModel bm = client.queryCurrentBlock();
         System.out.println(bm);
-        Assert.assertEquals(bm.getCode(), "0");
+        Assert.assertEquals(bm.getCode(), 0);
     }
 
     @Test
@@ -314,7 +314,7 @@ public class OKChainRPCClientImplTest {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
         BaseModel bm = client.queryBlock(1024);
         System.out.println(bm);
-        Assert.assertEquals(bm.getCode(), "0");
+        Assert.assertEquals(bm.getCode(), 0);
     }
 
     @Test
@@ -323,7 +323,7 @@ public class OKChainRPCClientImplTest {
         String txHash = "F6D87D7074E10429470B684842FBB88AE3EC4E2D950F198549A2B2AE8814926C";
         BaseModel bm = client.queryTx(txHash, true);
         System.out.println(bm);
-        Assert.assertEquals(bm.getCode(), "0");
+        Assert.assertEquals(bm.getCode(), 0);
     }
 
     @Test
@@ -331,7 +331,7 @@ public class OKChainRPCClientImplTest {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
         BaseModel bm = client.queryProposals();
         System.out.println(bm);
-        Assert.assertEquals(bm.getCode(), "0");
+        Assert.assertEquals(bm.getCode(), 0);
     }
 
     @Test
@@ -340,7 +340,7 @@ public class OKChainRPCClientImplTest {
         int proposalID = 1;
         BaseModel bm = client.queryProposalByID(proposalID);
         System.out.println(bm);
-        Assert.assertEquals(bm.getCode(), "0");
+        Assert.assertEquals(bm.getCode(), 0);
     }
 
     @Test
@@ -348,13 +348,13 @@ public class OKChainRPCClientImplTest {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
         BaseModel bm = client.queryCurrentValidators();
         System.out.println(bm);
-        Assert.assertEquals(bm.getCode(), "0");
+        Assert.assertEquals(bm.getCode(), 0);
     }
 
   @Test
   public void getTickersV2() {
       OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
-      String bm = client.getTickersV2("btc-c9f_okb");
+      String bm = client.getTickersV2("btc-c9f_okt");
       System.out.println(bm);
 
   }
@@ -369,7 +369,7 @@ public class OKChainRPCClientImplTest {
   @Test
   public void getOrderListOpenV2() {
       OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
-      String bm = client.getOrderListOpenV2("btc-c9f_okb", "", "", 100);
+      String bm = client.getOrderListOpenV2("xxb_okt", "", "", 100);
       System.out.println(bm);
   }
 

@@ -5,7 +5,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 
 public class BaseModel {
 
-    private String code;
+    private int code;
     private String data;
     private String msg;
 
@@ -13,11 +13,11 @@ public class BaseModel {
     private String detailMsg;
 
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
@@ -48,7 +48,7 @@ public class BaseModel {
     @Override
     public String toString() {
         return "BaseModel{" +
-                "code='" + code + '\'' +
+                "code=" + code +
                 ", data='" + data + '\'' +
                 ", msg='" + msg + '\'' +
                 ", detail_msg='" + detailMsg + '\'' +
