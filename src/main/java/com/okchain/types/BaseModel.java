@@ -1,11 +1,15 @@
 package com.okchain.types;
 
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class BaseModel {
 
     private String code;
     private String data;
     private String msg;
+
+    @JSONField(name = "detail_msg")
     private String detailMsg;
 
 
@@ -47,7 +51,7 @@ public class BaseModel {
                 "code='" + code + '\'' +
                 ", data='" + data + '\'' +
                 ", msg='" + msg + '\'' +
-                ", detailMsg='" + detailMsg + '\'' +
+                ", detail_msg='" + detailMsg + '\'' +
                 '}';
     }
 }

@@ -119,7 +119,7 @@ public class OKChainRPCClientImplTest {
         String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
         String memo = "";
         List<Token> amountList = new ArrayList<>();
-        Token amount = new Token("1.00000000", "xxb");
+        Token amount = new Token("1.00000000", "okt");
         amountList.add(amount);
         JSONObject ret = client.sendSendTransaction(account, to, amountList, memo);
         System.out.println(ret);
