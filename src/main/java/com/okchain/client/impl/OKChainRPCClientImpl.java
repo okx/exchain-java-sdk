@@ -237,9 +237,23 @@ public class OKChainRPCClientImpl implements OKChainClient {
         }else {
             if (obj.containsKey("log")) {
                 String rawLog = obj.getString("log");
+
                 resObj.put("raw_log", rawLog);
-                JSONArray logObj = JSONObject.parseArray(rawLog);
-                resObj.put("logs", logObj);
+                try{
+                    JSONArray logObj = JSONObject.parseArray(rawLog);
+                    resObj.put("logs", logObj);
+                }catch (Exception e){
+                    try{
+                        JSONObject logObj = JSONObject.parseObject(rawLog);
+                        JSONArray arr = new JSONArray();
+                        arr.add(logObj);
+                        resObj.put("logs", arr);
+                        //System.out.println(arr);
+                    }catch (Exception e2){
+                        resObj.put("logs", rawLog);
+                    }
+
+                }
             }
             if (obj.containsKey("code")) {
                 resObj.put("code", obj.get("code"));

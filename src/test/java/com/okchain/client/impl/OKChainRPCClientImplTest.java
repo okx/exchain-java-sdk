@@ -26,8 +26,7 @@ public class OKChainRPCClientImplTest {
     private static String addr = "okchain1g7c3nvac7mjgn2m9mqllgat8wwd3aptdqket5k";
     // rpc
     private static String url_rpc = "http://localhost:26657";
-//    private static String url_rpc = "https://okexbeta.bafang.com/okchain/v1/rpc";
-//    private static String url_rpc = "http://192.168.13.125:20157";
+
     private static String queryAddr="okchain1a3xgd3ymuh282fwwawkk9jceml8pex5q0llrhn";
     private static String queryAddr1="okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
 
