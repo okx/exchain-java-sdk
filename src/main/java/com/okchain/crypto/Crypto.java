@@ -128,6 +128,18 @@ public class Crypto {
     }
   }
 
+  public static String generateValidatorAddressFromPub(String pubKey) {
+
+    try {
+      String addr =
+              AddressUtil.createNewAddressSecp256k1(ConstantIF.VALIDATOR_ADDRESS_PREFIX, Hex.decode(pubKey));
+      return addr;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return "";
+    }
+  }
+
   public static boolean validPubKey(String pubKey) {
     if (pubKey == null || pubKey.length() != 66) {
       return false;

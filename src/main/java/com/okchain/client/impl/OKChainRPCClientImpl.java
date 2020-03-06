@@ -17,6 +17,8 @@ import com.okchain.exception.OKChainException;
 import com.okchain.transaction.BuildTransaction;
 import com.okchain.types.*;
 
+import com.okchain.types.staking.CommissionRates;
+import com.okchain.types.staking.Description;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
 import org.jetbrains.annotations.NotNull;
@@ -805,6 +807,15 @@ public class OKChainRPCClientImpl implements OKChainClient {
         res.put("order_id", orderIdMap);
 
         return res;
+    }
+
+    public JSONObject sendCreateValidatorTransaction(AccountInfo account, Description description, CommissionRates commission, Token minSelfDelegation,
+                                                     String delegatorAddress, String validatorAddress, String pubKey, String memo) throws NullPointerException {
+        return JSON.parseObject("{}");
+    }
+
+    public JSONObject sendEditValidatorTransaction(AccountInfo account, String minSelfDelegation,  String validatorAddress, Description description, String memo) throws NullPointerException {
+        return JSON.parseObject("{}");
     }
 
 }

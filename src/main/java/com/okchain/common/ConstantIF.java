@@ -7,6 +7,7 @@ public interface ConstantIF {
     String CHAIN_ID = "okchain";
 
     String ADDRESS_PREFIX = "okchain";
+    String VALIDATOR_ADDRESS_PREFIX = "okchainvaloper";
 
     String HD_PATH = "M/44H/996H/0H/0/0";
 

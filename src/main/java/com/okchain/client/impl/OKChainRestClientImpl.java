@@ -10,6 +10,8 @@ import com.okchain.crypto.keystore.CipherException;
 import com.okchain.crypto.keystore.KeyStoreUtils;
 import com.okchain.transaction.BuildTransaction;
 import com.okchain.types.*;
+import com.okchain.types.staking.CommissionRates;
+import com.okchain.types.staking.Description;
 
 import java.io.File;
 import java.io.IOException;
@@ -143,6 +145,25 @@ public class OKChainRestClientImpl implements OKChainClient {
         if (orderId.equals("")) throw new NullPointerException("empty orderId");
 
         String data = BuildTransaction.generateCancelOrderTransaction(account, orderId, memo);
+        return sendTransaction(data);
+    }
+
+    public JSONObject sendCreateValidatorTransaction(AccountInfo account, Description description, CommissionRates commission, Token minSelfDelegation,
+                                                 String delegatorAddress, String validatorAddress, String pubKey, String memo) throws NullPointerException {
+        checkAccountInfoValue(account);
+
+        String data = BuildTransaction.generateCreateValidatorTransaction(account, description,
+                commission, minSelfDelegation, delegatorAddress, validatorAddress, pubKey, memo);
+        System.out.println(data);
+        return sendTransaction(data);
+    }
+
+    public JSONObject sendEditValidatorTransaction(AccountInfo account, String minSelfDelegation, String validatorAddress,
+                                                   Description description, String memo) throws NullPointerException {
+        checkAccountInfoValue(account);
+
+        String data = BuildTransaction.generateEditValidatorTransaction(account, minSelfDelegation, validatorAddress, description, memo);
+        System.out.println(data);
         return sendTransaction(data);
     }
 

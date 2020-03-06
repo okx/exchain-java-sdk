@@ -5,9 +5,15 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.okchain.client.OKChainClient;
 import com.okchain.client.impl.OKChainRestClientImpl;
+import com.okchain.crypto.Crypto;
 import com.okchain.crypto.keystore.CipherException;
 import com.okchain.transaction.BuildTransaction;
 import com.okchain.types.*;
+import com.okchain.types.staking.CommissionRates;
+import com.okchain.types.staking.Description;
+import org.bouncycastle.util.Strings;
+import org.bouncycastle.util.encoders.Base64;
+import org.bouncycastle.util.encoders.Hex;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,15 +25,15 @@ import java.util.List;
 
 public class OKChainRestClientImplTest {
 
-    //okchain1v853tq96n9ghvyxlvqyxyj97589clccr33yr7a
-    private static String privateKey = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
+    // okchain1v853tq96n9ghvyxlvqyxyj97589clccr33yr7a
+    private static String privateKey =
+            "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
     // rest服务，端口改为26659
 
     private static String url = "http://127.0.0.1:26659";
     private static String address = "okchain1g7c3nvac7mjgn2m9mqllgat8wwd3aptdqket5k";
-    private static String mnemonic = "total lottery arena when pudding best candy until army spoil drill pool";
-
-
+    private static String mnemonic =
+            "total lottery arena when pudding best candy until army spoil drill pool";
 
     @Test
     public void getAddressInfo() {
@@ -63,7 +69,7 @@ public class OKChainRestClientImplTest {
         OKChainClient okc = generateClient();
         // 创建助记词
         String mnemonic = okc.generateMnemonic();
-        //System.out.println(mnemonic);
+        // System.out.println(mnemonic);
         String[] words = mnemonic.split(" ");
         Assert.assertEquals(12, words.length);
     }
@@ -76,7 +82,7 @@ public class OKChainRestClientImplTest {
         try {
             // 用私钥和密码生成KeyStore文件
             filename = okc.generateKeyStore(this.privateKey, password);
-            //System.out.println(filename);
+            // System.out.println(filename);
             Assert.assertNotNull(filename);
             Assert.assertNotEquals("", filename);
         } catch (CipherException e) {
@@ -98,7 +104,7 @@ public class OKChainRestClientImplTest {
             Assert.assertNull(e.getMessage());
         }
         File file = new File(filename);
-        //System.out.println(filename);
+        // System.out.println(filename);
         file.delete();
     }
 
@@ -111,7 +117,6 @@ public class OKChainRestClientImplTest {
         // generateAccountInfo中有函数getAccountInfo，getAccountInfo函数中
         // getAddressInfo通过私钥找到公钥和ok地址
         // account是从主网get到的ok addr上的一些信息
-
 
         String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
         String memo = "";
@@ -133,7 +138,7 @@ public class OKChainRestClientImplTest {
         Object err = resJson.get("error");
         Assert.assertNull(code);
         Assert.assertNull(err);
-        //Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
+        // Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
     }
 
     @Test
@@ -153,9 +158,9 @@ public class OKChainRestClientImplTest {
         System.out.println(resJson.toString());
         Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
 
-
         String orderId = getOrderIdFromResult(resJson);
-        account.setSequenceNumber(Integer.toString(Integer.parseInt(account.getSequenceNumber()) + 1));
+        account.setSequenceNumber(
+                Integer.toString(Integer.parseInt(account.getSequenceNumber()) + 1));
         JSONObject resJson2 = okc.sendCancelOrderTransaction(account, orderId, memo);
         System.out.println(resJson2.toString());
         Assert.assertEquals(true, resJson2.getJSONArray("logs").getJSONObject(0).get("success"));
@@ -178,15 +183,73 @@ public class OKChainRestClientImplTest {
         for (Iterator<Object> iterator = events.iterator(); iterator.hasNext(); ) {
             JSONObject event = (JSONObject) iterator.next();
             JSONArray attributes = event.getJSONArray("attributes");
-            for (Iterator<Object> attributesIterator = attributes.iterator(); attributesIterator.hasNext(); ) {
+            for (Iterator<Object> attributesIterator = attributes.iterator();
+                    attributesIterator.hasNext(); ) {
                 JSONObject attribute = (JSONObject) attributesIterator.next();
-//                System.out.println(attribute);
+                //                System.out.println(attribute);
                 if (attribute.getString("key").equals("orderId")) {
                     return attribute.getString("value");
                 }
             }
         }
         return orderId;
+    }
+
+    @Test
+    public void sendCreateValidatorTransaction() throws IOException {
+        OKChainClient okc = generateClient();
+        BuildTransaction.setMode("block");
+        AccountInfo account = generateAccountInfo(okc);
+
+        String memo = "";
+        Description description = new Description("m1", "1", "1", "1");
+        CommissionRates commission = new CommissionRates("0.10000000", "0.50000000", "0.00100000");
+        String delegatorAddress = account.getUserAddress();
+        String validatorAddress = Crypto.generateValidatorAddressFromPub(account.getPublicKey());
+//        String validatorAddress = "okchainvaloper10q0rk5qnyag7wfvvt7rtphlw589m7frs863s3m";
+
+        System.out.println(validatorAddress);
+
+        String pubKey = "okchainvalconspub1zcjduepqtv2yy90ptjegdm34vfhlq2uw9eu39hjrt98sffj7yghl4s47xv7swuf0dx";
+        Token minSelfDelegation = new Token();
+        minSelfDelegation.setDenom("okt");
+        minSelfDelegation.setAmount("1000.00000000");
+
+        JSONObject resJson = okc.sendCreateValidatorTransaction(account, description,
+                commission, minSelfDelegation, delegatorAddress, validatorAddress, pubKey, memo);
+
+        System.out.println(resJson.toString());
+
+        Object code = resJson.get("code");
+        Object err = resJson.get("error");
+        Assert.assertNull(code);
+        Assert.assertNull(err);
+    }
+
+    @Test
+    public void sendEditValidatorTransaction() throws IOException {
+        OKChainClient okc = generateClient();
+        BuildTransaction.setMode("block");
+
+        AccountInfo account = generateAccountInfo(okc);
+
+        String memo = "";
+        Description description = new Description("m1", "1", "1", "1");
+
+        String validatorAddress = Crypto.generateValidatorAddressFromPub(account.getPublicKey());
+
+        System.out.println(validatorAddress);
+
+        String minSelfDelegation = "1100";
+
+        JSONObject resJson = okc.sendEditValidatorTransaction(account, minSelfDelegation, validatorAddress, description, memo);
+
+        System.out.println(resJson.toString());
+
+        Object code = resJson.get("code");
+        Object err = resJson.get("error");
+        Assert.assertNull(code);
+        Assert.assertNull(err);
     }
 
     private OKChainClient generateClient() {

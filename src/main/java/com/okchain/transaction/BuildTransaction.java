@@ -12,6 +12,10 @@ import com.okchain.encoding.message.AminoEncode;
 import com.okchain.exception.InvalidFormatException;
 import com.okchain.proto.Transfer;
 import com.okchain.types.*;
+import com.okchain.types.staking.CommissionRates;
+import com.okchain.types.staking.Description;
+import com.okchain.types.staking.MsgCreateValidator;
+import com.okchain.types.staking.MsgEditValidator;
 import org.bouncycastle.util.Strings;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
@@ -205,13 +209,24 @@ public class BuildTransaction {
     }
 
     public static String generateSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) {
-        // 从谁到谁 转多钱(List)
         IMsg msg = new MsgSend(account.getUserAddress(), to, amount);
         IMsg stdMsg = new MsgStd("token/Send", msg);
         return buildTransaction(account, stdMsg, msg, memo);
     }
 
+    public static String generateCreateValidatorTransaction(AccountInfo account, Description description, CommissionRates commission, Token minSelfDelegation,
+                                                            String delegatorAddress, String validatorAddress, String pubKey, String memo) {
+        IMsg msg = new MsgCreateValidator(description, commission, minSelfDelegation,
+                delegatorAddress, validatorAddress, pubKey);
+        IMsg stdMsg = new MsgStd("cosmos-sdk/MsgCreateValidator", msg);
+        return buildTransaction(account, stdMsg, stdMsg, memo);
+    }
 
+    public static String generateEditValidatorTransaction(AccountInfo account, String minSelfDelegation,  String validatorAddress, Description description, String memo) {
+        IMsg msg = new MsgEditValidator(validatorAddress, description, minSelfDelegation);
+        IMsg stdMsg = new MsgStd("cosmos-sdk/MsgEditValidator", msg);
+        return buildTransaction(account, stdMsg, stdMsg, memo);
+    }
 
     private static String buildTransaction(AccountInfo account, IMsg stdMsg, IMsg signMsg, String memo) {
         if (account.getAccountNumber() == "" || account.getSequenceNumber() == "") {
