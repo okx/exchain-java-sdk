@@ -190,4 +190,113 @@ public class BuildTransaction {
     }
 
 
+    public static String generatePlaceOrderTransaction(AccountInfo account, String side, String product, String price, String quantity, String memo) {
+
+        IMsg msg = new MsgNewOrder(price, product, quantity, account.getUserAddress(), side);
+        IMsg stdMsg = new MsgStd("order/new", msg);
+        return buildTransaction(account, stdMsg, msg, memo);
+    }
+
+
+    public static String generateCancelOrderTransaction(AccountInfo account, String orderId, String memo) {
+        IMsg msg = new MsgCancelOrder(account.getUserAddress(), orderId);
+        IMsg stdMsg = new MsgStd("order/cancel", msg);
+        return buildTransaction(account, stdMsg, msg, memo);
+    }
+
+    public static String generateSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) {
+        // 从谁到谁 转多钱(List)
+        IMsg msg = new MsgSend(account.getUserAddress(), to, amount);
+        IMsg stdMsg = new MsgStd("token/Send", msg);
+        return buildTransaction(account, stdMsg, msg, memo);
+    }
+
+    public static String generateSendTransactions(AccountInfo account, List<String> tos, List<List<Token>> amounts, String memo) {
+        if (tos.size() != amounts.size()) {
+            return "the lengths of receiver addresses ,values and memos are not the same";
+        }
+        List<IMsg> msgs = new ArrayList<>();
+        List<IMsg> stdMsgs = new ArrayList<>();
+        for (int i = 0; i < tos.size(); i++) {
+            IMsg msg = new MsgSend(account.getUserAddress(), tos.get(i), amounts.get(i));
+            IMsg stdMsg = new MsgStd("token/Send", msg);
+            msgs.add(msg);
+            stdMsgs.add(stdMsg);
+        }
+        return buildTransactions(account, stdMsgs, msgs, memo);
+
+
+    }
+
+    public static String generateMultiSendTransaction(AccountInfo account, List<TransferUnit> transfers, String memo) {
+        IMsg msg = new MsgMultiSend(account.getUserAddress(), transfers);
+        IMsg stdMsg = new MsgStd("token/MultiSend", msg);
+        return buildTransaction(account, stdMsg, msg, memo);
+    }
+
+    private static String buildTransaction(AccountInfo account, IMsg stdMsg, IMsg signMsg, String memo) {
+        if (account.getAccountNumber() == "" || account.getSequenceNumber() == "") {
+
+        }
+        if (memo == null) {
+            memo = "";
+        }
+        // 暂无手续费
+        Fee fee = generateFeeDefault();
+        // 需要对account中的accountNumber和sequenceNumber、chain_id、手续费、memo、IMsg实现类集合签名
+        SignData signData = new SignData(account.getAccountNumber(), ConstantIF.CHAIN_ID, fee, memo, new IMsg[]{signMsg}, account.getSequenceNumber());
+        try {
+            // signData转为Json串
+            String signDataJson = JSONObject.toJSONString(signData);
+
+            // 对signData的Json串利用私钥签名
+
+            System.out.println("signData: " + signDataJson);
+            Signature signature = sign(signDataJson.getBytes(), account.getPrivateKey());
+            //组装签名结构
+            List<Signature> signatures = new ArrayList<>();
+            signatures.add(signature);
+            StdTransaction stdTransaction = new StdTransaction(new IMsg[]{stdMsg}, fee, signatures, memo);
+            //组装待广播交易结构
+
+            PostTransaction postTransaction = new PostTransaction(stdTransaction, mode);
+            return JSON.toJSONString(postTransaction);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    private static String buildTransactions(AccountInfo account, List<IMsg> stdMsgs, List<IMsg> signMsgs, String memo) {
+        if (stdMsgs.size() != signMsgs.size()) {
+            return "the lengths of stdMsgs ,signMsgs are not the same. ";
+        }
+        Fee fee = generateFeeDefault();
+        SignData signData = new SignData(account.getAccountNumber(), ConstantIF.CHAIN_ID, fee, memo, new IMsg[]{signMsgs.get(0), signMsgs.get(1)}, account.getSequenceNumber());
+        try {
+            // signData转为Json串
+            String signDataJson = JSONObject.toJSONString(signData);
+            // 对signData的Json串利用私钥签名
+            Signature signature = sign(signDataJson.getBytes(), account.getPrivateKey());
+            //组装签名结构
+            List<Signature> signatures = new ArrayList<>();
+            signatures.add(signature);
+//            System.out.println(stdMsgs.get(0).toString());
+//            System.out.println(stdMsgs.get(1).toString());
+
+            StdTransaction stdTransaction = new StdTransaction(new IMsg[]{stdMsgs.get(0), stdMsgs.get(1)}, fee, signatures, memo);
+            //组装待广播交易结构
+
+            PostTransaction postTransaction = new PostTransaction(stdTransaction, "block");
+//            System.out.println(JSON.toJSONString(postTransaction));
+            return JSON.toJSONString(postTransaction);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+
 }
