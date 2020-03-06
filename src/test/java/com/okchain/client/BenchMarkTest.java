@@ -6,18 +6,15 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class BenchMarkTest {
-    private static String url_rpc = "http://127.0.0.1:26657";
+    private static String URL_RPC = "http://127.0.0.1:26657";
     @Test
-    public void testGetToken() {
-        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(this.url_rpc);
+    public void getTokenTest() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(URL_RPC);
         BaseModel bm;
         bm = client.getToken("okb");
         for (int i=0;i<100;i++){
-            System.out.println(i);
-            bm = client.queryBlock(0);
+            bm = client.queryBlock(i);
         }
-
-        System.out.println(bm);
-        Assert.assertEquals(bm.getCode(), "0");
+        Assert.assertEquals(bm.getCode(), 0);
     }
 }
