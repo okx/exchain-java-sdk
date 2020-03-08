@@ -12,6 +12,10 @@ import com.okchain.encoding.message.AminoEncode;
 import com.okchain.exception.InvalidFormatException;
 import com.okchain.proto.Transfer;
 import com.okchain.types.*;
+import com.okchain.types.staking.CommissionRates;
+import com.okchain.types.staking.Description;
+import com.okchain.types.staking.MsgCreateValidator;
+import com.okchain.types.staking.MsgEditValidator;
 import org.bouncycastle.util.Strings;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
@@ -187,6 +191,75 @@ public class BuildTransaction {
         signature.setSignature(sigResult);
 
         return signature;
+    }
+
+
+    public static String generatePlaceOrderTransaction(AccountInfo account, String side, String product, String price, String quantity, String memo) {
+
+        IMsg msg = new MsgNewOrder(price, product, quantity, account.getUserAddress(), side);
+        IMsg stdMsg = new MsgStd("order/new", msg);
+        return buildTransaction(account, stdMsg, msg, memo);
+    }
+
+
+    public static String generateCancelOrderTransaction(AccountInfo account, String orderId, String memo) {
+        IMsg msg = new MsgCancelOrder(account.getUserAddress(), orderId);
+        IMsg stdMsg = new MsgStd("order/cancel", msg);
+        return buildTransaction(account, stdMsg, msg, memo);
+    }
+
+    public static String generateSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) {
+        IMsg msg = new MsgSend(account.getUserAddress(), to, amount);
+        IMsg stdMsg = new MsgStd("token/Send", msg);
+        return buildTransaction(account, stdMsg, msg, memo);
+    }
+
+    public static String generateCreateValidatorTransaction(AccountInfo account, Description description, CommissionRates commission, Token minSelfDelegation,
+                                                            String delegatorAddress, String validatorAddress, String pubKey, String memo) {
+        IMsg msg = new MsgCreateValidator(description, commission, minSelfDelegation,
+                delegatorAddress, validatorAddress, pubKey);
+        IMsg stdMsg = new MsgStd("cosmos-sdk/MsgCreateValidator", msg);
+        return buildTransaction(account, stdMsg, stdMsg, memo);
+    }
+
+    public static String generateEditValidatorTransaction(AccountInfo account, String minSelfDelegation,  String validatorAddress, Description description, String memo) {
+        IMsg msg = new MsgEditValidator(validatorAddress, description, minSelfDelegation);
+        IMsg stdMsg = new MsgStd("cosmos-sdk/MsgEditValidator", msg);
+        return buildTransaction(account, stdMsg, stdMsg, memo);
+    }
+
+    private static String buildTransaction(AccountInfo account, IMsg stdMsg, IMsg signMsg, String memo) {
+        if (account.getAccountNumber() == "" || account.getSequenceNumber() == "") {
+
+        }
+        if (memo == null) {
+            memo = "";
+        }
+        // 暂无手续费
+        Fee fee = generateFeeDefault();
+        // 需要对account中的accountNumber和sequenceNumber、chain_id、手续费、memo、IMsg实现类集合签名
+        SignData signData = new SignData(account.getAccountNumber(), ConstantIF.CHAIN_ID, fee, memo, new IMsg[]{signMsg}, account.getSequenceNumber());
+        try {
+            // signData转为Json串
+            String signDataJson = JSONObject.toJSONString(signData);
+
+            // 对signData的Json串利用私钥签名
+
+            System.out.println("signData: " + signDataJson);
+            Signature signature = sign(signDataJson.getBytes(), account.getPrivateKey());
+            //组装签名结构
+            List<Signature> signatures = new ArrayList<>();
+            signatures.add(signature);
+            StdTransaction stdTransaction = new StdTransaction(new IMsg[]{stdMsg}, fee, signatures, memo);
+            //组装待广播交易结构
+
+            PostTransaction postTransaction = new PostTransaction(stdTransaction, mode);
+            return JSON.toJSONString(postTransaction);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 
 

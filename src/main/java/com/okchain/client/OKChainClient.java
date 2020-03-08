@@ -4,6 +4,8 @@ package com.okchain.client;
 import com.alibaba.fastjson.JSONObject;
 import com.okchain.crypto.keystore.CipherException;
 import com.okchain.types.*;
+import com.okchain.types.staking.CommissionRates;
+import com.okchain.types.staking.Description;
 
 import java.io.IOException;
 import java.util.List;
@@ -79,4 +81,10 @@ public interface OKChainClient {
 
     public JSONObject sendCancelOrderTransactionV2(AccountInfo account, String orderId, String memo) throws NullPointerException, IOException;
 
-}
+
+    public JSONObject sendCreateValidatorTransaction(AccountInfo account, Description description, CommissionRates commission, Token minSelfDelegation,
+                                                     String delegatorAddress, String validatorAddress, String pubKey, String memo) throws NullPointerException;
+
+    public JSONObject sendEditValidatorTransaction(AccountInfo account, String minSelfDelegation,  String validatorAddress, Description description, String memo) throws NullPointerException;
+
+    }
