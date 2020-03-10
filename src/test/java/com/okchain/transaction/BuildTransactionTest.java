@@ -11,6 +11,9 @@ import com.okchain.types.Token;
 import com.okchain.types.TransferUnit;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mock;
+
+import static org.mockito.Mockito.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,12 +22,13 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class BuildTransactionTest {
-    private static String RPCURL = "http://3.13.150.20:26657";
+
     private static String PRIVATEKEY = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
 
     @Test
     public void testBuildAminoNewOrderTx() throws IOException {
         AccountInfo account = generateAccountInfoByRpc();
+
         String side = "BUY";
         String product = "tokt_tusdk";
         String price = "1.00000000";
@@ -35,7 +39,9 @@ public class BuildTransactionTest {
         Map<String, Object> mp = new TreeMap<>();
         mp.put("tx", tx);
         String res = JSONRPCUtils.getRpcSendData(method, mp);
-        Assert.assertNotNull(res);
+
+        String resRaw = "{\"id\":\"jsonrpc-client\",\"jsonrpc\":\"2.0\",\"method\":\"broadcast_tx_async\",\"params\":{\"tx\":\"swEoKBapCkHGHZiTChRHsRmzuPbkiatl2D/0dWdzmx6FbRIKdG9rdF90dXNkaxoDQlVZIgkxMDAwMDAwMDAqCTEwMDAwMDAwMBJqCibrWumHIQIGuT+01qKqvunJsTkx4Y/bS6hZRzZS6VjBHQHx3KJKfhJA1ESqcxbzCRe7Usjp67BBhjaHSykrMDZPbJmcyplD7U9zmek1Qj0jNw2BWzxIUB2VIzSmlQ5EI7pPZxYz59Oqow==\"}}";
+        Assert.assertEquals(resRaw, res);
     }
 
     @Test
@@ -114,7 +120,10 @@ public class BuildTransactionTest {
     }
 
     private AccountInfo generateAccountInfoByRpc() {
-        OKChainClient okc = OKChainRPCClientImpl.getOKChainClient(RPCURL);
+        AccountInfo accountInfo = new AccountInfo(PRIVATEKEY, "0206b93fb4d6a2aabee9c9b13931e18fdb4ba859473652e958c11d01f1dca24a7e", "okchain1g7c3nvac7mjgn2m9mqllgat8wwd3aptdqket5k", "2741", "27");
+
+        OKChainClient okc = mock(OKChainClient.class);
+        when(okc.getAccountInfo(PRIVATEKEY)).thenReturn(accountInfo);
         return okc.getAccountInfo(PRIVATEKEY);
     }
 
