@@ -148,6 +148,14 @@ public class OKChainRestClientImpl implements OKChainClient {
         return sendTransaction(data);
     }
 
+    public JSONObject sendMultiSendTransaction(AccountInfo account, List<TransferUnit> transfers, String memo) throws IOException {
+        checkAccountInfoValue(account);
+        if (transfers == null || transfers.isEmpty()) throw new NullPointerException("empty transfers");
+        String data = BuildTransaction.generateMultiSendTransaction(account, transfers, memo);
+        return sendTransaction(data);
+    }
+
+
     public JSONObject sendCreateValidatorTransaction(AccountInfo account, Description description, CommissionRates commission, Token minSelfDelegation,
                                                  String delegatorAddress, String validatorAddress, String pubKey, String memo) throws NullPointerException {
         checkAccountInfoValue(account);

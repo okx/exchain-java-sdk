@@ -4,10 +4,10 @@ import com.okchain.encoding.EncodeUtils;
 
 public enum MessageType {
     BaseType(null),
-    Send("C9EE213F"),
-    MultiSend("3C1EDEF4"),
-    NewOrder("C61D9893"),
-    CancelOrder("AE30E5D6"),
+    Send("F738C3C9"),
+    MultiSend("0E7BC372"),
+    NewOrder("DC9650E5"),
+    CancelOrder("4867EBA0"),
     MultiNewOrder("0AB2A87C"),
     MultiCancelOrder("89234E28"),
     PubKey("EB5AE987"),
