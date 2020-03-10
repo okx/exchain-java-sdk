@@ -9,6 +9,7 @@ import com.okchain.types.AccountInfo;
 import com.okchain.types.AddressInfo;
 import com.okchain.types.Token;
 import com.okchain.types.TransferUnit;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -18,8 +19,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class BuildTransactionTest {
-    private static String rpcUrl = "http://3.13.150.20:26657";
-    private static String privateKey = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
+    private static String RPCURL = "http://3.13.150.20:26657";
+    private static String PRIVATEKEY = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
 
     @Test
     public void testBuildAminoNewOrderTx() throws IOException {
@@ -34,7 +35,7 @@ public class BuildTransactionTest {
         Map<String, Object> mp = new TreeMap<>();
         mp.put("tx", tx);
         String res = JSONRPCUtils.getRpcSendData(method, mp);
-        System.out.println(res);
+        Assert.assertNotNull(res);
     }
 
     @Test
@@ -48,7 +49,7 @@ public class BuildTransactionTest {
         Map<String, Object> mp = new TreeMap<>();
         mp.put("tx", tx);
         String res = JSONRPCUtils.getRpcSendData(method, mp);
-        System.out.println(res);
+        Assert.assertNotNull(res);
     }
 
     @Test
@@ -70,7 +71,7 @@ public class BuildTransactionTest {
         Map<String, Object> mp = new TreeMap<>();
         mp.put("tx", tx);
         String res = JSONRPCUtils.getRpcSendData(method, mp);
-        System.out.println(res);
+        Assert.assertNotNull(res);
     }
 
 
@@ -109,46 +110,40 @@ public class BuildTransactionTest {
         Map<String, Object> mp = new TreeMap<>();
         mp.put("tx", tx);
         String res = JSONRPCUtils.getRpcSendData(method, mp);
-        System.out.println(res);
+        Assert.assertNotNull(res);
     }
 
     private AccountInfo generateAccountInfoByRpc() {
-        String url = rpcUrl;
-        OKChainClient okc = OKChainRPCClientImpl.getOKChainClient(url);
-        return okc.getAccountInfo(privateKey);
+        OKChainClient okc = OKChainRPCClientImpl.getOKChainClient(RPCURL);
+        return okc.getAccountInfo(PRIVATEKEY);
     }
 
     @Test
     public void testBuildNewOrderTx() {
         AccountInfo account = generateAccountInfo();
-        String sequence = "50";
         String side = "BUY";
         String product = "xxb_okb";
         String price = "1.00000000";
         String quantity = "1.00000000";
         String memo = "";
         String transaction = BuildTransaction.generatePlaceOrderTransaction(account, side, product, price, quantity, memo);
-        System.out.println(transaction);
+        Assert.assertNotNull(transaction);
     }
 
 
     @Test
     public void testBuildCancelOrderTx() {
         AccountInfo account = generateAccountInfo();
-
-        String sequence = "51";
         String orderId = "ID0000065785-1";
         String memo = "";
         String transaction = BuildTransaction.generateCancelOrderTransaction(account, orderId, memo);
-        System.out.println(transaction);
+        Assert.assertNotNull(transaction);
     }
 
 
     @Test
     public void testBuildSendTx() {
         AccountInfo account = generateAccountInfo();
-
-        String sequence = "52";
         String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
         String memo = "";
 
@@ -159,9 +154,8 @@ public class BuildTransactionTest {
         amountList.add(amount);
 
         String transaction = BuildTransaction.generateSendTransaction(account, to, amountList, memo);
-        System.out.println(transaction);
+        Assert.assertNotNull(transaction);
     }
-
 
     private AccountInfo generateAccountInfo() {
         String url = "";
