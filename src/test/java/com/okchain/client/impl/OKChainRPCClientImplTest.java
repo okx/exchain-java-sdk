@@ -27,12 +27,12 @@ public class OKChainRPCClientImplTest {
 
     private static String URL_RPC = "http://localhost:26657";
 
-    private static String QUERYADDR="okchain1a3xgd3ymuh282fwwawkk9jceml8pex5q0llrhn";
-    private static String QUERYADDR1="okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
+    private static String QUERYADDR = "okchain1a3xgd3ymuh282fwwawkk9jceml8pex5q0llrhn";
+    private static String QUERYADDR1 = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
 
     @Test
     public void testCreateAccount() {
-        OKChainRPCClientImpl okc = OKChainRPCClientImpl.getOKChainClient(URL_RPC);
+        OKChainRPCClientImpl okc = OKChainRPCClientImpl.getOKChainClient("");
         AccountInfo accountInfo = okc.createAccount();
         Assert.assertNotNull(accountInfo);
     }
@@ -41,10 +41,10 @@ public class OKChainRPCClientImplTest {
     public void testGetAccountInfo() {
         OKChainRPCClientImpl okc = OKChainRPCClientImpl.getOKChainClient(URL_RPC);
         AccountInfo accountInfo;
-        try{
-            accountInfo = okc.getAccountInfo(PRIVATEKEY+"1");
+        try {
+            accountInfo = okc.getAccountInfo(PRIVATEKEY + "1");
             Assert.assertFalse(true);
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         accountInfo = okc.getAccountInfo(PRIVATEKEY);
@@ -64,14 +64,14 @@ public class OKChainRPCClientImplTest {
 
     @Test
     public void testGenerateMnemonic() {
-        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(URL_RPC);
-        String Mnemonic = client.generateMnemonic();
-        Assert.assertNotNull(Mnemonic);
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient("");
+        String mnemonic = client.generateMnemonic();
+        Assert.assertNotNull(mnemonic);
     }
 
     @Test
     public void getPrivateKeyFromKeyStore() {
-        OKChainClient okc = OKChainRPCClientImpl.getOKChainClient(URL_RPC);
+        OKChainClient okc = OKChainRPCClientImpl.getOKChainClient("");
         String password = "1234567";
         String filename = "";
         try {
@@ -323,33 +323,33 @@ public class OKChainRPCClientImplTest {
         Assert.assertEquals(bm.getCode(), 0);
     }
 
-  @Test
-  public void testGetTickersV2() {
-      OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(URL_RPC);
-      String bm = client.getTickersV2("btc-c9f_okt");
-      Assert.assertNotNull(bm);
-  }
+    @Test
+    public void testGetTickersV2() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(URL_RPC);
+        String bm = client.getTickersV2("btc-c9f_okt");
+        Assert.assertNotNull(bm);
+    }
 
-  @Test
-  public void testGetInstrumentsV2() {
-      OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(URL_RPC);
-      String bm = client.getInstrumentsV2();
-      Assert.assertNotNull(bm);
-  }
+    @Test
+    public void testGetInstrumentsV2() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(URL_RPC);
+        String bm = client.getInstrumentsV2();
+        Assert.assertNotNull(bm);
+    }
 
-  @Test
-  public void testGetOrderListOpenV2() {
-      OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(URL_RPC);
-      String bm = client.getOrderListOpenV2("xxb_okt", "", "", 100);
-      Assert.assertNotNull(bm);
-  }
+    @Test
+    public void testGetOrderListOpenV2() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(URL_RPC);
+        String bm = client.getOrderListOpenV2("xxb_okt", "", "", 100);
+        Assert.assertNotNull(bm);
+    }
 
-  @Test
-  public void testGetOrderV2() {
-      OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(URL_RPC);
-      String bm = client.getOrderV2("ID0000000006-1");
-      Assert.assertNotNull(bm);
-  }
+    @Test
+    public void testGetOrderV2() {
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(URL_RPC);
+        String bm = client.getOrderV2("ID0000000006-1");
+        Assert.assertNotNull(bm);
+    }
 
     @Test
     public void testSendPlaceOrderTransactionV2() throws IOException {
