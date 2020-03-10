@@ -38,6 +38,7 @@ public interface OKChainClient {
 
     public JSONObject sendCancelOrderTransaction(AccountInfo account, String orderId, String memo) throws NullPointerException, IOException;
 
+    public JSONObject sendMultiSendTransaction(AccountInfo account, List<TransferUnit> transfers, String memo) throws IOException;
 
     //query
 

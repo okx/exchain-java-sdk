@@ -103,6 +103,7 @@ public class OKChainRestClientImplTest {
 
     @Test
     public void sendSendTransactionTest() throws IOException {
+        BuildTransaction.setMode("block");
         OKChainClient okc = generateClient();
         // okc instance contain url and backend
         AccountInfo account = generateAccountInfo(okc);
@@ -129,7 +130,8 @@ public class OKChainRestClientImplTest {
     }
 
     @Test
-    public void testSendCancelOrderTransactionTest() throws IOException {
+    public void sendCancelOrderTransactionTest() throws IOException {
+        BuildTransaction.setMode("block");
         OKChainClient okc = generateClient();
         AccountInfo account = generateAccountInfo(okc);
 
@@ -151,7 +153,7 @@ public class OKChainRestClientImplTest {
         Assert.assertEquals(true, resJson2.getJSONArray("logs").getJSONObject(0).get("success"));
     }
 
-    private TransferUnit generateTrasferUnitTest(String to, String denom, String amount) {
+    private TransferUnit generateTrasferUnit(String to, String denom, String amount) {
         List<Token> coins = new ArrayList<>();
         Token coin = new Token();
         coin.setDenom(denom);
@@ -178,6 +180,33 @@ public class OKChainRestClientImplTest {
         }
         return orderId;
     }
+
+    @Test
+    public void sendMultiSendTransactionTest() throws IOException {
+        BuildTransaction.setMode("block");
+        OKChainClient okc = generateClient();
+        AccountInfo account = generateAccountInfo(okc);
+
+        String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
+        String to2 = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
+        String memo = "";
+
+        String amount = "1.00000000";
+        String denom = "okt";
+
+        List<TransferUnit> transfers = new ArrayList<>();
+        transfers.add(generateTrasferUnit(to, denom, amount));
+        transfers.add(generateTrasferUnit(to2, denom, amount));
+
+        JSONObject resJson = okc.sendMultiSendTransaction(account, transfers, memo);
+
+        Object code = resJson.get("code");
+        Object err = resJson.get("error");
+        Assert.assertNull(code);
+        Assert.assertNull(err);
+        //Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
+    }
+
 
     @Test
     public void sendCreateValidatorTransactionTest() throws IOException {

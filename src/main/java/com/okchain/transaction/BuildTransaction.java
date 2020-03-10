@@ -197,20 +197,26 @@ public class BuildTransaction {
     public static String generatePlaceOrderTransaction(AccountInfo account, String side, String product, String price, String quantity, String memo) {
 
         IMsg msg = new MsgNewOrder(price, product, quantity, account.getUserAddress(), side);
-        IMsg stdMsg = new MsgStd("order/new", msg);
+        IMsg stdMsg = new MsgStd("okchain/order/MsgNew", msg);
         return buildTransaction(account, stdMsg, msg, memo);
     }
 
 
     public static String generateCancelOrderTransaction(AccountInfo account, String orderId, String memo) {
         IMsg msg = new MsgCancelOrder(account.getUserAddress(), orderId);
-        IMsg stdMsg = new MsgStd("order/cancel", msg);
+        IMsg stdMsg = new MsgStd("okchain/order/MsgCancel", msg);
         return buildTransaction(account, stdMsg, msg, memo);
     }
 
     public static String generateSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) {
         IMsg msg = new MsgSend(account.getUserAddress(), to, amount);
-        IMsg stdMsg = new MsgStd("token/Send", msg);
+        IMsg stdMsg = new MsgStd("okchain/token/MsgTransfer", msg);
+        return buildTransaction(account, stdMsg, msg, memo);
+    }
+
+    public static String generateMultiSendTransaction(AccountInfo account, List<TransferUnit> transfers, String memo) {
+        IMsg msg = new MsgMultiSend(account.getUserAddress(), transfers);
+        IMsg stdMsg = new MsgStd("okchain/token/MsgMultiTransfer", msg);
         return buildTransaction(account, stdMsg, msg, memo);
     }
 
@@ -218,13 +224,13 @@ public class BuildTransaction {
                                                             String delegatorAddress, String validatorAddress, String pubKey, String memo) {
         IMsg msg = new MsgCreateValidator(description, commission, minSelfDelegation,
                 delegatorAddress, validatorAddress, pubKey);
-        IMsg stdMsg = new MsgStd("cosmos-sdk/MsgCreateValidator", msg);
+        IMsg stdMsg = new MsgStd("okchain/staking/MsgCreateValidator", msg);
         return buildTransaction(account, stdMsg, stdMsg, memo);
     }
 
     public static String generateEditValidatorTransaction(AccountInfo account, String minSelfDelegation,  String validatorAddress, Description description, String memo) {
         IMsg msg = new MsgEditValidator(validatorAddress, description, minSelfDelegation);
-        IMsg stdMsg = new MsgStd("cosmos-sdk/MsgEditValidator", msg);
+        IMsg stdMsg = new MsgStd("okchain/staking/MsgEditValidator", msg);
         return buildTransaction(account, stdMsg, stdMsg, memo);
     }
 

@@ -149,6 +149,30 @@ public class OKChainRPCClientImplTest {
         Assert.assertNotNull(ret);
     }
 
+    @Test
+    public void testSendMultiSendTransaction() throws IOException {
+        BuildTransaction.setMode("block");
+        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(URL_RPC);
+        AccountInfo account = client.getAccountInfo(PRIVATEKEY);
+        List<TransferUnit> transferUnits = new ArrayList<>();
+        // create the 1st tx
+        String to1 = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
+        String memo = "";
+        List<Token> amounts1 = new ArrayList<>();
+        amounts1.add(new Token("1.00000000", "okt"));
+        amounts1.add(new Token("5.50000000", "okt"));
+        transferUnits.add(new TransferUnit(amounts1, to1));
+        // create the 2nd tx
+        String to2 = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
+        List<Token> amounts2 = new ArrayList<>();
+        amounts2.add(new Token("10.00000000", "okt"));
+        amounts2.add(new Token("50.00000000", "okt"));
+        transferUnits.add(new TransferUnit(amounts2, to2));
+        JSONObject ret = client.sendMultiSendTransaction(account, transferUnits, memo);
+        Assert.assertNotNull(ret);
+    }
+
+
     // query
     @Test
     public void testGetAccountALLTokens() {

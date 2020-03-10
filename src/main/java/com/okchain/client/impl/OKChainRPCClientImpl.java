@@ -312,6 +312,13 @@ public class OKChainRPCClientImpl implements OKChainClient {
         return sendTransaction(data);
     }
 
+    public JSONObject sendMultiSendTransaction(AccountInfo account, List<TransferUnit> transfers, String memo)throws IOException {
+        checkAccountInfoValue(account);
+        byte[] data = BuildTransaction.generateAminoMultiSendTransaction(account, transfers, memo);
+        return sendTransaction(data);
+    }
+
+
     // query
     // convert type JSONObject 2 type BaseModel
     private BaseModel queryJO2BM(JSONObject jo) {

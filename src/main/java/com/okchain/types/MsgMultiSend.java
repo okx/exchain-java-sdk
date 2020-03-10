@@ -5,10 +5,10 @@ import com.alibaba.fastjson.annotation.JSONField;
 import java.util.List;
 
 public class MsgMultiSend implements IMsg {
-    @JSONField(name = "From")
+    @JSONField(name = "from")
     private String from;
 
-    @JSONField(name = "Transfers")
+    @JSONField(name = "transfers")
     private List<TransferUnit> transfers;
 
     public MsgMultiSend(String from, List<TransferUnit> transfers) {
