@@ -204,7 +204,7 @@ public class OKChainRestClientImplTest {
         Object err = resJson.get("error");
         Assert.assertNull(code);
         Assert.assertNull(err);
-        //Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
+        Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
     }
 
 
@@ -232,6 +232,8 @@ public class OKChainRestClientImplTest {
         Object err = resJson.get("error");
         Assert.assertNull(code);
         Assert.assertNull(err);
+        Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
+
     }
 
     @Test
@@ -255,6 +257,8 @@ public class OKChainRestClientImplTest {
         Object err = resJson.get("error");
         Assert.assertNull(code);
         Assert.assertNull(err);
+        Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
+
     }
 
     private OKChainClient generateClient() {

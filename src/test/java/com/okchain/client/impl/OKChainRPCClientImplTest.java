@@ -119,6 +119,8 @@ public class OKChainRPCClientImplTest {
         amountList.add(amount);
         JSONObject ret = client.sendSendTransaction(account, to, amountList, memo);
         Assert.assertNotNull(ret);
+        Assert.assertEquals(true, ret.getJSONArray("logs").getJSONObject(0).get("success"));
+
     }
 
     @Test
@@ -184,6 +186,8 @@ public class OKChainRPCClientImplTest {
         transferUnits.add(new TransferUnit(amounts2, to2));
         JSONObject ret = client.sendMultiSendTransaction(account, transferUnits, memo);
         Assert.assertNotNull(ret);
+        Assert.assertEquals(true, ret.getJSONArray("logs").getJSONObject(0).get("success"));
+
     }
 
 
