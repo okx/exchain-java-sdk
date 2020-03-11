@@ -171,7 +171,7 @@ public class OKChainRestClientImplTest {
             JSONObject event = (JSONObject) iterator.next();
             JSONArray attributes = event.getJSONArray("attributes");
             for (Iterator<Object> attributesIterator = attributes.iterator();
-                    attributesIterator.hasNext(); ) {
+                 attributesIterator.hasNext(); ) {
                 JSONObject attribute = (JSONObject) attributesIterator.next();
                 if (attribute.getString("key").equals("orderId")) {
                     return attribute.getString("value");

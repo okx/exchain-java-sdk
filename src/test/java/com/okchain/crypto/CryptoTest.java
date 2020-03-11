@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+
 import com.okchain.crypto.io.cosmos.util.AddressUtil;
+
 import java.util.Base64;
 
 public class CryptoTest {
@@ -21,18 +23,18 @@ public class CryptoTest {
     @Test
     public void generatePrivateKeyTest() {
         String priv = Crypto.generatePrivateKey();
-        Assert.assertNotEquals(TEST_PRIVATE_KEY,priv);
+        Assert.assertNotEquals(TEST_PRIVATE_KEY, priv);
     }
 
     @Test
     public void generateAddressTest() {
         long startTime = System.currentTimeMillis();
         byte[] pub = Crypto.generatePubKeyFromPriv(TEST_PRIVATE_KEY);
-        Assert.assertEquals("02fa42bcdb80aae828e480d80ec05c3a8847a2dc150071d08adf2f99fbcb09a3fb",Hex.toHexString(pub));
+        Assert.assertEquals("02fa42bcdb80aae828e480d80ec05c3a8847a2dc150071d08adf2f99fbcb09a3fb", Hex.toHexString(pub));
         try {
             String addr = AddressUtil.createNewAddressSecp256k1("okchain", pub);
-            Assert.assertEquals("okchain152p8xmejhza7wuhhzut88vkakdgasqwlw2qjcf",addr);
-        }catch (Exception e){
+            Assert.assertEquals("okchain152p8xmejhza7wuhhzut88vkakdgasqwlw2qjcf", addr);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -60,15 +62,15 @@ public class CryptoTest {
 
     @Test
     public void generateMnemonicTest() {
-        Assert.assertNotEquals(TEST_MNEMONIC,Crypto.generateMnemonic());
+        Assert.assertNotEquals(TEST_MNEMONIC, Crypto.generateMnemonic());
     }
 
     @Test
     public void generatePrivateKeyFromMnemonicTest() {
         String mnemonic = "total lottery arena when pudding best candy until army spoil drill pool";
         String priv = Crypto.generatePrivateKeyFromMnemonic(mnemonic);
-        Assert.assertEquals("29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884",priv);
-        Assert.assertEquals("okchain1g7c3nvac7mjgn2m9mqllgat8wwd3aptdqket5k",Crypto.generateAddressFromPriv(priv));
+        Assert.assertEquals("29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884", priv);
+        Assert.assertEquals("okchain1g7c3nvac7mjgn2m9mqllgat8wwd3aptdqket5k", Crypto.generateAddressFromPriv(priv));
     }
 
 
@@ -108,7 +110,7 @@ public class CryptoTest {
         }
         try {
             String privateKey = KeyStoreUtils.getPrivateKeyFromKeyStoreFile(filename, password);
-            Assert.assertEquals(TEST_PRIVATE_KEY,privateKey);
+            Assert.assertEquals(TEST_PRIVATE_KEY, privateKey);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (CipherException e) {
