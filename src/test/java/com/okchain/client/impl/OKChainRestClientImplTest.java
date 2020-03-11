@@ -140,7 +140,7 @@ public class OKChainRestClientImplTest {
         String price = "0.10000000";
         String quantity = "1.00000000";
         String memo = "";
-        BuildTransaction.setMode("block");
+
         RequestPlaceOrderParams parms = new RequestPlaceOrderParams(price, product, quantity, side);
 
         JSONObject resJson = okc.sendPlaceOrderTransaction(account, parms, memo);
