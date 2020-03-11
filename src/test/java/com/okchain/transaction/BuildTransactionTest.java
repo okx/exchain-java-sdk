@@ -7,7 +7,10 @@ import com.okchain.common.jsonrpc.JSONRPCUtils;
 import com.okchain.types.AccountInfo;
 import com.okchain.types.Token;
 import com.okchain.types.TransferUnit;
+import org.junit.Assert;
 import org.junit.Test;
+
+import static org.mockito.Mockito.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,12 +19,12 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class BuildTransactionTest {
-    private static String rpcUrl = "http://3.13.150.20:26657";
-    private static String privateKey = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
+    private static String PRIVATEKEY = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
 
     @Test
     public void testBuildAminoNewOrderTx() throws IOException {
         AccountInfo account = generateAccountInfoByRpc();
+
         String side = "BUY";
         String product = "tokt_tusdk";
         String price = "1.00000000";
@@ -32,7 +35,9 @@ public class BuildTransactionTest {
         Map<String, Object> mp = new TreeMap<>();
         mp.put("tx", tx);
         String res = JSONRPCUtils.getRpcSendData(method, mp);
-        System.out.println(res);
+
+        String resRaw = "{\"id\":\"jsonrpc-client\",\"jsonrpc\":\"2.0\",\"method\":\"broadcast_tx_async\",\"params\":{\"tx\":\"swHwYl3uCkHGHZiTChRHsRmzuPbkiatl2D/0dWdzmx6FbRIKdG9rdF90dXNkaxoDQlVZIgkxMDAwMDAwMDAqCTEwMDAwMDAwMBJqCibrWumHIQIGuT+01qKqvunJsTkx4Y/bS6hZRzZS6VjBHQHx3KJKfhJAcYGtFXnBooYGu0DDVl6N/RKvdBKV4RZd/RlagG/xJaswULXRL0MPtiLxT1RYsr7g27ytHHSyrZAzMpmax56Hfw==\"}}";
+        Assert.assertEquals(resRaw, res);
     }
 
     @Test
@@ -46,14 +51,13 @@ public class BuildTransactionTest {
         Map<String, Object> mp = new TreeMap<>();
         mp.put("tx", tx);
         String res = JSONRPCUtils.getRpcSendData(method, mp);
-        System.out.println(res);
+        Assert.assertNotNull(res);
     }
 
     @Test
     public void testBuildAminoSendTx() throws IOException {
         AccountInfo account = generateAccountInfoByRpc();
 
-        String sequence = "52";
         String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
         String memo = "";
 
@@ -68,7 +72,7 @@ public class BuildTransactionTest {
         Map<String, Object> mp = new TreeMap<>();
         mp.put("tx", tx);
         String res = JSONRPCUtils.getRpcSendData(method, mp);
-        System.out.println(res);
+        Assert.assertNotNull(res);
     }
 
 
@@ -107,12 +111,14 @@ public class BuildTransactionTest {
         Map<String, Object> mp = new TreeMap<>();
         mp.put("tx", tx);
         String res = JSONRPCUtils.getRpcSendData(method, mp);
-        System.out.println(res);
+        Assert.assertNotNull(res);
     }
 
     private AccountInfo generateAccountInfoByRpc() {
-        String url = rpcUrl;
-        OKChainClient okc = OKChainRPCClientImpl.getOKChainClient(url);
-        return okc.getAccountInfo(privateKey);
+        AccountInfo accountInfo = new AccountInfo(PRIVATEKEY, "0206b93fb4d6a2aabee9c9b13931e18fdb4ba859473652e958c11d01f1dca24a7e", "okchain1g7c3nvac7mjgn2m9mqllgat8wwd3aptdqket5k", "2741", "27");
+
+        OKChainClient okc = mock(OKChainClient.class);
+        when(okc.getAccountInfo(PRIVATEKEY)).thenReturn(accountInfo);
+        return okc.getAccountInfo(PRIVATEKEY);
     }
 }
