@@ -1,6 +1,7 @@
 package com.okchain.client.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.okchain.client.OKChainClient;
 import com.okchain.client.impl.OKChainRPCClientImpl;
@@ -16,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Iterator;
 import java.util.List;
 
 public class OKChainRPCClientImplTest {
@@ -117,10 +119,12 @@ public class OKChainRPCClientImplTest {
         amountList.add(amount);
         JSONObject ret = client.sendSendTransaction(account, to, amountList, memo);
         Assert.assertNotNull(ret);
+        Assert.assertEquals(true, ret.getJSONArray("logs").getJSONObject(0).get("success"));
+
     }
 
     @Test
-    public void testSendPlaceOrderTransaction() throws IOException {
+    public void testSendPlaceOrderAndCancelOrderTransaction() throws IOException {
         BuildTransaction.setMode("block");
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(URL_RPC);
         AccountInfo account = client.getAccountInfo(PRIVATEKEY);
@@ -133,21 +137,33 @@ public class OKChainRPCClientImplTest {
         JSONObject ret = client.sendPlaceOrderTransaction(account, param, memo);
         Assert.assertNotNull(ret);
 
-        String orderID = GetOrderID(ret);
-        Assert.assertNotNull(orderID);
+        Assert.assertEquals(true, ret.getJSONArray("logs").getJSONObject(0).get("success"));
+
+        String orderId = getOrderIdFromResult(ret);
+        account.setSequenceNumber(
+                Integer.toString(Integer.parseInt(account.getSequenceNumber()) + 1));
+        JSONObject resJson2 = client.sendCancelOrderTransaction(account, orderId, memo);
+        Assert.assertEquals(true, resJson2.getJSONArray("logs").getJSONObject(0).get("success"));
     }
 
-    @Test
-    public void testSendCancelOrderTransaction() throws IOException {
-        BuildTransaction.setMode("block");
-        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(URL_RPC);
-        AccountInfo account = client.getAccountInfo(PRIVATEKEY);
-        // u can get order-ID by placing a new order
-        String orderId = "ID0000001970-1";
-        String memo = "cancel order memo";
-        JSONObject ret = client.sendCancelOrderTransaction(account, orderId, memo);
-        Assert.assertNotNull(ret);
+    private String getOrderIdFromResult(JSONObject result) {
+        String orderId = "";
+        JSONArray events = result.getJSONArray("events");
+
+        for (Iterator<Object> iterator = events.iterator(); iterator.hasNext(); ) {
+            JSONObject event = (JSONObject) iterator.next();
+            JSONArray attributes = event.getJSONArray("attributes");
+            for (Iterator<Object> attributesIterator = attributes.iterator();
+                 attributesIterator.hasNext(); ) {
+                JSONObject attribute = (JSONObject) attributesIterator.next();
+                if (attribute.getString("key").equals("orderId")) {
+                    return attribute.getString("value");
+                }
+            }
+        }
+        return orderId;
     }
+
 
     @Test
     public void testSendMultiSendTransaction() throws IOException {
@@ -170,6 +186,8 @@ public class OKChainRPCClientImplTest {
         transferUnits.add(new TransferUnit(amounts2, to2));
         JSONObject ret = client.sendMultiSendTransaction(account, transferUnits, memo);
         Assert.assertNotNull(ret);
+        Assert.assertEquals(true, ret.getJSONArray("logs").getJSONObject(0).get("success"));
+
     }
 
 
