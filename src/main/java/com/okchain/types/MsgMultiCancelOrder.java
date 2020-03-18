@@ -5,7 +5,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import java.util.List;
 
 public class MsgMultiCancelOrder implements IMsg {
-    @JSONField(name = "order_id_items")
+    @JSONField(name = "order_ids")
     private List<String> orderIdItems;
 
     // order maker address

@@ -124,6 +124,7 @@ public class OKChainRestClientImpl implements OKChainClient {
             throw new NullPointerException("empty amount");
         // 生成最终要发送到网络中的json串(String)
         String data = BuildTransaction.generateSendTransaction(account, to, amount, memo);
+        System.out.println(data);
         // sendTransaction是用post请求将data(json串发到主网)
         return sendTransaction(data);
         // return 主网给的答复：
@@ -132,10 +133,13 @@ public class OKChainRestClientImpl implements OKChainClient {
 
 
 
-    public JSONObject sendPlaceOrderTransaction(AccountInfo account, RequestPlaceOrderParams parms, String memo) throws NullPointerException {
+    public JSONObject sendPlaceOrderTransaction(AccountInfo account, RequestPlaceOrderParams params, String memo) throws NullPointerException {
         checkAccountInfoValue(account);
-        checkPlaceOrderRequestParms(parms);
-        String data = BuildTransaction.generatePlaceOrderTransaction(account, parms.getSide(), parms.getProduct(), parms.getPrice(), parms.getQuantity(), memo);
+        checkPlaceOrderRequestParms(params);
+        MultiNewOrderItem item = new MultiNewOrderItem(params.getPrice(), params.getProduct(), params.getQuantity(), params.getSide());
+        List<MultiNewOrderItem> items = new ArrayList<>();
+        items.add(item);
+        String data = BuildTransaction.generatePlaceOrdersTransaction(account, items, memo);
         return sendTransaction(data);
     }
 
@@ -143,8 +147,9 @@ public class OKChainRestClientImpl implements OKChainClient {
     public JSONObject sendCancelOrderTransaction(AccountInfo account, String orderId, String memo) throws NullPointerException {
         checkAccountInfoValue(account);
         if (orderId.equals("")) throw new NullPointerException("empty orderId");
-
-        String data = BuildTransaction.generateCancelOrderTransaction(account, orderId, memo);
+        List<String> orderIditems = new ArrayList<>();
+        orderIditems.add(orderId);
+        String data = BuildTransaction.generateCancelOrdersTransaction(account, orderIditems, memo);
         return sendTransaction(data);
     }
 

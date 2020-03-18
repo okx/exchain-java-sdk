@@ -36,21 +36,6 @@ public class BuildTransaction {
     }
 
 
-    public static byte[] generateAminoPlaceOrderTransaction(AccountInfo account, String side, String product, String price, String quantity, String memo) throws IOException {
-        IMsg msg = new MsgNewOrder(price, product, quantity, account.getUserAddress(), side);
-        // stdMsg to Proto and to ProtoBytes
-        // first 2 get the protobytes of object MsgNewOrder
-        Transfer.MsgNewOrder msgNewOrderProto = Transfer.MsgNewOrder.newBuilder()
-                .setPrice(EncodeUtils.stringTo8(price))
-                .setProduct(product)
-                .setQuantity(EncodeUtils.stringTo8(quantity))
-                .setSender(ByteString.copyFrom(AddressUtil.decodeAddress(account.getUserAddress())))
-                .setSide(side).build();
-
-        byte[] msgNewOrderAminoEncoded = AminoEncode.encodeMsgNewOrder(msgNewOrderProto);
-        return buildAminoTransaction(account, msgNewOrderAminoEncoded, msg, memo);
-
-    }
 
     public static byte[] generateAminoMultiPlaceOrderTransaction(AccountInfo account, List<MultiNewOrderItem> items, String memo) throws IOException {
         IMsg msg = new MsgMultiNewOrder(account.getUserAddress(), items);
@@ -71,15 +56,6 @@ public class BuildTransaction {
 
     }
 
-
-    public static byte[] generateAminoCancelOrderTransaction(AccountInfo account, String orderId, String memo) throws IOException {
-        IMsg msg = new MsgCancelOrder(account.getUserAddress(), orderId);
-        Transfer.MsgCancelOrder msgCancelOrderProto = Transfer.MsgCancelOrder.newBuilder()
-                .setOrderId(orderId)
-                .setSender(ByteString.copyFrom(AddressUtil.decodeAddress(account.getUserAddress()))).build();
-        byte[] msgCancelOrderAminoEncoded = AminoEncode.encodeMsgCancelOrder(msgCancelOrderProto);
-        return buildAminoTransaction(account, msgCancelOrderAminoEncoded, msg, memo);
-    }
 
     public static byte[] generateAminoMultiCancelOrderTransaction(AccountInfo account, List<String> orderIdMap, String memo) throws IOException {
         IMsg msg = new MsgMultiCancelOrder(account.getUserAddress(), orderIdMap);
@@ -194,16 +170,15 @@ public class BuildTransaction {
     }
 
 
-    public static String generatePlaceOrderTransaction(AccountInfo account, String side, String product, String price, String quantity, String memo) {
-
-        IMsg msg = new MsgNewOrder(price, product, quantity, account.getUserAddress(), side);
+    public static String generatePlaceOrdersTransaction(AccountInfo account, List<MultiNewOrderItem> items, String memo) {
+        IMsg msg = new MsgMultiNewOrder(account.getUserAddress(), items);
         IMsg stdMsg = new MsgStd("okchain/order/MsgNew", msg);
         return buildTransaction(account, stdMsg, msg, memo);
     }
 
 
-    public static String generateCancelOrderTransaction(AccountInfo account, String orderId, String memo) {
-        IMsg msg = new MsgCancelOrder(account.getUserAddress(), orderId);
+    public static String generateCancelOrdersTransaction(AccountInfo account, List<String> orderIdMap, String memo) {
+        IMsg msg = new MsgMultiCancelOrder(account.getUserAddress(), orderIdMap);
         IMsg stdMsg = new MsgStd("okchain/order/MsgCancel", msg);
         return buildTransaction(account, stdMsg, msg, memo);
     }

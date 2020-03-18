@@ -32,6 +32,10 @@ public class OKChainRestClientImplTest {
     private static String ADDRESS = "okchain1g7c3nvac7mjgn2m9mqllgat8wwd3aptdqket5k";
     private static String MNEMONIC = "total lottery arena when pudding best candy until army spoil drill pool";
 
+    private static String TEST_COIN_NAME = "xxb-127";
+    private static String BASE_COIN_NAME = "okt";
+    private static String TEST_PRODUCT = TEST_COIN_NAME + "_" + BASE_COIN_NAME;
+
     @Test
     public void getAddressInfoTest() {
         OKChainClient okc = generateClient();
@@ -113,7 +117,7 @@ public class OKChainRestClientImplTest {
 
         List<Token> amountList = new ArrayList<>();
         Token amount = new Token();
-        amount.setDenom("okt");
+        amount.setDenom(BASE_COIN_NAME);
         amount.setAmount("16.00000000");
         amountList.add(amount);
         // account instance is client infomation（get publicKey and address with privateKey,then query infomation from mainnet）
@@ -122,7 +126,7 @@ public class OKChainRestClientImplTest {
         // resJson instance is response msg from mainnet
         JSONObject resJson = okc.sendSendTransaction(account, to, amountList, memo);
         Assert.assertNotNull(resJson);
-
+        System.out.println(resJson);
         Object code = resJson.get("code");
         Object err = resJson.get("error");
         Assert.assertNull(code);
@@ -136,7 +140,7 @@ public class OKChainRestClientImplTest {
         AccountInfo account = generateAccountInfo(okc);
 
         String side = "BUY";
-        String product = "xxb_okt";
+        String product = TEST_PRODUCT;
         String price = "0.10000000";
         String quantity = "1.00000000";
         String memo = "";
@@ -192,7 +196,7 @@ public class OKChainRestClientImplTest {
         String memo = "";
 
         String amount = "1.00000000";
-        String denom = "okt";
+        String denom = BASE_COIN_NAME;
 
         List<TransferUnit> transfers = new ArrayList<>();
         transfers.add(generateTrasferUnit(to, denom, amount));
@@ -222,7 +226,7 @@ public class OKChainRestClientImplTest {
 
         String pubKey = "okchainvalconspub1zcjduepqtv2yy90ptjegdm34vfhlq2uw9eu39hjrt98sffj7yghl4s47xv7swuf0dx";
         Token minSelfDelegation = new Token();
-        minSelfDelegation.setDenom("okt");
+        minSelfDelegation.setDenom(BASE_COIN_NAME);
         minSelfDelegation.setAmount("1000.00000000");
 
         JSONObject resJson = okc.sendCreateValidatorTransaction(account, description,
@@ -283,7 +287,7 @@ public class OKChainRestClientImplTest {
     @Test
     public void getAccountTokenTest() {
         OKChainClient okc = generateClient();
-        String symbol = "okt";
+        String symbol = BASE_COIN_NAME;
         BaseModel resJson = okc.getAccountToken(ADDRESS, symbol);
         String res = JSON.toJSON(resJson).toString();
         Assert.assertNotNull(res);
@@ -302,7 +306,7 @@ public class OKChainRestClientImplTest {
     @Test
     public void getTokenTest() {
         OKChainClient okc = generateClient();
-        String symbol = "okt";
+        String symbol = BASE_COIN_NAME;
         BaseModel resJson = okc.getToken(symbol);
         String res = JSON.toJSON(resJson).toString();
         Assert.assertNotNull(res);
@@ -321,7 +325,7 @@ public class OKChainRestClientImplTest {
     @Test
     public void getDepthBookTest() {
         OKChainClient okc = generateClient();
-        String product = "xxb_okt";
+        String product = TEST_PRODUCT;
         BaseModel resJson = okc.getDepthBook(product);
         String res = JSON.toJSON(resJson).toString();
         Assert.assertNotNull(res);
@@ -332,7 +336,7 @@ public class OKChainRestClientImplTest {
     public void getCandlesTest() {
         OKChainClient okc = generateClient();
         String granularity = "60";
-        String instrumentId = "xxb_okt";
+        String instrumentId = TEST_PRODUCT;
         String size = "10";
         BaseModel resJson = okc.getCandles(granularity, instrumentId, size);
         String res = JSON.toJSON(resJson).toString();

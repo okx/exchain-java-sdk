@@ -7,14 +7,6 @@ import org.bouncycastle.util.encoders.Hex;
 import java.io.IOException;
 
 public class AminoEncode {
-    public static byte[] encodeMsgNewOrder(Transfer.MsgNewOrder msgNewOrderProto) throws IOException {
-        return EncodeUtils.aminoWrap(msgNewOrderProto.toByteArray(), MessageType.NewOrder.getTypePrefixBytes(), false);
-    }
-
-    public static byte[] encodeMsgCancelOrder(Transfer.MsgCancelOrder msgCancelOrderProto) throws IOException {
-        return EncodeUtils.aminoWrap(msgCancelOrderProto.toByteArray(), MessageType.CancelOrder.getTypePrefixBytes(), false);
-    }
-
     public static byte[] encodeMsgSend(Transfer.MsgSend msgSendProto) throws IOException {
         return EncodeUtils.aminoWrap(msgSendProto.toByteArray(), MessageType.Send.getTypePrefixBytes(), false);
     }

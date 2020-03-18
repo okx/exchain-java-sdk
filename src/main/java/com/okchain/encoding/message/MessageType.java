@@ -6,10 +6,8 @@ public enum MessageType {
     BaseType(null),
     Send("F738C3C9"),
     MultiSend("0E7BC372"),
-    NewOrder("DC9650E5"),
-    CancelOrder("4867EBA0"),
-    MultiNewOrder("0AB2A87C"),
-    MultiCancelOrder("89234E28"),
+    MultiNewOrder("DC9650E5"),
+    MultiCancelOrder("4867EBA0"),
     PubKey("EB5AE987"),
     StdTx("282816A9");
 

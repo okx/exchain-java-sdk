@@ -300,7 +300,10 @@ public class OKChainRPCClientImpl implements OKChainClient {
     public JSONObject sendPlaceOrderTransaction(AccountInfo account, RequestPlaceOrderParams params, String memo) throws IOException {
         checkAccountInfoValue(account);
         checkPlaceOrderRequestParms(params);
-        byte[] data = BuildTransaction.generateAminoPlaceOrderTransaction(account, params.getSide(), params.getProduct(), params.getPrice(), params.getQuantity(), memo);
+        MultiNewOrderItem item = new MultiNewOrderItem(params.getPrice(), params.getProduct(), params.getQuantity(), params.getSide());
+        List<MultiNewOrderItem> items = new ArrayList<>();
+        items.add(item);
+        byte[] data = BuildTransaction.generateAminoMultiPlaceOrderTransaction(account, items, memo);
         return sendTransaction(data);
     }
 
@@ -308,7 +311,9 @@ public class OKChainRPCClientImpl implements OKChainClient {
         checkAccountInfoValue(account);
         if (orderId==null||orderId=="") throw new InvalidFormatException("empty orderId");
         if (orderId.length()>30) throw new InvalidFormatException("the length of orderId is too long");
-        byte[] data = BuildTransaction.generateAminoCancelOrderTransaction(account, orderId, memo);
+        List<String> orderIditems = new ArrayList<>();
+        orderIditems.add(orderId);
+        byte[] data = BuildTransaction.generateAminoMultiCancelOrderTransaction(account, orderIditems, memo);
         return sendTransaction(data);
     }
 
@@ -698,7 +703,10 @@ public class OKChainRPCClientImpl implements OKChainClient {
     public JSONObject sendPlaceOrderTransactionV2(AccountInfo account, RequestPlaceOrderParams params, String memo) throws IOException {
         checkAccountInfoValue(account);
         checkPlaceOrderRequestParms(params);
-        byte[] data = BuildTransaction.generateAminoPlaceOrderTransaction(account, params.getSide(), params.getProduct(), params.getPrice(), params.getQuantity(), memo);
+        MultiNewOrderItem item = new MultiNewOrderItem(params.getPrice(), params.getProduct(), params.getQuantity(), params.getSide());
+        List<MultiNewOrderItem> items = new ArrayList<>();
+        items.add(item);
+        byte[] data = BuildTransaction.generateAminoMultiPlaceOrderTransaction(account, items, memo);
         JSONObject res = sendTransaction(data);
         setOrderMsg(res);
         res.put("client_oid", account.getSequenceNumber());
@@ -740,7 +748,9 @@ public class OKChainRPCClientImpl implements OKChainClient {
         checkAccountInfoValue(account);
         if (orderId==null||orderId.equals("")) throw new InvalidFormatException("empty orderId");
         if (orderId.length()>30) throw new InvalidFormatException("the length of orderId is too long");
-        byte[] data = BuildTransaction.generateAminoCancelOrderTransaction(account, orderId, memo);
+        List<String> orderIditems = new ArrayList<>();
+        orderIditems.add(orderId);
+        byte[] data = BuildTransaction.generateAminoMultiCancelOrderTransaction(account, orderIditems, memo);
         JSONObject res = sendTransaction(data);
         setOrderMsg(res);
         res.put("order_id", orderId);
