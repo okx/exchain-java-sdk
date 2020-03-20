@@ -34,7 +34,7 @@ public interface OKChainClient {
 
     public JSONObject sendSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) throws NullPointerException, IOException;
 
-    public JSONObject sendPlaceOrderTransaction(AccountInfo account, RequestPlaceOrderParams parms, String memo) throws NullPointerException, IOException;
+    public JSONObject sendPlaceOrderTransaction(AccountInfo account, RequestPlaceOrderParams params, String memo) throws NullPointerException, IOException;
 
     public JSONObject sendCancelOrderTransaction(AccountInfo account, String orderId, String memo) throws NullPointerException, IOException;
 

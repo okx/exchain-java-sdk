@@ -26,39 +26,6 @@ public class BuildTransactionTest {
     private static String PRIVATEKEY = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
 
     @Test
-    public void testBuildAminoNewOrderTx() throws IOException {
-        AccountInfo account = generateAccountInfoByRpc();
-
-        String side = "BUY";
-        String product = "tokt_tusdk";
-        String price = "1.00000000";
-        String quantity = "1.00000000";
-        String memo = "";
-        byte[] tx = BuildTransaction.generateAminoPlaceOrderTransaction(account, side, product, price, quantity, memo);
-        String method = ConstantIF.RPC_METHOD_TX_SEND_ASYNC;
-        Map<String, Object> mp = new TreeMap<>();
-        mp.put("tx", tx);
-        String res = JSONRPCUtils.getRpcSendData(method, mp);
-
-        String resRaw = "{\"id\":\"jsonrpc-client\",\"jsonrpc\":\"2.0\",\"method\":\"broadcast_tx_async\",\"params\":{\"tx\":\"swEoKBapCkHGHZiTChRHsRmzuPbkiatl2D/0dWdzmx6FbRIKdG9rdF90dXNkaxoDQlVZIgkxMDAwMDAwMDAqCTEwMDAwMDAwMBJqCibrWumHIQIGuT+01qKqvunJsTkx4Y/bS6hZRzZS6VjBHQHx3KJKfhJA1ESqcxbzCRe7Usjp67BBhjaHSykrMDZPbJmcyplD7U9zmek1Qj0jNw2BWzxIUB2VIzSmlQ5EI7pPZxYz59Oqow==\"}}";
-        Assert.assertEquals(resRaw, res);
-    }
-
-    @Test
-    public void testBuildAminoCancelOrderTx() throws IOException {
-        AccountInfo account = generateAccountInfoByRpc();
-
-        String orderId = "ID0000065785-1";
-        String memo = "";
-        byte[] tx = BuildTransaction.generateAminoCancelOrderTransaction(account, orderId, memo);
-        String method = ConstantIF.RPC_METHOD_TX_SEND_ASYNC;
-        Map<String, Object> mp = new TreeMap<>();
-        mp.put("tx", tx);
-        String res = JSONRPCUtils.getRpcSendData(method, mp);
-        Assert.assertNotNull(res);
-    }
-
-    @Test
     public void testBuildAminoSendTx() throws IOException {
         AccountInfo account = generateAccountInfoByRpc();
 
@@ -127,27 +94,6 @@ public class BuildTransactionTest {
         return okc.getAccountInfo(PRIVATEKEY);
     }
 
-    @Test
-    public void testBuildNewOrderTx() {
-        AccountInfo account = generateAccountInfo();
-        String side = "BUY";
-        String product = "xxb_okb";
-        String price = "1.00000000";
-        String quantity = "1.00000000";
-        String memo = "";
-        String transaction = BuildTransaction.generatePlaceOrderTransaction(account, side, product, price, quantity, memo);
-        Assert.assertNotNull(transaction);
-    }
-
-
-    @Test
-    public void testBuildCancelOrderTx() {
-        AccountInfo account = generateAccountInfo();
-        String orderId = "ID0000065785-1";
-        String memo = "";
-        String transaction = BuildTransaction.generateCancelOrderTransaction(account, orderId, memo);
-        Assert.assertNotNull(transaction);
-    }
 
 
     @Test
