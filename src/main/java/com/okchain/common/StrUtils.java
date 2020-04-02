@@ -1,5 +1,8 @@
 package com.okchain.common;
 
+import com.alibaba.fastjson.JSONObject;
+
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StrUtils {
@@ -31,6 +34,15 @@ public class StrUtils {
         if (str == null || str.equals("")) return false;
         if (str.equals("BUY") || str.equals("SELL")) return true;
         return false;
+    }
+
+    public static String getOrderIdFromResult(JSONObject result) {
+        String str = result.toJSONString();
+        String pattern = ".*(ID[0-9]*-[0-9]*).*";
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(str);
+        m.matches();
+        return m.group(1);
     }
 
 }

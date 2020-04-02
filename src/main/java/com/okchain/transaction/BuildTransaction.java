@@ -27,6 +27,14 @@ import java.util.List;
 public class BuildTransaction {
     private static String mode = ConstantIF.TX_SEND_MODE_SYNC;
 
+    private static String NEW_ORDER_TYPE = "okchain/order/MsgNew";
+    private static String CANCEL_ORDER_TYPE = "okchain/order/MsgCancel";
+    private static String TRANSFER_TYPE = "okchain/token/MsgTransfer";
+    private static String MULTI_TRANSFER_TYPE = "okchain/token/MsgMultiTransfer";
+    private static String CREATE_VALIDATOR_TYPE = "okchain/staking/MsgCreateValidator";
+    private static String EDIT_VALIDATOR_TYPE = "okchain/staking/MsgEditValidator";
+
+
     public static String getMode() {
         return mode;
     }
@@ -39,6 +47,7 @@ public class BuildTransaction {
 
     public static byte[] generateAminoMultiPlaceOrderTransaction(AccountInfo account, List<MultiNewOrderItem> items, String memo) throws IOException {
         IMsg msg = new MsgMultiNewOrder(account.getUserAddress(), items);
+        IMsg stdMsg = new MsgStd(NEW_ORDER_TYPE, msg);
         // stdMsg to Proto and to ProtoBytes
         // first 2 get the protobytes of object MsgNewOrder
         Transfer.MsgMultiNewOrder.Builder msgMultiNewOrderBuilder = Transfer.MsgMultiNewOrder.newBuilder();
@@ -52,25 +61,27 @@ public class BuildTransaction {
         }
         msgMultiNewOrderBuilder.setSender(ByteString.copyFrom(AddressUtil.decodeAddress(account.getUserAddress())));
         byte[] msgMultiNewOrderAminoEncoded = AminoEncode.encodeMsgMultiNewOrder(msgMultiNewOrderBuilder.build());
-        return buildAminoTransaction(account, msgMultiNewOrderAminoEncoded, msg, memo);
+        return buildAminoTransaction(account, msgMultiNewOrderAminoEncoded, stdMsg, memo);
 
     }
 
 
     public static byte[] generateAminoMultiCancelOrderTransaction(AccountInfo account, List<String> orderIdMap, String memo) throws IOException {
         IMsg msg = new MsgMultiCancelOrder(account.getUserAddress(), orderIdMap);
+        IMsg stdMsg = new MsgStd(CANCEL_ORDER_TYPE, msg);
         Transfer.MsgMultiCancelOrder.Builder msgMultiCancelOrderBuilder = Transfer.MsgMultiCancelOrder.newBuilder()
                 .setSender(ByteString.copyFrom(AddressUtil.decodeAddress(account.getUserAddress())));
         for (String orderId : orderIdMap) {
             msgMultiCancelOrderBuilder.addOrderIdItems(orderId);
         }
         byte[] msgCancelOrderAminoEncoded = AminoEncode.encodeMsgMultiCancelOrder(msgMultiCancelOrderBuilder.build());
-        return buildAminoTransaction(account, msgCancelOrderAminoEncoded, msg, memo);
+        return buildAminoTransaction(account, msgCancelOrderAminoEncoded, stdMsg, memo);
     }
 
 
     public static byte[] generateAminoSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) throws IOException {
         IMsg msg = new MsgSend(account.getUserAddress(), to, amount);
+        IMsg stdMsg = new MsgStd(TRANSFER_TYPE, msg);
         // stdMsg to Proto and to ProtoBytes
         // first 2 get the protobytes of object MsgSend
         Transfer.MsgSend.Builder msgSendBuilder = Transfer.MsgSend.newBuilder()
@@ -83,12 +94,13 @@ public class BuildTransaction {
 
         // then 2 get the protobytes of object stdMsg
         byte[] msgSendAminoEncoded = AminoEncode.encodeMsgSend(msgSendBuilder.build());
-        return buildAminoTransaction(account, msgSendAminoEncoded, msg, memo);
+        return buildAminoTransaction(account, msgSendAminoEncoded, stdMsg, memo);
     }
 
 
     public static byte[] generateAminoMultiSendTransaction(AccountInfo account, List<TransferUnit> transfers, String memo) throws IOException {
         IMsg msg = new MsgMultiSend(account.getUserAddress(), transfers);
+        IMsg stdMsg = new MsgStd(MULTI_TRANSFER_TYPE, msg);
         Transfer.MsgMultiSend.Builder msgMultiSendBuilder = Transfer.MsgMultiSend.newBuilder().setFrom(ByteString.copyFrom(AddressUtil.decodeAddress(account.getUserAddress())));
         for (TransferUnit tu : transfers) {
             Transfer.TransferUnit.Builder transferUnitBuilder = Transfer.TransferUnit.newBuilder().setTo(ByteString.copyFrom(AddressUtil.decodeAddress(tu.getTo())));
@@ -102,7 +114,7 @@ public class BuildTransaction {
         }
 
         byte[] msgMultiSendAminoEncoded = AminoEncode.encodeMsgMultiSend(msgMultiSendBuilder.build());
-        return buildAminoTransaction(account, msgMultiSendAminoEncoded, msg, memo);
+        return buildAminoTransaction(account, msgMultiSendAminoEncoded, stdMsg, memo);
     }
 
 
@@ -172,40 +184,40 @@ public class BuildTransaction {
 
     public static String generatePlaceOrdersTransaction(AccountInfo account, List<MultiNewOrderItem> items, String memo) {
         IMsg msg = new MsgMultiNewOrder(account.getUserAddress(), items);
-        IMsg stdMsg = new MsgStd("okchain/order/MsgNew", msg);
-        return buildTransaction(account, stdMsg, msg, memo);
+        IMsg stdMsg = new MsgStd(NEW_ORDER_TYPE, msg);
+        return buildTransaction(account, stdMsg, stdMsg, memo);
     }
 
 
     public static String generateCancelOrdersTransaction(AccountInfo account, List<String> orderIdMap, String memo) {
         IMsg msg = new MsgMultiCancelOrder(account.getUserAddress(), orderIdMap);
-        IMsg stdMsg = new MsgStd("okchain/order/MsgCancel", msg);
-        return buildTransaction(account, stdMsg, msg, memo);
+        IMsg stdMsg = new MsgStd(CANCEL_ORDER_TYPE, msg);
+        return buildTransaction(account, stdMsg, stdMsg, memo);
     }
 
     public static String generateSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) {
         IMsg msg = new MsgSend(account.getUserAddress(), to, amount);
-        IMsg stdMsg = new MsgStd("okchain/token/MsgTransfer", msg);
-        return buildTransaction(account, stdMsg, msg, memo);
+        IMsg stdMsg = new MsgStd(TRANSFER_TYPE, msg);
+        return buildTransaction(account, stdMsg, stdMsg, memo);
     }
 
     public static String generateMultiSendTransaction(AccountInfo account, List<TransferUnit> transfers, String memo) {
         IMsg msg = new MsgMultiSend(account.getUserAddress(), transfers);
-        IMsg stdMsg = new MsgStd("okchain/token/MsgMultiTransfer", msg);
-        return buildTransaction(account, stdMsg, msg, memo);
+        IMsg stdMsg = new MsgStd(MULTI_TRANSFER_TYPE, msg);
+        return buildTransaction(account, stdMsg, stdMsg, memo);
     }
 
     public static String generateCreateValidatorTransaction(AccountInfo account, Description description, CommissionRates commission, Token minSelfDelegation,
                                                             String delegatorAddress, String validatorAddress, String pubKey, String memo) {
         IMsg msg = new MsgCreateValidator(description, commission, minSelfDelegation,
                 delegatorAddress, validatorAddress, pubKey);
-        IMsg stdMsg = new MsgStd("okchain/staking/MsgCreateValidator", msg);
+        IMsg stdMsg = new MsgStd(CREATE_VALIDATOR_TYPE, msg);
         return buildTransaction(account, stdMsg, stdMsg, memo);
     }
 
     public static String generateEditValidatorTransaction(AccountInfo account, String minSelfDelegation,  String validatorAddress, Description description, String memo) {
         IMsg msg = new MsgEditValidator(validatorAddress, description, minSelfDelegation);
-        IMsg stdMsg = new MsgStd("okchain/staking/MsgEditValidator", msg);
+        IMsg stdMsg = new MsgStd(EDIT_VALIDATOR_TYPE, msg);
         return buildTransaction(account, stdMsg, stdMsg, memo);
     }
 
