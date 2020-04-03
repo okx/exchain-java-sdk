@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.okchain.client.OKChainClient;
 import com.okchain.client.impl.OKChainRestClientImpl;
+import com.okchain.common.StrUtils;
 import com.okchain.crypto.Crypto;
 import com.okchain.crypto.keystore.CipherException;
 import com.okchain.transaction.BuildTransaction;
@@ -32,7 +33,7 @@ public class OKChainRestClientImplTest {
     private static String ADDRESS = "okchain1g7c3nvac7mjgn2m9mqllgat8wwd3aptdqket5k";
     private static String MNEMONIC = "total lottery arena when pudding best candy until army spoil drill pool";
 
-    private static String TEST_COIN_NAME = "xxb-127";
+    private static String TEST_COIN_NAME = "xxb-3fc";
     private static String BASE_COIN_NAME = "okt";
     private static String TEST_PRODUCT = TEST_COIN_NAME + "_" + BASE_COIN_NAME;
 
@@ -150,7 +151,7 @@ public class OKChainRestClientImplTest {
         JSONObject resJson = okc.sendPlaceOrderTransaction(account, parms, memo);
         Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
 
-        String orderId = getOrderIdFromResult(resJson);
+        String orderId = StrUtils.getOrderIdFromResult(resJson);
         account.setSequenceNumber(
                 Integer.toString(Integer.parseInt(account.getSequenceNumber()) + 1));
         JSONObject resJson2 = okc.sendCancelOrderTransaction(account, orderId, memo);
@@ -165,24 +166,6 @@ public class OKChainRestClientImplTest {
         coins.add(coin);
         TransferUnit transferUint = new TransferUnit(coins, to);
         return transferUint;
-    }
-
-    private String getOrderIdFromResult(JSONObject result) {
-        String orderId = "";
-        JSONArray events = result.getJSONArray("events");
-
-        for (Iterator<Object> iterator = events.iterator(); iterator.hasNext(); ) {
-            JSONObject event = (JSONObject) iterator.next();
-            JSONArray attributes = event.getJSONArray("attributes");
-            for (Iterator<Object> attributesIterator = attributes.iterator();
-                 attributesIterator.hasNext(); ) {
-                JSONObject attribute = (JSONObject) attributesIterator.next();
-                if (attribute.getString("key").equals("orderId")) {
-                    return attribute.getString("value");
-                }
-            }
-        }
-        return orderId;
     }
 
     @Test
