@@ -3,9 +3,9 @@ option java_package = "com.okchain.proto";
 
 message StdTransaction {
     repeated bytes msgs = 1;
-    //Fee fee = 2;
-    repeated Signature signatures = 2;
-    string memo = 3;
+    Fee fee = 2;
+    repeated Signature signatures = 3;
+    string memo = 4;
 }
 
 message Fee {

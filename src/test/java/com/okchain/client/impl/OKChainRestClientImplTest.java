@@ -33,7 +33,7 @@ public class OKChainRestClientImplTest {
     private static String ADDRESS = "okchain1g7c3nvac7mjgn2m9mqllgat8wwd3aptdqket5k";
     private static String MNEMONIC = "total lottery arena when pudding best candy until army spoil drill pool";
 
-    private static String TEST_COIN_NAME = "xxb-3fc";
+    private static String TEST_COIN_NAME = "xxb-d35";
     private static String BASE_COIN_NAME = "okt";
     private static String TEST_PRODUCT = TEST_COIN_NAME + "_" + BASE_COIN_NAME;
 
@@ -203,7 +203,9 @@ public class OKChainRestClientImplTest {
 
         String memo = "";
         Description description = new Description("m1", "1", "1", "1");
-        CommissionRates commission = new CommissionRates("0.10000000", "0.50000000", "0.00100000");
+//        CommissionRates commission = new CommissionRates("0.10000000", "0.50000000", "0.00100000");
+        CommissionRates commission = null;
+
         String delegatorAddress = account.getUserAddress();
         String validatorAddress = Crypto.generateValidatorAddressFromPub(account.getPublicKey());
 
@@ -236,7 +238,7 @@ public class OKChainRestClientImplTest {
         String validatorAddress = Crypto.generateValidatorAddressFromPub(account.getPublicKey());
         Assert.assertNotNull(validatorAddress);
 
-        String minSelfDelegation = "1100";
+        String minSelfDelegation = null;
 
         JSONObject resJson = okc.sendEditValidatorTransaction(account, minSelfDelegation, validatorAddress, description, memo);
 

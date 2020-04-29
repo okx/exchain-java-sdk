@@ -27,7 +27,7 @@ public class OKChainRPCClientImplTest {
     private static String QUERYADDR = "okchain1a3xgd3ymuh282fwwawkk9jceml8pex5q0llrhn";
     private static String QUERYADDR1 = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
 
-    private static String TEST_COIN_NAME = "xxb-3fc";
+    private static String TEST_COIN_NAME = "xxb-d35";
     private static String BASE_COIN_NAME = "okt";
     private static String TEST_PRODUCT = TEST_COIN_NAME + "_" + BASE_COIN_NAME;
 
@@ -226,6 +226,7 @@ public class OKChainRPCClientImplTest {
     public void testGetTickers() {
         OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(URL_RPC);
         BaseModel bm = client.getTickers("10");
+        System.out.println(bm.toString());
         Assert.assertEquals(bm.getCode(), 0);
     }
 
@@ -420,34 +421,34 @@ public class OKChainRPCClientImplTest {
         return new MultiNewOrderItem(price, product, quantity, side);
     }
 
-    @Test
-    public void testMarket() throws IOException {
-        BuildTransaction.setMode("async");
-        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(URL_RPC);
-        AccountInfo account = client.getAccountInfo(PRIVATEKEY);
-        String memo = "new order memo";
-        for (;;) {
-            List<MultiNewOrderItem> items = new ArrayList<>();
-            for (int i = 0; i < 5; i++) {
-                MultiNewOrderItem itemBuy = getMultiNewOrderItemWithBUY();
-                MultiNewOrderItem itemSell = getMultiNewOrderItemWithSELL();
-                items.add(itemBuy);
-                items.add(itemSell);
-            }
-
-            JSONObject ret = client.sendMultiPlaceOrderTransactionV2(account, items, memo);
-            Assert.assertNotNull(ret);
-            System.out.println(ret);
-            account.setSequenceNumber(
-                    Integer.toString(Integer.parseInt(account.getSequenceNumber()) + 1));
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
+//    @Test
+//    public void testMarket() throws IOException {
+//        BuildTransaction.setMode("async");
+//        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(URL_RPC);
+//        AccountInfo account = client.getAccountInfo(PRIVATEKEY);
+//        String memo = "new order memo";
+//        for (;;) {
+//            List<MultiNewOrderItem> items = new ArrayList<>();
+//            for (int i = 0; i < 5; i++) {
+//                MultiNewOrderItem itemBuy = getMultiNewOrderItemWithBUY();
+//                MultiNewOrderItem itemSell = getMultiNewOrderItemWithSELL();
+//                items.add(itemBuy);
+//                items.add(itemSell);
+//            }
+//
+//            JSONObject ret = client.sendMultiPlaceOrderTransactionV2(account, items, memo);
+//            Assert.assertNotNull(ret);
+//            System.out.println(ret);
+//            account.setSequenceNumber(
+//                    Integer.toString(Integer.parseInt(account.getSequenceNumber()) + 1));
+//            try {
+//                Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//    }
 
     @Test
     public void testSendMultiPlaceOrderTransaction() throws IOException {
