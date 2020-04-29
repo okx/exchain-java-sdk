@@ -32,55 +32,48 @@ public final class Transfer {
     com.google.protobuf.ByteString getMsgs(int index);
 
     /**
-     * <pre>
-     *Fee fee = 2;
-     * </pre>
-     *
-     * <code>repeated .Signature signatures = 2;</code>
+     * <code>.Fee fee = 2;</code>
+     */
+    boolean hasFee();
+    /**
+     * <code>.Fee fee = 2;</code>
+     */
+    com.okchain.proto.Transfer.Fee getFee();
+    /**
+     * <code>.Fee fee = 2;</code>
+     */
+    com.okchain.proto.Transfer.FeeOrBuilder getFeeOrBuilder();
+
+    /**
+     * <code>repeated .Signature signatures = 3;</code>
      */
     java.util.List<com.okchain.proto.Transfer.Signature> 
         getSignaturesList();
     /**
-     * <pre>
-     *Fee fee = 2;
-     * </pre>
-     *
-     * <code>repeated .Signature signatures = 2;</code>
+     * <code>repeated .Signature signatures = 3;</code>
      */
     com.okchain.proto.Transfer.Signature getSignatures(int index);
     /**
-     * <pre>
-     *Fee fee = 2;
-     * </pre>
-     *
-     * <code>repeated .Signature signatures = 2;</code>
+     * <code>repeated .Signature signatures = 3;</code>
      */
     int getSignaturesCount();
     /**
-     * <pre>
-     *Fee fee = 2;
-     * </pre>
-     *
-     * <code>repeated .Signature signatures = 2;</code>
+     * <code>repeated .Signature signatures = 3;</code>
      */
     java.util.List<? extends com.okchain.proto.Transfer.SignatureOrBuilder> 
         getSignaturesOrBuilderList();
     /**
-     * <pre>
-     *Fee fee = 2;
-     * </pre>
-     *
-     * <code>repeated .Signature signatures = 2;</code>
+     * <code>repeated .Signature signatures = 3;</code>
      */
     com.okchain.proto.Transfer.SignatureOrBuilder getSignaturesOrBuilder(
         int index);
 
     /**
-     * <code>string memo = 3;</code>
+     * <code>string memo = 4;</code>
      */
     java.lang.String getMemo();
     /**
-     * <code>string memo = 3;</code>
+     * <code>string memo = 4;</code>
      */
     com.google.protobuf.ByteString
         getMemoBytes();
@@ -136,15 +129,28 @@ public final class Transfer {
               break;
             }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+              com.okchain.proto.Transfer.Fee.Builder subBuilder = null;
+              if (fee_ != null) {
+                subBuilder = fee_.toBuilder();
+              }
+              fee_ = input.readMessage(com.okchain.proto.Transfer.Fee.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(fee_);
+                fee_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 signatures_ = new java.util.ArrayList<com.okchain.proto.Transfer.Signature>();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000004;
               }
               signatures_.add(
                   input.readMessage(com.okchain.proto.Transfer.Signature.parser(), extensionRegistry));
               break;
             }
-            case 26: {
+            case 34: {
               java.lang.String s = input.readStringRequireUtf8();
 
               memo_ = s;
@@ -168,7 +174,7 @@ public final class Transfer {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           msgs_ = java.util.Collections.unmodifiableList(msgs_);
         }
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           signatures_ = java.util.Collections.unmodifiableList(signatures_);
         }
         this.unknownFields = unknownFields.build();
@@ -211,65 +217,66 @@ public final class Transfer {
       return msgs_.get(index);
     }
 
-    public static final int SIGNATURES_FIELD_NUMBER = 2;
+    public static final int FEE_FIELD_NUMBER = 2;
+    private com.okchain.proto.Transfer.Fee fee_;
+    /**
+     * <code>.Fee fee = 2;</code>
+     */
+    public boolean hasFee() {
+      return fee_ != null;
+    }
+    /**
+     * <code>.Fee fee = 2;</code>
+     */
+    public com.okchain.proto.Transfer.Fee getFee() {
+      return fee_ == null ? com.okchain.proto.Transfer.Fee.getDefaultInstance() : fee_;
+    }
+    /**
+     * <code>.Fee fee = 2;</code>
+     */
+    public com.okchain.proto.Transfer.FeeOrBuilder getFeeOrBuilder() {
+      return getFee();
+    }
+
+    public static final int SIGNATURES_FIELD_NUMBER = 3;
     private java.util.List<com.okchain.proto.Transfer.Signature> signatures_;
     /**
-     * <pre>
-     *Fee fee = 2;
-     * </pre>
-     *
-     * <code>repeated .Signature signatures = 2;</code>
+     * <code>repeated .Signature signatures = 3;</code>
      */
     public java.util.List<com.okchain.proto.Transfer.Signature> getSignaturesList() {
       return signatures_;
     }
     /**
-     * <pre>
-     *Fee fee = 2;
-     * </pre>
-     *
-     * <code>repeated .Signature signatures = 2;</code>
+     * <code>repeated .Signature signatures = 3;</code>
      */
     public java.util.List<? extends com.okchain.proto.Transfer.SignatureOrBuilder> 
         getSignaturesOrBuilderList() {
       return signatures_;
     }
     /**
-     * <pre>
-     *Fee fee = 2;
-     * </pre>
-     *
-     * <code>repeated .Signature signatures = 2;</code>
+     * <code>repeated .Signature signatures = 3;</code>
      */
     public int getSignaturesCount() {
       return signatures_.size();
     }
     /**
-     * <pre>
-     *Fee fee = 2;
-     * </pre>
-     *
-     * <code>repeated .Signature signatures = 2;</code>
+     * <code>repeated .Signature signatures = 3;</code>
      */
     public com.okchain.proto.Transfer.Signature getSignatures(int index) {
       return signatures_.get(index);
     }
     /**
-     * <pre>
-     *Fee fee = 2;
-     * </pre>
-     *
-     * <code>repeated .Signature signatures = 2;</code>
+     * <code>repeated .Signature signatures = 3;</code>
      */
     public com.okchain.proto.Transfer.SignatureOrBuilder getSignaturesOrBuilder(
         int index) {
       return signatures_.get(index);
     }
 
-    public static final int MEMO_FIELD_NUMBER = 3;
+    public static final int MEMO_FIELD_NUMBER = 4;
     private volatile java.lang.Object memo_;
     /**
-     * <code>string memo = 3;</code>
+     * <code>string memo = 4;</code>
      */
     public java.lang.String getMemo() {
       java.lang.Object ref = memo_;
@@ -284,7 +291,7 @@ public final class Transfer {
       }
     }
     /**
-     * <code>string memo = 3;</code>
+     * <code>string memo = 4;</code>
      */
     public com.google.protobuf.ByteString
         getMemoBytes() {
@@ -317,11 +324,14 @@ public final class Transfer {
       for (int i = 0; i < msgs_.size(); i++) {
         output.writeBytes(1, msgs_.get(i));
       }
+      if (fee_ != null) {
+        output.writeMessage(2, getFee());
+      }
       for (int i = 0; i < signatures_.size(); i++) {
-        output.writeMessage(2, signatures_.get(i));
+        output.writeMessage(3, signatures_.get(i));
       }
       if (!getMemoBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, memo_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, memo_);
       }
       unknownFields.writeTo(output);
     }
@@ -341,12 +351,16 @@ public final class Transfer {
         size += dataSize;
         size += 1 * getMsgsList().size();
       }
+      if (fee_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getFee());
+      }
       for (int i = 0; i < signatures_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, signatures_.get(i));
+          .computeMessageSize(3, signatures_.get(i));
       }
       if (!getMemoBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, memo_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, memo_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -366,6 +380,11 @@ public final class Transfer {
       boolean result = true;
       result = result && getMsgsList()
           .equals(other.getMsgsList());
+      result = result && (hasFee() == other.hasFee());
+      if (hasFee()) {
+        result = result && getFee()
+            .equals(other.getFee());
+      }
       result = result && getSignaturesList()
           .equals(other.getSignaturesList());
       result = result && getMemo()
@@ -384,6 +403,10 @@ public final class Transfer {
       if (getMsgsCount() > 0) {
         hash = (37 * hash) + MSGS_FIELD_NUMBER;
         hash = (53 * hash) + getMsgsList().hashCode();
+      }
+      if (hasFee()) {
+        hash = (37 * hash) + FEE_FIELD_NUMBER;
+        hash = (53 * hash) + getFee().hashCode();
       }
       if (getSignaturesCount() > 0) {
         hash = (37 * hash) + SIGNATURES_FIELD_NUMBER;
@@ -527,9 +550,15 @@ public final class Transfer {
         super.clear();
         msgs_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000001);
+        if (feeBuilder_ == null) {
+          fee_ = null;
+        } else {
+          fee_ = null;
+          feeBuilder_ = null;
+        }
         if (signaturesBuilder_ == null) {
           signatures_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000004);
         } else {
           signaturesBuilder_.clear();
         }
@@ -568,10 +597,15 @@ public final class Transfer {
           bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.msgs_ = msgs_;
+        if (feeBuilder_ == null) {
+          result.fee_ = fee_;
+        } else {
+          result.fee_ = feeBuilder_.build();
+        }
         if (signaturesBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
             signatures_ = java.util.Collections.unmodifiableList(signatures_);
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000004);
           }
           result.signatures_ = signatures_;
         } else {
@@ -637,11 +671,14 @@ public final class Transfer {
           }
           onChanged();
         }
+        if (other.hasFee()) {
+          mergeFee(other.getFee());
+        }
         if (signaturesBuilder_ == null) {
           if (!other.signatures_.isEmpty()) {
             if (signatures_.isEmpty()) {
               signatures_ = other.signatures_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000004);
             } else {
               ensureSignaturesIsMutable();
               signatures_.addAll(other.signatures_);
@@ -654,7 +691,7 @@ public final class Transfer {
               signaturesBuilder_.dispose();
               signaturesBuilder_ = null;
               signatures_ = other.signatures_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000004);
               signaturesBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getSignaturesFieldBuilder() : null;
@@ -769,12 +806,129 @@ public final class Transfer {
         return this;
       }
 
+      private com.okchain.proto.Transfer.Fee fee_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.okchain.proto.Transfer.Fee, com.okchain.proto.Transfer.Fee.Builder, com.okchain.proto.Transfer.FeeOrBuilder> feeBuilder_;
+      /**
+       * <code>.Fee fee = 2;</code>
+       */
+      public boolean hasFee() {
+        return feeBuilder_ != null || fee_ != null;
+      }
+      /**
+       * <code>.Fee fee = 2;</code>
+       */
+      public com.okchain.proto.Transfer.Fee getFee() {
+        if (feeBuilder_ == null) {
+          return fee_ == null ? com.okchain.proto.Transfer.Fee.getDefaultInstance() : fee_;
+        } else {
+          return feeBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.Fee fee = 2;</code>
+       */
+      public Builder setFee(com.okchain.proto.Transfer.Fee value) {
+        if (feeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          fee_ = value;
+          onChanged();
+        } else {
+          feeBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Fee fee = 2;</code>
+       */
+      public Builder setFee(
+          com.okchain.proto.Transfer.Fee.Builder builderForValue) {
+        if (feeBuilder_ == null) {
+          fee_ = builderForValue.build();
+          onChanged();
+        } else {
+          feeBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Fee fee = 2;</code>
+       */
+      public Builder mergeFee(com.okchain.proto.Transfer.Fee value) {
+        if (feeBuilder_ == null) {
+          if (fee_ != null) {
+            fee_ =
+              com.okchain.proto.Transfer.Fee.newBuilder(fee_).mergeFrom(value).buildPartial();
+          } else {
+            fee_ = value;
+          }
+          onChanged();
+        } else {
+          feeBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Fee fee = 2;</code>
+       */
+      public Builder clearFee() {
+        if (feeBuilder_ == null) {
+          fee_ = null;
+          onChanged();
+        } else {
+          fee_ = null;
+          feeBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.Fee fee = 2;</code>
+       */
+      public com.okchain.proto.Transfer.Fee.Builder getFeeBuilder() {
+        
+        onChanged();
+        return getFeeFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.Fee fee = 2;</code>
+       */
+      public com.okchain.proto.Transfer.FeeOrBuilder getFeeOrBuilder() {
+        if (feeBuilder_ != null) {
+          return feeBuilder_.getMessageOrBuilder();
+        } else {
+          return fee_ == null ?
+              com.okchain.proto.Transfer.Fee.getDefaultInstance() : fee_;
+        }
+      }
+      /**
+       * <code>.Fee fee = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.okchain.proto.Transfer.Fee, com.okchain.proto.Transfer.Fee.Builder, com.okchain.proto.Transfer.FeeOrBuilder> 
+          getFeeFieldBuilder() {
+        if (feeBuilder_ == null) {
+          feeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.okchain.proto.Transfer.Fee, com.okchain.proto.Transfer.Fee.Builder, com.okchain.proto.Transfer.FeeOrBuilder>(
+                  getFee(),
+                  getParentForChildren(),
+                  isClean());
+          fee_ = null;
+        }
+        return feeBuilder_;
+      }
+
       private java.util.List<com.okchain.proto.Transfer.Signature> signatures_ =
         java.util.Collections.emptyList();
       private void ensureSignaturesIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
           signatures_ = new java.util.ArrayList<com.okchain.proto.Transfer.Signature>(signatures_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000004;
          }
       }
 
@@ -782,11 +936,7 @@ public final class Transfer {
           com.okchain.proto.Transfer.Signature, com.okchain.proto.Transfer.Signature.Builder, com.okchain.proto.Transfer.SignatureOrBuilder> signaturesBuilder_;
 
       /**
-       * <pre>
-       *Fee fee = 2;
-       * </pre>
-       *
-       * <code>repeated .Signature signatures = 2;</code>
+       * <code>repeated .Signature signatures = 3;</code>
        */
       public java.util.List<com.okchain.proto.Transfer.Signature> getSignaturesList() {
         if (signaturesBuilder_ == null) {
@@ -796,11 +946,7 @@ public final class Transfer {
         }
       }
       /**
-       * <pre>
-       *Fee fee = 2;
-       * </pre>
-       *
-       * <code>repeated .Signature signatures = 2;</code>
+       * <code>repeated .Signature signatures = 3;</code>
        */
       public int getSignaturesCount() {
         if (signaturesBuilder_ == null) {
@@ -810,11 +956,7 @@ public final class Transfer {
         }
       }
       /**
-       * <pre>
-       *Fee fee = 2;
-       * </pre>
-       *
-       * <code>repeated .Signature signatures = 2;</code>
+       * <code>repeated .Signature signatures = 3;</code>
        */
       public com.okchain.proto.Transfer.Signature getSignatures(int index) {
         if (signaturesBuilder_ == null) {
@@ -824,11 +966,7 @@ public final class Transfer {
         }
       }
       /**
-       * <pre>
-       *Fee fee = 2;
-       * </pre>
-       *
-       * <code>repeated .Signature signatures = 2;</code>
+       * <code>repeated .Signature signatures = 3;</code>
        */
       public Builder setSignatures(
           int index, com.okchain.proto.Transfer.Signature value) {
@@ -845,11 +983,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <pre>
-       *Fee fee = 2;
-       * </pre>
-       *
-       * <code>repeated .Signature signatures = 2;</code>
+       * <code>repeated .Signature signatures = 3;</code>
        */
       public Builder setSignatures(
           int index, com.okchain.proto.Transfer.Signature.Builder builderForValue) {
@@ -863,11 +997,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <pre>
-       *Fee fee = 2;
-       * </pre>
-       *
-       * <code>repeated .Signature signatures = 2;</code>
+       * <code>repeated .Signature signatures = 3;</code>
        */
       public Builder addSignatures(com.okchain.proto.Transfer.Signature value) {
         if (signaturesBuilder_ == null) {
@@ -883,11 +1013,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <pre>
-       *Fee fee = 2;
-       * </pre>
-       *
-       * <code>repeated .Signature signatures = 2;</code>
+       * <code>repeated .Signature signatures = 3;</code>
        */
       public Builder addSignatures(
           int index, com.okchain.proto.Transfer.Signature value) {
@@ -904,11 +1030,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <pre>
-       *Fee fee = 2;
-       * </pre>
-       *
-       * <code>repeated .Signature signatures = 2;</code>
+       * <code>repeated .Signature signatures = 3;</code>
        */
       public Builder addSignatures(
           com.okchain.proto.Transfer.Signature.Builder builderForValue) {
@@ -922,11 +1044,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <pre>
-       *Fee fee = 2;
-       * </pre>
-       *
-       * <code>repeated .Signature signatures = 2;</code>
+       * <code>repeated .Signature signatures = 3;</code>
        */
       public Builder addSignatures(
           int index, com.okchain.proto.Transfer.Signature.Builder builderForValue) {
@@ -940,11 +1058,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <pre>
-       *Fee fee = 2;
-       * </pre>
-       *
-       * <code>repeated .Signature signatures = 2;</code>
+       * <code>repeated .Signature signatures = 3;</code>
        */
       public Builder addAllSignatures(
           java.lang.Iterable<? extends com.okchain.proto.Transfer.Signature> values) {
@@ -959,16 +1073,12 @@ public final class Transfer {
         return this;
       }
       /**
-       * <pre>
-       *Fee fee = 2;
-       * </pre>
-       *
-       * <code>repeated .Signature signatures = 2;</code>
+       * <code>repeated .Signature signatures = 3;</code>
        */
       public Builder clearSignatures() {
         if (signaturesBuilder_ == null) {
           signatures_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
           signaturesBuilder_.clear();
@@ -976,11 +1086,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <pre>
-       *Fee fee = 2;
-       * </pre>
-       *
-       * <code>repeated .Signature signatures = 2;</code>
+       * <code>repeated .Signature signatures = 3;</code>
        */
       public Builder removeSignatures(int index) {
         if (signaturesBuilder_ == null) {
@@ -993,22 +1099,14 @@ public final class Transfer {
         return this;
       }
       /**
-       * <pre>
-       *Fee fee = 2;
-       * </pre>
-       *
-       * <code>repeated .Signature signatures = 2;</code>
+       * <code>repeated .Signature signatures = 3;</code>
        */
       public com.okchain.proto.Transfer.Signature.Builder getSignaturesBuilder(
           int index) {
         return getSignaturesFieldBuilder().getBuilder(index);
       }
       /**
-       * <pre>
-       *Fee fee = 2;
-       * </pre>
-       *
-       * <code>repeated .Signature signatures = 2;</code>
+       * <code>repeated .Signature signatures = 3;</code>
        */
       public com.okchain.proto.Transfer.SignatureOrBuilder getSignaturesOrBuilder(
           int index) {
@@ -1018,11 +1116,7 @@ public final class Transfer {
         }
       }
       /**
-       * <pre>
-       *Fee fee = 2;
-       * </pre>
-       *
-       * <code>repeated .Signature signatures = 2;</code>
+       * <code>repeated .Signature signatures = 3;</code>
        */
       public java.util.List<? extends com.okchain.proto.Transfer.SignatureOrBuilder> 
            getSignaturesOrBuilderList() {
@@ -1033,22 +1127,14 @@ public final class Transfer {
         }
       }
       /**
-       * <pre>
-       *Fee fee = 2;
-       * </pre>
-       *
-       * <code>repeated .Signature signatures = 2;</code>
+       * <code>repeated .Signature signatures = 3;</code>
        */
       public com.okchain.proto.Transfer.Signature.Builder addSignaturesBuilder() {
         return getSignaturesFieldBuilder().addBuilder(
             com.okchain.proto.Transfer.Signature.getDefaultInstance());
       }
       /**
-       * <pre>
-       *Fee fee = 2;
-       * </pre>
-       *
-       * <code>repeated .Signature signatures = 2;</code>
+       * <code>repeated .Signature signatures = 3;</code>
        */
       public com.okchain.proto.Transfer.Signature.Builder addSignaturesBuilder(
           int index) {
@@ -1056,11 +1142,7 @@ public final class Transfer {
             index, com.okchain.proto.Transfer.Signature.getDefaultInstance());
       }
       /**
-       * <pre>
-       *Fee fee = 2;
-       * </pre>
-       *
-       * <code>repeated .Signature signatures = 2;</code>
+       * <code>repeated .Signature signatures = 3;</code>
        */
       public java.util.List<com.okchain.proto.Transfer.Signature.Builder> 
            getSignaturesBuilderList() {
@@ -1073,7 +1155,7 @@ public final class Transfer {
           signaturesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.okchain.proto.Transfer.Signature, com.okchain.proto.Transfer.Signature.Builder, com.okchain.proto.Transfer.SignatureOrBuilder>(
                   signatures_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
                   isClean());
           signatures_ = null;
@@ -1083,7 +1165,7 @@ public final class Transfer {
 
       private java.lang.Object memo_ = "";
       /**
-       * <code>string memo = 3;</code>
+       * <code>string memo = 4;</code>
        */
       public java.lang.String getMemo() {
         java.lang.Object ref = memo_;
@@ -1098,7 +1180,7 @@ public final class Transfer {
         }
       }
       /**
-       * <code>string memo = 3;</code>
+       * <code>string memo = 4;</code>
        */
       public com.google.protobuf.ByteString
           getMemoBytes() {
@@ -1114,7 +1196,7 @@ public final class Transfer {
         }
       }
       /**
-       * <code>string memo = 3;</code>
+       * <code>string memo = 4;</code>
        */
       public Builder setMemo(
           java.lang.String value) {
@@ -1127,7 +1209,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>string memo = 3;</code>
+       * <code>string memo = 4;</code>
        */
       public Builder clearMemo() {
         
@@ -1136,7 +1218,7 @@ public final class Transfer {
         return this;
       }
       /**
-       * <code>string memo = 3;</code>
+       * <code>string memo = 4;</code>
        */
       public Builder setMemoBytes(
           com.google.protobuf.ByteString value) {
@@ -11761,29 +11843,29 @@ public final class Transfer {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016transfer.proto\"L\n\016StdTransaction\022\014\n\004ms" +
-      "gs\030\001 \003(\014\022\036\n\nsignatures\030\002 \003(\0132\n.Signature" +
-      "\022\014\n\004memo\030\003 \001(\t\"*\n\003Fee\022\026\n\006amount\030\001 \003(\0132\006." +
-      "Token\022\013\n\003gas\030\002 \001(\003\".\n\tSignature\022\016\n\006pubke" +
-      "y\030\001 \001(\014\022\021\n\tsignature\030\002 \001(\014\"&\n\005Token\022\r\n\005d" +
-      "enom\030\001 \001(\t\022\016\n\006amount\030\002 \001(\t\"I\n\007MsgSend\022\023\n" +
-      "\013fromAddress\030\001 \001(\014\022\021\n\ttoAddress\030\002 \001(\014\022\026\n" +
-      "\006amount\030\003 \003(\0132\006.Token\"]\n\013MsgNewOrder\022\016\n\006" +
-      "sender\030\001 \001(\014\022\017\n\007product\030\002 \001(\t\022\014\n\004side\030\003 " +
-      "\001(\t\022\r\n\005price\030\004 \001(\t\022\020\n\010quantity\030\005 \001(\t\"1\n\016" +
-      "MsgCancelOrder\022\016\n\006sender\030\001 \001(\014\022\017\n\007orderI" +
-      "d\030\002 \001(\t\">\n\014MsgMultiSend\022\014\n\004from\030\001 \001(\014\022 \n" +
-      "\ttransfers\030\002 \003(\0132\r.TransferUnit\"1\n\014Trans" +
-      "ferUnit\022\n\n\002to\030\001 \001(\014\022\025\n\005coins\030\002 \003(\0132\006.Tok" +
-      "en\"@\n\010BaseType\022\t\n\001i\030\001 \001(\003\022\t\n\001s\030\002 \001(\t\022\n\n\002" +
-      "ss\030\003 \003(\t\022\022\n\004stus\030\004 \003(\0132\004.Stu\"\021\n\003Stu\022\n\n\002i" +
-      "d\030\001 \001(\003\"S\n\021MultiNewOrderItem\022\017\n\007product\030" +
-      "\001 \001(\t\022\014\n\004side\030\002 \001(\t\022\r\n\005price\030\003 \001(\t\022\020\n\010qu" +
-      "antity\030\004 \001(\t\"J\n\020MsgMultiNewOrder\022\016\n\006send" +
-      "er\030\001 \001(\014\022&\n\norderItems\030\002 \003(\0132\022.MultiNewO" +
-      "rderItem\";\n\023MsgMultiCancelOrder\022\016\n\006sende" +
-      "r\030\001 \001(\014\022\024\n\014orderIdItems\030\002 \003(\tB\023\n\021com.okc" +
-      "hain.protob\006proto3"
+      "\n\016transfer.proto\"_\n\016StdTransaction\022\014\n\004ms" +
+      "gs\030\001 \003(\014\022\021\n\003fee\030\002 \001(\0132\004.Fee\022\036\n\nsignature" +
+      "s\030\003 \003(\0132\n.Signature\022\014\n\004memo\030\004 \001(\t\"*\n\003Fee" +
+      "\022\026\n\006amount\030\001 \003(\0132\006.Token\022\013\n\003gas\030\002 \001(\003\".\n" +
+      "\tSignature\022\016\n\006pubkey\030\001 \001(\014\022\021\n\tsignature\030" +
+      "\002 \001(\014\"&\n\005Token\022\r\n\005denom\030\001 \001(\t\022\016\n\006amount\030" +
+      "\002 \001(\t\"I\n\007MsgSend\022\023\n\013fromAddress\030\001 \001(\014\022\021\n" +
+      "\ttoAddress\030\002 \001(\014\022\026\n\006amount\030\003 \003(\0132\006.Token" +
+      "\"]\n\013MsgNewOrder\022\016\n\006sender\030\001 \001(\014\022\017\n\007produ" +
+      "ct\030\002 \001(\t\022\014\n\004side\030\003 \001(\t\022\r\n\005price\030\004 \001(\t\022\020\n" +
+      "\010quantity\030\005 \001(\t\"1\n\016MsgCancelOrder\022\016\n\006sen" +
+      "der\030\001 \001(\014\022\017\n\007orderId\030\002 \001(\t\">\n\014MsgMultiSe" +
+      "nd\022\014\n\004from\030\001 \001(\014\022 \n\ttransfers\030\002 \003(\0132\r.Tr" +
+      "ansferUnit\"1\n\014TransferUnit\022\n\n\002to\030\001 \001(\014\022\025" +
+      "\n\005coins\030\002 \003(\0132\006.Token\"@\n\010BaseType\022\t\n\001i\030\001" +
+      " \001(\003\022\t\n\001s\030\002 \001(\t\022\n\n\002ss\030\003 \003(\t\022\022\n\004stus\030\004 \003(" +
+      "\0132\004.Stu\"\021\n\003Stu\022\n\n\002id\030\001 \001(\003\"S\n\021MultiNewOr" +
+      "derItem\022\017\n\007product\030\001 \001(\t\022\014\n\004side\030\002 \001(\t\022\r" +
+      "\n\005price\030\003 \001(\t\022\020\n\010quantity\030\004 \001(\t\"J\n\020MsgMu" +
+      "ltiNewOrder\022\016\n\006sender\030\001 \001(\014\022&\n\norderItem" +
+      "s\030\002 \003(\0132\022.MultiNewOrderItem\";\n\023MsgMultiC" +
+      "ancelOrder\022\016\n\006sender\030\001 \001(\014\022\024\n\014orderIdIte" +
+      "ms\030\002 \003(\tB\023\n\021com.okchain.protob\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -11802,7 +11884,7 @@ public final class Transfer {
     internal_static_StdTransaction_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_StdTransaction_descriptor,
-        new java.lang.String[] { "Msgs", "Signatures", "Memo", });
+        new java.lang.String[] { "Msgs", "Fee", "Signatures", "Memo", });
     internal_static_Fee_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_Fee_fieldAccessorTable = new

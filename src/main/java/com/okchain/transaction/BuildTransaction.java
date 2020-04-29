@@ -26,6 +26,10 @@ import java.util.List;
 
 public class BuildTransaction {
     private static String mode = ConstantIF.TX_SEND_MODE_SYNC;
+    private static String nativeDenom = "okt";
+    private static String defaultAmount = "0.00200000";
+    private static String defaultGas = "200000";
+    private static Fee fee = new Fee(new Token(defaultAmount, nativeDenom), defaultGas);
 
     private static String NEW_ORDER_TYPE = "okchain/order/MsgNew";
     private static String CANCEL_ORDER_TYPE = "okchain/order/MsgCancel";
@@ -43,6 +47,13 @@ public class BuildTransaction {
         BuildTransaction.mode = mode;
     }
 
+    public static void setFee(Fee f) {
+        fee = f;
+    }
+
+    public static Fee getFee() {
+        return fee;
+    }
 
 
     public static byte[] generateAminoMultiPlaceOrderTransaction(AccountInfo account, List<MultiNewOrderItem> items, String memo) throws IOException {
@@ -128,7 +139,7 @@ public class BuildTransaction {
         }
         if (memo.length()>ConstantIF.MAX_MEMO_LEN) throw new InvalidFormatException("length of memo is too long");
         // no fee temporarily
-        Fee fee = generateFeeDefault();
+        Fee fee = getFee();
         // prepare for sign
         SignData signData = new SignData(account.getAccountNumber(), ConstantIF.CHAIN_ID, fee, memo, new IMsg[]{signMsg}, account.getSequenceNumber());
         System.out.println("signData:" + JSON.toJSONString(signData));
@@ -145,7 +156,16 @@ public class BuildTransaction {
             Transfer.StdTransaction.Builder stdTxBuilder = Transfer.StdTransaction.newBuilder();
             // 1.memo
             stdTxBuilder.setMemo(memo);
-            // 2.signature list
+            // 2.fee
+            Transfer.Fee.Builder feeBuilder = Transfer.Fee.newBuilder().setGas(Integer.parseInt(fee.getGas()));
+            for (Token t : fee.getAmount()) {
+                Transfer.Token tokenProto = Transfer.Token.newBuilder()
+                        .setAmount(EncodeUtils.stringTo8(t.getAmount()))
+                        .setDenom(t.getDenom()).build();
+                feeBuilder.addAmount(tokenProto);
+            }
+            stdTxBuilder.setFee(feeBuilder.build());
+            // 3.signature list
             for (Signature sig : signatures) {
                 byte[] pubkeyAminoEncoded = AminoEncode.encodePubkey(account.getPublicKey());
                 Transfer.Signature sigProto = Transfer.Signature.newBuilder()
@@ -153,7 +173,7 @@ public class BuildTransaction {
                         .setSignature(ByteString.copyFrom(Base64.decode(sig.getSignature()))).build();
                 stdTxBuilder.addSignatures(sigProto);
             }
-            // 3.msg
+            // 4.msg
             Transfer.StdTransaction stdTransactionProto = stdTxBuilder.addMsgs(ByteString.copyFrom(stdMsgProtoBytes)).build();
             return AminoEncode.encodeStdTransaction(stdTransactionProto);
         } catch (Exception e) {
@@ -162,9 +182,6 @@ public class BuildTransaction {
         }
     }
 
-    private static Fee generateFeeDefault() {
-        return null;
-    }
 
     private static Signature sign(byte[] byteSignData, String privateKey) throws Exception {
         //sign
@@ -228,23 +245,18 @@ public class BuildTransaction {
         if (memo == null) {
             memo = "";
         }
-        // 暂无手续费
-        Fee fee = generateFeeDefault();
-        // 需要对account中的accountNumber和sequenceNumber、chain_id、手续费、memo、IMsg实现类集合签名
+
+        Fee fee = getFee();
         SignData signData = new SignData(account.getAccountNumber(), ConstantIF.CHAIN_ID, fee, memo, new IMsg[]{signMsg}, account.getSequenceNumber());
         try {
-            // signData转为Json串
             String signDataJson = JSONObject.toJSONString(signData);
 
-            // 对signData的Json串利用私钥签名
 
             System.out.println("signData: " + signDataJson);
             Signature signature = sign(signDataJson.getBytes(), account.getPrivateKey());
-            //组装签名结构
             List<Signature> signatures = new ArrayList<>();
             signatures.add(signature);
             StdTransaction stdTransaction = new StdTransaction(new IMsg[]{stdMsg}, fee, signatures, memo);
-            //组装待广播交易结构
 
             PostTransaction postTransaction = new PostTransaction(stdTransaction, mode);
             return JSON.toJSONString(postTransaction);
