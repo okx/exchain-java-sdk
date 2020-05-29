@@ -34,7 +34,7 @@ public class OKChainRestClientImplTest {
     private static String MNEMONIC = "total lottery arena when pudding best candy until army spoil drill pool";
 
     private static String TEST_COIN_NAME = "xxb-d35";
-    private static String BASE_COIN_NAME = "okt";
+    private static String BASE_COIN_NAME = "tokt";
     private static String TEST_PRODUCT = TEST_COIN_NAME + "_" + BASE_COIN_NAME;
 
     @Test

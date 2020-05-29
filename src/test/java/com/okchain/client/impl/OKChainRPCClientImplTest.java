@@ -28,7 +28,7 @@ public class OKChainRPCClientImplTest {
     private static String QUERYADDR1 = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
 
     private static String TEST_COIN_NAME = "xxb-d35";
-    private static String BASE_COIN_NAME = "okt";
+    private static String BASE_COIN_NAME = "tokt";
     private static String TEST_PRODUCT = TEST_COIN_NAME + "_" + BASE_COIN_NAME;
 
     @Test

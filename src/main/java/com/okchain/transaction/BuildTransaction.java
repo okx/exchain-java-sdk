@@ -26,7 +26,7 @@ import java.util.List;
 
 public class BuildTransaction {
     private static String mode = ConstantIF.TX_SEND_MODE_SYNC;
-    private static String nativeDenom = "okt";
+    private static String nativeDenom = "tokt";
     private static String defaultAmount = "0.00200000";
     private static String defaultGas = "200000";
     private static Fee fee = new Fee(new Token(defaultAmount, nativeDenom), defaultGas);
