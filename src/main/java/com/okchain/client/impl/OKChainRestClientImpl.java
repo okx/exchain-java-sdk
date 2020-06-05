@@ -38,7 +38,6 @@ public class OKChainRestClientImpl implements OKChainClient {
     // 通过http的get方法访问主网，拿到关于该地址的一些信息，包括公钥、account_number和sequence(json串)
     private String getAccountPrivate(String userAddress) {
         String url = backend + ConstantIF.ACCOUNT_URL_PATH + userAddress;
-        System.out.println(url);
         return HttpUtils.httpGet(url);
 
     }
@@ -68,7 +67,6 @@ public class OKChainRestClientImpl implements OKChainClient {
     public AccountInfo getAccountInfo(String privateKey) throws NullPointerException {
         if (privateKey.equals("")) throw new NullPointerException("empty privateKey");
         AddressInfo addressInfo = getAddressInfo(privateKey);
-        //System.out.println(getAccountPrivate(addressInfo.getUserAddress()));
 
         // 将json串转为对象
         // getAccountPrivate方法利用ok地址通过http的get方法访问主网，拿到关于该地址的一些信息，包括公钥、account_number和sequence(json串)
@@ -124,7 +122,6 @@ public class OKChainRestClientImpl implements OKChainClient {
             throw new NullPointerException("empty amount");
         // 生成最终要发送到网络中的json串(String)
         String data = BuildTransaction.generateSendTransaction(account, to, amount, memo);
-        System.out.println(data);
         // sendTransaction是用post请求将data(json串发到主网)
         return sendTransaction(data);
         // return 主网给的答复：
@@ -167,7 +164,6 @@ public class OKChainRestClientImpl implements OKChainClient {
 
         String data = BuildTransaction.generateCreateValidatorTransaction(account, description,
                 commission, minSelfDelegation, delegatorAddress, validatorAddress, pubKey, memo);
-        System.out.println(data);
         return sendTransaction(data);
     }
 
@@ -176,13 +172,19 @@ public class OKChainRestClientImpl implements OKChainClient {
         checkAccountInfoValue(account);
 
         String data = BuildTransaction.generateEditValidatorTransaction(account, minSelfDelegation, validatorAddress, description, memo);
-        System.out.println(data);
         return sendTransaction(data);
     }
 
+    public JSONObject sendVoteTransaction(AccountInfo account, String delegatorAddress, String[] validatorAddress, String memo) throws NullPointerException {
+        checkAccountInfoValue(account);
+
+        String data = BuildTransaction.generateVoteTransaction(account, delegatorAddress, validatorAddress, memo);
+        return sendTransaction(data);
+    }
+
+
     private JSONObject sendTransaction(String data) {
         String res = HttpUtils.httpPost(this.backend + ConstantIF.TRANSACTION_URL_PATH, data);
-        // System.out.println("post back string"+res);
         return JSON.parseObject(res);
     }
 
