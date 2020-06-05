@@ -250,6 +250,32 @@ public class OKChainRestClientImplTest {
 
     }
 
+    @Test
+    public void sendVoteTransactionTest() throws IOException {
+        OKChainClient okc = generateClient();
+        BuildTransaction.setMode("block");
+        AccountInfo account = generateAccountInfo(okc);
+
+        String memo = "";
+
+        String delegatorAddress = account.getUserAddress();
+        String[] validatorAddress = {Crypto.generateValidatorAddressFromPub(account.getPublicKey())};
+
+        String pubKey = "okchainvalconspub1zcjduepqtv2yy90ptjegdm34vfhlq2uw9eu39hjrt98sffj7yghl4s47xv7swuf0dx";
+        Token minSelfDelegation = new Token();
+        minSelfDelegation.setDenom(BASE_COIN_NAME);
+        minSelfDelegation.setAmount("1000.00000000");
+
+        JSONObject resJson = okc.sendVoteTransaction(account, delegatorAddress, validatorAddress, memo);
+
+        Object code = resJson.get("code");
+        Object err = resJson.get("error");
+        Assert.assertNull(code);
+        Assert.assertNull(err);
+        Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
+
+    }
+
     private OKChainClient generateClient() {
         OKChainClient okc = OKChainRestClientImpl.getOKChainClient(URL);
         return okc;
