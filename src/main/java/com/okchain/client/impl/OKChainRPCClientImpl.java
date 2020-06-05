@@ -835,5 +835,9 @@ public class OKChainRPCClientImpl implements OKChainClient {
         return JSON.parseObject("{}");
     }
 
+    public JSONObject sendVoteTransaction(AccountInfo account, String delegatorAddress, String[] validatorAddress, String memo) throws NullPointerException {
+        return JSON.parseObject("{}");
+    }
+
 }
 

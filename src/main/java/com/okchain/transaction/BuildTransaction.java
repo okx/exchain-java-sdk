@@ -12,10 +12,7 @@ import com.okchain.encoding.message.AminoEncode;
 import com.okchain.exception.InvalidFormatException;
 import com.okchain.proto.Transfer;
 import com.okchain.types.*;
-import com.okchain.types.staking.CommissionRates;
-import com.okchain.types.staking.Description;
-import com.okchain.types.staking.MsgCreateValidator;
-import com.okchain.types.staking.MsgEditValidator;
+import com.okchain.types.staking.*;
 import org.bouncycastle.util.Strings;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
@@ -37,6 +34,7 @@ public class BuildTransaction {
     private static String MULTI_TRANSFER_TYPE = "okchain/token/MsgMultiTransfer";
     private static String CREATE_VALIDATOR_TYPE = "okchain/staking/MsgCreateValidator";
     private static String EDIT_VALIDATOR_TYPE = "okchain/staking/MsgEditValidator";
+    private static String VOTE_TYPE = "okchain/staking/MsgVote";
 
 
     public static String getMode() {
@@ -235,6 +233,12 @@ public class BuildTransaction {
     public static String generateEditValidatorTransaction(AccountInfo account, String minSelfDelegation,  String validatorAddress, Description description, String memo) {
         IMsg msg = new MsgEditValidator(validatorAddress, description, minSelfDelegation);
         IMsg stdMsg = new MsgStd(EDIT_VALIDATOR_TYPE, msg);
+        return buildTransaction(account, stdMsg, stdMsg, memo);
+    }
+
+    public static String generateVoteTransaction(AccountInfo account, String delegatorAddress, String[] validatorAddresses, String memo) {
+        IMsg msg = new MsgVote(delegatorAddress, validatorAddresses);
+        IMsg stdMsg = new MsgStd(VOTE_TYPE, msg);
         return buildTransaction(account, stdMsg, stdMsg, memo);
     }
 

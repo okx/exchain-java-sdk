@@ -180,6 +180,15 @@ public class OKChainRestClientImpl implements OKChainClient {
         return sendTransaction(data);
     }
 
+    public JSONObject sendVoteTransaction(AccountInfo account, String delegatorAddress, String[] validatorAddress, String memo) throws NullPointerException {
+        checkAccountInfoValue(account);
+
+        String data = BuildTransaction.generateVoteTransaction(account, delegatorAddress, validatorAddress, memo);
+        System.out.println(data);
+        return sendTransaction(data);
+    }
+
+
     private JSONObject sendTransaction(String data) {
         String res = HttpUtils.httpPost(this.backend + ConstantIF.TRANSACTION_URL_PATH, data);
         // System.out.println("post back string"+res);
