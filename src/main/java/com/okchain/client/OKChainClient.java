@@ -86,5 +86,7 @@ public interface OKChainClient {
                                                      String delegatorAddress, String validatorAddress, String pubKey, String memo) throws NullPointerException;
     public JSONObject sendEditValidatorTransaction(AccountInfo account, String minSelfDelegation,  String validatorAddress, Description description, String memo) throws NullPointerException;
 
-    public JSONObject sendVoteTransaction(AccountInfo account, String delegatorAddress, String[] validatorAddress, String memo) throws NullPointerException;
+    public JSONObject sendDepositTransaction(AccountInfo account, String delegatorAddress, Token amount,  String memo) throws NullPointerException;
+
+    public JSONObject sendAddSharesTransaction(AccountInfo account, String delegatorAddress, String[] validatorAddress, String memo) throws NullPointerException;
     }
