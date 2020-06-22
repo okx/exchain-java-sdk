@@ -89,4 +89,5 @@ public interface OKChainClient {
     public JSONObject sendDepositTransaction(AccountInfo account, String delegatorAddress, Token amount,  String memo) throws NullPointerException;
 
     public JSONObject sendAddSharesTransaction(AccountInfo account, String delegatorAddress, String[] validatorAddress, String memo) throws NullPointerException;
+
     }
