@@ -175,7 +175,14 @@ public class OKChainRestClientImpl implements OKChainClient {
         return sendTransaction(data);
     }
 
-    public JSONObject sendVoteTransaction(AccountInfo account, String delegatorAddress, String[] validatorAddress, String memo) throws NullPointerException {
+    public JSONObject sendDepositTransaction(AccountInfo account, String delegatorAddress, Token amount,  String memo) throws NullPointerException {
+        checkAccountInfoValue(account);
+
+        String data = BuildTransaction.generateDepositTransaction(account, delegatorAddress, amount, memo);
+        return sendTransaction(data);
+    }
+
+    public JSONObject sendAddSharesTransaction(AccountInfo account, String delegatorAddress, String[] validatorAddress, String memo) throws NullPointerException {
         checkAccountInfoValue(account);
 
         String data = BuildTransaction.generateVoteTransaction(account, delegatorAddress, validatorAddress, memo);

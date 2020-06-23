@@ -34,6 +34,7 @@ public class BuildTransaction {
     private static String MULTI_TRANSFER_TYPE = "okchain/token/MsgMultiTransfer";
     private static String CREATE_VALIDATOR_TYPE = "okchain/staking/MsgCreateValidator";
     private static String EDIT_VALIDATOR_TYPE = "okchain/staking/MsgEditValidator";
+    private static String DEPOSIT_TYPE = "okchain/staking/MsgDelegate";
     private static String VOTE_TYPE = "okchain/staking/MsgVote";
 
 
@@ -233,6 +234,12 @@ public class BuildTransaction {
     public static String generateEditValidatorTransaction(AccountInfo account, String minSelfDelegation,  String validatorAddress, Description description, String memo) {
         IMsg msg = new MsgEditValidator(validatorAddress, description, minSelfDelegation);
         IMsg stdMsg = new MsgStd(EDIT_VALIDATOR_TYPE, msg);
+        return buildTransaction(account, stdMsg, stdMsg, memo);
+    }
+
+    public static String generateDepositTransaction(AccountInfo account, String delegatorAddress, Token amount, String memo) {
+        IMsg msg = new MsgDeposit(delegatorAddress, amount);
+        IMsg stdMsg = new MsgStd(DEPOSIT_TYPE, msg);
         return buildTransaction(account, stdMsg, stdMsg, memo);
     }
 
