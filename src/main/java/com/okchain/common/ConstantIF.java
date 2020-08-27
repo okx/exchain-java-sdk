@@ -4,7 +4,7 @@ public interface ConstantIF {
     int DECIMAL_N = 8;
     int MAX_MEMO_LEN =256;
 
-    String CHAIN_ID = "okchain";
+    String CHAIN_ID = "okchain-testnet1";
 
     String ADDRESS_PREFIX = "okchain";
     String VALIDATOR_ADDRESS_PREFIX = "okchainvaloper";
