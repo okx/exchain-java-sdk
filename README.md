@@ -1,4 +1,4 @@
-## OKChain Java SDK
+## OKExChain Java SDK
 
 The OKChain Java SDK is a lightweight Java library to interact with OKChain. 
 
