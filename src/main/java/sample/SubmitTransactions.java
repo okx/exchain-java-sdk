@@ -1,11 +1,11 @@
 package sample;
 
 import com.alibaba.fastjson.JSONObject;
-import com.okchain.client.impl.OKChainRPCClientImpl;
-import com.okchain.transaction.BuildTransaction;
-import com.okchain.types.AccountInfo;
-import com.okchain.types.RequestPlaceOrderParams;
-import com.okchain.types.Token;
+import com.okexchain.client.impl.OKEXChainRPCClientImpl;
+import com.okexchain.transaction.BuildTransaction;
+import com.okexchain.types.AccountInfo;
+import com.okexchain.types.RequestPlaceOrderParams;
+import com.okexchain.types.Token;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,14 +20,14 @@ public class SubmitTransactions {
 
 
     /**
-     * Submit a transfer transaction to OKChain.
+     * Submit a transfer transaction to OKEXChain.
      * @throws IOException
      */
     public static void submitTransferTransaction() throws NullPointerException, IOException {
         BuildTransaction.setMode("block");
-        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        OKEXChainRPCClientImpl client = OKEXChainRPCClientImpl.getOKEXChainClient(url_rpc);
         AccountInfo account = client.getAccountInfo(privateKey);
-        String to = "okchain1t2cvfv58764q4wdly7qjx5d2z89lewvwq2448n";
+        String to = "okexchain1wq0zdnrc0r9uvqsly6622f4erl5qxly24qd4ur";
         String memo = "send memo";
         List<Token> amountList = new ArrayList<>();
         Token amount = new Token("1.00000000", "tokt");
@@ -37,12 +37,12 @@ public class SubmitTransactions {
     }
 
     /**
-     * Submit a placeOrder transaction to OKChain.
+     * Submit a placeOrder transaction to OKEXChain.
      * @throws IOException
      */
     public static void submitPlaceOrderTransaction() throws IOException {
         BuildTransaction.setMode("block");
-        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        OKEXChainRPCClientImpl client = OKEXChainRPCClientImpl.getOKEXChainClient(url_rpc);
         AccountInfo account = client.getAccountInfo(privateKey);
         String side = "BUY";
         String product = "tbtc_tusdk";
@@ -55,13 +55,13 @@ public class SubmitTransactions {
     }
 
     /**
-     * Submit a cancelOrder transaction to OKChain.
+     * Submit a cancelOrder transaction to OKEXChain.
      * @param orderId You can get orderId when exec submitPlaceOrderTransaction.
      * @throws IOException
      */
     public static void submitCancelOrderTransaction(String orderId) throws IOException {
         BuildTransaction.setMode("block");
-        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        OKEXChainRPCClientImpl client = OKEXChainRPCClientImpl.getOKEXChainClient(url_rpc);
         AccountInfo account = client.getAccountInfo(privateKey);
         String memo = "cancel order memo";
         JSONObject ret = client.sendCancelOrderTransaction(account, orderId, memo);
@@ -70,10 +70,10 @@ public class SubmitTransactions {
 
     /**
      * Get AccountInfo with privateKey or mnemonic.
-     * This function will query the information of account from OKChain.
+     * This function will query the information of account from OKEXChain.
      */
     public static void getAccountInfo() {
-        OKChainRPCClientImpl client = OKChainRPCClientImpl.getOKChainClient(url_rpc);
+        OKEXChainRPCClientImpl client = OKEXChainRPCClientImpl.getOKEXChainClient(url_rpc);
         AccountInfo account = client.getAccountInfo(privateKey);
         System.out.println(account.toString());
         AccountInfo accountFromMnemonic = client.getAccountInfoFromMnemonic(mnemo);

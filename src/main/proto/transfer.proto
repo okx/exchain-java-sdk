@@ -1,5 +1,5 @@
 syntax = "proto3";
-option java_package = "com.okchain.proto";
+option java_package = "com.okexchain.proto";
 
 message StdTransaction {
     repeated bytes msgs = 1;
