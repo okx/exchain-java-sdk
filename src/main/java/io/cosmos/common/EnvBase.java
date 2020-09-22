@@ -1,15 +1,17 @@
 package io.cosmos.common;
 
+import io.cosmos.crypto.Crypto;
+
 public class EnvBase {
 
     public String GetMainPrefix(){
-        return "okchain";
+        return "okexchain";
     };
     public String GetDenom(){
         return "okt";
     }
     public String GetChainid(){
-        return "okchain";
+        return "okexchain";
     }
 
     public String GetRestServerUrl(){
@@ -21,34 +23,35 @@ public class EnvBase {
     }
 
     public String GetValidatorAddrPrefix(){
-        return  "okchainvaloper";
+        return  "okexchainvaloper";
     }
 
     public String GetRestPathPrefix(){
-        return  "/okchain/v1";
+        return  "/okexchain/v1";
     }
 
     public String GetTxUrlPath() {
-        return "/okchain/v1/txs";
+        return "/okexchain/v1/txs";
     };
 
     public boolean HasFee() {
-        return false;
+        return true;
     };
 
 
     public String GetNode0Mnmonic() {
-        return "puzzle glide follow cruel say burst deliver wild tragic galaxy lumber one";
+        return "puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer";
     };
     public String GetNode1Mnmonic() {
         return "palace cube bitter light woman side pave cereal donor bronze twice work";
     };
 
+
     public String GetNode0Addr() {
-        return "okchain10q0rk5qnyag7wfvvt7rtphlw589m7frsmyq4ya";
+        return "okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9";
     };
     public String GetNode1Addr() {
-        return "okchain1v853tq96n9ghvyxlvqyxyj97589clccr33yr7a";
+        return "okexchain1v853tq96n9ghvyxlvqyxyj97589clccrufrkz9";
     };
 
 
@@ -58,6 +61,6 @@ public class EnvBase {
 
 
     public String GetTendermintConsensusPubkey() {
-        return "okchainvalconspub1zcjduepqwfr8lelpqerf8xyc63vqtje0wvhd68h7uce6ludygc28uj5hc9ushev2kp";
+        return "okexchainvalconspub1zcjduepqwfr8lelpqerf8xyc63vqtje0wvhd68h7uce6ludygc28uj5hc9ushev2kp";
     };
 }

@@ -11,10 +11,9 @@ import java.util.List;
 public class MsgSend extends MsgBase {
 
     public static void main(String[] args) {
-        EnvInstance.setEnv("okl");
         MsgSend msg = new MsgSend();
 
-        msg.setMsgType("cosmos-sdk/MsgSend");
+        msg.setMsgType("okexchain/token/MsgTransfer");
 
         msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
 
@@ -23,7 +22,7 @@ public class MsgSend extends MsgBase {
                 EnvInstance.getEnv().GetTransferAmount(),
                 EnvInstance.getEnv().GetNode1Addr());
 
-        msg.submit(messages, "6", "200000", "cosmos transfer!");
+        msg.submit(messages, "6.00000000", "200000", "okexchain transfer!");
     }
 
     public Message produceSendMsg(String denom, String amountDenom, String to) {
