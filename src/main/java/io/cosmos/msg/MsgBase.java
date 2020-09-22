@@ -7,10 +7,7 @@ import io.cosmos.common.EnvInstance;
 import io.cosmos.common.HttpUtils;
 import io.cosmos.common.Utils;
 import io.cosmos.crypto.Crypto;
-import io.cosmos.msg.utils.BoardcastTx;
-import io.cosmos.msg.utils.Data2Sign;
-import io.cosmos.msg.utils.Message;
-import io.cosmos.msg.utils.TxValue;
+import io.cosmos.msg.utils.*;
 import io.cosmos.types.Fee;
 import io.cosmos.types.Pubkey;
 import io.cosmos.types.Signature;
@@ -234,5 +231,97 @@ public class MsgBase {
         return result;
     }
 
+
+
+    public void submitTx(Message message,
+                         String feeAmount,
+                         String gas,
+                         String memo) {
+        try {
+            UnsignedTx unsignedTx = getUnsignedTx(message, feeAmount, gas, memo);
+
+            Signature signature = MsgBase.signTx(unsignedTx.toString(), priKeyString);
+
+            BoardcastTx signedTx = unsignedTx.signed(signature);
+
+            boardcast(signedTx.toJson());
+        } catch (Exception e) {
+            System.out.println("serialize transfer msg failed");
+        }
+    }
+
+    public UnsignedTx getUnsignedTx(Message message,
+                                    String feeAmount,
+                                    String gas,
+                                    String memo) {
+
+        UnsignedTx tx = null;
+        try {
+            List<Token> amountList = new ArrayList<>();
+            Token amount = new Token();
+            amount.setDenom(EnvInstance.getEnv().GetDenom());
+            amount.setAmount(feeAmount);
+            amountList.add(amount);
+
+            //组装待签名交易结构
+            Fee fee = new Fee();
+            fee.setAmount(amountList);
+            fee.setGas(gas);
+
+            Message[] msgs = new Message[1];
+            msgs[0] = message;
+
+            Data2Sign data = new Data2Sign(accountNum, EnvInstance.getEnv().GetChainid(), fee, memo, msgs, sequenceNum);
+
+            String unsignedTxJson = Utils.serializer.toJson(data);
+
+            BoardcastTx cosmosTransaction = new BoardcastTx();
+            cosmosTransaction.setMode("block");
+
+            TxValue cosmosTx = new TxValue();
+            cosmosTx.setType("auth/StdTx");
+            cosmosTx.setMsgs(msgs);
+
+            if (EnvInstance.getEnv().HasFee()) {
+                cosmosTx.setFee(fee);
+            }
+            cosmosTx.setMemo(memo);
+
+            cosmosTransaction.setTx(cosmosTx);
+
+            tx = new UnsignedTx(cosmosTransaction, unsignedTxJson);
+        } catch (Exception e) {
+            System.out.println("serialize transfer msg failed");
+        }
+
+        return tx;
+    }
+
+
+
+    static Signature signTx(String unsignedTx, String privateKey) throws Exception {
+
+        byte[] byteSignData = unsignedTx.getBytes();
+        System.out.println("byte data length:");
+        System.out.println(byteSignData.length);
+
+        byte[] sig = Crypto.sign(byteSignData, privateKey);
+        String sigResult = Strings.fromByteArray(Base64.encode(sig));
+
+        Signature signature = new Signature();
+        Pubkey pubkey = new Pubkey();
+        pubkey.setType("tendermint/PubKeySecp256k1");
+        pubkey.setValue(Strings.fromByteArray(Base64.encode(Hex.decode(Crypto.generatePubKeyHexFromPriv(privateKey)))));
+        signature.setPubkey(pubkey);
+        signature.setSignature(sigResult);
+
+        System.out.println("privateKey: ");
+        System.out.println(privateKey);
+
+        System.out.println("signature: ");
+        System.out.println(sigResult);
+
+        return signature;
+    }
 
 }
