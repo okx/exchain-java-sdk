@@ -22,7 +22,7 @@ import java.util.List;
 
 public class MsgBase {
 
-    protected String restServerUrl = EnvInstance.getEnv().GetRestServerUrl();
+    static protected String restServerUrl = EnvInstance.getEnv().GetRestServerUrl();
 
     protected String sequenceNum;
     protected String accountNum;
@@ -75,12 +75,12 @@ public class MsgBase {
         return res;
     }
 
-    protected JSONObject boardcast(String tx) {
+    public static JSONObject boardcast(String tx, String url) {
         System.out.println("Boardcast tx:");
         System.out.println(tx);
 
         System.out.println("Response:");
-        String res = HttpUtils.httpPost(restServerUrl + EnvInstance.getEnv().GetTxUrlPath(), tx);
+        String res = HttpUtils.httpPost(url + EnvInstance.getEnv().GetTxUrlPath(), tx);
         JSONObject result = JSON.parseObject(res);
 
         System.out.println(result);
@@ -101,7 +101,7 @@ public class MsgBase {
 
             BoardcastTx signedTx = unsignedTx.signed(signature);
 
-            boardcast(signedTx.toJson());
+            boardcast(signedTx.toJson(), restServerUrl);
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
         }
@@ -158,7 +158,7 @@ public class MsgBase {
     }
 
 
-    static Signature signTx(String unsignedTx, String privateKey) throws Exception {
+    public static Signature signTx(String unsignedTx, String privateKey) throws Exception {
 
         byte[] byteSignData = unsignedTx.getBytes();
         System.out.println("byte data length:");
@@ -183,4 +183,13 @@ public class MsgBase {
         return signature;
     }
 
+
+    public void init(String addr, String pubkey) {
+        pubKeyString = pubkey;
+        address = addr;
+        JSONObject accountJson = JSON.parseObject(getAccountPrivate(address));
+        sequenceNum = getSequance(accountJson);
+        accountNum = getAccountNumber(accountJson);
+        operAddress = Crypto.generateValidatorAddressFromPub(pubKeyString);
+    }
 }

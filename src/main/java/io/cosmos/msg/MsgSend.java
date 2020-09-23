@@ -10,10 +10,12 @@ import java.util.List;
 
 public class MsgSend extends MsgBase {
 
+    public MsgSend() {
+        setMsgType("okexchain/token/MsgTransfer");
+    }
+
     public static void main(String[] args) {
         MsgSend msg = new MsgSend();
-
-        msg.setMsgType("okexchain/token/MsgTransfer");
 
         msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
 
