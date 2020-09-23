@@ -149,10 +149,12 @@ public class OKEXChainRPCClientImpl implements OKEXChainClient {
         mp.put("tx", data);
         String res = JSONRPCUtils.call(this.backend, method, mp);
         JSONObject obj = JSON.parseObject(res).getJSONObject("result");
-        //System.out.println(obj);
+        System.out.println(obj);
         JSONObject resObj = new JSONObject();
         JSONObject execObj;
-        resObj.put("txhash", obj.getString("hash"));
+        if (obj.containsKey("hash")) {
+            resObj.put("txhash", obj.getString("hash"));
+        }
         if (method.equals(ConstantIF.RPC_METHOD_TX_SEND_BLOCK)) {
             resObj.put("height", obj.getIntValue("height"));
             if (obj.getJSONObject("check_tx").containsKey("code")&&obj.getJSONObject("check_tx").getIntValue("code")!=0) {
