@@ -143,9 +143,8 @@ public class MsgBase {
             cosmosTx.setType("auth/StdTx");
             cosmosTx.setMsgs(msgs);
 
-            if (EnvInstance.getEnv().HasFee()) {
-                cosmosTx.setFee(fee);
-            }
+            cosmosTx.setFee(fee);
+
             cosmosTx.setMemo(memo);
 
             cosmosTransaction.setTx(cosmosTx);

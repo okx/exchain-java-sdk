@@ -15,14 +15,14 @@ public class MsgSend extends MsgBase {
 
         msg.setMsgType("okexchain/token/MsgTransfer");
 
-        msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
+        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
 
         Message messages = msg.produceSendMsg(
-                EnvInstance.getEnv().GetDenom(),
-                EnvInstance.getEnv().GetTransferAmount(),
-                EnvInstance.getEnv().GetNode1Addr());
+                "okt",
+                "6.00000000",
+                "okexchain1v853tq96n9ghvyxlvqyxyj97589clccrufrkz9");
 
-        msg.submit(messages, "6.00000000", "200000", "okexchain transfer!");
+        msg.submit(messages, "0.01000000", "200000", "okexchain transfer!");
     }
 
     public Message produceSendMsg(String denom, String amountDenom, String to) {
