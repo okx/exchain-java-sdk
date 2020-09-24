@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.bitcoinj:bitcoinj-core:0.14.7">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/bitcoinj/bitcoinj-core/0.14.7/bitcoinj-core-0.14.7.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/bitcoinj/bitcoinj-core/0.14.7/bitcoinj-core-0.14.7-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/bitcoinj/bitcoinj-core/0.14.7/bitcoinj-core-0.14.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
