@@ -1,6 +1,5 @@
 package crypto;
 
-import io.cosmos.common.Constants;
 import io.cosmos.common.EnvInstance;
 import io.cosmos.crypto.Crypto;
 import io.cosmos.util.AddressUtil;
@@ -8,11 +7,7 @@ import org.bouncycastle.util.encoders.Hex;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.IOException;
-import java.security.InvalidAlgorithmParameterException;
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.util.Base64;
 
 public class CryptoTest {

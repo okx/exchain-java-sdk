@@ -1,8 +1,8 @@
 package io.cosmos.common;
 
-import io.cosmos.crypto.Crypto;
-
 public class EnvBase {
+
+    protected String restServerUrl;
 
     public String GetMainPrefix(){
         return "okexchain";
@@ -15,29 +15,24 @@ public class EnvBase {
     }
 
     public String GetRestServerUrl(){
-        return  "http://localhost:26659";
+        return restServerUrl;
     }
 
     public String GetHDPath(){
         return "M/44H/996H/0H/0/0";
     }
-
     public String GetValidatorAddrPrefix(){
         return  "okexchainvaloper";
     }
-
     public String GetRestPathPrefix(){
         return  "/okexchain/v1";
     }
-
     public String GetTxUrlPath() {
         return "/okexchain/v1/txs";
     };
-
-    public boolean HasFee() {
-        return true;
+    public String GetAccountUrlPath() {
+        return "/auth/accounts/";
     };
-
 
     public String GetNode0Mnmonic() {
         return "puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer";
@@ -54,11 +49,9 @@ public class EnvBase {
         return "okexchain1v853tq96n9ghvyxlvqyxyj97589clccrufrkz9";
     };
 
-
     public String GetTransferAmount() {
         return "16.00000000";
     };
-
 
     public String GetTendermintConsensusPubkey() {
         return "okexchainvalconspub1zcjduepqwfr8lelpqerf8xyc63vqtje0wvhd68h7uce6ludygc28uj5hc9ushev2kp";

@@ -10,7 +10,6 @@ import io.cosmos.types.Fee;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder(alphabetic = true)
 public class Data2Sign {
@@ -27,16 +26,10 @@ public class Data2Sign {
     private Message[] msgs;
     private String sequence;
 
-    public Data2Sign() {
-
-    }
-
     public Data2Sign(String accountNumber, String chainId, Fee fee, String memo, Message[] msgs, String sequence) {
         this.accountNumber = accountNumber;
         this.chainId = chainId;
-        if (EnvInstance.getEnv().HasFee()) {
-            this.fee = fee;
-        }
+        this.fee = fee;
         this.memo = memo;
         this.msgs = msgs;
         this.sequence = sequence;

@@ -2,7 +2,6 @@ package io.cosmos.msg;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import io.cosmos.common.Constants;
 import io.cosmos.common.EnvInstance;
 import io.cosmos.common.HttpUtils;
 import io.cosmos.common.Utils;
@@ -12,7 +11,6 @@ import io.cosmos.types.Fee;
 import io.cosmos.types.Pubkey;
 import io.cosmos.types.Signature;
 import io.cosmos.types.Token;
-import io.cosmos.util.EncodeUtils;
 import org.bouncycastle.util.Strings;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
@@ -22,7 +20,6 @@ import java.util.List;
 
 public class MsgBase {
 
-    static protected String restServerUrl = EnvInstance.getEnv().GetRestServerUrl();
 
     protected String sequenceNum;
     protected String accountNum;
@@ -54,7 +51,9 @@ public class MsgBase {
     }
 
     private String getAccountPrivate(String userAddress) {
-        String url = restServerUrl + EnvInstance.getEnv().GetRestPathPrefix() + Constants.COSMOS_ACCOUNT_URL_PATH + userAddress;
+        String url = EnvInstance.getEnv().GetRestServerUrl() +
+                EnvInstance.getEnv().GetRestPathPrefix() +
+                EnvInstance.getEnv().GetAccountUrlPath() + userAddress;
         System.out.println(url);
         return HttpUtils.httpGet(url);
     }
@@ -101,7 +100,7 @@ public class MsgBase {
 
             BoardcastTx signedTx = unsignedTx.signed(signature);
 
-            boardcast(signedTx.toJson(), restServerUrl);
+            boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
         }
