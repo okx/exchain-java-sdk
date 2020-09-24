@@ -11,7 +11,7 @@ public class MsgEditValidator extends MsgBase {
         EnvInstance.setEnv("okq");
 
         MsgEditValidator msg = new MsgEditValidator();
-        msg.setMsgType("cosmos-sdk/MsgEditValidator");
+        msg.setMsgType("okexchain/staking/MsgEditValidator");
         msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
 
         Message messages = msg.produceMsg();
