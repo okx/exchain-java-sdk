@@ -2,7 +2,7 @@ package crypto;
 
 import io.cosmos.common.EnvInstance;
 import io.cosmos.crypto.Crypto;
-import io.cosmos.util.AddressUtil;
+import io.cosmos.crypto.AddressUtil;
 import org.bouncycastle.util.encoders.Hex;
 import org.junit.Assert;
 import org.junit.Test;

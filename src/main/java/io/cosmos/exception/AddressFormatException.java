@@ -1,6 +1,6 @@
 package io.cosmos.exception;
 
-import io.cosmos.subtle.Bech32;
+import io.cosmos.crypto.encode.Bech32;
 
 @SuppressWarnings("serial")
 public class AddressFormatException extends IllegalArgumentException {

@@ -1,6 +1,6 @@
-package io.cosmos.util;
+package io.cosmos.crypto;
 
-import io.cosmos.subtle.Bech32;
+import io.cosmos.crypto.encode.Bech32;
 import io.cosmos.crypto.encode.ConvertBits;
 import io.cosmos.crypto.hash.Ripemd;
 import io.cosmos.exception.AddressFormatException;

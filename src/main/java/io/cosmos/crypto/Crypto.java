@@ -2,7 +2,6 @@ package io.cosmos.crypto;
 
 import com.google.common.base.Splitter;
 import io.cosmos.common.EnvInstance;
-import io.cosmos.util.AddressUtil;
 import org.bitcoinj.core.ECKey;
 import org.bitcoinj.core.Sha256Hash;
 import org.bitcoinj.core.Utils;
