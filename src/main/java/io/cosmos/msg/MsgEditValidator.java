@@ -33,10 +33,10 @@ public class MsgEditValidator extends MsgBase {
         System.out.println(this.operAddress);
 
         value.setAddress(this.operAddress);
-        value.setCommissionRate("0.600000000000000000");
-        value.setCommissionRate(null);
+//        value.setCommissionRate("0.600000000000000000");
+//        value.setCommissionRate(null);
         value.setDescription(d);
-        value.setMinSelfDelegation("1110");
+//        value.setMinSelfDelegation("1110");
 
         Message<MsgEditValidatorValue> msg = new Message<>();
         msg.setType(msgType);
