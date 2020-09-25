@@ -15,29 +15,31 @@ public class MsgTokenIssueValue {
     @SerializedName("description")
     private String description;
 
-    @JsonProperty("symbol")
-    @SerializedName("symbol")
-    private String symbol;
+    @JsonProperty("mintable")
+    @SerializedName("mintable")
+    private boolean mintable;
 
     @JsonProperty("original_symbol")
     @SerializedName("original_symbol")
     private String originalSymbol;
 
-    @JsonProperty("whole_name")
-    @SerializedName("whole_name")
-    private String wholeName;
+    @JsonProperty("owner")
+    @SerializedName("owner")
+    private String owner;
+
+    @JsonProperty("symbol")
+    @SerializedName("symbol")
+    private String symbol;
 
     @JsonProperty("total_supply")
     @SerializedName("total_supply")
     private String totalSupply;
 
-    @JsonProperty("owner")
-    @SerializedName("owner")
-    private String owner;
+    @JsonProperty("whole_name")
+    @SerializedName("whole_name")
+    private String wholeName;
 
-    @JsonProperty("mintable")
-    @SerializedName("mintable")
-    private boolean mintable;
+
 
     public void setDescription(String description) {this.description = description;}
 
@@ -57,12 +59,12 @@ public class MsgTokenIssueValue {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("description", description)
-                .append("symbol", symbol)
-                .append("original_symbol", originalSymbol)
-                .append("whole_name", wholeName)
-                .append("total_supply", totalSupply)
-                .append("owner", owner)
                 .append("mintable", mintable)
+                .append("original_symbol", originalSymbol)
+                .append("owner", owner)
+                .append("symbol", symbol)
+                .append("total_supply", totalSupply)
+                .append("whole_name", wholeName)
                 .toString();
     }
 
