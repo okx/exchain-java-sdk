@@ -11,7 +11,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder(alphabetic = true)
 public class MsgEditValidatorValue {
-    private String address;
 /*
     @JsonProperty("commission_rate")
     @SerializedName("commission_rate")
@@ -20,6 +19,8 @@ public class MsgEditValidatorValue {
     @JsonProperty("Description")
     @SerializedName("Description")
     private Description description;
+
+    private String address;
 /*
     @JsonProperty("min_self_delegation")
     @SerializedName("min_self_delegation")

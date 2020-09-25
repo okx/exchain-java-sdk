@@ -16,7 +16,7 @@ public class MsgEditValidator extends MsgBase {
 
         Message messages = msg.produceMsg();
 
-        msg.submit(messages, "6", "200000", "");
+        msg.submit(messages, "6.00000000", "200000", "");
     }
 
     public Message produceMsg() {
