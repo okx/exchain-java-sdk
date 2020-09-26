@@ -1,6 +1,6 @@
-## OKEXChain Java SDK
+## OKExChain Java SDK
 
-The OKEXChain Java SDK is a lightweight Java library to interact with OKEXChain. 
+The OKExChain Java SDK is a lightweight Java library to interact with OKExChain. 
 
 ### 1.Components
 
