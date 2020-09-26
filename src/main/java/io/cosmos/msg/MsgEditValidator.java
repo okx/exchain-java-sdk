@@ -11,12 +11,12 @@ public class MsgEditValidator extends MsgBase {
         EnvInstance.setEnv("okq");
 
         MsgEditValidator msg = new MsgEditValidator();
-        msg.setMsgType("cosmos-sdk/MsgEditValidator");
+        msg.setMsgType("okexchain/staking/MsgEditValidator");
         msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
 
         Message messages = msg.produceMsg();
 
-        msg.submit(messages, "6", "200000", "");
+        msg.submit(messages, "6.00000000", "200000", "");
     }
 
     public Message produceMsg() {
@@ -33,10 +33,8 @@ public class MsgEditValidator extends MsgBase {
         System.out.println(this.operAddress);
 
         value.setAddress(this.operAddress);
-        value.setCommissionRate("0.600000000000000000");
-        value.setCommissionRate(null);
+
         value.setDescription(d);
-        value.setMinSelfDelegation("1110");
 
         Message<MsgEditValidatorValue> msg = new Message<>();
         msg.setType(msgType);
