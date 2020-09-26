@@ -13,12 +13,6 @@ public class MsgDeposit  extends MsgBase {
         msg.setMsgType("cosmos-sdk/MsgEditValidator");
         msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
 
-        /*Message messages = msg.produceMsg();
-
-        msg.submit(messages, "6", "200000", "");*/
     }
 
-   /* public Message produceMsg() {
-
-    }*/
 }
