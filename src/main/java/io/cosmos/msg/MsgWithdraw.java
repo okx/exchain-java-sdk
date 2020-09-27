@@ -2,17 +2,15 @@ package io.cosmos.msg;
 
 import io.cosmos.common.EnvInstance;
 import io.cosmos.msg.utils.Message;
-import io.cosmos.msg.utils.type.MsgDepositValue;
-import io.cosmos.msg.utils.type.MsgEditValidatorValue;
+import io.cosmos.msg.utils.type.MsgWithdrawValue;
 import io.cosmos.types.DecCoin;
-import io.cosmos.types.Description;
 
-public class MsgDeposit extends MsgBase {
+public class MsgWithdraw  extends MsgBase {
     public static void main(String[] args) {
         EnvInstance.setEnv("okq");
 
-        MsgDeposit msg = new MsgDeposit();
-        msg.setMsgType("okexchain/staking/MsgDeposit");
+        MsgWithdraw msg = new MsgWithdraw();
+        msg.setMsgType("okexchain/staking/MsgWithdraw");
         msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
 
         Message messages = msg.produceMsg("okt", "10.00000000", "okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9");
@@ -26,7 +24,7 @@ public class MsgDeposit extends MsgBase {
         d.setDenom(denom);
         d.setAmount(amountDenom);
 
-        MsgDepositValue value = new MsgDepositValue();
+        MsgWithdrawValue value = new MsgWithdrawValue();
 
         System.out.println("this.operAddress:");
         System.out.println(this.operAddress);
@@ -36,10 +34,9 @@ public class MsgDeposit extends MsgBase {
 
         System.out.println("println this.operAdddress");
 
-        Message<MsgDepositValue> msg = new Message<>();
+        Message<MsgWithdrawValue> msg = new Message<>();
         msg.setType(msgType);
         msg.setValue(value);
         return msg;
     }
-
 }
