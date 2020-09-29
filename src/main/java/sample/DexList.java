@@ -1,12 +1,12 @@
 package sample;
 
-import io.cosmos.crypto.PrivateKey;
-import io.cosmos.msg.MsgBase;
-import io.cosmos.msg.MsgList;
-import io.cosmos.msg.utils.BoardcastTx;
-import io.cosmos.msg.utils.Message;
-import io.cosmos.msg.utils.UnsignedTx;
-import io.cosmos.types.Signature;
+import com.okexchain.utils.crypto.PrivateKey;
+import com.okexchain.msg.MsgBase;
+import com.okexchain.msg.MsgList;
+import com.okexchain.msg.tx.BoardcastTx;
+import com.okexchain.msg.common.Message;
+import com.okexchain.msg.tx.UnsignedTx;
+import com.okexchain.msg.common.Signature;
 
 public class DexList {
     public static void main(String[] args) {

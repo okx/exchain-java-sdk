@@ -1,14 +1,13 @@
 package sample;
 
-import io.cosmos.common.EnvInstance;
-import io.cosmos.common.LocalEnv;
-import io.cosmos.crypto.Crypto;
-import io.cosmos.crypto.PrivateKey;
-import io.cosmos.msg.*;
-import io.cosmos.msg.utils.BoardcastTx;
-import io.cosmos.msg.utils.Message;
-import io.cosmos.msg.utils.UnsignedTx;
-import io.cosmos.types.Signature;
+import com.okexchain.env.EnvInstance;
+import com.okexchain.env.LocalEnv;
+import com.okexchain.utils.crypto.PrivateKey;
+import com.okexchain.msg.*;
+import com.okexchain.msg.tx.BoardcastTx;
+import com.okexchain.msg.common.Message;
+import com.okexchain.msg.tx.UnsignedTx;
+import com.okexchain.msg.common.Signature;
 
 public class Staking {
 
