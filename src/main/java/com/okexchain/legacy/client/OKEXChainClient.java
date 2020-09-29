@@ -4,7 +4,6 @@ package com.okexchain.legacy.client;
 import com.alibaba.fastjson.JSONObject;
 import com.okexchain.legacy.crypto.keystore.CipherException;
 import com.okexchain.legacy.types.*;
-import io.okexchain.types.*;
 import com.okexchain.legacy.types.staking.CommissionRates;
 import com.okexchain.legacy.types.staking.Description;
 

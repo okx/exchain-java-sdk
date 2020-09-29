@@ -11,7 +11,6 @@ import com.okexchain.legacy.types.staking.CommissionRates;
 import com.okexchain.legacy.types.staking.Description;
 import com.okexchain.legacy.crypto.keystore.CipherException;
 import com.okexchain.legacy.transaction.BuildTransaction;
-import io.okexchain.types.*;
 import org.junit.Assert;
 import org.junit.Test;
 
