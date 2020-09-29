@@ -21,6 +21,9 @@ public class ColdSign {
         MsgSend msg = new MsgSend();
         msg.init(key.getAddress(), key.getPubKey());
 
+        // or init by account number and sequence number
+        // msg.init(key.getPubKey(), "0", "10");
+
         Message messages = msg.produceSendMsg(
                 "okt",
                 "6.00000000",

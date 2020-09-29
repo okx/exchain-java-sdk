@@ -13,8 +13,6 @@ import com.okexchain.legacy.types.staking.*;
 import com.okexchain.legacy.encoding.EncodeUtils;
 import com.okexchain.legacy.encoding.message.AminoEncode;
 import com.okexchain.legacy.exception.InvalidFormatException;
-import io.okexchain.types.*;
-import io.okexchain.types.staking.*;
 import org.bouncycastle.util.Strings;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;

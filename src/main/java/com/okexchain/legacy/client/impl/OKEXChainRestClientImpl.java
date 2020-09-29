@@ -10,7 +10,6 @@ import com.okexchain.legacy.crypto.keystore.CipherException;
 import com.okexchain.legacy.crypto.keystore.KeyStoreUtils;
 import com.okexchain.legacy.transaction.BuildTransaction;
 import com.okexchain.legacy.types.*;
-import io.okexchain.types.*;
 import com.okexchain.legacy.types.staking.CommissionRates;
 import com.okexchain.legacy.types.staking.Description;
 
