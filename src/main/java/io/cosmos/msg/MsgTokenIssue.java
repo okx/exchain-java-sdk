@@ -9,7 +9,7 @@ public class MsgTokenIssue extends MsgBase {
         setMsgType("okexchain/token/MsgIssue");
     }
 
-    public Message produceToeknIssueMsg (String description, String symbol, String originalSymbol, String wholeName, String totalSupply, String owner, boolean mintable) {
+    public Message produceTokenIssueMsg (String description, String symbol, String originalSymbol, String wholeName, String totalSupply, String owner, boolean mintable) {
 
         MsgTokenIssueValue value = new MsgTokenIssueValue();
         value.setDescription(description);
