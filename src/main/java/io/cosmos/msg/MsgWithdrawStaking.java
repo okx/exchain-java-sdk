@@ -6,11 +6,13 @@ import io.cosmos.msg.utils.type.MsgWithdrawStakingValue;
 import io.cosmos.types.DecCoin;
 
 public class MsgWithdrawStaking  extends MsgBase {
+    public MsgWithdrawStaking() {
+        setMsgType("okexchain/staking/MsgWithdraw");
+    }
     public static void main(String[] args) {
         EnvInstance.setEnv("okq");
 
         MsgWithdrawStaking msg = new MsgWithdrawStaking();
-        msg.setMsgType("okexchain/staking/MsgWithdraw");
         msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
 
         Message messages = msg.produceMsg("okt", "10.00000000", "okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9");

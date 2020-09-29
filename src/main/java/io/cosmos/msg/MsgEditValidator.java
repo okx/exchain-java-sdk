@@ -6,7 +6,9 @@ import io.cosmos.msg.utils.type.MsgEditValidatorValue;
 import io.cosmos.types.Description;
 
 public class MsgEditValidator extends MsgBase {
-
+    public MsgEditValidator() {
+        setMsgType("okexchain/staking/MsgEditValidator");
+    }
     public static void main(String[] args) {
         EnvInstance.setEnv("okq");
 
@@ -14,25 +16,22 @@ public class MsgEditValidator extends MsgBase {
         msg.setMsgType("okexchain/staking/MsgEditValidator");
         msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
 
-        Message messages = msg.produceMsg();
+        Message messages = msg.produceMsg("1","1","1","1", "okexchainvaloper10q0rk5qnyag7wfvvt7rtphlw589m7frshchly8");
 
         msg.submit(messages, "6.00000000", "200000", "");
     }
 
-    public Message produceMsg() {
+    public Message produceMsg(String details, String identity, String moniker, String website, String operAddress) {
 
         Description d = new Description();
-        d.setDetails("1");
-        d.setIdentity("1");
-        d.setMoniker("m1");
-        d.setWebsite("1");
+        d.setDetails(details);
+        d.setIdentity(identity);
+        d.setMoniker(moniker);
+        d.setWebsite(website);
 
         MsgEditValidatorValue value = new MsgEditValidatorValue();
 
-        System.out.println("this.operAddress:");
-        System.out.println(this.operAddress);
-
-        value.setAddress(this.operAddress);
+        value.setAddress(operAddress);
 
         value.setDescription(d);
 

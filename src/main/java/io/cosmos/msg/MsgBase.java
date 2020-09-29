@@ -50,6 +50,17 @@ public class MsgBase {
         operAddress = Crypto.generateValidatorAddressFromPub(pubKeyString);
     }
 
+    void init(String privateKey, String accountNum, String sequenceNum) {
+        pubKeyString = Hex.toHexString(Crypto.generatePubKeyFromPriv(privateKey));
+        address = Crypto.generateAddressFromPriv(privateKey);
+        JSONObject accountJson = JSON.parseObject(getAccountPrivate(address));
+        this.sequenceNum = sequenceNum;
+        this.accountNum = accountNum;
+        priKeyString = privateKey;
+
+        operAddress = Crypto.generateValidatorAddressFromPub(pubKeyString);
+    }
+
     private String getAccountPrivate(String userAddress) {
         String url = EnvInstance.getEnv().GetRestServerUrl() +
                 EnvInstance.getEnv().GetRestPathPrefix() +
