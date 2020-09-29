@@ -8,11 +8,14 @@ import io.cosmos.types.DecCoin;
 import io.cosmos.types.Description;
 
 public class MsgDeposit extends MsgBase {
+    public MsgDeposit() {
+        setMsgType("okexchain/staking/MsgDeposit");
+    }
+
     public static void main(String[] args) {
         EnvInstance.setEnv("okq");
 
         MsgDeposit msg = new MsgDeposit();
-        msg.setMsgType("okexchain/staking/MsgDeposit");
         msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
 
         Message messages = msg.produceMsg("okt", "10.00000000", "okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9");

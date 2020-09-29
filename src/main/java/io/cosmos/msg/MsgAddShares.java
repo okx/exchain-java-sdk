@@ -6,11 +6,14 @@ import io.cosmos.msg.utils.type.MsgAddSharesValue;
 
 public class MsgAddShares extends MsgBase {
 
+    public MsgAddShares() {
+        setMsgType("okexchain/staking/MsgAddShares");
+    }
+
     public static void main(String[] args) {
         EnvInstance.setEnv("okq");
 
         MsgAddShares msg = new MsgAddShares();
-        msg.setMsgType("okexchain/staking/MsgAddShares");
         msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
 
         String [] validators = {"okexchainvaloper10q0rk5qnyag7wfvvt7rtphlw589m7frshchly8"};

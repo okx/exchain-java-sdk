@@ -7,11 +7,14 @@ import io.cosmos.msg.utils.type.MsgRegProxyValue;
 
 public class MsgRegProxy extends MsgBase {
 
+    public MsgRegProxy() {
+        setMsgType("okexchain/staking/MsgRegProxy");
+    }
+
     public static void main(String[] args) {
         EnvInstance.setEnv("okq");
 
         MsgRegProxy msg = new MsgRegProxy();
-        msg.setMsgType("okexchain/staking/MsgRegProxy");
         msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
 
         Message messages = msg.produceMsg("okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9", true);
