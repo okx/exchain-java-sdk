@@ -10,7 +10,7 @@ public class MsgAddShares extends MsgBase {
         setMsgType("okexchain/staking/MsgAddShares");
     }
 
-    public static void main(String[] args) {
+   public static void main(String[] args) {
         EnvInstance.setEnv("okq");
 
         MsgAddShares msg = new MsgAddShares();
