@@ -89,9 +89,4 @@ public class ColdSignTest {
             System.out.println("serialize transfer msg failed");
         }
     }
-
-
-
-
-
 }
