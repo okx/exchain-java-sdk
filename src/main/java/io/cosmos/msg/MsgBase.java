@@ -35,30 +35,19 @@ public class MsgBase {
     }
 
     void initMnemonic(String mnemonic) {
-        String prikey = Crypto.generatePrivateKeyFromMnemonic(mnemonic);
-        init(prikey);
+//        String prikey = Crypto.generatePrivateKeyFromMnemonic(mnemonic);
+//        init(prikey);
     }
 
     void init(String privateKey) {
-        pubKeyString = Hex.toHexString(Crypto.generatePubKeyFromPriv(privateKey));
-        address = Crypto.generateAddressFromPriv(privateKey);
-        JSONObject accountJson = JSON.parseObject(getAccountPrivate(address));
-        sequenceNum = getSequance(accountJson);
-        accountNum = getAccountNumber(accountJson);
-        priKeyString = privateKey;
-
-        operAddress = Crypto.generateValidatorAddressFromPub(pubKeyString);
-    }
-
-    void init(String privateKey, String accountNum, String sequenceNum) {
-        pubKeyString = Hex.toHexString(Crypto.generatePubKeyFromPriv(privateKey));
-        address = Crypto.generateAddressFromPriv(privateKey);
-        JSONObject accountJson = JSON.parseObject(getAccountPrivate(address));
-        this.sequenceNum = sequenceNum;
-        this.accountNum = accountNum;
-        priKeyString = privateKey;
-
-        operAddress = Crypto.generateValidatorAddressFromPub(pubKeyString);
+//        pubKeyString = Hex.toHexString(Crypto.generatePubKeyFromPriv(privateKey));
+//        address = Crypto.generateAddressFromPriv(privateKey);
+//        JSONObject accountJson = JSON.parseObject(getAccountPrivate(address));
+//        sequenceNum = getSequance(accountJson);
+//        accountNum = getAccountNumber(accountJson);
+//        priKeyString = privateKey;
+//
+//        operAddress = Crypto.generateValidatorAddressFromPub(pubKeyString);
     }
 
     private String getAccountPrivate(String userAddress) {
@@ -200,6 +189,14 @@ public class MsgBase {
         JSONObject accountJson = JSON.parseObject(getAccountPrivate(address));
         sequenceNum = getSequance(accountJson);
         accountNum = getAccountNumber(accountJson);
+        operAddress = Crypto.generateValidatorAddressFromPub(pubKeyString);
+    }
+
+    public void init(String pubkey, String accountNum, String sequenceNum) {
+        pubKeyString = pubkey;
+        address = Crypto.generateAddressFromPub(pubKeyString);
+        this.sequenceNum = sequenceNum;
+        this.accountNum = accountNum;
         operAddress = Crypto.generateValidatorAddressFromPub(pubKeyString);
     }
 }
