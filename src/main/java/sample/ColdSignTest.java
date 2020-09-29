@@ -16,8 +16,7 @@ public class ColdSignTest {
 
     public static void main(String[] args) {
 
-//        PrivateKey key = new PrivateKey("8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7");
-        PrivateKey key = new PrivateKey("a786d7b5123359eb33dff6909b86a8aaf65927eaa4484c5d1d45a51c35242500");
+        PrivateKey key = new PrivateKey("8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7");
 
         // token issue
         MsgTokenIssue msg = new MsgTokenIssue();
