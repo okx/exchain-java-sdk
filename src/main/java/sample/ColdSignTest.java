@@ -1,16 +1,15 @@
 package sample;
 
-import io.cosmos.crypto.PrivateKey;
-import io.cosmos.msg.MsgBase;
-import io.cosmos.msg.MsgSend;
-import io.cosmos.msg.MsgTokenIssue;
-import io.cosmos.msg.MsgTokenModify;
-import io.cosmos.msg.MsgTransferOwnership;
-import io.cosmos.msg.MsgConfirmOwnership;
-import io.cosmos.msg.utils.BoardcastTx;
-import io.cosmos.msg.utils.Message;
-import io.cosmos.msg.utils.UnsignedTx;
-import io.cosmos.types.Signature;
+import com.okexchain.utils.crypto.PrivateKey;
+import com.okexchain.msg.MsgBase;
+import com.okexchain.msg.MsgTokenIssue;
+import com.okexchain.msg.MsgTokenModify;
+import com.okexchain.msg.MsgTransferOwnership;
+import com.okexchain.msg.MsgConfirmOwnership;
+import com.okexchain.msg.tx.BoardcastTx;
+import com.okexchain.msg.common.Message;
+import com.okexchain.msg.tx.UnsignedTx;
+import com.okexchain.msg.common.Signature;
 
 public class ColdSignTest {
 
