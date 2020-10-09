@@ -84,9 +84,9 @@ public class CryptoTest {
 
     @Test
     public void testPubKey() {
-        String priv = Crypto.generatePrivateKey();
-        String pub = Crypto.generatePubKeyHexFromPriv(priv);
-//        String pub = "02061a2f5b59ede92abf079084aa231bcb031d47cddb7a895af880b130c85af614";
+//        String priv = Crypto.generatePrivateKey();
+//        String pub = Crypto.generatePubKeyHexFromPriv(priv);
+        String pub = "02061a2f5b59ede92abf079084aa231bcb031d47cddb7a895af880b130c85af614";
         String pubBech = Crypto.generateBechPub(pub);
         String expectedPubBech = "okexchainpub1addwnpepqgrp5t6mt8k7j24lq7ggf23rr09sx828ehdh4z26lzqtzvxgttmpgrfngzd";
         Assert.assertEquals(expectedPubBech, pubBech);
