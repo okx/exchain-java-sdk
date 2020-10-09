@@ -4,11 +4,9 @@ import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.MsgCreateOKValidator;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Signature;
-import com.okexchain.msg.tx.BoardcastTx;
+import com.okexchain.msg.tx.BoardcastValue;
 import com.okexchain.msg.tx.UnsignedTx;
-import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
-import com.okexchain.utils.crypto.Crypto;
 
 public class Gentx {
     public static void main(String[] args) {
@@ -21,21 +19,17 @@ public class Gentx {
         msg.setMsgType("okexchain/staking/MsgCreateValidator");
 
 
-        Message messages = msg.produceMsg("okexchainvalconspub1zcjduepqtv2yy90ptjegdm34vfhlq2uw9eu39hjrt98sffj7yghl4s47xv7svt56mk",
+        Message messages = msg.produceMsg(
+                "okexchainvalconspub1zcjduepqtv2yy90ptjegdm34vfhlq2uw9eu39hjrt98sffj7yghl4s47xv7svt56mk",
                 "val0","","","","10000.00000000");
 
         try {
             UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"", "200000", "");
-
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
+            BoardcastValue signedTx = unsignedTx.sign4gentx(signature);
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
-
-            System.out.println("================");
-            System.out.println(Utils.serializer.toJson(signedTx.getTx()));
-            System.out.println("================");
+            System.out.println("======= gentx json =========");
             System.out.println(signedTx.toJson());
-//            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
 
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");

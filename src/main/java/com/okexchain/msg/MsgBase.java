@@ -111,15 +111,17 @@ public class MsgBase {
 
         UnsignedTx tx = null;
         try {
-            List<Token> amountList = new ArrayList<>();
-            Token amount = new Token();
-            amount.setDenom(EnvInstance.getEnv().GetDenom());
-            amount.setAmount(feeAmount);
-            amountList.add(amount);
-
             //组装待签名交易结构
             Fee fee = new Fee();
+            List<Token> amountList = new ArrayList<>();
             fee.setAmount(amountList);
+
+            if (feeAmount.length() > 0) {
+                Token amount = new Token();
+                amount.setDenom(EnvInstance.getEnv().GetDenom());
+                amount.setAmount(feeAmount);
+                amountList.add(amount);
+            }
             fee.setGas(gas);
 
             Message[] msgs = new Message[1];
@@ -130,23 +132,15 @@ public class MsgBase {
 
             System.out.println("row data:");
             System.out.println(data);
-            System.out.println("json data:");
-            System.out.println(unsignedTxJson);
+//            System.out.println("json data to sign:");
+//            System.out.println(unsignedTxJson);
 
-            BoardcastTx cosmosTransaction = new BoardcastTx();
-            cosmosTransaction.setMode("block");
+            TxValue txValue = new TxValue();
+            txValue.setMsgs(msgs);
+            txValue.setFee(fee);
+            txValue.setMemo(memo);
 
-            TxValue cosmosTx = new TxValue();
-//            cosmosTx.setType("auth/StdTx");
-            cosmosTx.setMsgs(msgs);
-
-            cosmosTx.setFee(fee);
-
-            cosmosTx.setMemo(memo);
-
-            cosmosTransaction.setTx(cosmosTx);
-
-            tx = new UnsignedTx(cosmosTransaction, unsignedTxJson);
+            tx = new UnsignedTx(txValue, unsignedTxJson);
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
         }
@@ -156,6 +150,8 @@ public class MsgBase {
 
 
     public static Signature signTx(String unsignedTx, String privateKey) throws Exception {
+        System.out.println("data to sign:");
+        System.out.println(unsignedTx);
 
         byte[] byteSignData = unsignedTx.getBytes();
         System.out.println("byte data length:");
