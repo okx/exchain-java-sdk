@@ -24,6 +24,9 @@ public class EnvBase {
     public String GetValidatorAddrPrefix(){
         return  "okexchainvaloper";
     }
+    public String GetPubPrefix(){
+        return  "okexchainpub";
+    }
     public String GetRestPathPrefix(){
         return  "/okexchain/v1";
     }

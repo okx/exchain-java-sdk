@@ -134,5 +134,15 @@ public class Crypto {
             return "";
         }
     }
+    public static String generateBechPub(String pubKey) {
 
+        try {
+            String pubBech32 = AddressUtil.getPubkeyBech32FromValue(
+                    EnvInstance.getEnv().GetPubPrefix(), Hex.decode(pubKey));
+            return pubBech32;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
 }
