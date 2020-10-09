@@ -10,6 +10,10 @@ import com.okexchain.msg.common.Token;
 
 public class MsgCreateOKValidator extends MsgBase {
 
+    public MsgCreateOKValidator() {
+        setMsgType("okexchain/staking/MsgCreateValidator");
+    }
+
     public static void main(String[] args) {
         EnvInstance.setEnv("ok");
         MsgCreateOKValidator msg = new MsgCreateOKValidator();
@@ -47,7 +51,7 @@ public class MsgCreateOKValidator extends MsgBase {
         return msg;
     }
 
-    public Message produceMsg(String nodePubKey,String moniker, String website,String identity,String details,String msdAmount) {
+    public Message produceMsg(String nodePubKey, String moniker, String website, String identity, String details, String msdAmount) {
         MsgCreateOKValidatorValue value = new MsgCreateOKValidatorValue();
 
         value.setDelegatorAddress(this.address);

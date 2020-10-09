@@ -16,8 +16,6 @@ public class Gentx {
         MsgCreateOKValidator msg = new MsgCreateOKValidator();
         System.out.println(key.getPubKey());
         msg.init(key.getPubKey(),"0","0");
-        msg.setMsgType("okexchain/staking/MsgCreateValidator");
-
 
         Message messages = msg.produceMsg(
                 "okexchainvalconspub1zcjduepqtv2yy90ptjegdm34vfhlq2uw9eu39hjrt98sffj7yghl4s47xv7svt56mk",
