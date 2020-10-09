@@ -15,7 +15,7 @@ public class TxValue {
     private List<Signature> signatures;
 
 
-    private  String type;
+//    private  String type;
 
     public Message[] getMsgs() {
         return msgs;
@@ -45,13 +45,13 @@ public class TxValue {
         this.memo = memo;
     }
 
-    public String getType() {
-        return type;
-    }
+//    public String getType() {
+//        return type;
+//    }
 
-    public void setType(String type) {
-        this.type = type;
-    }
+//    public void setType(String type) {
+//        this.type = type;
+//    }
 
     public void setSignatures(List<Signature> signatures) {
         this.signatures = signatures;

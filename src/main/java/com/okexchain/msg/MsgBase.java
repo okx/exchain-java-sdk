@@ -137,7 +137,7 @@ public class MsgBase {
             cosmosTransaction.setMode("block");
 
             TxValue cosmosTx = new TxValue();
-            cosmosTx.setType("auth/StdTx");
+//            cosmosTx.setType("auth/StdTx");
             cosmosTx.setMsgs(msgs);
 
             cosmosTx.setFee(fee);
