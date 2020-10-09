@@ -32,13 +32,9 @@ public class MsgCreateOKValidator extends MsgBase {
         d.setMoniker("3");
         d.setWebsite("4");
 
-        CommissionMsg c = new CommissionMsg();
-        c.setMaxChangeRate("0.05000000");
-        c.setMaxRate("0.05000000");
-        c.setRate("0.05000000");
 
         Token t = new Token();
-        t.setAmount("68.00000000");
+        t.setAmount("10000.00000000");
         t.setDenom(EnvInstance.getEnv().GetDenom());
 
         value.setDescription(d);

@@ -27,7 +27,7 @@ public class Gentx {
         Message messages = msg.produceMsg();
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "okexchain transfer!");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"2.00000000", "200000", "okexchain transfer!");
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
