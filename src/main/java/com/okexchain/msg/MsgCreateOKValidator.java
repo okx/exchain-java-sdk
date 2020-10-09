@@ -47,4 +47,28 @@ public class MsgCreateOKValidator extends MsgBase {
         return msg;
     }
 
+    public Message produceMsg(String nodePubKey,String moniker, String website,String identity,String details,String msdAmount) {
+        MsgCreateOKValidatorValue value = new MsgCreateOKValidatorValue();
+
+        value.setDelegatorAddress(this.address);
+        value.setValidatorAddress(this.operAddress);
+        value.setPubKey(nodePubKey);
+
+        Description d = new Description();
+        d.setMoniker(moniker);
+        d.setWebsite(website);
+        d.setIdentity(identity);
+        d.setDetails(details);
+        value.setDescription(d);
+
+        Token t = new Token();
+        t.setAmount(msdAmount);
+        t.setDenom(EnvInstance.getEnv().GetDenom());
+        value.setMinSelfDelegation(t);
+
+        Message<MsgCreateOKValidatorValue> msg = new Message<>();
+        msg.setType(msgType);
+        msg.setValue(value);
+        return msg;
+    }
 }
