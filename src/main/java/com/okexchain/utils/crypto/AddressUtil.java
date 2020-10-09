@@ -35,6 +35,17 @@ public class AddressUtil {
 
     }
 
+    public static String getPubkeyBech32FromValue(String mainPrefix, byte[] publickKeyValue) throws Exception {
+        try {
+            byte[] bytes = encode(0, publickKeyValue);
+            String pubBech32 = com.okexchain.utils.crypto.encode.Bech32.encode(mainPrefix, bytes);
+            return pubBech32;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
     public static byte[] decodeAddress(String address){
         byte[] dec = Bech32.decode(address).getData();
         return ConvertBits.convertBits(dec, 0, dec.length, 5, 8, false);
@@ -51,4 +62,6 @@ public class AddressUtil {
         byte[] convertedProgram = ConvertBits.convertBits(witnessProgram, 0, witnessProgram.length, 8, 5, true);
         return convertedProgram;
     }
+
+
 }

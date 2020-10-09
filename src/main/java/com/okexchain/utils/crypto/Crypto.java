@@ -2,6 +2,7 @@ package com.okexchain.utils.crypto;
 
 import com.google.common.base.Splitter;
 import com.okexchain.env.EnvInstance;
+import com.okexchain.legacy.encoding.message.AminoEncode;
 import org.bitcoinj.core.ECKey;
 import org.bitcoinj.core.Sha256Hash;
 import org.bitcoinj.core.Utils;
@@ -134,5 +135,15 @@ public class Crypto {
             return "";
         }
     }
+    public static String generateBechPub(String pubKey) {
 
+        try {
+            String pubBech32 = AddressUtil.getPubkeyBech32FromValue(
+                    EnvInstance.getEnv().GetPubPrefix(), AminoEncode.encodePubkey(pubKey));
+            return pubBech32;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
 }
