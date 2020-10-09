@@ -41,7 +41,6 @@ public class MsgCreateOKValidator extends MsgBase {
         t.setAmount("68.00000000");
         t.setDenom(EnvInstance.getEnv().GetDenom());
 
-        value.setCommission(c);
         value.setDescription(d);
         value.setMinSelfDelegation(t);
 

@@ -14,8 +14,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @JsonPropertyOrder(alphabetic = true)
 public class MsgCreateOKValidatorValue {
 
-    private CommissionMsg commission;
-
     @JsonProperty("delegator_address")
     @SerializedName("delegator_address")
     private String delegatorAddress;
@@ -52,9 +50,6 @@ public class MsgCreateOKValidatorValue {
         this.description = description;
     }
 
-    public void setCommission(CommissionMsg commission) {
-        this.commission = commission;
-    }
 
     @Override
     public String toString() {
@@ -63,7 +58,6 @@ public class MsgCreateOKValidatorValue {
                 .append("validator_address", validatorAddress)
                 .append("min_self_delegation", this.minSelfDelegation)
                 .append("description", this.description)
-                .append("commission", this.commission)
                 .append("pubkey", this.pubkey)
                 .toString();
     }
