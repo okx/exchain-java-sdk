@@ -1,8 +1,8 @@
 package crypto;
 
-import io.cosmos.common.EnvInstance;
-import io.cosmos.crypto.Crypto;
-import io.cosmos.crypto.AddressUtil;
+import com.okexchain.env.EnvInstance;
+import com.okexchain.utils.crypto.Crypto;
+import com.okexchain.utils.crypto.AddressUtil;
 import org.bouncycastle.util.encoders.Hex;
 import org.junit.Assert;
 import org.junit.Test;
