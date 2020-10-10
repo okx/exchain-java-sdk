@@ -7,6 +7,7 @@ import com.okexchain.msg.common.TxValue;
 public class BoardcastTx {
 
     private String mode;
+    private String type = "cosmos-sdk/StdTx";
     private TxValue tx;
 
     public BoardcastTx() {

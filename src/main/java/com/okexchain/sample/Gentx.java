@@ -1,43 +1,33 @@
 package com.okexchain.sample;
 
-import com.okexchain.env.EnvInstance;
-import com.okexchain.env.LocalEnv;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.MsgCreateOKValidator;
-import com.okexchain.msg.MsgSend;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Signature;
-import com.okexchain.msg.tx.BoardcastTx;
+import com.okexchain.msg.tx.BoardcastValue;
 import com.okexchain.msg.tx.UnsignedTx;
-import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
 
 public class Gentx {
     public static void main(String[] args) {
-
-        EnvInstance.setEnv(new LocalEnv("http://localhost:26659"));
-
-        PrivateKey key = new PrivateKey("8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7");
+//        String priKey = Crypto.generatePrivateKeyFromMnemonic("race imitate stay curtain puppy suggest spend toe old bridge sunset pride");
+        PrivateKey key = new PrivateKey("b4083733cd8379f1249cb9431a074e495a64ae003273d31a7e58356eaad8a0cf");
 
         MsgCreateOKValidator msg = new MsgCreateOKValidator();
-        msg.init(key.getAddress(), key.getPubKey());
-        msg.setMsgType("okexchain/staking/MsgCreateValidator");
+        System.out.println(key.getPubKey());
+        msg.init(key.getPubKey(),"0","0");
 
-
-        Message messages = msg.produceMsg();
+        Message messages = msg.produceMsg(
+                "okexchainvalconspub1zcjduepqtv2yy90ptjegdm34vfhlq2uw9eu39hjrt98sffj7yghl4s47xv7svt56mk",
+                "val0","","","","10000.00000000");
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"2.00000000", "200000", "okexchain transfer!");
-
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"", "200000", "");
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
+            BoardcastValue signedTx = unsignedTx.sign4gentx(signature);
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
-
-            System.out.println("================");
-            System.out.println(Utils.serializer.toJson(signedTx.getTx()));
-            System.out.println("================");
+            System.out.println("======= gentx json =========");
             System.out.println(signedTx.toJson());
-//            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
 
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
