@@ -2,53 +2,76 @@ package com.okexchain.msg;
 
 import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.common.Message;
-import com.okexchain.msg.types.MsgCreateValidatorValue;
-import com.okexchain.msg.common.CommissionMsg;
+import com.okexchain.msg.types.MsgCreateOKValidatorValue;
 import com.okexchain.msg.common.Description;
 import com.okexchain.msg.common.Token;
 
 
 public class MsgCreateValidator extends MsgBase {
 
+    public MsgCreateValidator() {
+        setMsgType("okexchain/staking/MsgCreateValidator");
+    }
+
     public static void main(String[] args) {
-        EnvInstance.setEnv("local");
+        EnvInstance.setEnv("ok");
         MsgCreateValidator msg = new MsgCreateValidator();
         msg.setMsgType("cosmos-sdk/MsgCreateValidator");
-        msg.initMnemonic(EnvInstance.getEnv().GetNode1Mnmonic());
+        msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
         Message messages = msg.produceMsg();
-        msg.submit(messages, "10"+"000000000", "200000", "");
+        msg.submit(messages, "6", "200000", "");
     }
 
     public Message produceMsg() {
-        MsgCreateValidatorValue value = new MsgCreateValidatorValue();
+        MsgCreateOKValidatorValue value = new MsgCreateOKValidatorValue();
+
         value.setDelegatorAddress(this.address);
         value.setValidatorAddress(this.operAddress);
-        value.setPubKey(EnvInstance.getEnv().GetTendermintConsensusPubkey());
+        value.setPubKey("okchainvalconspub1zcjduepqwfr8lelpqerf8xyc63vqtje0wvhd68h7uce6ludygc28uj5hc9ushev2kp");
 
         Description d = new Description();
-        d.setDetails("node5");
+        d.setDetails("1");
         d.setIdentity("2");
         d.setMoniker("3");
         d.setWebsite("4");
 
-        CommissionMsg c = new CommissionMsg();
-        c.setMaxChangeRate("0.050000000000000000");
-        c.setMaxRate("0.050000000000000000");
-        c.setRate("0.050000000000000000");
 
         Token t = new Token();
-        t.setAmount("10" + "000000000");
+        t.setAmount("10000.00000000");
         t.setDenom(EnvInstance.getEnv().GetDenom());
 
-        value.setValue(t);
-        value.setCommission(c);
         value.setDescription(d);
-        value.setMinSelfDelegation("1" + "000000000");
+        value.setMinSelfDelegation(t);
 
-        Message<MsgCreateValidatorValue> msg = new Message<>();
+
+        Message<MsgCreateOKValidatorValue> msg = new Message<>();
         msg.setType(msgType);
         msg.setValue(value);
         return msg;
     }
 
+    public Message produceMsg(String nodePubKey, String moniker, String website, String identity, String details, String msdAmount) {
+        MsgCreateOKValidatorValue value = new MsgCreateOKValidatorValue();
+
+        value.setDelegatorAddress(this.address);
+        value.setValidatorAddress(this.operAddress);
+        value.setPubKey(nodePubKey);
+
+        Description d = new Description();
+        d.setMoniker(moniker);
+        d.setWebsite(website);
+        d.setIdentity(identity);
+        d.setDetails(details);
+        value.setDescription(d);
+
+        Token t = new Token();
+        t.setAmount(msdAmount);
+        t.setDenom(EnvInstance.getEnv().GetDenom());
+        value.setMinSelfDelegation(t);
+
+        Message<MsgCreateOKValidatorValue> msg = new Message<>();
+        msg.setType(msgType);
+        msg.setValue(value);
+        return msg;
+    }
 }
