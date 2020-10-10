@@ -1,7 +1,7 @@
 package com.okexchain.sample;
 
 import com.okexchain.msg.MsgBase;
-import com.okexchain.msg.MsgCreateOKValidator;
+import com.okexchain.msg.MsgCreateValidator;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Signature;
 import com.okexchain.msg.tx.BoardcastValue;
@@ -13,7 +13,7 @@ public class Gentx {
 //        String priKey = Crypto.generatePrivateKeyFromMnemonic("race imitate stay curtain puppy suggest spend toe old bridge sunset pride");
         PrivateKey key = new PrivateKey("b4083733cd8379f1249cb9431a074e495a64ae003273d31a7e58356eaad8a0cf");
 
-        MsgCreateOKValidator msg = new MsgCreateOKValidator();
+        MsgCreateValidator msg = new MsgCreateValidator();
         System.out.println(key.getPubKey());
         msg.init(key.getPubKey(),"0","0");
 

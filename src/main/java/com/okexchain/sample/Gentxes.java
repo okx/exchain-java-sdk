@@ -1,6 +1,6 @@
 package com.okexchain.sample;
 
-import com.okexchain.msg.MsgCreateOKValidator;
+import com.okexchain.msg.MsgCreateValidator;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.tx.UnsignedTx;
 
@@ -8,7 +8,7 @@ public class Gentxes {
 
     public static void gentx(String[] params) {
 
-        MsgCreateOKValidator msg = new MsgCreateOKValidator();
+        MsgCreateValidator msg = new MsgCreateValidator();
         msg.init(params[0],"0","0");
 
         Message messages = msg.produceMsg(
@@ -30,9 +30,17 @@ public class Gentxes {
     public static void main(String[] args) {
 
         String[][] validators = {
-                {"03d9d7b471f537aaeeeadfbebf863f0a1e4c518fd4f5954b189bfb6079c52881f1", "okexchainvalconspub1zcjduepqtv2yy90ptjegdm34vfhlq2uw9eu39hjrt98sffj7yghl4s47xv7svt56mk", "moniker",  "website", "identity", "details",},
-                {"03d9d7b471f537aaeeeadfbebf863f0a1e4c518fd4f5954b189bfb6079c52881f1", "okexchainvalconspub1zcjduepqtv2yy90ptjegdm34vfhlq2uw9eu39hjrt98sffj7yghl4s47xv7svt56mk", "moniker",  "website", "identity", "details",},
-                {"03d9d7b471f537aaeeeadfbebf863f0a1e4c518fd4f5954b189bfb6079c52881f1", "okexchainvalconspub1zcjduepqtv2yy90ptjegdm34vfhlq2uw9eu39hjrt98sffj7yghl4s47xv7svt56mk", "moniker",  "website", "identity", "details",},
+                {"03d9d7b471f537aaeeeadfbebf863f0a1e4c518fd4f5954b189bfb6079c52881f1",
+                        "okexchainvalconspub1zcjduepqtv2yy90ptjegdm34vfhlq2uw9eu39hjrt98sffj7yghl4s47xv7svt56mk",
+                        "moniker",  "website", "identity", "details",},
+
+                {"03d9d7b471f537aaeeeadfbebf863f0a1e4c518fd4f5954b189bfb6079c52881f1",
+                        "okexchainvalconspub1zcjduepqtv2yy90ptjegdm34vfhlq2uw9eu39hjrt98sffj7yghl4s47xv7svt56mk",
+                        "moniker",  "website", "identity", "details",},
+
+                {"03d9d7b471f537aaeeeadfbebf863f0a1e4c518fd4f5954b189bfb6079c52881f1",
+                        "okexchainvalconspub1zcjduepqtv2yy90ptjegdm34vfhlq2uw9eu39hjrt98sffj7yghl4s47xv7svt56mk",
+                        "moniker",  "website", "identity", "details",},
         };
 
         for (int i = 0; i < validators.length; i++) {
