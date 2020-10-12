@@ -17,7 +17,7 @@ public class Gentxes {
                 params[5], "10000.00000000");
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"", "200000", "");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"", "200000", "v"+String.valueOf(idx));
             msg.persist("unsigned." + String.valueOf(idx) +".json", unsignedTx.toString());
             System.out.println("======= unsignedTx json =========");
             System.out.println(unsignedTx.toString());
