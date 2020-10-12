@@ -6,7 +6,7 @@ import com.okexchain.msg.tx.UnsignedTx;
 
 public class Gentxes {
 
-    public static void gentx(String[] params) {
+    public static void gentx(String[] params, int idx) {
 
         MsgCreateValidator msg = new MsgCreateValidator();
         msg.init(params[0],"0","0");
@@ -18,6 +18,7 @@ public class Gentxes {
 
         try {
             UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"", "200000", "");
+            msg.persist("unsigned." + String.valueOf(idx) +".json", unsignedTx.toString());
             System.out.println("======= unsignedTx json =========");
             System.out.println(unsignedTx.toString());
 
@@ -49,7 +50,7 @@ public class Gentxes {
 
         for (int i = 0; i < validators.length; i++) {
             System.out.printf("\n================== gentx index[%d] ====================\n", i);
-            gentx(validators[i]);
+            gentx(validators[i], i);
         }
 
     }
