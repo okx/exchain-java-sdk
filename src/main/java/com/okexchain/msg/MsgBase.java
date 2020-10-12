@@ -13,6 +13,8 @@ import org.bouncycastle.util.Strings;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -193,4 +195,18 @@ public class MsgBase {
         this.accountNum = accountNum;
         operAddress = Crypto.generateValidatorAddressFromPub(pubKeyString);
     }
+
+
+    public void persist(String path, String content) {
+        try {
+            FileOutputStream fos=new FileOutputStream(path);
+            BufferedOutputStream bos=new BufferedOutputStream(fos);
+            bos.write(content.getBytes(),0,content.getBytes().length);
+            bos.flush();
+            bos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
