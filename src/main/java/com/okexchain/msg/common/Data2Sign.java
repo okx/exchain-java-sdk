@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.gson.annotations.SerializedName;
+import com.okexchain.msg.tx.BoardcastTx;
 import com.okexchain.utils.Utils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -88,16 +89,20 @@ public class Data2Sign {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-            .append("account_number", accountNumber)
-            .append("chain_id", chainId)
-            .append("fee", fee)
-            .append("memo", memo)
-            .append("msgs", msgs)
-            .append("sequence", sequence)
-            .toString();
+                .append("account_number", accountNumber)
+                .append("chain_id", chainId)
+                .append("fee", fee)
+                .append("memo", memo)
+                .append("msgs", msgs)
+                .append("sequence", sequence)
+                .toString();
     }
 
     public String toJson() {
         return Utils.serializer.toJson(this);
+    }
+
+    public static Data2Sign fromJson(String json) {
+        return Utils.serializer.fromJson(json, Data2Sign.class);
     }
 }

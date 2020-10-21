@@ -2,6 +2,7 @@ package com.okexchain.msg.tx;
 
 import com.okexchain.msg.common.Signature;
 import com.okexchain.msg.common.TxValue;
+import com.okexchain.msg.common.Data2Sign;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ public class UnsignedTx {
         boardcastTx.getTx().setSignatures(signatureList);
         return boardcastTx;
     }
+
     public BoardcastValue sign4gentx(Signature signature) {
         List<Signature> signatureList = new ArrayList<>();
         signatureList.add(signature);
@@ -39,5 +41,19 @@ public class UnsignedTx {
 
     public String toString() {
         return unsignedTxJson;
+    }
+
+
+    public static BoardcastTx genBroadcastTx(String unsignedTxStr, Signature signature) {
+        Data2Sign data = Data2Sign.fromJson(unsignedTxStr);
+
+        TxValue txValue = new TxValue();
+        txValue.setMsgs(data.getMsgs());
+        txValue.setFee(data.getFee());
+        txValue.setMemo(data.getMemo());
+
+        UnsignedTx unsignedTx = new UnsignedTx(txValue, unsignedTxStr);
+
+        return unsignedTx.signed(signature);
     }
 }

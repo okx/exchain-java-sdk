@@ -19,10 +19,10 @@ public class ColdSign {
         PrivateKey key = new PrivateKey("8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7");
 
         MsgSend msg = new MsgSend();
-        msg.init(key.getAddress(), key.getPubKey());
+//        msg.init(key.getAddress(), key.getPubKey());
 
         // or init by account number and sequence number
-        // msg.init(key.getPubKey(), "0", "10");
+        msg.init(key.getPubKey(), "0", "10");
 
         Message messages = msg.produceSendMsg(
                 "okt",
@@ -30,13 +30,16 @@ public class ColdSign {
                 "okexchain1v853tq96n9ghvyxlvqyxyj97589clccrufrkz9");
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "okexchain transfer!");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages, "0.01000000", "200000", "okexchain transfer!");
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
+//            BoardcastTx signedTx = unsignedTx.signed(signature);
+            BoardcastTx signedTx = UnsignedTx.genBroadcastTx(unsignedTx.toString(), signature);
+            System.out.println(signedTx.toJson());
 
-            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+
+//            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
 
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
