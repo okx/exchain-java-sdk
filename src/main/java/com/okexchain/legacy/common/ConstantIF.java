@@ -8,7 +8,7 @@ public interface ConstantIF {
 //    String BASE_COIN_NAME = "okt";
 //    String CHAIN_ID = "okexchain";
     String BASE_COIN_NAME = "tokt";
-    String CHAIN_ID = "okexchain-testnet1";
+    String CHAIN_ID = "testnet-1";
 
     String ADDRESS_PREFIX = "okexchain";
     String VALIDATOR_ADDRESS_PREFIX = "okexchainvaloper";
