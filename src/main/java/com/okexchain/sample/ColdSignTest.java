@@ -75,7 +75,7 @@ public class ColdSignTest {
 //            UnsignedTx unsignedTx = msg.getUnsignedTx(messagesTransfer,"0.00200000", "200000", "");
 
             // confirm ownership
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messagesConfirm, Utils.NewDecString("0.00200000"), "200000", "");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messagesConfirm, "0.00200000", "200000", "");
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 

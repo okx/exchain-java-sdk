@@ -17,10 +17,12 @@ import com.okexchain.legacy.transaction.BuildTransaction;
 import com.okexchain.legacy.types.*;
 import com.okexchain.legacy.types.staking.CommissionRates;
 import com.okexchain.legacy.types.staking.Description;
+import com.okexchain.utils.Utils;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
 
 
+import javax.rmi.CORBA.Util;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -277,18 +279,19 @@ public class OKEXChainRPCClientImpl implements OKEXChainClient {
         if (!StrUtils.isProductSide(parms.getSide())) throw new InvalidFormatException("invalid product side");
     }
 
-    public JSONObject sendSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) throws NullPointerException, IOException {
+    public JSONObject sendSendTransaction(AccountInfo account, String to, List<Token> amounts, String memo) throws NullPointerException, IOException {
+        amounts.forEach(amount -> amount.setAmount(Utils.NewDecString(amount.getAmount())));
         checkAccountInfoValue(account);
         Crypto.validateAddress(to);
-        if (amount ==null) throw new NullPointerException("amount should not be null");
-        if (amount.isEmpty()) throw new NullPointerException("Amount is empty.");
-        Iterator<Token> it=amount.iterator();
+        if (amounts ==null) throw new NullPointerException("amount should not be null");
+        if (amounts.isEmpty()) throw new NullPointerException("Amount is empty.");
+        Iterator<Token> it=amounts.iterator();
         while(it.hasNext()) {
             Token t=it.next();
             if (!StrUtils.isDecimal(t.getAmount(), ConstantIF.DECIMAL_N)) throw new InvalidFormatException("invalid amount, need " + ConstantIF.DECIMAL_N +" decimals after .");
         }
 
-        byte[] data = BuildTransaction.generateAminoSendTransaction(account, to, amount, memo);
+        byte[] data = BuildTransaction.generateAminoSendTransaction(account, to, amounts, memo);
         System.out.println(Hex.toHexString(data));
         return sendTransaction(data);
     }

@@ -20,7 +20,7 @@ public class MsgCreateValidator extends MsgBase {
         msg.setMsgType("cosmos-sdk/MsgCreateValidator");
         msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
         Message messages = msg.produceMsg();
-        msg.submit(messages, Utils.NewDecString("6"), "200000", "");
+        msg.submit(messages, "6", "200000", "");
     }
 
     public Message produceMsg() {
@@ -66,7 +66,7 @@ public class MsgCreateValidator extends MsgBase {
         value.setDescription(d);
 
         Token t = new Token();
-        t.setAmount(msdAmount);
+        t.setAmount(Utils.NewDecString(msdAmount));
         t.setDenom(EnvInstance.getEnv().GetDenom());
         value.setMinSelfDelegation(t);
 

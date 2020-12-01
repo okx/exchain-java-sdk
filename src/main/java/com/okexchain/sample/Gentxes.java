@@ -15,7 +15,7 @@ public class Gentxes {
         Message messages = msg.produceMsg(
                 params[1], params[2],
                 params[3], params[4],
-                params[5], Utils.NewDecString("10000.00000000"));
+                params[5], "10000.00000000");
 
         try {
             UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"", "200000", "v"+String.valueOf(idx));

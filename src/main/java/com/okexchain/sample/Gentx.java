@@ -21,7 +21,7 @@ public class Gentx {
 
         Message messages = msg.produceMsg(
                 "okexchainvalconspub1zcjduepqtv2yy90ptjegdm34vfhlq2uw9eu39hjrt98sffj7yghl4s47xv7svt56mk",
-                "val0","","","", Utils.NewDecString("10000.00000000"));
+                "val0","","","", "10000.00000000");
 
         try {
             UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"", "200000", "");

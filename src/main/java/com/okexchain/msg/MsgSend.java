@@ -21,11 +21,11 @@ public class MsgSend extends MsgBase {
 
         Message messages = msg.produceSendMsg(
                 "okt",
-                Utils.NewDecString("6.00000000"),
+                "6.00000000",
                 "okexchain1v853tq96n9ghvyxlvqyxyj97589clccrufrkz9");
 
         // okexchaincli tx send okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9 okexchain1v853tq96n9ghvyxlvqyxyj97589clccrufrkz9 6okt --from captain -y -b block --fees 0.01okt
-        msg.submit(messages, Utils.NewDecString("0.01000000"), "200000", "okexchain transfer!");
+        msg.submit(messages, "0.01000000", "200000", "okexchain transfer!");
     }
 
     public Message produceSendMsg(String denom, String amountDenom, String to) {
@@ -33,7 +33,7 @@ public class MsgSend extends MsgBase {
         List<Token> amountList = new ArrayList<>();
         Token amount = new Token();
         amount.setDenom(denom);
-        amount.setAmount(amountDenom);
+        amount.setAmount(Utils.NewDecString(amountDenom));
         amountList.add(amount);
 
         MsgSendValue value = new MsgSendValue();

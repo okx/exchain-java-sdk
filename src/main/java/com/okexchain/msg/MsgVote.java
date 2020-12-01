@@ -19,7 +19,7 @@ public class MsgVote extends MsgBase {
                 "2",
                 "Yes");
 
-        msg.submit(messages, Utils.NewDecString("0.01000000"), "200000", "okexchain gov vot!");
+        msg.submit(messages, "0.01000000", "200000", "okexchain gov vot!");
     }
 
     public Message produceVoteMsg(String ProposalID, String option) {

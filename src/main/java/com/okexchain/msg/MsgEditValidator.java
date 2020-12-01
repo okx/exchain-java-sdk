@@ -19,7 +19,7 @@ public class MsgEditValidator extends MsgBase {
 
         Message messages = msg.produceMsg("1","1","1","1", "okexchainvaloper10q0rk5qnyag7wfvvt7rtphlw589m7frshchly8");
 
-        msg.submit(messages, Utils.NewDecString("6.00000000"), "200000", "");
+        msg.submit(messages, "6.00000000", "200000", "");
     }
 
     public Message produceMsg(String details, String identity, String moniker, String website, String operAddress) {

@@ -36,10 +36,10 @@ public class MsgParameterChangeProposal extends MsgBase {
                 "",
                 "121",
                 "6000",
-                Utils.NewDecString("100.00000000")
+                "100.00000000"
         );
 
-        msg.submit(messages, Utils.NewDecString("0.01000000"), "200000", "OKExChain change parameter proposal!");
+        msg.submit(messages, "0.01000000", "200000", "OKExChain change parameter proposal!");
     }
 
 //    @SneakyThrows

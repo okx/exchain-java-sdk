@@ -21,7 +21,7 @@ public class MsgAddShares extends MsgBase {
         Message messages = msg.produceMsg("okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9", validators);
 
 
-        msg.submit(messages, Utils.NewDecString("6.00000000"), "200000", "");
+        msg.submit(messages, "6.00000000", "200000", "");
     }
 
     public Message produceMsg(String delegator, String [] validators) {

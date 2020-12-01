@@ -18,10 +18,10 @@ public class MsgList extends MsgBase {
         Message messages = msg.produceListMsg(
                 "eos-f4d",
                 "okt",
-                Utils.NewDecString("1.00000000"));
+                "1.00000000");
 
         // okexchaincli tx dex list --from captain --base-asset eos-a99 --quote-asset okt -y -b block --fees 0.01okt
-        msg.submit(messages, Utils.NewDecString("0.01000000"), "200000", "okexchain dex list!");
+        msg.submit(messages, "0.01000000", "200000", "okexchain dex list!");
     }
 
     public Message produceListMsg(String listAsset, String quoteAsset, String initPrice) {
@@ -30,7 +30,7 @@ public class MsgList extends MsgBase {
         value.setOwner(this.address);
         value.setListAsset(listAsset);
         value.setQuoteAsset(quoteAsset);
-        value.setInitPrice(initPrice);
+        value.setInitPrice(Utils.NewDecString(initPrice));
 
         Message<MsgListValue> msg = new Message<>();
         msg.setType(msgType);

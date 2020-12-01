@@ -24,10 +24,10 @@ public class MsgDeListProposal extends MsgBase {
                 "delete xxx-okt",
                 "xxx",
                 "okt",
-                Utils.NewDecString("100.00000000")
+                "100.00000000"
         );
 
-        msg.submit(messages, Utils.NewDecString("0.01000000"), "200000", "OKExChain delete token pair!");
+        msg.submit(messages, "0.01000000", "200000", "OKExChain delete token pair!");
     }
 
     public Message produceDelistProposalMsg(
@@ -55,7 +55,7 @@ public class MsgDeListProposal extends MsgBase {
         List<Token> depositList = new ArrayList<>();
         Token deposit = new Token();
         deposit.setDenom("okt");
-        deposit.setAmount(amountDeposit);
+        deposit.setAmount(Utils.NewDecString(amountDeposit));
         depositList.add(deposit);
 
         MsgSubmitDeListProposalValue value = new MsgSubmitDeListProposalValue();

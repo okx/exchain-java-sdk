@@ -17,9 +17,9 @@ public class MsgDeposit extends MsgBase {
         MsgDeposit msg = new MsgDeposit();
         msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
 
-        Message messages = msg.produceMsg("okt", Utils.NewDecString("10.00000000"), "okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9");
+        Message messages = msg.produceMsg("okt", "10.00000000", "okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9");
 
-        msg.submit(messages, Utils.NewDecString("6.00000000"), "200000", "");
+        msg.submit(messages, "6.00000000", "200000", "");
     }
 
     public Message produceMsg(String denom, String amountDenom, String delegrator) {

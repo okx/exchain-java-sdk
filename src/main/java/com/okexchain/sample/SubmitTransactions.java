@@ -31,7 +31,7 @@ public class SubmitTransactions {
         String to = "okexchain1wq0zdnrc0r9uvqsly6622f4erl5qxly24qd4ur";
         String memo = "send memo";
         List<Token> amountList = new ArrayList<>();
-        Token amount = new Token(Utils.NewDecString("1.00000000"), "tokt");
+        Token amount = new Token("1.00000000", "tokt");
         amountList.add(amount);
         JSONObject ret = client.sendSendTransaction(account, to, amountList, memo);
         System.out.println(ret);
@@ -47,8 +47,8 @@ public class SubmitTransactions {
         AccountInfo account = client.getAccountInfo(privateKey);
         String side = "BUY";
         String product = "tbtc_tusdk";
-        String price = Utils.NewDecString("1.10000000");
-        String quantity = Utils.NewDecString("1.22000000");
+        String price = "1.10000000";
+        String quantity = "1.22000000";
         String memo = "new order memo";
         RequestPlaceOrderParams param = new RequestPlaceOrderParams(price, product, quantity, side);
         JSONObject ret = client.sendPlaceOrderTransaction(account, param, memo);
