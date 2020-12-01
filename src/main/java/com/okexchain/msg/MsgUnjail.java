@@ -3,6 +3,9 @@ package com.okexchain.msg;
 import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgUnjailValue;
+import com.okexchain.utils.Utils;
+
+import javax.swing.*;
 
 public class MsgUnjail  extends MsgBase {
     public MsgUnjail () {
@@ -14,7 +17,7 @@ public class MsgUnjail  extends MsgBase {
         MsgUnjail msg = new MsgUnjail();
         msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
         Message messages = msg.produceMsg("okexchainvaloper10q0rk5qnyag7wfvvt7rtphlw589m7frshchly8");
-        msg.submit(messages, "100000.00000000", "200000", "");
+        msg.submit(messages, Utils.NewDecString("100000.00000000"), "200000", "");
     }
 
     public Message produceMsg(String operAddress) {

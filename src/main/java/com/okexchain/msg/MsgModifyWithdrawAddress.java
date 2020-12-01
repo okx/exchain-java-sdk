@@ -2,6 +2,7 @@ package com.okexchain.msg;
 
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgModifyWithdrawAddressValue;
+import com.okexchain.utils.Utils;
 
 public class MsgModifyWithdrawAddress extends MsgBase {
 
@@ -17,7 +18,7 @@ public class MsgModifyWithdrawAddress extends MsgBase {
         Message messages = msg.produceModifyWithdrawAddressMsg(
                 "okexchain1v853tq96n9ghvyxlvqyxyj97589clccrufrkz9");
 
-        msg.submit(messages, "0.01000000", "200000", "okexchain modify withdraw address!");
+        msg.submit(messages, Utils.NewDecString("0.01000000"), "200000", "okexchain modify withdraw address!");
     }
 
     public Message produceModifyWithdrawAddressMsg(String withdrawAddress) {

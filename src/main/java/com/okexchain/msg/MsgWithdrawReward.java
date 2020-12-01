@@ -2,6 +2,7 @@ package com.okexchain.msg;
 
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgWithdrawRewardValue;
+import com.okexchain.utils.Utils;
 
 public class MsgWithdrawReward extends MsgBase {
 
@@ -17,7 +18,7 @@ public class MsgWithdrawReward extends MsgBase {
         Message messages = msg.produceWithdrawRewardMsg(
                 "okexchainvaloper10q0rk5qnyag7wfvvt7rtphlw589m7frshchly8");
 
-        msg.submit(messages, "0.01000000", "200000", "okexchain withdraw reward!");
+        msg.submit(messages, Utils.NewDecString("0.01000000"), "200000", "okexchain withdraw reward!");
     }
 
     public Message produceWithdrawRewardMsg(String withdrawAddress) {

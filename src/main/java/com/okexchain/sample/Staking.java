@@ -2,6 +2,7 @@ package com.okexchain.sample;
 
 import com.okexchain.env.EnvInstance;
 import com.okexchain.env.LocalEnv;
+import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
 import com.okexchain.msg.*;
 import com.okexchain.msg.tx.BoardcastTx;
@@ -38,7 +39,7 @@ public class Staking {
         Message messages = msg.produceMsg(delegator_address, proxy_address);
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "okexchain transfer!");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages, Utils.NewDecString("0.01000000"), "200000", "okexchain transfer!");
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
@@ -60,7 +61,7 @@ public class Staking {
         Message messages = msg.produceMsg("1","1","1","1", "okexchainvaloper10q0rk5qnyag7wfvvt7rtphlw589m7frshchly8");
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "okexchain transfer!");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,Utils.NewDecString("0.01000000"), "200000", "okexchain transfer!");
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 

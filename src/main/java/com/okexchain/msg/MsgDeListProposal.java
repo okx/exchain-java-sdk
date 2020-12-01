@@ -5,6 +5,7 @@ import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgDeListProposalValue;
 import com.okexchain.msg.types.MsgSubmitDeListProposalValue;
 import com.okexchain.msg.common.Token;
+import com.okexchain.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +24,10 @@ public class MsgDeListProposal extends MsgBase {
                 "delete xxx-okt",
                 "xxx",
                 "okt",
-                "100.00000000"
+                Utils.NewDecString("100.00000000")
         );
 
-        msg.submit(messages, "0.01000000", "200000", "OKExChain delete token pair!");
+        msg.submit(messages, Utils.NewDecString("0.01000000"), "200000", "OKExChain delete token pair!");
     }
 
     public Message produceDelistProposalMsg(

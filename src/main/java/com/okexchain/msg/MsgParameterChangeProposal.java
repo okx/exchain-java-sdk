@@ -13,6 +13,7 @@ import com.okexchain.msg.types.MsgParameterChangeProposalValue;
 import com.okexchain.msg.types.MsgParameterChangeProposalWrapperValue;
 import com.okexchain.msg.types.MsgSubmitProposalValue;
 import com.okexchain.msg.common.Token;
+import com.okexchain.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -35,10 +36,10 @@ public class MsgParameterChangeProposal extends MsgBase {
                 "",
                 "121",
                 "6000",
-                "100.00000000"
+                Utils.NewDecString("100.00000000")
         );
 
-        msg.submit(messages, "0.01000000", "200000", "OKExChain change parameter proposal!");
+        msg.submit(messages, Utils.NewDecString("0.01000000"), "200000", "OKExChain change parameter proposal!");
     }
 
 //    @SneakyThrows

@@ -3,6 +3,7 @@ package com.okexchain.msg;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgWithdrawValue;
 import com.okexchain.msg.common.Token;
+import com.okexchain.utils.Utils;
 
 public class MsgWithdraw extends MsgBase {
 
@@ -17,10 +18,10 @@ public class MsgWithdraw extends MsgBase {
 
         Message messages = msg.produceWithdrawMsg(
                 "okt",
-                "1.00000000");
+                Utils.NewDecString("1.00000000"));
 
         // okexchaincli tx send okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9 okexchain1v853tq96n9ghvyxlvqyxyj97589clccrufrkz9 6okt --from captain -y -b block --fees 0.01okt
-        msg.submit(messages, "0.01000000", "200000", "okexchain withdraw staking bonus!");
+        msg.submit(messages, Utils.NewDecString("0.01000000"), "200000", "okexchain withdraw staking bonus!");
     }
 
     public Message produceWithdrawMsg(String denom, String amountDenom) {

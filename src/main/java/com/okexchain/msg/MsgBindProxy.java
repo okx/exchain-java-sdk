@@ -4,6 +4,7 @@ package com.okexchain.msg;
 import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgBindProxyValue;
+import com.okexchain.utils.Utils;
 
 public class MsgBindProxy extends MsgBase {
 
@@ -18,7 +19,7 @@ public class MsgBindProxy extends MsgBase {
 
         Message messages = msg.produceMsg("okexchain1fqc7fw5ka5md4jyrnj53n2m82f5jewz9vrvnan", "okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9");
 
-        msg.submit(messages, "6.00000000", "200000", "");
+        msg.submit(messages, Utils.NewDecString("6.00000000"), "200000", "");
     }
 
     public Message produceMsg(String delegator_address, String proxy_address) {

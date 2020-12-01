@@ -2,6 +2,7 @@ package com.okexchain.msg;
 
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgCreateOperatorValue;
+import com.okexchain.utils.Utils;
 
 public class MsgCreateOperator extends MsgBase {
     public MsgCreateOperator() {
@@ -18,7 +19,7 @@ public class MsgCreateOperator extends MsgBase {
                 "https://captain.okg/operator.json");
 
         // okexchaincli tx dex register-operator --website http://captain.okg.com/operator.json --from captain --fees 0.02okt -b block -y
-        msg.submit(messages, "0.01000000", "200000", "okexchain dex create operator!");
+        msg.submit(messages, Utils.NewDecString("0.01000000"), "200000", "okexchain dex create operator!");
     }
 
     public Message produceCreateOperatorMsg(String handlingFeeAddress, String website) {

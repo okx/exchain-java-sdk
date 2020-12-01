@@ -3,6 +3,7 @@ package com.okexchain.sample;
 import com.okexchain.msg.MsgCreateValidator;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.tx.UnsignedTx;
+import com.okexchain.utils.Utils;
 
 public class Gentxes {
 
@@ -14,7 +15,7 @@ public class Gentxes {
         Message messages = msg.produceMsg(
                 params[1], params[2],
                 params[3], params[4],
-                params[5], "10000.00000000");
+                params[5], Utils.NewDecString("10000.00000000"));
 
         try {
             UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"", "200000", "v"+String.valueOf(idx));

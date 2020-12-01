@@ -1,6 +1,7 @@
 package com.okexchain.sample;
 import com.okexchain.env.EnvInstance;
 import com.okexchain.env.LocalEnv;
+import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
 import com.okexchain.msg.*;
 import com.okexchain.msg.tx.BoardcastTx;
@@ -30,7 +31,7 @@ public class Dex {
                 "https://captain.okg/operator.json");
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "okexchain dex create operator!");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages, Utils.NewDecString("0.01000000"), "200000", "okexchain dex create operator!");
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
             BoardcastTx signedTx = unsignedTx.signed(signature);
@@ -53,7 +54,7 @@ public class Dex {
                 "https://captain.okg/operator111.json");
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "okexchain dex create operator!");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,Utils.NewDecString("0.01000000"), "200000", "okexchain dex create operator!");
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
@@ -75,10 +76,10 @@ public class Dex {
         Message messages = msg.produceListMsg(
                 "eos-d87",
                 "okt",
-                "1.00000000");
+                Utils.NewDecString("1.00000000"));
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "okexchain dex list!");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,Utils.NewDecString("0.01000000"), "200000", "okexchain dex list!");
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
@@ -106,7 +107,7 @@ public class Dex {
             Signature toSignature = MsgBase.signTx(msgJson, keyTo.getPriKey());
             messages = msg.setToSignature(messages, toSignature);
 
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "dex transfer ownership");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,Utils.NewDecString("0.01000000"), "200000", "dex transfer ownership");
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), keyFrom.getPriKey());
 

@@ -2,6 +2,7 @@ package com.okexchain.msg;
 
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgListValue;
+import com.okexchain.utils.Utils;
 
 public class MsgList extends MsgBase {
 
@@ -17,10 +18,10 @@ public class MsgList extends MsgBase {
         Message messages = msg.produceListMsg(
                 "eos-f4d",
                 "okt",
-                "1.00000000");
+                Utils.NewDecString("1.00000000"));
 
         // okexchaincli tx dex list --from captain --base-asset eos-a99 --quote-asset okt -y -b block --fees 0.01okt
-        msg.submit(messages, "0.01000000", "200000", "okexchain dex list!");
+        msg.submit(messages, Utils.NewDecString("0.01000000"), "200000", "okexchain dex list!");
     }
 
     public Message produceListMsg(String listAsset, String quoteAsset, String initPrice) {

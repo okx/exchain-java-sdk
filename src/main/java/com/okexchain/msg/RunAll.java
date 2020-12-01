@@ -2,6 +2,7 @@ package com.okexchain.msg;
 
 import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.common.Message;
+import com.okexchain.utils.Utils;
 
 public class RunAll {
 
@@ -44,7 +45,7 @@ public class RunAll {
                 EnvInstance.getEnv().GetTransferAmount(),
                 EnvInstance.getEnv().GetNode1Addr());
 
-        msg.submit(messages, "6", "200000", "cosmos transfer");
+        msg.submit(messages, Utils.NewDecString("6"), "200000", "cosmos transfer");
     }
 
     static void RunMsgDelegate() {
@@ -55,7 +56,7 @@ public class RunAll {
 
         Message message = msg.produceDelegateMsg(EnvInstance.getEnv().GetDenom(), "100");
 
-        msg.submit(message, "3", "200000", "Delegate memo");
+        msg.submit(message, Utils.NewDecString("3"), "200000", "Delegate memo");
     }
 
     static void RunMsgRedelegate() {

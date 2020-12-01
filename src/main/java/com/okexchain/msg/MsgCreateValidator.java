@@ -5,6 +5,7 @@ import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgCreateOKValidatorValue;
 import com.okexchain.msg.common.Description;
 import com.okexchain.msg.common.Token;
+import com.okexchain.utils.Utils;
 
 
 public class MsgCreateValidator extends MsgBase {
@@ -19,7 +20,7 @@ public class MsgCreateValidator extends MsgBase {
         msg.setMsgType("cosmos-sdk/MsgCreateValidator");
         msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
         Message messages = msg.produceMsg();
-        msg.submit(messages, "6", "200000", "");
+        msg.submit(messages, Utils.NewDecString("6"), "200000", "");
     }
 
     public Message produceMsg() {
@@ -37,7 +38,7 @@ public class MsgCreateValidator extends MsgBase {
 
 
         Token t = new Token();
-        t.setAmount("10000.00000000");
+        t.setAmount(Utils.NewDecString("10000.00000000"));
         t.setDenom(EnvInstance.getEnv().GetDenom());
 
         value.setDescription(d);

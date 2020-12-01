@@ -2,6 +2,7 @@ package com.okexchain.sample;
 
 import com.okexchain.env.EnvInstance;
 import com.okexchain.env.LocalEnv;
+import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.MsgSend;
@@ -26,11 +27,11 @@ public class ColdSign {
 
         Message messages = msg.produceSendMsg(
                 "okt",
-                "6.00000000",
+                Utils.NewDecString("6.00000000"),
                 "okexchain1v853tq96n9ghvyxlvqyxyj97589clccrufrkz9");
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages, "0.01000000", "200000", "okexchain transfer!");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages, Utils.NewDecString("0.01000000"), "200000", "okexchain transfer!");
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 

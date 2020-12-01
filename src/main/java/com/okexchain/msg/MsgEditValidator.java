@@ -4,6 +4,7 @@ import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgEditValidatorValue;
 import com.okexchain.msg.common.Description;
+import com.okexchain.utils.Utils;
 
 public class MsgEditValidator extends MsgBase {
     public MsgEditValidator() {
@@ -18,7 +19,7 @@ public class MsgEditValidator extends MsgBase {
 
         Message messages = msg.produceMsg("1","1","1","1", "okexchainvaloper10q0rk5qnyag7wfvvt7rtphlw589m7frshchly8");
 
-        msg.submit(messages, "6.00000000", "200000", "");
+        msg.submit(messages, Utils.NewDecString("6.00000000"), "200000", "");
     }
 
     public Message produceMsg(String details, String identity, String moniker, String website, String operAddress) {

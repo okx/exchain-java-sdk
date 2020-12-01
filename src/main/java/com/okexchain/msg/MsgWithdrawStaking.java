@@ -4,6 +4,7 @@ import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgWithdrawStakingValue;
 import com.okexchain.msg.common.DecCoin;
+import com.okexchain.utils.Utils;
 
 public class MsgWithdrawStaking  extends MsgBase {
     public MsgWithdrawStaking() {
@@ -15,9 +16,9 @@ public class MsgWithdrawStaking  extends MsgBase {
         MsgWithdrawStaking msg = new MsgWithdrawStaking();
         msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
 
-        Message messages = msg.produceMsg("okt", "10.00000000", "okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9");
+        Message messages = msg.produceMsg("okt", Utils.NewDecString("10.00000000"), "okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9");
 
-        msg.submit(messages, "6.00000000", "200000", "");
+        msg.submit(messages, Utils.NewDecString("6.00000000"), "200000", "");
     }
 
     public Message produceMsg(String denom, String amountDenom, String delegrator) {

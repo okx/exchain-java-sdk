@@ -13,6 +13,7 @@ import com.okexchain.legacy.types.staking.*;
 import com.okexchain.legacy.encoding.EncodeUtils;
 import com.okexchain.legacy.encoding.message.AminoEncode;
 import com.okexchain.legacy.exception.InvalidFormatException;
+import com.okexchain.utils.Utils;
 import org.bouncycastle.util.Strings;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
@@ -24,7 +25,7 @@ import java.util.List;
 public class BuildTransaction {
     private static String mode = ConstantIF.TX_SEND_MODE_SYNC;
     private static String nativeDenom = ConstantIF.BASE_COIN_NAME;
-    private static String defaultAmount = "0.00200000";
+    private static String defaultAmount = Utils.NewDecString("0.00200000");
     private static String defaultGas = "200000";
     private static Fee fee = new Fee(new Token(defaultAmount, nativeDenom), defaultGas);
 

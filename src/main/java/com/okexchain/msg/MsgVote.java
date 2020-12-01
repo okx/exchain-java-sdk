@@ -2,6 +2,7 @@ package com.okexchain.msg;
 
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgVoteValue;
+import com.okexchain.utils.Utils;
 
 public class MsgVote extends MsgBase {
 
@@ -18,7 +19,7 @@ public class MsgVote extends MsgBase {
                 "2",
                 "Yes");
 
-        msg.submit(messages, "0.01000000", "200000", "okexchain gov vot!");
+        msg.submit(messages, Utils.NewDecString("0.01000000"), "200000", "okexchain gov vot!");
     }
 
     public Message produceVoteMsg(String ProposalID, String option) {
