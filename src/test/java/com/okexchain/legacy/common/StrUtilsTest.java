@@ -2,6 +2,7 @@ package com.okexchain.legacy.common;
 
 import org.junit.Assert;
 import org.junit.Test;
+import com.okexchain.utils.Utils;
 
 public class StrUtilsTest {
 
@@ -48,5 +49,15 @@ public class StrUtilsTest {
         Assert.assertFalse(StrUtils.isProductSide("999"));
         Assert.assertTrue(StrUtils.isProductSide("BUY"));
         Assert.assertTrue(StrUtils.isProductSide("SELL"));
+    }
+
+    @Test
+    public void strToDecStrTest() {
+        Assert.assertEquals("1.000000000000000000", Utils.NewDecString("1.000"));
+        Assert.assertEquals("1.000000000000000000", Utils.NewDecString("1.0"));
+        Assert.assertEquals("1.000000000000000000", Utils.NewDecString("1.0"));
+        Assert.assertEquals("1.000000000000000000", Utils.NewDecString("1"));
+        Assert.assertEquals("-1.000000000000000000", Utils.NewDecString("-1"));
+        Assert.assertEquals("0.002000000000000000", Utils.NewDecString("0.00200000"));
     }
 }

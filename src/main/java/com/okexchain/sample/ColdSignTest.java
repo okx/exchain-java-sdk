@@ -1,5 +1,6 @@
 package com.okexchain.sample;
 
+import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.MsgTokenIssue;
@@ -74,7 +75,7 @@ public class ColdSignTest {
 //            UnsignedTx unsignedTx = msg.getUnsignedTx(messagesTransfer,"0.00200000", "200000", "");
 
             // confirm ownership
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messagesConfirm,"0.00200000", "200000", "");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messagesConfirm, "0.00200000", "200000", "");
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 

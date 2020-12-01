@@ -4,6 +4,7 @@ import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgEditValidatorValue;
 import com.okexchain.msg.common.Description;
+import com.okexchain.utils.Utils;
 
 public class MsgEditValidator extends MsgBase {
     public MsgEditValidator() {

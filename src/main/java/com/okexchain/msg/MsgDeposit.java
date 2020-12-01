@@ -4,6 +4,7 @@ import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgDepositValue;
 import com.okexchain.msg.common.DecCoin;
+import com.okexchain.utils.Utils;
 
 public class MsgDeposit extends MsgBase {
     public MsgDeposit() {

@@ -5,6 +5,7 @@ import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgDeListProposalValue;
 import com.okexchain.msg.types.MsgSubmitDeListProposalValue;
 import com.okexchain.msg.common.Token;
+import com.okexchain.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,7 @@ public class MsgDeListProposal extends MsgBase {
         List<Token> depositList = new ArrayList<>();
         Token deposit = new Token();
         deposit.setDenom("okt");
-        deposit.setAmount(amountDeposit);
+        deposit.setAmount(Utils.NewDecString(amountDeposit));
         depositList.add(deposit);
 
         MsgSubmitDeListProposalValue value = new MsgSubmitDeListProposalValue();
