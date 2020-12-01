@@ -5,6 +5,7 @@ import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgCreateOKValidatorValue;
 import com.okexchain.msg.common.Description;
 import com.okexchain.msg.common.Token;
+import com.okexchain.utils.Utils;
 
 
 public class MsgCreateValidator extends MsgBase {
@@ -37,7 +38,7 @@ public class MsgCreateValidator extends MsgBase {
 
 
         Token t = new Token();
-        t.setAmount("10000.00000000");
+        t.setAmount(Utils.NewDecString("10000.00000000"));
         t.setDenom(EnvInstance.getEnv().GetDenom());
 
         value.setDescription(d);
@@ -65,7 +66,7 @@ public class MsgCreateValidator extends MsgBase {
         value.setDescription(d);
 
         Token t = new Token();
-        t.setAmount(msdAmount);
+        t.setAmount(Utils.NewDecString(msdAmount));
         t.setDenom(EnvInstance.getEnv().GetDenom());
         value.setMinSelfDelegation(t);
 

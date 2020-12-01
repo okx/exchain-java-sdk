@@ -2,6 +2,7 @@ package com.okexchain.msg;
 
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgListValue;
+import com.okexchain.utils.Utils;
 
 public class MsgList extends MsgBase {
 
@@ -29,7 +30,7 @@ public class MsgList extends MsgBase {
         value.setOwner(this.address);
         value.setListAsset(listAsset);
         value.setQuoteAsset(quoteAsset);
-        value.setInitPrice(initPrice);
+        value.setInitPrice(Utils.NewDecString(initPrice));
 
         Message<MsgListValue> msg = new Message<>();
         msg.setType(msgType);

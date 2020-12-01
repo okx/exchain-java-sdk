@@ -3,6 +3,7 @@ package com.okexchain.msg;
 import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgAddSharesValue;
+import com.okexchain.utils.Utils;
 
 public class MsgAddShares extends MsgBase {
 

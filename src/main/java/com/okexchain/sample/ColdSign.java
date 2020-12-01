@@ -2,6 +2,7 @@ package com.okexchain.sample;
 
 import com.okexchain.env.EnvInstance;
 import com.okexchain.env.LocalEnv;
+import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.MsgSend;
