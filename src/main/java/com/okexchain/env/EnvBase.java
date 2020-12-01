@@ -10,10 +10,10 @@ public class EnvBase {
         return "okexchain";
     };
     public String GetDenom(){
-        return "okt";
+        return "tokt";
     }
     public String GetChainid(){
-        return "okexchain";
+        return "okexchaintestnet-1";
     }
 
     public String GetRestServerUrl(){
