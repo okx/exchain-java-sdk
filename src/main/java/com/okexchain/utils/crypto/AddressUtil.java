@@ -4,24 +4,34 @@ import com.okexchain.utils.crypto.encode.Bech32;
 import com.okexchain.utils.crypto.encode.ConvertBits;
 import com.okexchain.utils.crypto.hash.Ripemd;
 import com.okexchain.utils.exception.AddressFormatException;
+import org.web3j.crypto.Keys;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import static org.bitcoinj.core.ECKey.CURVE;
+
 public class AddressUtil {
 
     public static String createNewAddressSecp256k1(String mainPrefix, byte[] publickKey) throws Exception {
+        // convert 33 bytes public key to 65 bytes public key
+        byte[] uncompressedPubKey = CURVE.getCurve().decodePoint(publickKey).getEncoded(false);
+        byte[] pub = new byte[64];
+        // truncate last 64 bytes to generate address
+        System.arraycopy(uncompressedPubKey, 1, pub, 0, 64);
+
+        //get address
+        byte[] address = Keys.getAddress(pub);
+
+        //get okexchain
         String addressResult = null;
         try {
-            byte[] pubKeyHash = sha256Hash(publickKey, 0, publickKey.length);
-            byte[] address = Ripemd.ripemd160(pubKeyHash);
             byte[] bytes = encode(0, address);
-            addressResult = com.okexchain.utils.crypto.encode.Bech32.encode(mainPrefix, bytes);
+            addressResult = com.okexchain.legacy.crypto.io.cosmos.crypto.encode.Bech32.encode(mainPrefix, bytes);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return addressResult;
-
     }
 
     public static byte[] getPubkeyValue(byte[] publickKey) throws Exception {
@@ -61,16 +71,5 @@ public class AddressUtil {
     private static byte[] encode(int witnessVersion, byte[] witnessProgram) throws AddressFormatException {
         byte[] convertedProgram = ConvertBits.convertBits(witnessProgram, 0, witnessProgram.length, 8, 5, true);
         return convertedProgram;
-    }
-
-    public static String createNewAddressETHSecp256k1(String mainPrefix, byte[] ethAddress) throws Exception {
-        String addressResult = null;
-        try {
-            byte[] bytes = encode(0, ethAddress);
-            addressResult = com.okexchain.utils.crypto.encode.Bech32.encode(mainPrefix, bytes);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return addressResult;
     }
 }

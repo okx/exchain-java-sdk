@@ -16,7 +16,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.List;
-import org.web3j.crypto.Keys;
 
 public class Crypto {
 
@@ -103,8 +102,7 @@ public class Crypto {
 
     public static String generateAddressFromPub(String pubKey) {
         try {
-            String ethAddr = Keys.getAddress(pubKey);
-            String addr = AddressUtil.createNewAddressETHSecp256k1(EnvInstance.getEnv().GetMainPrefix(), Hex.decode(ethAddr));
+            String addr = AddressUtil.createNewAddressSecp256k1(EnvInstance.getEnv().GetMainPrefix(), Hex.decode(pubKey));
             return addr;
         } catch (Exception e) {
             e.printStackTrace();
@@ -128,8 +126,7 @@ public class Crypto {
     public static String generateValidatorAddressFromPub(String pubKey) {
 
         try {
-            String ethAddr = Keys.getAddress(pubKey);
-            String addr = AddressUtil.createNewAddressETHSecp256k1(EnvInstance.getEnv().GetValidatorAddrPrefix(), Hex.decode(ethAddr));
+            String addr = AddressUtil.createNewAddressSecp256k1(EnvInstance.getEnv().GetValidatorAddrPrefix(), Hex.decode(pubKey));
             return addr;
         } catch (Exception e) {
             e.printStackTrace();
