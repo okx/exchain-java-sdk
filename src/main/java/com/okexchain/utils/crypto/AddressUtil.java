@@ -74,5 +74,4 @@ public class AddressUtil {
         byte[] convertedProgram = ConvertBits.convertBits(witnessProgram, 0, witnessProgram.length, 8, 5, true);
         return convertedProgram;
     }
-
 }

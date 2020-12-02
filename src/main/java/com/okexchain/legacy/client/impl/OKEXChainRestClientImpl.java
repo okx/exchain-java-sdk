@@ -12,6 +12,7 @@ import com.okexchain.legacy.transaction.BuildTransaction;
 import com.okexchain.legacy.types.*;
 import com.okexchain.legacy.types.staking.CommissionRates;
 import com.okexchain.legacy.types.staking.Description;
+import com.okexchain.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -81,12 +82,12 @@ public class OKEXChainRestClientImpl implements OKEXChainClient {
     }
 
     private String getSequance(JSONObject account) {
-        String res = (String) account.getJSONObject("value").get("sequence");
+        String res = account.getJSONObject("value").get("sequence").toString();
         return res;
     }
 
     private String getAccountNumber(JSONObject account) {
-        String res = (String) account.getJSONObject("value").get("account_number");
+        String res = account.getJSONObject("value").get("account_number").toString();
         return res;
     }
     public AccountInfo getAccountInfoFromMnemonic(String mnemo) throws NullPointerException {
@@ -110,7 +111,7 @@ public class OKEXChainRestClientImpl implements OKEXChainClient {
         return KeyStoreUtils.getPrivateKeyFromKeyStoreFile(keyStoreFilePath, passWord);
     }
 
-    public JSONObject sendSendTransaction(AccountInfo account, String to, List<Token> amount, String memo) throws NullPointerException {
+    public JSONObject sendSendTransaction(AccountInfo account, String to, List<Token> amounts, String memo) throws NullPointerException {
         // 检查这个账户不是空账户
         checkAccountInfoValue(account);
 
@@ -118,10 +119,11 @@ public class OKEXChainRestClientImpl implements OKEXChainClient {
         if (to.equals(""))
             throw new NullPointerException("empty to");
 
-        if (amount == null || amount.isEmpty())
+        if (amounts == null || amounts.isEmpty())
             throw new NullPointerException("empty amount");
+        amounts.forEach(amount -> amount.setAmount(Utils.NewDecString(amount.getAmount())));
         // 生成最终要发送到网络中的json串(String)
-        String data = BuildTransaction.generateSendTransaction(account, to, amount, memo);
+        String data = BuildTransaction.generateSendTransaction(account, to, amounts, memo);
         // sendTransaction是用post请求将data(json串发到主网)
         return sendTransaction(data);
         // return 主网给的答复：
@@ -153,6 +155,7 @@ public class OKEXChainRestClientImpl implements OKEXChainClient {
     public JSONObject sendMultiSendTransaction(AccountInfo account, List<TransferUnit> transfers, String memo) throws IOException {
         checkAccountInfoValue(account);
         if (transfers == null || transfers.isEmpty()) throw new NullPointerException("empty transfers");
+        transfers.forEach(transfer -> transfer.getCoins().forEach(amount -> amount.setAmount(Utils.NewDecString(amount.getAmount()))));
         String data = BuildTransaction.generateMultiSendTransaction(account, transfers, memo);
         return sendTransaction(data);
     }

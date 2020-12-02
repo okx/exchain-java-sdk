@@ -46,11 +46,11 @@ public class OKEXChainRPCClientImpl implements OKEXChainClient {
     // account
 
     private String getSequance(JSONObject account) {
-        return (String) account.getJSONObject("value").get("sequence");
+        return account.getJSONObject("value").get("sequence").toString();
     }
 
     private String getAccountNumber(JSONObject account) {
-        return (String) account.getJSONObject("value").get("account_number");
+        return account.getJSONObject("value").get("account_number").toString();
     }
 
     public String getPrivateKeyFromMnemonic(String mnemonic) {

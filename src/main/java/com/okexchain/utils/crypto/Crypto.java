@@ -19,7 +19,6 @@ import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.List;
 
-
 public class Crypto {
 
     public static byte[] sign(byte[] msg, String privateKey) throws NoSuchAlgorithmException {
@@ -126,7 +125,6 @@ public class Crypto {
         return true;
     }
 
-
     public static String generateValidatorAddressFromPub(String pubKey) {
 
         try {
@@ -137,6 +135,7 @@ public class Crypto {
             return "";
         }
     }
+
     public static String generateBechPub(String pubKey) {
 
         try {

@@ -1,14 +1,14 @@
 package com.okexchain.legacy.common;
 
 public interface ConstantIF {
-    int DECIMAL_N = 8;
+    int DECIMAL_N = 18;
     int MAX_MEMO_LEN =256;
 
 
 //    String BASE_COIN_NAME = "okt";
 //    String CHAIN_ID = "okexchain";
     String BASE_COIN_NAME = "tokt";
-    String CHAIN_ID = "testnet-1";
+    String CHAIN_ID = "okexchaintestnet-1";
 
     String ADDRESS_PREFIX = "okexchain";
     String VALIDATOR_ADDRESS_PREFIX = "okexchainvaloper";

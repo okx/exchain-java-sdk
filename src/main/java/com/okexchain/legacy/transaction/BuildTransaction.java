@@ -17,8 +17,12 @@ import com.okexchain.utils.Utils;
 import org.bouncycastle.util.Strings;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
+import org.web3j.crypto.ECKeyPair;
+import org.web3j.crypto.Sign;
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -184,11 +188,15 @@ public class BuildTransaction {
 
     private static Signature sign(byte[] byteSignData, String privateKey) throws Exception {
         //sign
-        byte[] sig = Crypto.sign(byteSignData, privateKey);
-        String sigResult = Strings.fromByteArray(Base64.encode(sig));
+//        byte[] sig = Crypto.sign(byteSignData, privateKey);
+//        String sigResult = Strings.fromByteArray(Base64.encode(sig));
+        BigInteger privKey = new BigInteger(privateKey, 16);
+        Sign.SignatureData sig = Sign.signMessage(byteSignData, ECKeyPair.create(privKey));
+        String sigResult =  toBase64(sig);
+
         Signature signature = new Signature();
         Pubkey pubkey = new Pubkey();
-        pubkey.setType("tendermint/PubKeySecp256k1");
+        pubkey.setType("ethermint/PubKeyEthSecp256k1");
         pubkey.setValue(Strings.fromByteArray(
                 Base64.encode(Hex.decode(Crypto.generatePubKeyHexFromPriv(privateKey)))));
         signature.setPubkey(pubkey);
@@ -273,4 +281,12 @@ public class BuildTransaction {
     }
 
 
+    public static String toBase64(Sign.SignatureData sig) {
+        byte[] sigData = new byte[64];  // 32 bytes for R + 32 bytes for S
+        System.arraycopy(sig.getR(), 0, sigData, 0, 32);
+        System.arraycopy(sig.getS(), 0, sigData, 32, 32);
+//        sigData[64] = sig.getV();
+        System.out.println(Hex.toHexString(sigData));
+        return new String(org.spongycastle.util.encoders.Base64.encode(sigData), Charset.forName("UTF-8"));
+    }
 }
