@@ -11,17 +11,24 @@ import org.web3j.crypto.Sign;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import static org.bitcoinj.core.ECKey.CURVE;
 
 public class AddressUtil {
 
     public static String createNewAddressSecp256k1(String mainPrefix, byte[] publickKey) throws Exception {
+        // convert 33 bytes public key to 65 bytes public key
+        byte[] uncompressedPubKey = CURVE.getCurve().decodePoint(publickKey).getEncoded(false);
+        byte[] pub = new byte[64];
+        // truncate last 64 bytes to generate address
+        System.arraycopy(uncompressedPubKey, 1, pub, 0, 64);
+
         //get address
-        String address = Keys.getAddress(new BigInteger(publickKey));
+        byte[] address = Keys.getAddress(pub);
 
         //get okexchain
         String addressResult = null;
         try {
-            byte[] bytes = encode(0, Hex.decode(address));
+            byte[] bytes = encode(0, address);
             addressResult = com.okexchain.utils.crypto.encode.Bech32.encode(mainPrefix, bytes);
         } catch (Exception e) {
             throw new RuntimeException(e);
