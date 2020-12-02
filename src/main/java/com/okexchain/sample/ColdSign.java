@@ -2,6 +2,8 @@ package com.okexchain.sample;
 
 import com.okexchain.env.EnvInstance;
 import com.okexchain.env.LocalEnv;
+import com.okexchain.utils.crypto.AddressUtil;
+import com.okexchain.utils.crypto.Crypto;
 import com.okexchain.utils.crypto.PrivateKey;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.MsgSend;
@@ -9,15 +11,21 @@ import com.okexchain.msg.tx.BoardcastTx;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.tx.UnsignedTx;
 import com.okexchain.msg.common.Signature;
+import sun.jvm.hotspot.debugger.Address;
 
 public class ColdSign {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
-        EnvInstance.setEnv(new LocalEnv("http://localhost:26659"));
+        EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
 
-        PrivateKey key = new PrivateKey("8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7");
+        PrivateKey key = new PrivateKey("raw flame junior chunk mule together aerobic water motor crunch sense alien");
 
+        String okaddress = Crypto.generateAddressFromPub(key.getPubKey());
+
+        System.out.println("okaddress " + okaddress);
+        System.out.println(key.getPriKey());
+        System.out.println(key.getPubKey());
         MsgSend msg = new MsgSend();
 //        msg.init(key.getAddress(), key.getPubKey());
 
@@ -39,7 +47,7 @@ public class ColdSign {
             System.out.println(signedTx.toJson());
 
 
-//            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
 
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");

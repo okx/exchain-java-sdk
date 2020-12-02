@@ -9,6 +9,8 @@ import org.bitcoinj.core.Utils;
 import org.bitcoinj.crypto.*;
 import org.bouncycastle.util.encoders.DecoderException;
 import org.bouncycastle.util.encoders.Hex;
+import org.web3j.crypto.Sign;
+import sun.nio.cs.ext.Big5;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

@@ -4,24 +4,29 @@ import com.okexchain.utils.crypto.encode.Bech32;
 import com.okexchain.utils.crypto.encode.ConvertBits;
 import com.okexchain.utils.crypto.hash.Ripemd;
 import com.okexchain.utils.exception.AddressFormatException;
+import org.bouncycastle.util.encoders.Hex;
+import org.web3j.crypto.Keys;
+import org.web3j.crypto.Sign;
 
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class AddressUtil {
 
     public static String createNewAddressSecp256k1(String mainPrefix, byte[] publickKey) throws Exception {
+        //get address
+        String address = Keys.getAddress(new BigInteger(publickKey));
+
+        //get okexchain
         String addressResult = null;
         try {
-            byte[] pubKeyHash = sha256Hash(publickKey, 0, publickKey.length);
-            byte[] address = Ripemd.ripemd160(pubKeyHash);
-            byte[] bytes = encode(0, address);
+            byte[] bytes = encode(0, Hex.decode(address));
             addressResult = com.okexchain.utils.crypto.encode.Bech32.encode(mainPrefix, bytes);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return addressResult;
-
     }
 
     public static byte[] getPubkeyValue(byte[] publickKey) throws Exception {
@@ -63,5 +68,16 @@ public class AddressUtil {
         return convertedProgram;
     }
 
+
+    public static String createNewAddressEthSecp256k1(String mainPrefix, byte[] address) throws Exception {
+        String addressResult = null;
+        try {
+            byte[] bytes = encode(0, address);
+            addressResult = com.okexchain.utils.crypto.encode.Bech32.encode(mainPrefix, bytes);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return addressResult;
+    }
 
 }
