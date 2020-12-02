@@ -13,7 +13,6 @@ public class PrivateKey {
 
     public PrivateKey(String mnemonic) {
         if (mnemonic.indexOf(' ') >= 0) {
-            // TODO
             priKeyString = Crypto.generatePrivateKeyFromMnemonic(mnemonic);
         } else {
             priKeyString = mnemonic;

@@ -13,13 +13,16 @@ import com.okexchain.legacy.types.staking.*;
 import com.okexchain.legacy.encoding.EncodeUtils;
 import com.okexchain.legacy.encoding.message.AminoEncode;
 import com.okexchain.legacy.exception.InvalidFormatException;
-import com.okexchain.msg.MsgBase;
 import com.okexchain.utils.Utils;
 import org.bouncycastle.util.Strings;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
+import org.web3j.crypto.ECKeyPair;
+import org.web3j.crypto.Sign;
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -185,21 +188,26 @@ public class BuildTransaction {
 
     private static Signature sign(byte[] byteSignData, String privateKey) throws Exception {
         //sign
-        com.okexchain.msg.common.Signature signature = MsgBase.signTx(byteSignData.toString(), privateKey);
-
 //        byte[] sig = Crypto.sign(byteSignData, privateKey);
 //        String sigResult = Strings.fromByteArray(Base64.encode(sig));
-//        Signature signature = new Signature();
-//        Pubkey pubkey = new Pubkey();
-//        pubkey.setType("ethermint/PubKeyEthSecp256k1");
-//        pubkey.setValue(Strings.fromByteArray(
-//                Base64.encode(Hex.decode(Crypto.generatePubKeyHexFromPriv(privateKey)))));
-//        signature.setPubkey(pubkey);
-//        signature.setSignature(sigResult);
-        Signature newSig = new Signature();
-        newSig.setPubkey(signature.getPubkey());
-        newSig.setSignature(signature.getSignature());
-        return newSig;
+        BigInteger privKey = new BigInteger(privateKey, 16);
+        Sign.SignatureData sig = Sign.signMessage(byteSignData, ECKeyPair.create(privKey));
+        String sigResult =  toBase64(sig);
+
+        Signature signature = new Signature();
+        Pubkey pubkey = new Pubkey();
+        pubkey.setType("ethermint/PubKeyEthSecp256k1");
+        pubkey.setValue(Strings.fromByteArray(
+                Base64.encode(Hex.decode(Crypto.generatePubKeyHexFromPriv(privateKey)))));
+        signature.setPubkey(pubkey);
+        signature.setSignature(sigResult);
+        System.out.println("privateKey: ");
+        System.out.println(privateKey);
+
+        System.out.println("signature: ");
+        System.out.println(sigResult);
+
+        return signature;
     }
 
 
@@ -269,6 +277,7 @@ public class BuildTransaction {
             StdTransaction stdTransaction = new StdTransaction(new IMsg[]{stdMsg}, fee, signatures, memo);
 
             PostTransaction postTransaction = new PostTransaction(stdTransaction, mode);
+            System.out.println(JSON.toJSONString(postTransaction));
             return JSON.toJSONString(postTransaction);
 
         } catch (Exception e) {
@@ -278,4 +287,12 @@ public class BuildTransaction {
     }
 
 
+    public static String toBase64(Sign.SignatureData sig) {
+        byte[] sigData = new byte[64];  // 32 bytes for R + 32 bytes for S
+        System.arraycopy(sig.getR(), 0, sigData, 0, 32);
+        System.arraycopy(sig.getS(), 0, sigData, 32, 32);
+//        sigData[64] = sig.getV();
+        System.out.println(Hex.toHexString(sigData));
+        return new String(org.spongycastle.util.encoders.Base64.encode(sigData), Charset.forName("UTF-8"));
+    }
 }
