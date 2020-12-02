@@ -11,8 +11,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @JsonPropertyOrder(alphabetic = true)
 public class MsgConfirmTokenPairOwnershipValue {
 
-    @JsonProperty("from_address")
-    @SerializedName("from_address")
+    @JsonProperty("new_owner")
+    @SerializedName("new_owner")
     private String fromAddress;
 
     @JsonProperty("product")
@@ -26,7 +26,7 @@ public class MsgConfirmTokenPairOwnershipValue {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("from_address", fromAddress)
+                .append("new_owner", fromAddress)
                 .append("product", product)
                 .toString();
     }
