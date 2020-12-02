@@ -4,6 +4,7 @@ import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgWithdrawStakingValue;
 import com.okexchain.msg.common.DecCoin;
+import com.okexchain.utils.Utils;
 
 public class MsgWithdrawStaking  extends MsgBase {
     public MsgWithdrawStaking() {
@@ -24,7 +25,7 @@ public class MsgWithdrawStaking  extends MsgBase {
 
         DecCoin d = new DecCoin();
         d.setDenom(denom);
-        d.setAmount(amountDenom);
+        d.setAmount(Utils.NewDecString(amountDenom));
 
         MsgWithdrawStakingValue value = new MsgWithdrawStakingValue();
 

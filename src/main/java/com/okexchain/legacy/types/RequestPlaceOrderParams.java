@@ -1,6 +1,7 @@
 package com.okexchain.legacy.types;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.okexchain.utils.Utils;
 
 public class RequestPlaceOrderParams {
     @JSONField(name = "Price")
@@ -20,9 +21,9 @@ public class RequestPlaceOrderParams {
     private String side;
 
     public RequestPlaceOrderParams(String price, String product, String quantity, String side) {
-        this.price = price;
+        this.price = Utils.NewDecString(price);
         this.product = product;
-        this.quantity = quantity;
+        this.quantity = Utils.NewDecString(quantity);
         this.side = side;
     }
 
