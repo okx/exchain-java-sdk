@@ -94,7 +94,7 @@ public class MsgBase {
                        String gas,
                        String memo) {
         try {
-            UnsignedTx unsignedTx = getUnsignedTx(message, feeAmount, gas, memo);
+            UnsignedTx unsignedTx = getUnsignedTx(message, Utils.NewDecString(feeAmount), gas, memo);
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), priKeyString);
 
@@ -121,7 +121,7 @@ public class MsgBase {
             if (feeAmount.length() > 0) {
                 Token amount = new Token();
                 amount.setDenom(EnvInstance.getEnv().GetDenom());
-                amount.setAmount(feeAmount);
+                amount.setAmount(Utils.NewDecString(feeAmount));
                 amountList.add(amount);
             }
             fee.setGas(gas);

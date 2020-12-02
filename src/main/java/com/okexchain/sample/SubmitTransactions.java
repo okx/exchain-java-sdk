@@ -6,6 +6,7 @@ import com.okexchain.legacy.transaction.BuildTransaction;
 import com.okexchain.legacy.types.AccountInfo;
 import com.okexchain.legacy.types.RequestPlaceOrderParams;
 import com.okexchain.legacy.types.Token;
+import com.okexchain.utils.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;

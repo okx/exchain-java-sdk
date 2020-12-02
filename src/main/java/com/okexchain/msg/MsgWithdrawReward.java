@@ -2,6 +2,7 @@ package com.okexchain.msg;
 
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgWithdrawRewardValue;
+import com.okexchain.utils.Utils;
 
 public class MsgWithdrawReward extends MsgBase {
 

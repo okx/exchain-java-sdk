@@ -3,6 +3,7 @@ package com.okexchain.msg;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgSendValue;
 import com.okexchain.msg.common.Token;
+import com.okexchain.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class MsgSend extends MsgBase {
         List<Token> amountList = new ArrayList<>();
         Token amount = new Token();
         amount.setDenom(denom);
-        amount.setAmount(amountDenom);
+        amount.setAmount(Utils.NewDecString(amountDenom));
         amountList.add(amount);
 
         MsgSendValue value = new MsgSendValue();

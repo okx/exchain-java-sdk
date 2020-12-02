@@ -4,6 +4,7 @@ import com.okexchain.env.EnvInstance;
 import com.okexchain.env.LocalEnv;
 import com.okexchain.utils.crypto.AddressUtil;
 import com.okexchain.utils.crypto.Crypto;
+import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.MsgSend;

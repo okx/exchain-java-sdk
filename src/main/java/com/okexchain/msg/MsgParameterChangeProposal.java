@@ -13,6 +13,7 @@ import com.okexchain.msg.types.MsgParameterChangeProposalValue;
 import com.okexchain.msg.types.MsgParameterChangeProposalWrapperValue;
 import com.okexchain.msg.types.MsgSubmitProposalValue;
 import com.okexchain.msg.common.Token;
+import com.okexchain.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
