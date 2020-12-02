@@ -21,9 +21,9 @@ import java.util.List;
 
 public class OKEXChainRestClientImplTest {
 
-    private static String PRIVATEKEY = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
+    private static String PRIVATEKEY = "8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7";
     // rest service port is 26659
-    private static String URL = "http://127.0.0.1:26659";
+    private static String URL = "http://localhost:8545";
     private static String ADDRESS = "okexchain1g7c3nvac7mjgn2m9mqllgat8wwd3aptddw77gw";
     private static String MNEMONIC = "total lottery arena when pudding best candy until army spoil drill pool";
 
@@ -180,12 +180,10 @@ public class OKEXChainRestClientImplTest {
         transfers.add(generateTrasferUnit(to2, denom, amount));
 
         JSONObject resJson = okc.sendMultiSendTransaction(account, transfers, memo);
-
         Object code = resJson.get("code");
         Object err = resJson.get("error");
         Assert.assertNull(code);
         Assert.assertNull(err);
-        Assert.assertEquals(true, resJson.getJSONArray("logs").getJSONObject(0).get("success"));
     }
 
 
