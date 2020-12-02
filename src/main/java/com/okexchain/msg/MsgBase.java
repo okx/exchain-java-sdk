@@ -12,9 +12,7 @@ import com.okexchain.msg.tx.UnsignedTx;
 import org.bouncycastle.util.Strings;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
-import org.web3j.crypto.ECDSASignature;
 import org.web3j.crypto.ECKeyPair;
-import org.web3j.crypto.Hash;
 import org.web3j.crypto.Sign;
 
 import java.io.BufferedOutputStream;
@@ -173,7 +171,7 @@ public class MsgBase {
         pubkey.setValue(Strings.fromByteArray(Base64.encode(Hex.decode(Crypto.generatePubKeyHexFromPriv(privateKey)))));
         signature.setPubkey(pubkey);
         signature.setSignature(sigResult);
-
+//
 //        System.out.println("privateKey: ");
 //        System.out.println(privateKey);
 //
@@ -222,5 +220,4 @@ public class MsgBase {
         System.out.println(Hex.toHexString(sigData));
         return new String(org.spongycastle.util.encoders.Base64.encode(sigData), Charset.forName("UTF-8"));
     }
-
 }
