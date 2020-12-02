@@ -4,10 +4,14 @@ import com.okexchain.utils.crypto.encode.Bech32;
 import com.okexchain.utils.crypto.encode.ConvertBits;
 import com.okexchain.utils.crypto.hash.Ripemd;
 import com.okexchain.utils.exception.AddressFormatException;
+import org.bouncycastle.util.encoders.Hex;
 import org.web3j.crypto.Keys;
+import org.web3j.crypto.Sign;
 
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import static org.bitcoinj.core.ECKey.CURVE;
 
 import static org.bitcoinj.core.ECKey.CURVE;
 

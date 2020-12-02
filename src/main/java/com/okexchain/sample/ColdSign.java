@@ -10,14 +10,7 @@ import com.okexchain.msg.MsgSend;
 import com.okexchain.msg.tx.BoardcastTx;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.tx.UnsignedTx;
-import com.okexchain.msg.common.Signature;
-import org.bouncycastle.util.encoders.Hex;
-import org.web3j.crypto.ECKeyPair;
-import org.web3j.crypto.Hash;
-import org.web3j.crypto.Keys;
-import org.web3j.crypto.Sign;
-import org.web3j.utils.Numeric;
-import java.math.BigInteger;
+import com.okexchain.msg.common.Signature;;
 
 public class ColdSign {
 
