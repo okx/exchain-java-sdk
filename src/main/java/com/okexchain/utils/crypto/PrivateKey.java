@@ -14,6 +14,7 @@ public class PrivateKey {
         } else {
             priKeyString = mnemonic;
         }
+
         pubKeyString = Hex.toHexString(Crypto.generatePubKeyFromPriv(priKeyString));
         address = Crypto.generateAddressFromPriv(priKeyString);
     }

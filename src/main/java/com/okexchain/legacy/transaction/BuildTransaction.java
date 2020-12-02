@@ -272,7 +272,6 @@ public class BuildTransaction {
             StdTransaction stdTransaction = new StdTransaction(new IMsg[]{stdMsg}, fee, signatures, memo);
 
             PostTransaction postTransaction = new PostTransaction(stdTransaction, mode);
-            System.out.println(JSON.toJSONString(postTransaction));
             return JSON.toJSONString(postTransaction);
 
         } catch (Exception e) {

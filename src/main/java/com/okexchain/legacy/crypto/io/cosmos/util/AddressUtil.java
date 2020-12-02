@@ -1,12 +1,10 @@
 package com.okexchain.legacy.crypto.io.cosmos.util;
 
-import com.okexchain.env.EnvInstance;
 import com.okexchain.legacy.crypto.io.cosmos.crypto.encode.Bech32;
 import com.okexchain.legacy.crypto.io.cosmos.crypto.encode.ConvertBits;
 import com.okexchain.legacy.crypto.io.cosmos.crypto.hash.Ripemd;
 import com.okexchain.legacy.crypto.io.cosmos.exception.AddressFormatException;
 
-import org.bouncycastle.util.encoders.Hex;
 import org.web3j.crypto.Keys;
 import static org.bitcoinj.core.ECKey.CURVE;
 import java.security.MessageDigest;

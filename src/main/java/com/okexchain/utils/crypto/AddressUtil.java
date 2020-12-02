@@ -13,8 +13,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import static org.bitcoinj.core.ECKey.CURVE;
 
-import static org.bitcoinj.core.ECKey.CURVE;
-
 public class AddressUtil {
 
     public static String createNewAddressSecp256k1(String mainPrefix, byte[] publickKey) throws Exception {
