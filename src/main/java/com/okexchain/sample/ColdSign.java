@@ -9,7 +9,7 @@ import com.okexchain.msg.MsgSend;
 import com.okexchain.msg.tx.BoardcastTx;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.tx.UnsignedTx;
-import com.okexchain.msg.common.Signature;
+import com.okexchain.msg.common.Signature;;
 
 public class ColdSign {
 

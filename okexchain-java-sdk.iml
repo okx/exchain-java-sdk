@@ -49,5 +49,8 @@
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.7" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
+    <orderEntry type="library" name="Maven: org.web3j:crypto:3.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.web3j:rlp:3.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.web3j:utils:3.3.1" level="project" />
   </component>
 </module>
