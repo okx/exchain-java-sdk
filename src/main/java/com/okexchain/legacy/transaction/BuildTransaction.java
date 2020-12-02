@@ -13,6 +13,7 @@ import com.okexchain.legacy.types.staking.*;
 import com.okexchain.legacy.encoding.EncodeUtils;
 import com.okexchain.legacy.encoding.message.AminoEncode;
 import com.okexchain.legacy.exception.InvalidFormatException;
+import com.okexchain.msg.MsgBase;
 import com.okexchain.utils.Utils;
 import org.bouncycastle.util.Strings;
 import org.bouncycastle.util.encoders.Base64;
@@ -184,17 +185,21 @@ public class BuildTransaction {
 
     private static Signature sign(byte[] byteSignData, String privateKey) throws Exception {
         //sign
-        byte[] sig = Crypto.sign(byteSignData, privateKey);
-        String sigResult = Strings.fromByteArray(Base64.encode(sig));
-        Signature signature = new Signature();
-        Pubkey pubkey = new Pubkey();
-        pubkey.setType("tendermint/PubKeySecp256k1");
-        pubkey.setValue(Strings.fromByteArray(
-                Base64.encode(Hex.decode(Crypto.generatePubKeyHexFromPriv(privateKey)))));
-        signature.setPubkey(pubkey);
-        signature.setSignature(sigResult);
+        com.okexchain.msg.common.Signature signature = MsgBase.signTx(byteSignData.toString(), privateKey);
 
-        return signature;
+//        byte[] sig = Crypto.sign(byteSignData, privateKey);
+//        String sigResult = Strings.fromByteArray(Base64.encode(sig));
+//        Signature signature = new Signature();
+//        Pubkey pubkey = new Pubkey();
+//        pubkey.setType("ethermint/PubKeyEthSecp256k1");
+//        pubkey.setValue(Strings.fromByteArray(
+//                Base64.encode(Hex.decode(Crypto.generatePubKeyHexFromPriv(privateKey)))));
+//        signature.setPubkey(pubkey);
+//        signature.setSignature(sigResult);
+        Signature newSig = new Signature();
+        newSig.setPubkey(signature.getPubkey());
+        newSig.setSignature(signature.getSignature());
+        return newSig;
     }
 
 

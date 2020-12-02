@@ -63,5 +63,14 @@ public class AddressUtil {
         return convertedProgram;
     }
 
-
+    public static String createNewAddressETHSecp256k1(String mainPrefix, byte[] ethAddress) throws Exception {
+        String addressResult = null;
+        try {
+            byte[] bytes = encode(0, ethAddress);
+            addressResult = com.okexchain.utils.crypto.encode.Bech32.encode(mainPrefix, bytes);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return addressResult;
+    }
 }

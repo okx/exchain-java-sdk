@@ -19,7 +19,7 @@ public class Pubkey {
 
     }
     public Pubkey(String value) {
-        this.type = "tendermint/PubKeySecp256k1";
+        this.type = "ethermint/PubKeyEthSecp256k1";
         this.value = value;
     }
 
