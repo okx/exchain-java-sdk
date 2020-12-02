@@ -18,12 +18,6 @@ public class PrivateKey {
         address = Crypto.generateAddressFromPriv(priKeyString);
     }
 
-    public PrivateKey(String priKey,String pubKey,String addr) {
-        this.priKeyString = priKey;
-        this.pubKeyString = pubKey;
-        this.address = addr;
-    }
-
     public String getAddress() {
         return address;
     }

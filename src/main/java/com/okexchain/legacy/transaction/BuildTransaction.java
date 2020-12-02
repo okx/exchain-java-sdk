@@ -201,11 +201,6 @@ public class BuildTransaction {
                 Base64.encode(Hex.decode(Crypto.generatePubKeyHexFromPriv(privateKey)))));
         signature.setPubkey(pubkey);
         signature.setSignature(sigResult);
-        System.out.println("privateKey: ");
-        System.out.println(privateKey);
-
-        System.out.println("signature: ");
-        System.out.println(sigResult);
 
         return signature;
     }

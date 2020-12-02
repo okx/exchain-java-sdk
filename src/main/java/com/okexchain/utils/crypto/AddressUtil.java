@@ -31,7 +31,7 @@ public class AddressUtil {
         String addressResult = null;
         try {
             byte[] bytes = encode(0, address);
-            addressResult = com.okexchain.legacy.crypto.io.cosmos.crypto.encode.Bech32.encode(mainPrefix, bytes);
+            addressResult = com.okexchain.utils.crypto.encode.Bech32.encode(mainPrefix, bytes);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
