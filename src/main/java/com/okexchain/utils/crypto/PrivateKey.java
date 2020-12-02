@@ -16,7 +16,11 @@ public class PrivateKey {
         }
 
         pubKeyString = Hex.toHexString(Crypto.generatePubKeyFromPriv(priKeyString));
-        address = Crypto.generateAddressFromPriv(priKeyString);
+        try {
+            address = AddressUtil.createNewAddressSecp256k1("okexchain", Hex.decode(pubKeyString));
+        } catch (Exception e) {
+            System.out.println("okexchain derive failed");
+        }
     }
 
     public String getAddress() {
