@@ -12,13 +12,13 @@ import com.okexchain.msg.common.Signature;
 
 public class Dex {
     public static void main(String[] args) {
-        EnvInstance.setEnv(new LocalEnv("http://localhost:26659"));
+        EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
 
         //testMsgCreateOperator();
         //testMsgUpdateOperator();
         //testMsgList();
         testMsgTransferTokenPairOwnership();
-//        testMsgConfirmTokenPairOwnership();
+        //testMsgConfirmTokenPairOwnership();
     }
 
     static void testMsgCreateOperator(){
@@ -100,9 +100,9 @@ public class Dex {
         msg.init(key.getAddress(), key.getPubKey());
 
         Message messages = msg.produceTransferTokenPairOwnershipMsg(
-                "okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9",
-                "okexchain1g7c3nvac7mjgn2m9mqllgat8wwd3aptddw77gw",
-                "eos-8ec_okt"
+                "okexchain1pt7xrmxul7sx54ml44lvv403r06clrdkgmvr9g",
+                "okexchain1jjvpmgwwgs99nhlje3aag0lackunqgj7xnrnwe",
+                "eos-024_tokt"
         );
 
         try {
@@ -126,8 +126,8 @@ public class Dex {
         msg.init(key.getAddress(), key.getPubKey());
 
         Message messages = msg.produceConfirmTokenPairOwnershipMsg(
-                "okexchain1g7c3nvac7mjgn2m9mqllgat8wwd3aptddw77gw",
-                "eos-8ec_okt"
+                "okexchain1jjvpmgwwgs99nhlje3aag0lackunqgj7xnrnwe",
+                "eos-024_tokt"
         );
 
         try {
