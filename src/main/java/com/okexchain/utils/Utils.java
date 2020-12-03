@@ -117,7 +117,7 @@ public class Utils {
             str += ".";
         }
 
-        if (lenDecs > Precision) {
+        if (lenDecs >= Precision) {
             return "";
         }
 

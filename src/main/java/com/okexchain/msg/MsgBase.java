@@ -199,6 +199,14 @@ public class MsgBase {
         operAddress = Crypto.generateValidatorAddressFromPub(pubKeyString);
     }
 
+    public void init(String addr, String accountnum, String sequencenum, String pubkey) {
+        pubKeyString = pubkey;
+        address = addr;
+        this.accountNum = accountnum;
+        this.sequenceNum = sequencenum;
+        operAddress = Crypto.generateValidatorAddressFromPub(pubKeyString);
+    }
+
 
     public void persist(String path, String content) {
         try {
