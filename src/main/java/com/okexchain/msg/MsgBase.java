@@ -202,8 +202,8 @@ public class MsgBase {
     public void init(String addr, String accountnum, String sequencenum, String pubkey) {
         pubKeyString = pubkey;
         address = addr;
-        this.accountNum = accountnum;
-        this.sequenceNum = sequencenum;
+        accountNum = accountnum;
+        sequenceNum = sequencenum;
         operAddress = Crypto.generateValidatorAddressFromPub(pubKeyString);
     }
 
