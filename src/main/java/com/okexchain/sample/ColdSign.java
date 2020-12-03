@@ -20,6 +20,7 @@ public class ColdSign {
 
         MsgSend msg = new MsgSend();
         msg.init(key.getAddress(), key.getPubKey());
+//        msg.init(key.getAddress(), "0", "1", key.getPubKey());
 
         // or init by account number and sequence number
 //        msg.init(key.getPubKey(), "0", "10");
@@ -27,7 +28,7 @@ public class ColdSign {
         Message messages = msg.produceSendMsg(
                 "tokt",
                 "6.00000000",
-                "okexchain1v853tq96n9ghvyxlvqyxyj97589clccrufrkz9");
+                "okexchain1q6ls3h64gkxq0r73u2eqwwr7d5mp583f2ats92");
 
         try {
             UnsignedTx unsignedTx = msg.getUnsignedTx(messages, "0.01000000", "200000", "okexchain transfer!");
