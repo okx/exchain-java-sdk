@@ -3,6 +3,7 @@ package com.okexchain.msg;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgWithdrawValue;
 import com.okexchain.msg.common.Token;
+import com.okexchain.utils.Utils;
 
 public class MsgWithdraw extends MsgBase {
 

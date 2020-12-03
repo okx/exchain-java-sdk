@@ -7,6 +7,7 @@ import com.okexchain.legacy.common.StrUtils;
 import com.okexchain.legacy.types.*;
 import com.okexchain.legacy.crypto.keystore.CipherException;
 import com.okexchain.legacy.transaction.BuildTransaction;
+import com.okexchain.utils.Utils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,7 +18,7 @@ import java.util.List;
 
 
 public class OKEXChainRPCClientImplTest {
-    private static String PRIVATEKEY = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884";
+    private static String PRIVATEKEY = "8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7";
     private static String PRIVATEKEY2 = "29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011885";
 
     private static String MNEMO = "total lottery arena when pudding best candy until army spoil drill pool";
@@ -115,7 +116,7 @@ public class OKEXChainRPCClientImplTest {
         String to = "okexchain1wq0zdnrc0r9uvqsly6622f4erl5qxly24qd4ur";
         String memo = "";
         List<Token> amountList = new ArrayList<>();
-        Token amount = new Token("1.00000000", BASE_COIN_NAME);
+        Token amount = new Token("16.00000000", BASE_COIN_NAME);
         amountList.add(amount);
         JSONObject ret = client.sendSendTransaction(account, to, amountList, memo);
         System.out.println(ret);

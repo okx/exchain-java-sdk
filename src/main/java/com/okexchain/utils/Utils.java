@@ -12,6 +12,8 @@ public class Utils {
 
     public static String rfc3339DateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
 
+    public static int Precision = 18;
+
     public static final Gson serializer = new GsonBuilder()
             .serializeNulls()
             .setDateFormat(rfc3339DateFormat)
@@ -95,5 +97,35 @@ public class Utils {
             return data;
         }
     }
+    public static String NewDecString(String str) {
+        if (str.length() == 0) {
+            return "";
+        }
 
+        String[] strs = str.split("\\.");
+        int lenDecs = 0;
+        String combinedStr = strs[0];
+
+        if (strs.length == 2) {
+            lenDecs = strs[1].length();
+            if (lenDecs == 0 || combinedStr.length() == 0) {
+                return "";
+            }
+        } else if (strs.length > 2) {
+            return "";
+        } else {
+            str += ".";
+        }
+
+        if (lenDecs > Precision) {
+            return "";
+        }
+
+        // add some extra zero's to correct to the Precision factor
+        int zerosToAdd = Precision - lenDecs;
+        String format = "%0"+String.valueOf(zerosToAdd)+"d";
+        String zeros = String.format(format, 0);
+        str += zeros;
+        return str;
+    }
 }

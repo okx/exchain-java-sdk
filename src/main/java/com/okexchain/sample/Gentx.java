@@ -6,6 +6,7 @@ import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Signature;
 import com.okexchain.msg.tx.BoardcastValue;
 import com.okexchain.msg.tx.UnsignedTx;
+import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
 
 public class Gentx {
@@ -19,7 +20,7 @@ public class Gentx {
 
         Message messages = msg.produceMsg(
                 "okexchainvalconspub1zcjduepqtv2yy90ptjegdm34vfhlq2uw9eu39hjrt98sffj7yghl4s47xv7svt56mk",
-                "val0","","","","10000.00000000");
+                "val0","","","", "10000.00000000");
 
         try {
             UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"", "200000", "");

@@ -1,5 +1,7 @@
 package com.okexchain.env;
 
+import com.okexchain.utils.Utils;
+
 public class EnvBase {
 
     protected String restServerUrl;
@@ -8,10 +10,10 @@ public class EnvBase {
         return "okexchain";
     };
     public String GetDenom(){
-        return "okt";
+        return "tokt";
     }
     public String GetChainid(){
-        return "okexchain";
+        return "okexchaintestnet-1";
     }
 
     public String GetRestServerUrl(){
@@ -53,7 +55,7 @@ public class EnvBase {
     };
 
     public String GetTransferAmount() {
-        return "16.00000000";
+        return Utils.NewDecString("16.00000000");
     };
 
     public String GetTendermintConsensusPubkey() {

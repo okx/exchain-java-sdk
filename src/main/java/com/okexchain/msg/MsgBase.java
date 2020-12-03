@@ -12,9 +12,13 @@ import com.okexchain.msg.tx.UnsignedTx;
 import org.bouncycastle.util.Strings;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
+import org.web3j.crypto.ECKeyPair;
+import org.web3j.crypto.Sign;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
+import java.math.BigInteger;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,18 +63,16 @@ public class MsgBase {
     }
 
     private String getSequance(JSONObject account) {
-        String res = (String) account
-//                .getJSONObject("result")
+        String res = account
                 .getJSONObject("value")
-                .get("sequence");
+                .get("sequence").toString();
         return res;
     }
 
     private String getAccountNumber(JSONObject account) {
-        String res = (String) account
-//                .getJSONObject("result")
+        String res = account
                 .getJSONObject("value")
-                .get("account_number");
+                .get("account_number").toString();
         return res;
     }
 
@@ -94,7 +96,7 @@ public class MsgBase {
                        String gas,
                        String memo) {
         try {
-            UnsignedTx unsignedTx = getUnsignedTx(message, feeAmount, gas, memo);
+            UnsignedTx unsignedTx = getUnsignedTx(message, Utils.NewDecString(feeAmount), gas, memo);
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), priKeyString);
 
@@ -121,7 +123,7 @@ public class MsgBase {
             if (feeAmount.length() > 0) {
                 Token amount = new Token();
                 amount.setDenom(EnvInstance.getEnv().GetDenom());
-                amount.setAmount(feeAmount);
+                amount.setAmount(Utils.NewDecString(feeAmount));
                 amountList.add(amount);
             }
             fee.setGas(gas);
@@ -134,8 +136,6 @@ public class MsgBase {
 
             System.out.println("row data:");
             System.out.println(data);
-//            System.out.println("json data to sign:");
-//            System.out.println(unsignedTxJson);
 
             TxValue txValue = new TxValue();
             txValue.setMsgs(msgs);
@@ -152,28 +152,31 @@ public class MsgBase {
 
 
     public static Signature signTx(String unsignedTx, String privateKey) throws Exception {
-        System.out.println("data to sign:");
-        System.out.println(unsignedTx);
+//        System.out.println("data to sign:");
+//        System.out.println(unsignedTx);
 
         byte[] byteSignData = unsignedTx.getBytes();
-        System.out.println("byte data length:");
-        System.out.println(byteSignData.length);
+//        System.out.println("byte data length:");
+//        System.out.println(byteSignData.length);
 
-        byte[] sig = Crypto.sign(byteSignData, privateKey);
-        String sigResult = Strings.fromByteArray(Base64.encode(sig));
+//        byte[] sig = Crypto.sign(byteSignData, privateKey);
+//        String sigResult = Strings.fromByteArray(Base64.encode(sig));
+        BigInteger privKey = new BigInteger(privateKey, 16);
+        Sign.SignatureData sig = Sign.signMessage(byteSignData, ECKeyPair.create(privKey));
+        String sigResult =  toBase64(sig);
 
         Signature signature = new Signature();
         Pubkey pubkey = new Pubkey();
-        pubkey.setType("tendermint/PubKeySecp256k1");
+        pubkey.setType("ethermint/PubKeyEthSecp256k1");
         pubkey.setValue(Strings.fromByteArray(Base64.encode(Hex.decode(Crypto.generatePubKeyHexFromPriv(privateKey)))));
         signature.setPubkey(pubkey);
         signature.setSignature(sigResult);
-
-        System.out.println("privateKey: ");
-        System.out.println(privateKey);
-
-        System.out.println("signature: ");
-        System.out.println(sigResult);
+//
+//        System.out.println("privateKey: ");
+//        System.out.println(privateKey);
+//
+//        System.out.println("signature: ");
+//        System.out.println(sigResult);
 
         return signature;
     }
@@ -209,4 +212,12 @@ public class MsgBase {
         }
     }
 
+    public static String toBase64(Sign.SignatureData sig) {
+        byte[] sigData = new byte[64];  // 32 bytes for R + 32 bytes for S
+        System.arraycopy(sig.getR(), 0, sigData, 0, 32);
+        System.arraycopy(sig.getS(), 0, sigData, 32, 32);
+//        sigData[64] = sig.getV();
+        System.out.println(Hex.toHexString(sigData));
+        return new String(org.spongycastle.util.encoders.Base64.encode(sigData), Charset.forName("UTF-8"));
+    }
 }

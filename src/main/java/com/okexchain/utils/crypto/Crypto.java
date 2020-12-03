@@ -9,6 +9,8 @@ import org.bitcoinj.core.Utils;
 import org.bitcoinj.crypto.*;
 import org.bouncycastle.util.encoders.DecoderException;
 import org.bouncycastle.util.encoders.Hex;
+import org.web3j.crypto.Sign;
+import sun.nio.cs.ext.Big5;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -16,7 +18,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.List;
-
 
 public class Crypto {
 
@@ -124,7 +125,6 @@ public class Crypto {
         return true;
     }
 
-
     public static String generateValidatorAddressFromPub(String pubKey) {
 
         try {
@@ -135,6 +135,7 @@ public class Crypto {
             return "";
         }
     }
+
     public static String generateBechPub(String pubKey) {
 
         try {
