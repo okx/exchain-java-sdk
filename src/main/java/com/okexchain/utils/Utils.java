@@ -117,8 +117,12 @@ public class Utils {
             str += ".";
         }
 
-        if (lenDecs >= Precision) {
+        if (lenDecs > Precision) {
             return "";
+        }
+
+        if (lenDecs == Precision) {
+            return str;
         }
 
         // add some extra zero's to correct to the Precision factor
