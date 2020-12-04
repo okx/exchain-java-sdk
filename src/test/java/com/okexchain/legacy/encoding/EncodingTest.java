@@ -19,7 +19,7 @@ public class EncodingTest {
                 .addStus(Transfer.Stu.newBuilder().setId(500000000).build())
                 .build();
         byte[] rawBytesProtoEncoded = EncodeUtils.aminoWrap(btProto.toByteArray(), MessageType.BaseType.getTypePrefixBytes(), true);
-        Assert.assertEquals("290880cab5ee0112076f6b636861696e1a036274631a036f6b6222060880cab5ee0122060880cab5ee01", Hex.toHexString(rawBytesProtoEncoded));
+        Assert.assertEquals("2b0880cab5ee0112096f6b6578636861696e1a036274631a036f6b6222060880cab5ee0122060880cab5ee01", Hex.toHexString(rawBytesProtoEncoded));
 
     }
 
