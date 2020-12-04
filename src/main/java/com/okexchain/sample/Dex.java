@@ -14,10 +14,10 @@ public class Dex {
     public static void main(String[] args) {
         EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
 
-        testMsgCreateOperator();
+        //testMsgCreateOperator();
         //testMsgUpdateOperator();
         //testMsgList();
-        //testMsgTransferTokenPairOwnership();
+        testMsgTransferTokenPairOwnership();
         //testMsgConfirmTokenPairOwnership();
 
     }
