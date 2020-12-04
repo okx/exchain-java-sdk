@@ -121,6 +121,10 @@ public class Utils {
             return "";
         }
 
+        if (lenDecs == Precision) {
+            return str;
+        }
+
         // add some extra zero's to correct to the Precision factor
         int zerosToAdd = Precision - lenDecs;
         String format = "%0"+String.valueOf(zerosToAdd)+"d";

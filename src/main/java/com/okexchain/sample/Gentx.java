@@ -8,7 +8,6 @@ import com.okexchain.msg.tx.BoardcastValue;
 import com.okexchain.msg.tx.UnsignedTx;
 import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
-import com.sun.deploy.ui.UITextArea;
 
 public class Gentx {
     public static void main(String[] args) {
