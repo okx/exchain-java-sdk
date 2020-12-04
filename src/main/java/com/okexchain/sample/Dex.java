@@ -12,12 +12,13 @@ import com.okexchain.msg.common.Signature;
 
 public class Dex {
     public static void main(String[] args) {
-        EnvInstance.setEnv(new LocalEnv("http://localhost:26659"));
+        EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
 
         //testMsgCreateOperator();
         //testMsgUpdateOperator();
         //testMsgList();
-        testMsgTransferTradingPairOwnership();
+        testMsgTransferTokenPairOwnership();
+        //testMsgConfirmTokenPairOwnership();
     }
 
     static void testMsgCreateOperator(){
@@ -92,24 +93,47 @@ public class Dex {
         }
     }
 
-    static void testMsgTransferTradingPairOwnership(){
-        PrivateKey keyFrom = new PrivateKey("8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7");
-        PrivateKey keyTo = new PrivateKey("f4feaca3a36f824776786eda67d4e12d5eeb038cc48c002d650fd2ede6b42a1b");
+    static void testMsgTransferTokenPairOwnership(){
+        PrivateKey key = new PrivateKey("8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7");
 
-        MsgTransferTradingPairOwnership msg = new MsgTransferTradingPairOwnership();
-        msg.init(keyFrom.getAddress(), keyFrom.getPubKey());
-        String toAddress = "okexchain106gw9etrg2650l04w7zvcax2ytxelx7yp7fzck";
-        String product = "eos-d87_okt";
+        MsgTransferTokenPairOwnership msg = new MsgTransferTokenPairOwnership();
+        msg.init(key.getAddress(), key.getPubKey());
+
+        Message messages = msg.produceTransferTokenPairOwnershipMsg(
+                "okexchain1pt7xrmxul7sx54ml44lvv403r06clrdkgmvr9g",
+                "okexchain1jjvpmgwwgs99nhlje3aag0lackunqgj7xnrnwe",
+                "eos-024_tokt"
+        );
 
         try {
-            Message messages = msg.produceMsg(toAddress, product);
-            String msgJson = msg.toJson(messages);
-            Signature toSignature = MsgBase.signTx(msgJson, keyTo.getPriKey());
-            messages = msg.setToSignature(messages, toSignature);
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "okexchain transfer token pair ownership!");
 
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "dex transfer ownership");
+            Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
-            Signature signature = MsgBase.signTx(unsignedTx.toString(), keyFrom.getPriKey());
+            BoardcastTx signedTx = unsignedTx.signed(signature);
+
+            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+
+        } catch (Exception e) {
+            System.out.println("serialize transfer msg failed");
+        }
+    }
+
+    static void testMsgConfirmTokenPairOwnership(){
+        PrivateKey key = new PrivateKey("29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884");
+
+        MsgConfirmTokenPairOwnership msg = new MsgConfirmTokenPairOwnership();
+        msg.init(key.getAddress(), key.getPubKey());
+
+        Message messages = msg.produceConfirmTokenPairOwnershipMsg(
+                "okexchain1jjvpmgwwgs99nhlje3aag0lackunqgj7xnrnwe",
+                "eos-024_tokt"
+        );
+
+        try {
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "okexchain confirm token pair ownership!");
+
+            Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
             BoardcastTx signedTx = unsignedTx.signed(signature);
 
