@@ -13,9 +13,9 @@ import com.okexchain.msg.common.Signature;
 public class Staking {
 
     public static void main(String[] args) {
-//        testUnjail();
+        testUnjail();
 //        testBindProxy();
-        testEditValidator();
+//        testEditValidator();
 //        testMsgDeposit();
 //        testMsgWithdrawStaking();
 //        testMsgAddShares();
@@ -32,8 +32,6 @@ public class Staking {
 
         MsgBindProxy msg = new MsgBindProxy();
         msg.init(key.getAddress(), key.getPubKey());
-
-        System.out.println("addr is " + key.getAddress());
 
         String delegator_address = "okexchain1k248qk9w04r4atekae0tyv9k6d6a64xl6t8nac";
         String proxy_address = "okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9";
@@ -60,7 +58,6 @@ public class Staking {
         MsgEditValidator msg = new MsgEditValidator();
         msg.init(key.getAddress(), key.getPubKey());
 
-        System.out.println("addr is" + key.getAddress());
         Message messages = msg.produceMsg("1","1","1","1", "okexchainvaloper10q0rk5qnyag7wfvvt7rtphlw589m7frshchly8");
 
         try {
@@ -173,7 +170,6 @@ public class Staking {
         MsgUnjail msg = new MsgUnjail();
         msg.init(key.getAddress(), key.getPubKey());
 
-        System.out.println("addr is " + key.getAddress());
         Message messages = msg.produceMsg("okexchainvaloper10q0rk5qnyag7wfvvt7rtphlw589m7frshchly8");
 
         try {

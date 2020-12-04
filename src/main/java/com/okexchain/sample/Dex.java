@@ -8,7 +8,6 @@ import com.okexchain.msg.tx.BoardcastTx;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.tx.UnsignedTx;
 import com.okexchain.msg.common.Signature;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 
 public class Dex {
@@ -101,7 +100,6 @@ public class Dex {
         msg.init(keyFrom.getAddress(), keyFrom.getPubKey());
         String toAddress = "okexchain106gw9etrg2650l04w7zvcax2ytxelx7yp7fzck";
         String product = "eos-d87_okt";
-
 
         try {
             Message messages = msg.produceMsg(toAddress, product);
