@@ -19,6 +19,7 @@ public class Dex {
         //testMsgList();
         testMsgTransferTokenPairOwnership();
         //testMsgConfirmTokenPairOwnership();
+
     }
 
     static void testMsgCreateOperator(){
