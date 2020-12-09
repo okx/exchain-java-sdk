@@ -91,7 +91,7 @@ public class MsgParameterChangeProposal extends MsgBase {
         List<Token> depositList = new ArrayList<>();
         Token deposit = new Token();
         deposit.setDenom("okt");
-        deposit.setAmount(amountDeposit);
+        deposit.setAmount(Utils.NewDecString(amountDeposit));
         depositList.add(deposit);
 
         MsgSubmitProposalValue value = new MsgSubmitProposalValue();

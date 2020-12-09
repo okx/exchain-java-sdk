@@ -3,6 +3,7 @@ package com.okexchain.msg;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgTokenMintValue;
 import com.okexchain.msg.common.Token;
+import com.okexchain.utils.Utils;
 
 public class MsgTokenMint extends MsgBase {
 
@@ -12,7 +13,7 @@ public class MsgTokenMint extends MsgBase {
 
         Token amount = new Token();
         amount.setDenom(denom);
-        amount.setAmount(amountDenom);
+        amount.setAmount(Utils.NewDecString(amountDenom));
 
         MsgTokenMintValue value = new MsgTokenMintValue();
         value.setAmount(amount);

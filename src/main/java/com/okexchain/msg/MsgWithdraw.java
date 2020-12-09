@@ -28,7 +28,7 @@ public class MsgWithdraw extends MsgBase {
 
         Token quantity = new Token();
         quantity.setDenom(denom);
-        quantity.setAmount(amountDenom);
+        quantity.setAmount(Utils.NewDecString(amountDenom));
 
         MsgWithdrawValue value = new MsgWithdrawValue();
         value.setQuantity(quantity);

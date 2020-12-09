@@ -2,6 +2,7 @@ package com.okexchain.msg;
 
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgTokenIssueValue;
+import com.okexchain.utils.Utils;
 
 public class MsgTokenIssue extends MsgBase {
 
@@ -16,7 +17,7 @@ public class MsgTokenIssue extends MsgBase {
         value.setSymbol(symbol);
         value.setOriginalSymbol(originalSymbol);
         value.setWholeName(wholeName);
-        value.setTotalSupply(totalSupply);
+        value.setTotalSupply(Utils.NewDecString(totalSupply));
         value.setOwner(owner);
         value.setMintable(mintable);
 

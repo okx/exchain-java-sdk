@@ -4,6 +4,7 @@ import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgDelegateValue;
 import com.okexchain.msg.common.Token;
+import com.okexchain.utils.Utils;
 
 
 public class MsgDelegate extends MsgBase {
@@ -32,7 +33,7 @@ public class MsgDelegate extends MsgBase {
         //amount
         Token token = new Token();
         token.setDenom(delegateDenom);
-        token.setAmount(delegateAmount);
+        token.setAmount(Utils.NewDecString(delegateAmount));
         delegateValue.setAmount(token);
         Message<MsgDelegateValue> messageDelegateMulti = new Message<>();
         messageDelegateMulti.setType(msgType);

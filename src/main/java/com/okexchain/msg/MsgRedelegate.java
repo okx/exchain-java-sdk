@@ -4,6 +4,7 @@ import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgBeginRedelegateValue;
 import com.okexchain.msg.common.Token;
+import com.okexchain.utils.Utils;
 
 public class MsgRedelegate extends MsgDelegate {
 
@@ -37,7 +38,7 @@ public class MsgRedelegate extends MsgDelegate {
         delegateValue.setDelegatorAddress(address);
         Token token = new Token();
         token.setDenom(delegateDenom);
-        token.setAmount(delegateAmount);
+        token.setAmount(Utils.NewDecString(delegateAmount));
         delegateValue.setAmount(token);
         Message<MsgBeginRedelegateValue> messageDelegateMulti = new Message<>();
         messageDelegateMulti.setType(msgType);
