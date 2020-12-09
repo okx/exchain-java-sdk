@@ -32,7 +32,7 @@ public class CryptoTest {
         Assert.assertEquals("02fa42bcdb80aae828e480d80ec05c3a8847a2dc150071d08adf2f99fbcb09a3fb", Hex.toHexString(pub));
         try {
             String addr = AddressUtil.createNewAddressSecp256k1("okexchain", pub);
-            Assert.assertEquals("okexchain152p8xmejhza7wuhhzut88vkakdgasqwlrj88y3", addr);
+            Assert.assertEquals("okexchain1nc2cryarmtm6g98ltdlcqk8v7d8eh3cr6jrscp", addr);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -69,7 +69,7 @@ public class CryptoTest {
         String mnemonic = "total lottery arena when pudding best candy until army spoil drill pool";
         String priv = Crypto.generatePrivateKeyFromMnemonic(mnemonic);
         Assert.assertEquals("29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884", priv);
-        Assert.assertEquals("okexchain1g7c3nvac7mjgn2m9mqllgat8wwd3aptddw77gw", Crypto.generateAddressFromPriv(priv));
+        Assert.assertEquals("okexchain1jjvpmgwwgs99nhlje3aag0lackunqgj7xnrnwe", Crypto.generateAddressFromPriv(priv));
     }
 
 
