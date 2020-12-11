@@ -36,7 +36,7 @@ public class MsgDeListProposal extends MsgBase {
             String baseAsset,
             String quoteAsset,
             String amountDeposit
-    ) throws JsonProcessingException {
+    ) {
 
         // proposal
         MsgDeListProposalValue proposal = new MsgDeListProposalValue();
@@ -54,7 +54,7 @@ public class MsgDeListProposal extends MsgBase {
         // submit
         List<Token> depositList = new ArrayList<>();
         Token deposit = new Token();
-        deposit.setDenom("okt");
+        deposit.setDenom("tokt");
         deposit.setAmount(Utils.NewDecString(amountDeposit));
         depositList.add(deposit);
 

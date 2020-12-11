@@ -3,6 +3,7 @@ package com.okexchain.sample;
 import com.okexchain.env.EnvInstance;
 import com.okexchain.env.LocalEnv;
 import com.okexchain.utils.Utils;
+import com.okexchain.utils.crypto.Crypto;
 import com.okexchain.utils.crypto.PrivateKey;
 import com.okexchain.msg.*;
 import com.okexchain.msg.tx.BoardcastTx;
@@ -13,13 +14,15 @@ import com.okexchain.msg.common.Signature;
 public class Staking {
 
     public static void main(String[] args) {
-        testUnjail();
+//        testUnjail();
 //        testBindProxy();
 //        testEditValidator();
 //        testMsgDeposit();
 //        testMsgWithdrawStaking();
 //        testMsgAddShares();
 //        testRegProxy();
+//        testWithdrawReward();
+        testModifyWithdrawAddress();
     }
 
     static void testBindProxy() {
@@ -28,13 +31,13 @@ public class Staking {
 //        System.out.println(prikey);
 
         EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
-        PrivateKey key = new PrivateKey("769CE08B6AAD66A579A1925F9D208570296EB505CC7819D7E6D7A0388EB4FD51");
+        PrivateKey key = new PrivateKey("17157D973569415C616E70BE2537DFB9F48BAD5C7FF088A5FCDF193DD3E450E3");
 
         MsgBindProxy msg = new MsgBindProxy();
         msg.init(key.getAddress(), key.getPubKey());
 
-        String delegator_address = "okexchain1tscazctcr3jvtdx4harrzm75xltlccrr36cw54";
-        String proxy_address = "okexchain1pt7xrmxul7sx54ml44lvv403r06clrdkgmvr9g";
+        String delegator_address = key.getAddress();
+        String proxy_address = "okexchain1ntvyep3suq5z7789g7d5dejwzameu08m6gh7yl";
 
         Message messages = msg.produceMsg(delegator_address, proxy_address);
 
@@ -54,14 +57,14 @@ public class Staking {
 
     static void testEditValidator(){
         EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
-        PrivateKey key = new PrivateKey("8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7");
+        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgEditValidator msg = new MsgEditValidator();
         msg.init(key.getAddress(), key.getPubKey());
 
-        Message messages = msg.produceMsg("1","1","1","1", "okexchainvaloper1pt7xrmxul7sx54ml44lvv403r06clrdkfluue2");
+        Message messages = msg.produceMsg("1","1","1","1", Crypto.generateValidatorAddressFromPub(key.getPubKey()));
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "okexchain transfer!");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "");
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
@@ -76,11 +79,11 @@ public class Staking {
 
     static void testMsgDeposit() {
         EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
-        PrivateKey key = new PrivateKey("769CE08B6AAD66A579A1925F9D208570296EB505CC7819D7E6D7A0388EB4FD51");
+        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgDeposit msg = new MsgDeposit();
         msg.init(key.getAddress(), key.getPubKey());
 
-        Message messages = msg.produceMsg("tokt", "10.000000000000000000", "okexchain1tscazctcr3jvtdx4harrzm75xltlccrr36cw54");
+        Message messages = msg.produceMsg("tokt", "10.000000000000000000", key.getAddress());
 
         try {
             UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "okexchain transfer!");
@@ -98,14 +101,14 @@ public class Staking {
 
     static void testMsgWithdrawStaking() {
         EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
-        PrivateKey key = new PrivateKey("8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7");
+        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgWithdrawStaking msg = new MsgWithdrawStaking();
         msg.init(key.getAddress(), key.getPubKey());
 
-        Message messages = msg.produceMsg("tokt", "10.00000000", "okexchain1pt7xrmxul7sx54ml44lvv403r06clrdkgmvr9g");
+        Message messages = msg.produceMsg("tokt", "9.000000000000000000", key.getAddress());
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "okexchain transfer!");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "");
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
@@ -120,16 +123,16 @@ public class Staking {
 
     static void testMsgAddShares() {
         EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
-        PrivateKey key = new PrivateKey("8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7");
+        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgAddShares msg = new MsgAddShares();
         msg.init(key.getAddress(), key.getPubKey());
 
-        String [] validators = {"okexchainvaloper1pt7xrmxul7sx54ml44lvv403r06clrdkfluue2"};
-        Message messages = msg.produceMsg("okexchain1pt7xrmxul7sx54ml44lvv403r06clrdkgmvr9g", validators);
+        String [] validators = { Crypto.generateValidatorAddressFromPub(key.getPubKey()) };
+        Message messages = msg.produceMsg(key.getAddress(), validators);
 
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "okexchain transfer!");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "");
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
@@ -144,14 +147,14 @@ public class Staking {
 
     static void testRegProxy() {
         EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
-        PrivateKey key = new PrivateKey("8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7");
+        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgRegProxy msg = new MsgRegProxy();
         msg.init(key.getAddress(), key.getPubKey());
 
-        Message messages = msg.produceMsg("okexchain1pt7xrmxul7sx54ml44lvv403r06clrdkgmvr9g", true);
+        Message messages = msg.produceMsg(key.getAddress(), true);
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "okexchain transfer!");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "");
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
@@ -166,14 +169,58 @@ public class Staking {
 
     static void testUnjail() {
         EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
-        PrivateKey key = new PrivateKey("8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7");
+        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgUnjail msg = new MsgUnjail();
         msg.init(key.getAddress(), key.getPubKey());
 
-        Message messages = msg.produceMsg("okexchainvaloper1pt7xrmxul7sx54ml44lvv403r06clrdkfluue2");
+        Message messages = msg.produceMsg(Crypto.generateValidatorAddressFromPub(key.getPubKey()));
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "okexchain transfer!");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "");
+
+            Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
+
+            BoardcastTx signedTx = unsignedTx.signed(signature);
+
+            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+
+        } catch (Exception e) {
+            System.out.println("serialize transfer msg failed");
+        }
+    }
+
+    static void testWithdrawReward() {
+        EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
+        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
+        MsgWithdrawReward msg = new MsgWithdrawReward();
+        msg.init(key.getAddress(), key.getPubKey());
+
+        Message messages = msg.produceWithdrawRewardMsg(Crypto.generateValidatorAddressFromPub(key.getPubKey()));
+
+        try {
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "");
+
+            Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
+
+            BoardcastTx signedTx = unsignedTx.signed(signature);
+
+            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+
+        } catch (Exception e) {
+            System.out.println("serialize transfer msg failed");
+        }
+    }
+
+    static void testModifyWithdrawAddress() {
+        EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
+        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
+        MsgModifyWithdrawAddress msg = new MsgModifyWithdrawAddress();
+        msg.init(key.getAddress(), key.getPubKey());
+
+        Message messages = msg.produceModifyWithdrawAddressMsg("okexchain1twtrl3wvaf9yz6jvt4s726wj6e3cpfxxlgampg");
+
+        try {
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "");
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
