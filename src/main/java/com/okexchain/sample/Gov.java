@@ -1,8 +1,8 @@
 package com.okexchain.sample;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.okexchain.env.EnvBase;
 import com.okexchain.env.EnvInstance;
-import com.okexchain.env.LocalEnv;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.MsgDeListProposal;
 import com.okexchain.msg.MsgParameterChangeProposal;
@@ -17,7 +17,7 @@ import com.okexchain.utils.crypto.PrivateKey;
 public class Gov {
 
     public static void main(String[] args) throws JsonProcessingException {
-        EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
+        EnvInstance.setEnv(new EnvBase());
 
 //        testParameterChangeProposal();
 //        testDeListProposal();

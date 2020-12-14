@@ -1,7 +1,7 @@
 package com.okexchain.sample;
 
+import com.okexchain.env.EnvBase;
 import com.okexchain.env.EnvInstance;
-import com.okexchain.env.LocalEnv;
 import com.okexchain.utils.crypto.PrivateKey;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.MsgSend;
@@ -13,8 +13,6 @@ import com.okexchain.msg.common.Signature;;
 public class ColdSign {
 
     public static void main(String[] args) {
-        EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
-
         PrivateKey key = new PrivateKey("8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7");
 //        PrivateKey key = new PrivateKey("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
 

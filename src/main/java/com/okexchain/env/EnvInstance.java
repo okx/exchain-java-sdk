@@ -2,7 +2,7 @@ package com.okexchain.env;
 
 public class EnvInstance {
 
-    static EnvBase env = new LocalEnv("http://localhost:8545");
+    static EnvBase env = new EnvBase();
 
     static public void setEnv(String type) {
     }

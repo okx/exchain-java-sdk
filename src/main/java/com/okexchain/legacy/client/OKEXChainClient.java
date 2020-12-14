@@ -84,7 +84,8 @@ public interface OKEXChainClient {
 
     public JSONObject sendCreateValidatorTransaction(AccountInfo account, Description description, CommissionRates commission, Token minSelfDelegation,
                                                      String delegatorAddress, String validatorAddress, String pubKey, String memo) throws NullPointerException;
-    public JSONObject sendEditValidatorTransaction(AccountInfo account, String minSelfDelegation,  String validatorAddress, Description description, String memo) throws NullPointerException;
+
+    public JSONObject sendEditValidatorTransaction(AccountInfo account, String minSelfDelegation, String validatorAddress, Description description, String memo) throws NullPointerException;
 
     public JSONObject sendVoteTransaction(AccountInfo account, String delegatorAddress, String[] validatorAddress, String memo) throws NullPointerException;
-    }
+}

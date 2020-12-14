@@ -1,6 +1,6 @@
 package com.okexchain.sample;
+import com.okexchain.env.EnvBase;
 import com.okexchain.env.EnvInstance;
-import com.okexchain.env.LocalEnv;
 import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
 import com.okexchain.msg.*;
@@ -12,8 +12,6 @@ import com.okexchain.msg.common.Signature;
 
 public class Dex {
     public static void main(String[] args) {
-        EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
-
 //        testMsgCreateOperator();
 //        testMsgUpdateOperator();
 //        testMsgList();

@@ -1,7 +1,6 @@
 package com.okexchain.sample;
 
 import com.okexchain.env.EnvInstance;
-import com.okexchain.env.LocalEnv;
 import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.Crypto;
 import com.okexchain.utils.crypto.PrivateKey;
@@ -30,7 +29,6 @@ public class Staking {
 //        String prikey = Crypto.generatePrivateKeyFromMnemonic(mnemonic);
 //        System.out.println(prikey);
 
-        EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
         PrivateKey key = new PrivateKey("17157D973569415C616E70BE2537DFB9F48BAD5C7FF088A5FCDF193DD3E450E3");
 
         MsgBindProxy msg = new MsgBindProxy();
@@ -56,7 +54,6 @@ public class Staking {
     }
 
     static void testEditValidator(){
-        EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
         PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgEditValidator msg = new MsgEditValidator();
         msg.init(key.getAddress(), key.getPubKey());
@@ -78,7 +75,6 @@ public class Staking {
     }
 
     static void testMsgDeposit() {
-        EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
         PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgDeposit msg = new MsgDeposit();
         msg.init(key.getAddress(), key.getPubKey());
@@ -100,7 +96,6 @@ public class Staking {
     }
 
     static void testMsgWithdrawStaking() {
-        EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
         PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgWithdrawStaking msg = new MsgWithdrawStaking();
         msg.init(key.getAddress(), key.getPubKey());
@@ -122,7 +117,6 @@ public class Staking {
     }
 
     static void testMsgAddShares() {
-        EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
         PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgAddShares msg = new MsgAddShares();
         msg.init(key.getAddress(), key.getPubKey());
@@ -146,7 +140,6 @@ public class Staking {
     }
 
     static void testRegProxy() {
-        EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
         PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgRegProxy msg = new MsgRegProxy();
         msg.init(key.getAddress(), key.getPubKey());
@@ -168,7 +161,6 @@ public class Staking {
     }
 
     static void testUnjail() {
-        EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
         PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgUnjail msg = new MsgUnjail();
         msg.init(key.getAddress(), key.getPubKey());
@@ -190,7 +182,6 @@ public class Staking {
     }
 
     static void testWithdrawReward() {
-        EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
         PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgWithdrawReward msg = new MsgWithdrawReward();
         msg.init(key.getAddress(), key.getPubKey());
@@ -212,7 +203,6 @@ public class Staking {
     }
 
     static void testModifyWithdrawAddress() {
-        EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
         PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgModifyWithdrawAddress msg = new MsgModifyWithdrawAddress();
         msg.init(key.getAddress(), key.getPubKey());
