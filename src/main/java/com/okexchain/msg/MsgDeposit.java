@@ -26,7 +26,7 @@ public class MsgDeposit extends MsgBase {
 
         DecCoin d = new DecCoin();
         d.setDenom(denom);
-        d.setAmount(amountDenom);
+        d.setAmount(Utils.NewDecString(amountDenom));
 
         MsgDepositValue value = new MsgDepositValue();
 

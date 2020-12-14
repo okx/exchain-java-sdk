@@ -1,5 +1,6 @@
 package com.okexchain.msg;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgVoteValue;
 import com.okexchain.utils.Utils;

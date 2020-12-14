@@ -14,23 +14,23 @@ public class Dex {
     public static void main(String[] args) {
         EnvInstance.setEnv(new LocalEnv("http://localhost:8545"));
 
-        //testMsgCreateOperator();
-        //testMsgUpdateOperator();
-        //testMsgList();
-        testMsgTransferTokenPairOwnership();
-        //testMsgConfirmTokenPairOwnership();
+//        testMsgCreateOperator();
+//        testMsgUpdateOperator();
+//        testMsgList();
+//        testMsgTransferTokenPairOwnership();
+        testMsgConfirmTokenPairOwnership();
 
     }
 
     static void testMsgCreateOperator(){
-        PrivateKey key = new PrivateKey("8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7");
+        PrivateKey key = new PrivateKey("17157D973569415C616E70BE2537DFB9F48BAD5C7FF088A5FCDF193DD3E450E3");
 
         MsgCreateOperator msg = new MsgCreateOperator();
         msg.init(key.getAddress(), key.getPubKey());
 
         Message messages = msg.produceCreateOperatorMsg(
-                "okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9",
-                "https://captain.okg/operator.json");
+                "okexchain1twtrl3wvaf9yz6jvt4s726wj6e3cpfxxlgampg",
+                "https://bob.okg/operator.json");
 
         try {
             UnsignedTx unsignedTx = msg.getUnsignedTx(messages, "0.01000000", "200000", "okexchain dex create operator!");
@@ -46,13 +46,13 @@ public class Dex {
     }
 
     static void testMsgUpdateOperator(){
-        PrivateKey key = new PrivateKey("8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7");
+        PrivateKey key = new PrivateKey("17157D973569415C616E70BE2537DFB9F48BAD5C7FF088A5FCDF193DD3E450E3");
 
         MsgUpdateOperator msg = new MsgUpdateOperator();
         msg.init(key.getAddress(), key.getPubKey());
 
         Message messages = msg.produceUpdateOperatorMsg(
-                "okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9",
+                "okexchain1ntvyep3suq5z7789g7d5dejwzameu08m6gh7yl",
                 "https://captain.okg/operator111.json");
 
         try {
@@ -70,15 +70,15 @@ public class Dex {
     }
 
     static void testMsgList(){
-        PrivateKey key = new PrivateKey("8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7");
+        PrivateKey key = new PrivateKey("17157D973569415C616E70BE2537DFB9F48BAD5C7FF088A5FCDF193DD3E450E3");
 
         MsgList msg = new MsgList();
         msg.init(key.getAddress(), key.getPubKey());
 
         Message messages = msg.produceListMsg(
-                "eos-d87",
-                "okt",
-                "1.00000000");
+                "eos-3bd",
+                EnvInstance.getEnv().GetDenom(),
+                "1");
 
         try {
             UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "okexchain dex list!");
@@ -95,15 +95,15 @@ public class Dex {
     }
 
     static void testMsgTransferTokenPairOwnership(){
-        PrivateKey key = new PrivateKey("8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7");
+        PrivateKey key = new PrivateKey("17157D973569415C616E70BE2537DFB9F48BAD5C7FF088A5FCDF193DD3E450E3");
 
         MsgTransferTokenPairOwnership msg = new MsgTransferTokenPairOwnership();
         msg.init(key.getAddress(), key.getPubKey());
 
         Message messages = msg.produceTransferTokenPairOwnershipMsg(
-                "okexchain1pt7xrmxul7sx54ml44lvv403r06clrdkgmvr9g",
-                "okexchain1jjvpmgwwgs99nhlje3aag0lackunqgj7xnrnwe",
-                "eos-024_tokt"
+                "okexchain1twtrl3wvaf9yz6jvt4s726wj6e3cpfxxlgampg",
+                "okexchain1ntvyep3suq5z7789g7d5dejwzameu08m6gh7yl",
+                "eos-3bd_tokt"
         );
 
         try {
@@ -121,14 +121,14 @@ public class Dex {
     }
 
     static void testMsgConfirmTokenPairOwnership(){
-        PrivateKey key = new PrivateKey("29892b64003fc5c8c89dc795a2ae82aa84353bb4352f28707c2ed32aa1011884");
+        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
 
         MsgConfirmTokenPairOwnership msg = new MsgConfirmTokenPairOwnership();
         msg.init(key.getAddress(), key.getPubKey());
 
         Message messages = msg.produceConfirmTokenPairOwnershipMsg(
-                "okexchain1jjvpmgwwgs99nhlje3aag0lackunqgj7xnrnwe",
-                "eos-024_tokt"
+                "okexchain1ntvyep3suq5z7789g7d5dejwzameu08m6gh7yl",
+                "eos-3bd_tokt"
         );
 
         try {
