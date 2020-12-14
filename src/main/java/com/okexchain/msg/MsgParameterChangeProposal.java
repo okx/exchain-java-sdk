@@ -7,6 +7,7 @@ import com.alibaba.fastjson.parser.Feature;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgParamChangeValue;
 import com.okexchain.msg.types.MsgParameterChangeProposalValue;
@@ -90,7 +91,7 @@ public class MsgParameterChangeProposal extends MsgBase {
         // submit
         List<Token> depositList = new ArrayList<>();
         Token deposit = new Token();
-        deposit.setDenom("tokt");
+        deposit.setDenom(EnvInstance.getEnv().GetDenom());
         deposit.setAmount(Utils.NewDecString(amountDeposit));
         depositList.add(deposit);
 

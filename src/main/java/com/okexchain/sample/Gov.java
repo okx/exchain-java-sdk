@@ -54,7 +54,7 @@ public class Gov {
         }
     }
 
-    static void testDeListProposal() {
+    static void testDeListProposal() throws JsonProcessingException {
         PrivateKey key = new PrivateKey("17157D973569415C616E70BE2537DFB9F48BAD5C7FF088A5FCDF193DD3E450E3");
 
         MsgDeListProposal msg = new MsgDeListProposal();
@@ -64,7 +64,7 @@ public class Gov {
                 "delete token pair proposal",
                 "delete eos-3bd_tokt",
                 "eos-3bd",
-                "tokt",
+                EnvInstance.getEnv().GetDenom(),
                 "100"
         );
 

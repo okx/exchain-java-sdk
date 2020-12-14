@@ -1,6 +1,7 @@
 package com.okexchain.msg;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.types.MsgDeListProposalValue;
 import com.okexchain.msg.types.MsgSubmitDeListProposalValue;
@@ -23,7 +24,7 @@ public class MsgDeListProposal extends MsgBase {
                 "delete token pair proposal",
                 "delete xxx-okt",
                 "xxx",
-                "okt",
+                EnvInstance.getEnv().GetDenom(),
                 "100.00000000"
         );
 
@@ -54,7 +55,7 @@ public class MsgDeListProposal extends MsgBase {
         // submit
         List<Token> depositList = new ArrayList<>();
         Token deposit = new Token();
-        deposit.setDenom("tokt");
+        deposit.setDenom(EnvInstance.getEnv().GetDenom());
         deposit.setAmount(Utils.NewDecString(amountDeposit));
         depositList.add(deposit);
 

@@ -77,7 +77,7 @@ public class Dex {
 
         Message messages = msg.produceListMsg(
                 "eos-3bd",
-                "tokt",
+                EnvInstance.getEnv().GetDenom(),
                 "1");
 
         try {

@@ -83,7 +83,7 @@ public class Staking {
         MsgDeposit msg = new MsgDeposit();
         msg.init(key.getAddress(), key.getPubKey());
 
-        Message messages = msg.produceMsg("tokt", "10.000000000000000000", key.getAddress());
+        Message messages = msg.produceMsg(EnvInstance.getEnv().GetDenom(), "10.000000000000000000", key.getAddress());
 
         try {
             UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "okexchain transfer!");
@@ -105,7 +105,7 @@ public class Staking {
         MsgWithdrawStaking msg = new MsgWithdrawStaking();
         msg.init(key.getAddress(), key.getPubKey());
 
-        Message messages = msg.produceMsg("tokt", "9.000000000000000000", key.getAddress());
+        Message messages = msg.produceMsg(EnvInstance.getEnv().GetDenom(), "9.000000000000000000", key.getAddress());
 
         try {
             UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "");

@@ -26,7 +26,7 @@ public class ColdSign {
 //        msg.init(key.getPubKey(), "0", "10");
 
         Message messages = msg.produceSendMsg(
-                "tokt",
+                EnvInstance.getEnv().GetDenom(),
                 "6.00000000",
                 "okexchain1q6ls3h64gkxq0r73u2eqwwr7d5mp583f2ats92");
 
