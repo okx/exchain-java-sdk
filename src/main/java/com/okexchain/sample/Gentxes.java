@@ -32,19 +32,19 @@ public class Gentxes {
     public static void main(String[] args) {
 
         String[][] validators = {
-                {"0322e2f6e84f7aaa61fd666cdf3ffb3f9e5cd823f55a107535f4f6809b7b046f3a",
+                {"031551b28d383cd917df9fb9577d213344980cbb1e057013242f7f4f1385de8d02",
                         "okexchainvalconspub1zcjduepq4zcj4e2m6h6tm76ucrvkn5drxa6j2qt5s8qgf0ajwa6kn2pdgksq5lvlcl",
                         "OKEx",  "https://www.okex.com", "https://static.okex.com/cdn/assets/imgs/MjAxOTQ/5CAB3C0086E2F1135A3428116E435B8A.png", "The World's Leading One-Stop Crypto Exchange",},
 
-                {"030915f4d34a0c102478cc117df1183d145b6afc32897f06ca631b0a52d2665c99",
+                {"0272b610cc2e561f3adb31ecae99d431df6097f9068b11e910e5f5f376997a9c5d",
                         "okexchainvalconspub1zcjduepqy6tlu8zak7vj20cpalng3e2hadv8gadwyk6zr2wr4chnr08at3mqc0d899",
                         "OKLink",  "https://www.oklink.com", "https://static.bafang.com/cdn/assets/imgs/MjAyMDM/238A87F2CCB1F1B2184CB21DC55D0EA0.png", "World-Leading Blockchain Explorer",},
 
-                {"03b0fd45a8d462bff54547b481855198ab4e1a2b7df438e6e570bb8665bba02592",
+                {"030b160560c1ffededee6b60a4d3226ebdcc5dd4e506adb3e75f7628e48a4b0afb",
                         "okexchainvalconspub1zcjduepq0ezwe9ev35v9ht370h3wkhqm33a3sc2ndwa0s2e7hj6zuw68qdnqcsfu0t",
                         "OKEx PooL",  "https://www.okex.com/pool", "identity", "The World's Leading Blockchain Digital Asset Mining Platform",},
 
-                {"02ab87eeb0a0fc7e747b444070fd9d83104077147728f98ebf93f68081b9c4c7d5",
+                {"0358458b033e9c2b8099ad5320175ac817045d79568840b2903bff86e0746532a6",
                         "okexchainvalconspub1zcjduepqqaes4htn3vsan8c9c8hs90w2vyzk0d8hlxwupawxz4rhp6srg0ts0cvc4k",
                         "OKEx DEX",  "https://www.okex.com/dex-test", "identity", "OKEx DEX Borderless decentralized trading platform",},
         };
