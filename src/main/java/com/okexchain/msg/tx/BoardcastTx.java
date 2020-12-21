@@ -8,17 +8,17 @@ public class BoardcastTx {
 
     private String mode;
     private String type = "cosmos-sdk/StdTx";
-    private TxValue tx;
+    private TxValue value;
 
     public BoardcastTx() {
     }
 
     public TxValue getTx() {
-        return tx;
+        return value;
     }
 
-    public void setTx(TxValue tx) {
-        this.tx = tx;
+    public void setTx(TxValue value) {
+        this.value = value;
     }
 
     public String toJson() {
