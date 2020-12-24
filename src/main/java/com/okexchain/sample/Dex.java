@@ -12,26 +12,28 @@ import com.okexchain.msg.common.Signature;
 
 public class Dex {
     public static void main(String[] args) {
+        EnvBase env = EnvInstance.getEnv();
+        env.setChainID("okexchainevm-8");
 //        testMsgCreateOperator();
 //        testMsgUpdateOperator();
-//        testMsgList();
+        testMsgList();
 //        testMsgTransferTokenPairOwnership();
-        testMsgConfirmTokenPairOwnership();
+//        testMsgConfirmTokenPairOwnership();
 
     }
 
     static void testMsgCreateOperator(){
-        PrivateKey key = new PrivateKey("17157D973569415C616E70BE2537DFB9F48BAD5C7FF088A5FCDF193DD3E450E3");
+        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
 
         MsgCreateOperator msg = new MsgCreateOperator();
         msg.init(key.getAddress(), key.getPubKey());
 
         Message messages = msg.produceCreateOperatorMsg(
-                "okexchain1twtrl3wvaf9yz6jvt4s726wj6e3cpfxxlgampg",
+                key.getAddress(),
                 "https://bob.okg/operator.json");
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages, "0.01000000", "200000", "okexchain dex create operator!");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages, "0.02000000", "200000", "okexchain dex create operator!");
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
             BoardcastTx signedTx = unsignedTx.signed(signature);
@@ -68,18 +70,18 @@ public class Dex {
     }
 
     static void testMsgList(){
-        PrivateKey key = new PrivateKey("17157D973569415C616E70BE2537DFB9F48BAD5C7FF088A5FCDF193DD3E450E3");
+        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
 
         MsgList msg = new MsgList();
         msg.init(key.getAddress(), key.getPubKey());
 
         Message messages = msg.produceListMsg(
-                "eos-3bd",
+                "usdk-5f7",
                 EnvInstance.getEnv().GetDenom(),
                 "1");
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "okexchain dex list!");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.02000000", "200000", "okexchain dex list!");
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 

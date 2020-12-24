@@ -2,7 +2,6 @@ package com.okexchain.msg.staking;
 
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
-import com.okexchain.msg.order.MsgNewValue;
 
 public class MsgDestroyValidator extends MsgBase {
 

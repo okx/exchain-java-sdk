@@ -2,19 +2,18 @@ package com.okexchain.msg.order;
 
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
-import com.okexchain.msg.order.MsgCancelValue;
 
-public class MsgCancel extends MsgBase {
+public class MsgCancelOrders extends MsgBase {
 
-    public MsgCancel() { setMsgType("okexchain/order/MsgCancel"); }
+    public MsgCancelOrders() { setMsgType("okexchain/order/MsgCancel"); }
 
     public Message produceMsg(String [] orderIDs){
 
-        MsgCancelValue value = new MsgCancelValue();
+        MsgCancelOrdersValue value = new MsgCancelOrdersValue();
         value.setSender(this.address);
         value.setOrderIDs(orderIDs);
 
-        Message<MsgCancelValue> msg = new Message<>();
+        Message<MsgCancelOrdersValue> msg = new Message<>();
         msg.setType(msgType);
         msg.setValue(value);
         return msg;

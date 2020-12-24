@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder(alphabetic = true)
-public class MsgCancelValue {
+public class MsgCancelOrdersValue {
 
     @JsonProperty("order_ids")
     @SerializedName("order_ids")
