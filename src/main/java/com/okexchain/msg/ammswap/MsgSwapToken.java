@@ -9,7 +9,7 @@ public class MsgSwapToken extends MsgBase {
 
     public MsgSwapToken() { setMsgType("okexchain/ammswap/MsgSwapToken"); }
 
-    public Message produceMsg(int deadline, String recipient, String amountMinBoughtToken, String denomMinBoughtToken, String amountSoldToken, String denomSoldToken) {
+    public Message produceMsg(String deadline, String recipient, String amountMinBoughtToken, String denomMinBoughtToken, String amountSoldToken, String denomSoldToken) {
 
         Token coinMinBoughtToken = new Token();
         coinMinBoughtToken.setDenom(amountMinBoughtToken);
@@ -21,7 +21,7 @@ public class MsgSwapToken extends MsgBase {
 
         MsgSwapTokenValue value = new MsgSwapTokenValue();
 
-        value.setDeadline(deadline);
+        value.setDeadline(Utils.NewDecString(deadline));
         value.setSender(this.address);
         value.setRecipient(recipient);
         value.setMinBoughtTokenAmount(coinMinBoughtToken);

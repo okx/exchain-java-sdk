@@ -5,25 +5,27 @@ import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Token;
 import com.okexchain.utils.Utils;
 
+import java.text.SimpleDateFormat;
+
 public class MsgAddLiquidity extends MsgBase {
 
     public MsgAddLiquidity() { setMsgType("okexchain/ammswap/MsgAddLiquidity"); }
 
-    public Message produceMsg(int deadline, String minLiquidity, String amountMaxBaseAmount, String denomMaxBaseAmount, String amountQuoteAmount, String denomQuoteAmount) {
+    public Message produceMsg(String deadline, String minLiquidity, String amountMaxBaseAmount, String denomMaxBaseAmount, String amountQuoteAmount, String denomQuoteAmount) {
 
         Token coinMaxBaseAmount = new Token();
-        coinMaxBaseAmount.setDenom(amountMaxBaseAmount);
-        coinMaxBaseAmount.setAmount(Utils.NewDecString(denomMaxBaseAmount));
+        coinMaxBaseAmount.setDenom(denomMaxBaseAmount);
+        coinMaxBaseAmount.setAmount(Utils.NewDecString(amountMaxBaseAmount));
 
         Token coinQuoteAmount = new Token();
-        coinQuoteAmount.setDenom(amountQuoteAmount);
-        coinQuoteAmount.setAmount(Utils.NewDecString(denomQuoteAmount));
+        coinQuoteAmount.setDenom(denomQuoteAmount);
+        coinQuoteAmount.setAmount(Utils.NewDecString(amountQuoteAmount));
 
         MsgAddLiquidityValue value = new MsgAddLiquidityValue();
 
         value.setDeadline(deadline);
         value.setSender(this.address);
-        value.setMinLiquidity(minLiquidity);
+        value.setMinLiquidity(Utils.NewDecString(minLiquidity));
         value.setMaxBaseAmount(coinMaxBaseAmount);
         value.setQuoteAmount(coinQuoteAmount);
 
