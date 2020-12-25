@@ -16,7 +16,7 @@ public class EnvBase {
     protected String accountUrlPath;
 
     public EnvBase() {
-        this.restServerUrl = "127.0.0.1:8545";
+        this.restServerUrl = "http://127.0.0.1:8545";
         this.mainPrefix = "okexchain";
         this.denom = "okt";
         this.chainID = "okexchain-1";

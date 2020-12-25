@@ -1,30 +1,41 @@
-package com.okexchain.msg.common;
+package com.okexchain.msg.order;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.google.gson.annotations.SerializedName;
+import com.okexchain.utils.Utils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder(alphabetic = true)
-public class NewOrderItem {
+public class OrderItem {
 
+    @JsonProperty("price")
+    @SerializedName("price")
     private String price;
 
+    @JsonProperty("product")
+    @SerializedName("product")
     private String product;
 
+    @JsonProperty("quantity")
+    @SerializedName("quantity")
     private String quantity;
 
+    @JsonProperty("side")
+    @SerializedName("side")
     private String side;
 
-    public NewOrderItem() {
+    public OrderItem() {
 
     }
 
-    public NewOrderItem(String price, String product, String quantity, String side) {
-        this.price = price;
+    public OrderItem(String price, String product, String quantity, String side) {
+        this.price = Utils.NewDecString(price);
         this.product = product;
-        this.quantity = quantity;
+        this.quantity = Utils.NewDecString(quantity);
         this.side = side;
     }
 
