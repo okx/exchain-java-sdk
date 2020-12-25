@@ -23,11 +23,10 @@ public class Token {
     public static void main(String[] args) throws JsonProcessingException {
         EnvBase env = EnvInstance.getEnv();
         env.setChainID("okexchainevm-8");
-        env.setRestServerUrl("http://localhost:8545");
-        env.setDenom("tokt");
+        env.setDenom("okt");
 
-//        testMsgIssueToken();
-        testMultiTransfer();
+        testMsgIssueToken();
+//        testMultiTransfer();
     }
 
     static void testMsgIssueToken(){
@@ -62,8 +61,6 @@ public class Token {
     }
 
     static void testMultiTransfer() {
-        EnvInstance.getEnv().setRestServerUrl("http://localhost:8545");
-
         PrivateKey key = new PrivateKey("3040196C06C630C1E30D6D347B097C9EA64ADA24FB94823B6C755194F3A00761");
 
         MsgMultiTransfer msg = new MsgMultiTransfer();
@@ -72,7 +69,7 @@ public class Token {
         List<com.okexchain.msg.common.Token> tokens = new ArrayList<>();
         com.okexchain.msg.common.Token amount = new com.okexchain.msg.common.Token();
         amount.setAmount(Utils.NewDecString("10"));
-        amount.setDenom("tokt");
+        amount.setDenom("okt");
         tokens.add(amount);
 
         List<TransferUnits> transferUnits = new ArrayList<>();

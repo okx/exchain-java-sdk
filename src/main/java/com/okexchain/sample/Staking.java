@@ -17,7 +17,7 @@ public class Staking {
     public static void main(String[] args) {
         EnvInstance.getEnv().setRestServerUrl("http://localhost:8545");
         EnvInstance.getEnv().setChainID("okexchainevm-8");
-        EnvInstance.getEnv().setDenom("tokt");
+        EnvInstance.getEnv().setDenom("okt");
 
 //        testUnjail();
 //        testBindProxy();

@@ -5,27 +5,31 @@ import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Token;
 import com.okexchain.utils.Utils;
 
+import java.time.Duration;
+import java.time.Instant;
+
 public class MsgRemoveLiquidity extends MsgBase {
 
     public MsgRemoveLiquidity() { setMsgType("okexchain/ammswap/MsgRemoveLiquidity"); }
 
-    public Message produce(int deadline, String liquidity, String amountMinBaseAmount, String denomMinBaseAmount, String amountMinQuoteAmount, String denomMinQuoteAmount){
+    public Message produce(String deadline, String liquidity, String minBaseAmount, String BaseDenom, String minQuoteAmount, String quoteDenom){
 
         Token coinMinBaseAmount = new Token();
-        coinMinBaseAmount.setDenom(amountMinBaseAmount);
-        coinMinBaseAmount.setAmount(Utils.NewDecString(denomMinBaseAmount));
+        coinMinBaseAmount.setDenom(BaseDenom);
+        coinMinBaseAmount.setAmount(Utils.NewDecString(minBaseAmount));
 
         Token coinMinQuoteAmount = new Token();
-        coinMinQuoteAmount.setDenom(amountMinQuoteAmount);
-        coinMinQuoteAmount.setAmount(Utils.NewDecString(denomMinQuoteAmount));
+        coinMinQuoteAmount.setDenom(quoteDenom);
+        coinMinQuoteAmount.setAmount(Utils.NewDecString(minQuoteAmount));
 
         MsgRemoveLiquidityValue value = new MsgRemoveLiquidityValue();
 
-        value.setDeadline(deadline);
+        long current = Instant.now().getEpochSecond() + Duration.parse(deadline).getSeconds();
+        value.setDeadline(Long.toString(current));
         value.setSender(this.address);
         value.setMinBaseAmount(coinMinBaseAmount);
         value.setMinQuoteAmount(coinMinQuoteAmount);
-        value.setLiquidity(liquidity);
+        value.setLiquidity(Utils.NewDecString(liquidity));
 
         Message<MsgRemoveLiquidityValue> msg = new Message<>();
         msg.setType(msgType);

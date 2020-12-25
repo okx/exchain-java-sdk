@@ -5,23 +5,27 @@ import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Token;
 import com.okexchain.utils.Utils;
 
+import java.time.Duration;
+import java.time.Instant;
+
 public class MsgSwapToken extends MsgBase {
 
     public MsgSwapToken() { setMsgType("okexchain/ammswap/MsgSwapToken"); }
 
-    public Message produceMsg(String deadline, String recipient, String amountMinBoughtToken, String denomMinBoughtToken, String amountSoldToken, String denomSoldToken) {
+    public Message produceMsg(String deadline, String recipient, String minBoughtAmount, String boughtDenom, String soldAmount, String soldDenom) {
 
         Token coinMinBoughtToken = new Token();
-        coinMinBoughtToken.setDenom(amountMinBoughtToken);
-        coinMinBoughtToken.setAmount(Utils.NewDecString(denomMinBoughtToken));
+        coinMinBoughtToken.setDenom(boughtDenom);
+        coinMinBoughtToken.setAmount(Utils.NewDecString(minBoughtAmount));
 
         Token coinSoldToken = new Token();
-        coinSoldToken.setDenom(amountSoldToken);
-        coinSoldToken.setAmount(Utils.NewDecString(denomSoldToken));
+        coinSoldToken.setDenom(soldDenom);
+        coinSoldToken.setAmount(Utils.NewDecString(soldAmount));
 
         MsgSwapTokenValue value = new MsgSwapTokenValue();
 
-        value.setDeadline(Utils.NewDecString(deadline));
+        long current = Instant.now().getEpochSecond() + Duration.parse(deadline).getSeconds();
+        value.setDeadline(Long.toString(current));
         value.setSender(this.address);
         value.setRecipient(recipient);
         value.setMinBoughtTokenAmount(coinMinBoughtToken);

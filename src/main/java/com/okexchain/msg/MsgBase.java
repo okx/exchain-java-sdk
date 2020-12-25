@@ -2,6 +2,7 @@ package com.okexchain.msg;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.okexchain.env.EnvInstance;
 import com.okexchain.utils.HttpUtils;
 import com.okexchain.utils.Utils;
@@ -132,10 +133,10 @@ public class MsgBase {
             msgs[0] = message;
 
             Data2Sign data = new Data2Sign(accountNum, EnvInstance.getEnv().GetChainid(), fee, memo, msgs, sequenceNum);
-            String unsignedTxJson = Utils.serializer.toJson(data);
+            String unsignedTxJson = new ObjectMapper().writeValueAsString(data);
 
             System.out.println("row data:");
-            System.out.println(data);
+            System.out.println(unsignedTxJson);
 
             TxValue txValue = new TxValue();
             txValue.setMsgs(msgs);

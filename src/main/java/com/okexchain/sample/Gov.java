@@ -62,7 +62,7 @@ public class Gov {
 
         Message messages = msg.produceDelistProposalMsg(
                 "delete token pair proposal",
-                "delete eos-3bd_tokt",
+                "delete eos-3bd_okt",
                 "eos-3bd",
                 EnvInstance.getEnv().GetDenom(),
                 "100"

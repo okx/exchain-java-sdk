@@ -14,21 +14,25 @@ public class MsgRemoveLiquidityValue {
 
     @JsonProperty("deadline")
     @SerializedName("deadline")
-    private int deadline;
+    private String deadline;
 
     @JsonProperty("liquidity")
     @SerializedName("liquidity")
     private String liquidity;
 
+    @JsonProperty("min_base_amount")
+    @SerializedName("min_base_amount")
     private Token minBaseAmount;
 
+    @JsonProperty("min_quote_amount")
+    @SerializedName("min_quote_amount")
     private Token minQuoteAmount;
 
     @JsonProperty("sender")
     @SerializedName("sender")
     private String sender;
 
-    public void setDeadline(int deadline) { this.deadline = deadline; }
+    public void setDeadline(String deadline) { this.deadline = deadline; }
 
     public void setLiquidity(String liquidity) {
         this.liquidity = liquidity;

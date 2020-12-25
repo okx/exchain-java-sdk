@@ -15,7 +15,7 @@ public class Dex {
     public static void main(String[] args) {
         EnvInstance.getEnv().setRestServerUrl("http://localhost:8545");
         EnvInstance.getEnv().setChainID("okexchainevm-8");
-        EnvInstance.getEnv().setDenom("tokt");
+        EnvInstance.getEnv().setDenom("okt");
 
 //        testMsgCreateOperator();
 //        testMsgUpdateOperator();
@@ -107,7 +107,7 @@ public class Dex {
         Message messages = msg.produceTransferTokenPairOwnershipMsg(
                 "okexchain1twtrl3wvaf9yz6jvt4s726wj6e3cpfxxlgampg",
                 "okexchain1ntvyep3suq5z7789g7d5dejwzameu08m6gh7yl",
-                "eos-3bd_tokt"
+                "eos-3bd_okt"
         );
 
         try {
@@ -132,7 +132,7 @@ public class Dex {
 
         Message messages = msg.produceConfirmTokenPairOwnershipMsg(
                 "okexchain1ntvyep3suq5z7789g7d5dejwzameu08m6gh7yl",
-                "eos-3bd_tokt"
+                "eos-3bd_okt"
         );
 
         try {
@@ -156,9 +156,9 @@ public class Dex {
         msg.init(key.getAddress(), key.getPubKey());
 
         Message messages = msg.produce(
-                "tokt",
+                "okt",
                 "1000",
-                "eos-c38_tokt"
+                "eos-c38_okt"
         );
 
         try {

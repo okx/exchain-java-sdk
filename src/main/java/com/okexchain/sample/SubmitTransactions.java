@@ -31,7 +31,7 @@ public class SubmitTransactions {
         String to = "okexchain1wq0zdnrc0r9uvqsly6622f4erl5qxly24qd4ur";
         String memo = "send memo";
         List<Token> amountList = new ArrayList<>();
-        Token amount = new Token("1.00000000", "tokt");
+        Token amount = new Token("1.00000000", "okt");
         amountList.add(amount);
         JSONObject ret = client.sendSendTransaction(account, to, amountList, memo);
         System.out.println(ret);

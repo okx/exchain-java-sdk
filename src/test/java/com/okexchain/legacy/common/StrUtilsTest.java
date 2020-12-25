@@ -35,7 +35,7 @@ public class StrUtilsTest {
 
     @Test
     public void isProductTest() {
-        Assert.assertTrue(StrUtils.isProduct("tokt_tusdk"));
+        Assert.assertTrue(StrUtils.isProduct("okt_tusdk"));
         Assert.assertTrue(StrUtils.isProduct("1_2"));
         Assert.assertFalse(StrUtils.isProduct("xxb"));
         Assert.assertFalse(StrUtils.isProduct("xxb_"));

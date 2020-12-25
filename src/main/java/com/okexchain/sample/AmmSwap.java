@@ -15,13 +15,12 @@ import com.okexchain.utils.crypto.PrivateKey;
 public class AmmSwap {
 
     public static void main(String[] args) {
-        EnvInstance.getEnv().setRestServerUrl("http://localhost:8545");
         EnvInstance.getEnv().setChainID("okexchainevm-8");
-        EnvInstance.getEnv().setDenom("tokt");
+        EnvInstance.getEnv().setDenom("okt");
 
 //        testAddLiquidity();
-//        testRemoveLiquidity();
-        testCreateExchange();
+        testRemoveLiquidity();
+//        testCreateExchange();
 //        testSwapToken();
     }
 
@@ -31,13 +30,14 @@ public class AmmSwap {
         MsgAddLiquidity msg = new MsgAddLiquidity();
         msg.init(key.getAddress(), key.getPubKey());
 
+        // the lexicographic order of BaseDenom must be less than QuoteDenom
         Message messages = msg.produceMsg(
-                "100000000",
-                "3",
+                "PT10S",
+                "1",
                 "100",
-                "eth-aeb",
+                "okt",
                 "100",
-                "tokt"
+                "usdk-5f7"
         );
 
         try {
@@ -55,22 +55,22 @@ public class AmmSwap {
     }
 
     static void testRemoveLiquidity() {
-        PrivateKey key = new PrivateKey("3040196C06C630C1E30D6D347B097C9EA64ADA24FB94823B6C755194F3A00761");
+        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
 
         MsgRemoveLiquidity msg = new MsgRemoveLiquidity();
         msg.init(key.getAddress(), key.getPubKey());
 
         Message messages = msg.produce(
-                10,
-                "10",
+                "PT10S",
                 "1",
+                "80",
                 "okt",
-                "1",
-                "eos"
+                "100",
+                "usdk-5f7"
         );
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages, "0.01000000", "200000", "remove liquidity!");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages, "0.02000000", "200000", "remove liquidity!");
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
@@ -90,12 +90,12 @@ public class AmmSwap {
         msg.init(key.getAddress(), key.getPubKey());
 
         Message messages = msg.productMsg(
-                "eth-aeb",
-                "tokt"
+                "usdk-5f7",
+                "okt"
         );
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages, "0.01000000", "200000", "create exchange!");
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages, "0.02000000", "200000", "create exchange!");
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
@@ -110,18 +110,18 @@ public class AmmSwap {
 
     static void testSwapToken() {
 
-        PrivateKey key = new PrivateKey("3040196C06C630C1E30D6D347B097C9EA64ADA24FB94823B6C755194F3A00761");
+        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
 
         MsgSwapToken msg = new MsgSwapToken();
         msg.init(key.getAddress(), key.getPubKey());
 
         Message messages = msg.produceMsg(
-                "10s",
+                "PT10S",
                 "okexchain1s6nfs7mlj7ewsskkrmekqhpq2w234fcz9sp3uz",
-                "1",
-                "tokt",
-                "1,",
-                "eos-c38"
+                "10",
+                "okt",
+                "15",
+                "usdk-5f7"
 
         );
 
