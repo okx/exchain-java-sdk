@@ -10,9 +10,11 @@ import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Signature;
+import com.okexchain.msg.common.TransferUnits;
 import com.okexchain.msg.order.MsgCancelOrders;
 import com.okexchain.msg.order.MsgNewOrders;
 import com.okexchain.msg.order.OrderItem;
+import com.okexchain.msg.token.MsgMultiTransfer;
 import com.okexchain.msg.tx.BoardcastTx;
 import com.okexchain.msg.tx.UnsignedTx;
 import com.okexchain.utils.crypto.PrivateKey;
@@ -87,3 +89,6 @@ public class Order {
         }
     }
 }
+
+
+
