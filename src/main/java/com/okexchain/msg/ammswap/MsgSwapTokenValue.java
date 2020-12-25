@@ -14,8 +14,10 @@ public class MsgSwapTokenValue {
 
     @JsonProperty("deadline")
     @SerializedName("deadline")
-    private int deadline;
+    private String deadline;
 
+    @JsonProperty("min_bought_token_amount")
+    @SerializedName("min_bought_token_amount")
     private Token minBoughtTokenAmount;
 
     @JsonProperty("recipient")
@@ -26,9 +28,11 @@ public class MsgSwapTokenValue {
     @SerializedName("sender")
     private String sender;
 
+    @JsonProperty("sold_token_amount")
+    @SerializedName("sold_token_amount")
     private Token soldTokenAmount;
 
-    public void setDeadline(int deadline) { this.deadline = deadline; }
+    public void setDeadline(String deadline) { this.deadline = deadline; }
 
     public void setRecipient(String recipient) {
         this.recipient = recipient;

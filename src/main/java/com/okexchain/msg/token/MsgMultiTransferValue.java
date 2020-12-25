@@ -14,17 +14,19 @@ import java.util.List;
 @JsonPropertyOrder(alphabetic = true)
 public class MsgMultiTransferValue {
 
-    private List<TransferUnits> transferUnits;
-
     @JsonProperty("from")
     @SerializedName("from")
     private String from;
 
+    @JsonProperty("transfers")
+    @SerializedName("transfers")
+    private List<TransferUnits> transfers;
+
     public List<TransferUnits> getTransferUnits() {
-        return transferUnits;
+        return transfers;
     }
 
-    public void setTransferUnits(List<TransferUnits> transferUnits) { this.transferUnits = transferUnits; }
+    public void setTransferUnits(List<TransferUnits> transferUnits) { this.transfers = transferUnits; }
 
     public String getFrom() {
         return from;
@@ -38,7 +40,7 @@ public class MsgMultiTransferValue {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("from", from)
-                .append("transfers", transferUnits)
+                .append("transfers", transfers)
                 .toString();
     }
 }

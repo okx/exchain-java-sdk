@@ -14,21 +14,25 @@ public class MsgAddLiquidityValue {
 
     @JsonProperty("deadline")
     @SerializedName("deadline")
-    private int deadline;
+    private String deadline;
+
+    @JsonProperty("max_base_amount")
+    @SerializedName("max_base_amount")
+    private Token maxBaseAmount;
 
     @JsonProperty("min_liquidity")
     @SerializedName("min_liquidity")
     private String minLiquidity;
 
-    private Token maxBaseAmount;
-
+    @JsonProperty("quote_amount")
+    @SerializedName("quote_amount")
     private Token quoteAmount;
 
     @JsonProperty("sender")
     @SerializedName("sender")
     private String sender;
 
-    public void setDeadline(int deadline) { this.deadline = deadline; }
+    public void setDeadline(String deadline) { this.deadline = deadline; }
 
     public void setMinLiquidity(String minLiquidity) {
         this.minLiquidity = minLiquidity;

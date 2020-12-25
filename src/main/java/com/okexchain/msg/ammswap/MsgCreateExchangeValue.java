@@ -11,6 +11,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @JsonPropertyOrder(alphabetic = true)
 public class MsgCreateExchangeValue {
 
+    @JsonProperty("sender")
+    @SerializedName("sender")
+    private String sender;
+
     @JsonProperty("token0_name")
     @SerializedName("token0_name")
     private String token0Name;
@@ -18,10 +22,6 @@ public class MsgCreateExchangeValue {
     @JsonProperty("token1_name")
     @SerializedName("token1_name")
     private String token1Name;
-
-    @JsonProperty("sender")
-    @SerializedName("sender")
-    private String sender;
 
     public void setTokenNameBefore(String token0Name) { this.token0Name = token0Name; }
 

@@ -12,6 +12,7 @@ import com.okexchain.msg.common.TransferUnits;
 import com.okexchain.msg.token.MsgMultiTransfer;
 import com.okexchain.msg.tx.BoardcastTx;
 import com.okexchain.msg.tx.UnsignedTx;
+import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
 
 import java.util.ArrayList;
@@ -23,7 +24,10 @@ public class Token {
         EnvBase env = EnvInstance.getEnv();
         env.setChainID("okexchainevm-8");
         env.setRestServerUrl("http://localhost:8545");
-        testMsgIssueToken();
+        env.setDenom("tokt");
+
+//        testMsgIssueToken();
+        testMultiTransfer();
     }
 
     static void testMsgIssueToken(){
@@ -31,6 +35,8 @@ public class Token {
 
         MsgTokenIssue msg = new MsgTokenIssue();
         msg.init(key.getAddress(), key.getPubKey());
+
+        System.out.println(key.getAddress());
 
         Message messages = msg.produceTokenIssueMsg(
                 "usdk",
@@ -65,8 +71,8 @@ public class Token {
 
         List<com.okexchain.msg.common.Token> tokens = new ArrayList<>();
         com.okexchain.msg.common.Token amount = new com.okexchain.msg.common.Token();
-        amount.setAmount("10");
-        amount.setDenom("okt");
+        amount.setAmount(Utils.NewDecString("10"));
+        amount.setDenom("tokt");
         tokens.add(amount);
 
         List<TransferUnits> transferUnits = new ArrayList<>();

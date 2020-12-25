@@ -1,6 +1,7 @@
 package com.okexchain.sample;
 import com.okexchain.env.EnvBase;
 import com.okexchain.env.EnvInstance;
+import com.okexchain.msg.dex.MsgWithdrawDeposit;
 import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
 import com.okexchain.msg.*;
@@ -12,13 +13,16 @@ import com.okexchain.msg.common.Signature;
 
 public class Dex {
     public static void main(String[] args) {
-        EnvBase env = EnvInstance.getEnv();
-        env.setChainID("okexchainevm-8");
+        EnvInstance.getEnv().setRestServerUrl("http://localhost:8545");
+        EnvInstance.getEnv().setChainID("okexchainevm-8");
+        EnvInstance.getEnv().setDenom("tokt");
+
 //        testMsgCreateOperator();
 //        testMsgUpdateOperator();
-        testMsgList();
+//        testMsgList();
 //        testMsgTransferTokenPairOwnership();
 //        testMsgConfirmTokenPairOwnership();
+        testMsgWithdrawDeposit();
 
     }
 
@@ -133,6 +137,32 @@ public class Dex {
 
         try {
             UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "okexchain confirm token pair ownership!");
+
+            Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
+
+            BoardcastTx signedTx = unsignedTx.signed(signature);
+
+            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+
+        } catch (Exception e) {
+            System.out.println("serialize transfer msg failed");
+        }
+    }
+
+    static void testMsgWithdrawDeposit(){
+        PrivateKey key = new PrivateKey("3040196C06C630C1E30D6D347B097C9EA64ADA24FB94823B6C755194F3A00761");
+
+        MsgWithdrawDeposit msg = new MsgWithdrawDeposit();
+        msg.init(key.getAddress(), key.getPubKey());
+
+        Message messages = msg.produce(
+                "tokt",
+                "1000",
+                "eos-c38_tokt"
+        );
+
+        try {
+            UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.01000000", "200000", "withdraw deposit!");
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
