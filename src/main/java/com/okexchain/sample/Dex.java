@@ -1,6 +1,6 @@
 package com.okexchain.sample;
 import com.okexchain.env.EnvInstance;
-import com.okexchain.msg.dex.MsgWithdrawDeposit;
+import com.okexchain.msg.dex.*;
 import com.okexchain.utils.crypto.PrivateKey;
 import com.okexchain.msg.*;
 import com.okexchain.msg.tx.BoardcastTx;

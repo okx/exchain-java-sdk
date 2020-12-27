@@ -1,12 +1,11 @@
 package com.okexchain.sample;
 
 import com.okexchain.msg.MsgBase;
-import com.okexchain.msg.MsgCreateValidator;
+import com.okexchain.msg.staking.MsgCreateValidator;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Signature;
 import com.okexchain.msg.tx.BoardcastValue;
 import com.okexchain.msg.tx.UnsignedTx;
-import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
 
 public class Gentx {

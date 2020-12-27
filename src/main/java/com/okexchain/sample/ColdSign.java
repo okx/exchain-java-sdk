@@ -3,7 +3,7 @@ package com.okexchain.sample;
 import com.okexchain.env.EnvInstance;
 import com.okexchain.utils.crypto.PrivateKey;
 import com.okexchain.msg.MsgBase;
-import com.okexchain.msg.MsgSend;
+import com.okexchain.msg.token.MsgSend;
 import com.okexchain.msg.tx.BoardcastTx;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.tx.UnsignedTx;

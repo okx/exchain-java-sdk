@@ -1,9 +1,8 @@
 package com.okexchain.sample;
 
-import com.okexchain.msg.MsgCreateValidator;
+import com.okexchain.msg.staking.MsgCreateValidator;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.tx.UnsignedTx;
-import com.okexchain.utils.Utils;
 
 public class Gentxes {
 

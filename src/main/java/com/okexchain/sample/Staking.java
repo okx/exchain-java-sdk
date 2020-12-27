@@ -1,8 +1,10 @@
 package com.okexchain.sample;
 
 import com.okexchain.env.EnvInstance;
-import com.okexchain.msg.staking.MsgDestroyValidator;
-import com.okexchain.msg.staking.MsgUnbindProxy;
+import com.okexchain.msg.distribution.MsgModifyWithdrawAddress;
+import com.okexchain.msg.distribution.MsgWithdrawReward;
+import com.okexchain.msg.slashing.MsgUnjail;
+import com.okexchain.msg.staking.*;
 import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.Crypto;
 import com.okexchain.utils.crypto.PrivateKey;
@@ -24,7 +26,7 @@ public class Staking {
         testMsgUnbindProxy();
 //        testEditValidator();
 //        testMsgDeposit();
-//        testMsgWithdrawStaking();
+        testMsgWithdrawStaking();
 //        testMsgAddShares();
 //        testRegProxy();
 //        testWithdrawReward();
