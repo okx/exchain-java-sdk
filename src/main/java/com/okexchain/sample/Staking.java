@@ -40,7 +40,7 @@ public class Staking {
         PrivateKey key = new PrivateKey("17157D973569415C616E70BE2537DFB9F48BAD5C7FF088A5FCDF193DD3E450E3");
 
         MsgBindProxy msg = new MsgBindProxy();
-        msg.init(key.getAddress(), key.getPubKey());
+        msg.init(key.getPubKey());
 
         String delegator_address = key.getAddress();
         String proxy_address = "okexchain193xnjknz3e52mqv2nyufnzjugu3mh65rpxdasn";
@@ -65,7 +65,7 @@ public class Staking {
         PrivateKey key = new PrivateKey("17157D973569415C616E70BE2537DFB9F48BAD5C7FF088A5FCDF193DD3E450E3");
 
         MsgUnbindProxy msg = new MsgUnbindProxy();
-        msg.init(key.getAddress(), key.getPubKey());
+        msg.init(key.getPubKey());
 
         Message messages = msg.produce();
 
@@ -86,7 +86,7 @@ public class Staking {
     static void testEditValidator(){
         PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgEditValidator msg = new MsgEditValidator();
-        msg.init(key.getAddress(), key.getPubKey());
+        msg.init(key.getPubKey());
 
         Message messages = msg.produceMsg("1","1","1","1", Crypto.generateValidatorAddressFromPub(key.getPubKey()));
 
@@ -107,7 +107,7 @@ public class Staking {
     static void testMsgDeposit() {
         PrivateKey key = new PrivateKey("17157D973569415C616E70BE2537DFB9F48BAD5C7FF088A5FCDF193DD3E450E3");
         MsgDeposit msg = new MsgDeposit();
-        msg.init(key.getAddress(), key.getPubKey());
+        msg.init(key.getPubKey());
 
         Message messages = msg.produceMsg(EnvInstance.getEnv().GetDenom(), Utils.NewDecString("10"), key.getAddress());
 
@@ -128,7 +128,7 @@ public class Staking {
     static void testMsgWithdrawStaking() {
         PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgWithdrawStaking msg = new MsgWithdrawStaking();
-        msg.init(key.getAddress(), key.getPubKey());
+        msg.init(key.getPubKey());
 
         Message messages = msg.produceMsg(EnvInstance.getEnv().GetDenom(), "9.000000000000000000", key.getAddress());
 
@@ -150,7 +150,7 @@ public class Staking {
         PrivateKey key = new PrivateKey("3040196C06C630C1E30D6D347B097C9EA64ADA24FB94823B6C755194F3A00761");
         PrivateKey key1 = new PrivateKey("17157D973569415C616E70BE2537DFB9F48BAD5C7FF088A5FCDF193DD3E450E3");
         MsgAddShares msg = new MsgAddShares();
-        msg.init(key.getAddress(), key.getPubKey());
+        msg.init(key.getPubKey());
 
         String [] validators = { Crypto.generateValidatorAddressFromPub(key1.getPubKey()) };
         Message messages = msg.produceMsg(key.getAddress(), validators);
@@ -173,7 +173,7 @@ public class Staking {
     static void testRegProxy() {
         PrivateKey key = new PrivateKey("3040196C06C630C1E30D6D347B097C9EA64ADA24FB94823B6C755194F3A00761");
         MsgRegProxy msg = new MsgRegProxy();
-        msg.init(key.getAddress(), key.getPubKey());
+        msg.init(key.getPubKey());
 
         Message messages = msg.produceMsg(key.getAddress(), true);
 
@@ -194,7 +194,7 @@ public class Staking {
     static void testUnjail() {
         PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgUnjail msg = new MsgUnjail();
-        msg.init(key.getAddress(), key.getPubKey());
+        msg.init(key.getPubKey());
 
         Message messages = msg.produceMsg(Crypto.generateValidatorAddressFromPub(key.getPubKey()));
 
@@ -215,7 +215,7 @@ public class Staking {
     static void testWithdrawReward() {
         PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgWithdrawReward msg = new MsgWithdrawReward();
-        msg.init(key.getAddress(), key.getPubKey());
+        msg.init(key.getPubKey());
 
         Message messages = msg.produceWithdrawRewardMsg(Crypto.generateValidatorAddressFromPub(key.getPubKey()));
 
@@ -236,7 +236,7 @@ public class Staking {
     static void testModifyWithdrawAddress() {
         PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgModifyWithdrawAddress msg = new MsgModifyWithdrawAddress();
-        msg.init(key.getAddress(), key.getPubKey());
+        msg.init(key.getPubKey());
 
         Message messages = msg.produceModifyWithdrawAddressMsg("okexchain1twtrl3wvaf9yz6jvt4s726wj6e3cpfxxlgampg");
 
@@ -257,7 +257,7 @@ public class Staking {
     static void testMsgDestroyValidator() {
         PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgDestroyValidator msg = new MsgDestroyValidator();
-        msg.init(key.getAddress(), key.getPubKey());
+        msg.init(key.getPubKey());
 
         Message messages = msg.produceMsg();
 

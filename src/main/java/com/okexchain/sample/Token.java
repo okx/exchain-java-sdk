@@ -4,8 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.okexchain.env.EnvBase;
 import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
-import com.okexchain.msg.MsgCreateOperator;
-import com.okexchain.msg.MsgTokenIssue;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Signature;
 import com.okexchain.msg.common.TransferUnits;
@@ -25,46 +23,16 @@ public class Token {
         env.setChainID("okexchainevm-8");
         env.setDenom("okt");
 
-        testMsgIssueToken();
+//        testMsgIssueToken();
 //        testMultiTransfer();
     }
 
-    static void testMsgIssueToken(){
-        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
-
-        MsgTokenIssue msg = new MsgTokenIssue();
-        msg.init(key.getAddress(), key.getPubKey());
-
-        System.out.println(key.getAddress());
-
-        Message messages = msg.produceTokenIssueMsg(
-                "usdk",
-                "usdk",
-                "usdk",
-                "usdk",
-                "1000000000",
-                key.getAddress(),
-                true
-        );
-
-        try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages, "0.02000000", "200000", "");
-            Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
-
-            BoardcastTx signedTx = unsignedTx.signed(signature);
-
-            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
-
-        } catch (Exception e) {
-            System.out.println("serialize transfer msg failed");
-        }
-    }
 
     static void testMultiTransfer() {
         PrivateKey key = new PrivateKey("3040196C06C630C1E30D6D347B097C9EA64ADA24FB94823B6C755194F3A00761");
 
         MsgMultiTransfer msg = new MsgMultiTransfer();
-        msg.init(key.getAddress(), key.getPubKey());
+        msg.init(key.getPubKey());
 
         List<com.okexchain.msg.common.Token> tokens = new ArrayList<>();
         com.okexchain.msg.common.Token amount = new com.okexchain.msg.common.Token();

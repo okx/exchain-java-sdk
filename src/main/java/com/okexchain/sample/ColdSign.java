@@ -1,6 +1,5 @@
 package com.okexchain.sample;
 
-import com.okexchain.env.EnvBase;
 import com.okexchain.env.EnvInstance;
 import com.okexchain.utils.crypto.PrivateKey;
 import com.okexchain.msg.MsgBase;
@@ -17,7 +16,7 @@ public class ColdSign {
 //        PrivateKey key = new PrivateKey("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
 
         MsgSend msg = new MsgSend();
-        msg.init(key.getAddress(), key.getPubKey());
+        msg.init(key.getPubKey());
 //        msg.init(key.getAddress(), "0", "1", key.getPubKey());
 
         // or init by account number and sequence number

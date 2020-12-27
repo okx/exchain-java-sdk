@@ -12,8 +12,6 @@ public class MsgAddShares extends MsgBase {
     }
 
    public static void main(String[] args) {
-        EnvInstance.setEnv("okq");
-
         MsgAddShares msg = new MsgAddShares();
         msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
 
@@ -25,13 +23,7 @@ public class MsgAddShares extends MsgBase {
     }
 
     public Message produceMsg(String delegator, String [] validators) {
-
-
         MsgAddSharesValue value = new MsgAddSharesValue();
-
-        System.out.println("this.operAddress:");
-        System.out.println(this.operAddress);
-
         value.setDelAddr(delegator);
         value.setValAddrs(validators);
 

@@ -11,7 +11,6 @@ import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Signature;
 import com.okexchain.msg.tx.BoardcastTx;
 import com.okexchain.msg.tx.UnsignedTx;
-import com.okexchain.msg.types.MsgSubmitProposalValue;
 import com.okexchain.utils.crypto.PrivateKey;
 
 public class Gov {
@@ -28,7 +27,7 @@ public class Gov {
         PrivateKey key = new PrivateKey("17157D973569415C616E70BE2537DFB9F48BAD5C7FF088A5FCDF193DD3E450E3");
 
         MsgParameterChangeProposal msg = new MsgParameterChangeProposal();
-        msg.init(key.getAddress(), key.getPubKey());
+        msg.init(key.getPubKey());
 
         Message messages = msg.produceParameterChangeProposalMsg(
                 "param change of mint deflation_rate",
@@ -58,7 +57,7 @@ public class Gov {
         PrivateKey key = new PrivateKey("17157D973569415C616E70BE2537DFB9F48BAD5C7FF088A5FCDF193DD3E450E3");
 
         MsgDeListProposal msg = new MsgDeListProposal();
-        msg.init(key.getAddress(), key.getPubKey());
+        msg.init(key.getPubKey());
 
         Message messages = msg.produceDelistProposalMsg(
                 "delete token pair proposal",
@@ -85,7 +84,7 @@ public class Gov {
         PrivateKey key = new PrivateKey("17157D973569415C616E70BE2537DFB9F48BAD5C7FF088A5FCDF193DD3E450E3");
 
         MsgVote msg = new MsgVote();
-        msg.init(key.getAddress(), key.getPubKey());
+        msg.init(key.getPubKey());
 
         Message messages = msg.produceVoteMsg(
                 "2",

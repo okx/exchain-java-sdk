@@ -1,15 +1,17 @@
 package com.okexchain.msg;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.okexchain.env.EnvInstance;
+import com.okexchain.msg.tx.*;
 import com.okexchain.utils.HttpUtils;
 import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.Crypto;
 import com.okexchain.msg.common.*;
-import com.okexchain.msg.tx.BoardcastTx;
-import com.okexchain.msg.tx.UnsignedTx;
+import com.okexchain.utils.crypto.PrivateKey;
 import org.bouncycastle.util.Strings;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
@@ -22,6 +24,7 @@ import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MsgBase {
 
@@ -39,20 +42,15 @@ public class MsgBase {
         this.msgType = type;
     }
 
-    void initMnemonic(String mnemonic) {
-//        String prikey = Crypto.generatePrivateKeyFromMnemonic(mnemonic);
-//        init(prikey);
+    public void initMnemonic(String mnemonic) {
+        String prikeyStr = Crypto.generatePrivateKeyFromMnemonic(mnemonic);
+        PrivateKey pri = new PrivateKey(prikeyStr);
+        init(pri);
     }
 
-    void init(String privateKey) {
-//        pubKeyString = Hex.toHexString(Crypto.generatePubKeyFromPriv(privateKey));
-//        address = Crypto.generateAddressFromPriv(privateKey);
-//        JSONObject accountJson = JSON.parseObject(getAccountPrivate(address));
-//        sequenceNum = getSequance(accountJson);
-//        accountNum = getAccountNumber(accountJson);
-//        priKeyString = privateKey;
-//
-//        operAddress = Crypto.generateValidatorAddressFromPub(pubKeyString);
+    public void init(PrivateKey privateKey) {
+        priKeyString = privateKey.getPriKey();
+        init(privateKey.getPubKey());
     }
 
     private String getAccountPrivate(String userAddress) {
@@ -91,11 +89,10 @@ public class MsgBase {
     }
 
 
-
-    public void submit(Message message,
-                       String feeAmount,
-                       String gas,
-                       String memo) {
+    public JSONObject submit(Message message,
+                             String feeAmount,
+                             String gas,
+                             String memo) {
         try {
             UnsignedTx unsignedTx = getUnsignedTx(message, Utils.NewDecString(feeAmount), gas, memo);
 
@@ -103,9 +100,10 @@ public class MsgBase {
 
             BoardcastTx signedTx = unsignedTx.signed(signature);
 
-            boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+            return boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
+            return new JSONObject();
         }
     }
 
@@ -116,7 +114,7 @@ public class MsgBase {
 
         UnsignedTx tx = null;
         try {
-            //组装待签名交易结构
+            // generate unsigned tx
             Fee fee = new Fee();
             List<Token> amountList = new ArrayList<>();
             fee.setAmount(amountList);
@@ -153,18 +151,10 @@ public class MsgBase {
 
 
     public static Signature signTx(String unsignedTx, String privateKey) throws Exception {
-//        System.out.println("data to sign:");
-//        System.out.println(unsignedTx);
-
         byte[] byteSignData = unsignedTx.getBytes();
-//        System.out.println("byte data length:");
-//        System.out.println(byteSignData.length);
-
-//        byte[] sig = Crypto.sign(byteSignData, privateKey);
-//        String sigResult = Strings.fromByteArray(Base64.encode(sig));
         BigInteger privKey = new BigInteger(privateKey, 16);
         Sign.SignatureData sig = Sign.signMessage(byteSignData, ECKeyPair.create(privKey));
-        String sigResult =  toBase64(sig);
+        String sigResult = toBase64(sig);
 
         Signature signature = new Signature();
         Pubkey pubkey = new Pubkey();
@@ -172,20 +162,14 @@ public class MsgBase {
         pubkey.setValue(Strings.fromByteArray(Base64.encode(Hex.decode(Crypto.generatePubKeyHexFromPriv(privateKey)))));
         signature.setPubkey(pubkey);
         signature.setSignature(sigResult);
-//
-//        System.out.println("privateKey: ");
-//        System.out.println(privateKey);
-//
-//        System.out.println("signature: ");
-//        System.out.println(sigResult);
 
         return signature;
     }
 
 
-    public void init(String addr, String pubkey) {
+    public void init(String pubkey) {
         pubKeyString = pubkey;
-        address = addr;
+        address = Crypto.generateAddressFromPub(pubKeyString);
         JSONObject accountJson = JSON.parseObject(getAccountPrivate(address));
         sequenceNum = getSequance(accountJson);
         accountNum = getAccountNumber(accountJson);
@@ -200,20 +184,12 @@ public class MsgBase {
         operAddress = Crypto.generateValidatorAddressFromPub(pubKeyString);
     }
 
-    public void init(String addr, String accountnum, String sequencenum, String pubkey) {
-        pubKeyString = pubkey;
-        address = addr;
-        accountNum = accountnum;
-        sequenceNum = sequencenum;
-        operAddress = Crypto.generateValidatorAddressFromPub(pubKeyString);
-    }
-
 
     public void persist(String path, String content) {
         try {
-            FileOutputStream fos=new FileOutputStream(path);
-            BufferedOutputStream bos=new BufferedOutputStream(fos);
-            bos.write(content.getBytes(),0,content.getBytes().length);
+            FileOutputStream fos = new FileOutputStream(path);
+            BufferedOutputStream bos = new BufferedOutputStream(fos);
+            bos.write(content.getBytes(), 0, content.getBytes().length);
             bos.flush();
             bos.close();
         } catch (Exception e) {
@@ -225,8 +201,34 @@ public class MsgBase {
         byte[] sigData = new byte[64];  // 32 bytes for R + 32 bytes for S
         System.arraycopy(sig.getR(), 0, sigData, 0, 32);
         System.arraycopy(sig.getS(), 0, sigData, 32, 32);
-//        sigData[64] = sig.getV();
         System.out.println(Hex.toHexString(sigData));
         return new String(org.spongycastle.util.encoders.Base64.encode(sigData), Charset.forName("UTF-8"));
+    }
+
+    public String getMatchedAttribute(JSONObject result, String matchedKey) throws Exception {
+        Response response = JSON.parseObject(result.toString(), Response.class);
+        if (result.isEmpty()) {
+            throw new Exception("result is empty");
+        } else if (response.getCode() != 0) {
+            throw new Exception("execute tx failed: " + response.getRawLog());
+        }
+
+        JSONArray rawLogs = JSON.parseArray(response.getRawLog());
+        RawLog<StringEvent<Attribute>> rawLog1 = JSONObject.parseObject(rawLogs.get(0).toString(), new TypeReference<RawLog<StringEvent<Attribute>>>() {});
+        for (StringEvent<Attribute> event : rawLog1.getEvents()) {
+            for (Attribute attr : event.getAttributes()) {
+                if (attr.getKey().equals(matchedKey)) {
+                    return attr.getValue();
+                }
+            }
+        }
+        throw  new Exception("can not find matched attribute");
+    }
+
+    public boolean isTxSucceed(JSONObject result) throws Exception {
+        Response response = JSON.parseObject(result.toString(), Response.class);
+        if (result.isEmpty()) {
+            throw new Exception("result is empty");
+        } else return response.getCode() == 0;
     }
 }

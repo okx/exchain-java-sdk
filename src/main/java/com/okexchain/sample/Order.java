@@ -1,20 +1,15 @@
 package com.okexchain.sample;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.gson.JsonObject;
 import com.okexchain.env.EnvBase;
 import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Signature;
-import com.okexchain.msg.common.TransferUnits;
 import com.okexchain.msg.order.MsgCancelOrders;
 import com.okexchain.msg.order.MsgNewOrders;
 import com.okexchain.msg.order.OrderItem;
-import com.okexchain.msg.token.MsgMultiTransfer;
 import com.okexchain.msg.tx.BoardcastTx;
 import com.okexchain.msg.tx.UnsignedTx;
 import com.okexchain.utils.crypto.PrivateKey;
@@ -35,7 +30,7 @@ public class Order {
         PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
 
         MsgNewOrders msg = new MsgNewOrders();
-        msg.init(key.getAddress(), key.getPubKey());
+        msg.init(key.getPubKey());
 
         List<OrderItem> orderItems = new ArrayList<>();
         OrderItem item = new OrderItem("2", "usdk-5f7_okt", "2", "SELL");
@@ -68,7 +63,7 @@ public class Order {
         PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
 
         MsgCancelOrders msg = new MsgCancelOrders();
-        msg.init(key.getAddress(), key.getPubKey());
+        msg.init(key.getPubKey());
 
         ArrayList<String> orderIDs = new ArrayList<>();
         orderIDs.add("ID0000001373-1");

@@ -1,9 +1,8 @@
 package com.okexchain.sample;
 
-import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
 import com.okexchain.msg.MsgBase;
-import com.okexchain.msg.MsgTokenIssue;
+import com.okexchain.msg.token.MsgTokenIssue;
 import com.okexchain.msg.MsgTokenModify;
 import com.okexchain.msg.MsgTransferOwnership;
 import com.okexchain.msg.MsgConfirmOwnership;
@@ -20,7 +19,7 @@ public class ColdSignTest {
 
         // token issue
         MsgTokenIssue msg = new MsgTokenIssue();
-        msg.init(key.getAddress(), key.getPubKey()); // key.getAddress(),
+        msg.init(key.getPubKey()); // key.getAddress(),
         System.out.println(key.getAddress());
         Message messages = msg.produceTokenIssueMsg(
                 "fuming-create",
@@ -33,7 +32,7 @@ public class ColdSignTest {
 
         // token modify
         MsgTokenModify msgModify = new MsgTokenModify();
-        msgModify.init(key.getAddress(), key.getPubKey());
+        msgModify.init(key.getPubKey());
         System.out.println(key.getAddress());
 
         Message messagesModify = msgModify.produceTokenModifyMsg(

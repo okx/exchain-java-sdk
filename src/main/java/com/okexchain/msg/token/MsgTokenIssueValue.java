@@ -1,4 +1,4 @@
-package com.okexchain.msg.types;
+package com.okexchain.msg.token;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
