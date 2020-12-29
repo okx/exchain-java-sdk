@@ -77,27 +77,27 @@ public class AddressUtil {
         return convertedProgram;
     }
 
-    public static String convertAddressToOKExChain(String ethAddress){
-        byte[] address = Numeric.hexStringToByteArray(ethAddress);
+    public static String convertAddressFromHexToBech32(String hexAddress){
+        byte[] address = Numeric.hexStringToByteArray(hexAddress);
 
-        String okexChainAddress = null;
+        String bech32Address = null;
         try {
             byte[] bytes = encode(0, address);
-            okexChainAddress = Bech32.encode(EnvInstance.getEnv().GetMainPrefix(), bytes);
+            bech32Address = Bech32.encode(EnvInstance.getEnv().GetMainPrefix(), bytes);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return okexChainAddress;
+        return bech32Address;
     }
 
-    public static String convertAddressToETH(String okexChainAddress){
-        String ethAddress = null;
+    public static String convertAddressFromBech32ToHex(String bech32Address){
+        String hexAddress = null;
         try {
-            byte[] bytes = decodeAddress(okexChainAddress);
-            ethAddress = Numeric.toHexString(bytes);
+            byte[] bytes = decodeAddress(bech32Address);
+            hexAddress = Numeric.toHexString(bytes);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return ethAddress;
+        return hexAddress;
     }
 }
