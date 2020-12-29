@@ -1,5 +1,6 @@
 package com.okexchain.utils.crypto;
 
+import com.okexchain.env.EnvInstance;
 import com.okexchain.utils.crypto.encode.Bech32;
 import com.okexchain.utils.crypto.encode.ConvertBits;
 import com.okexchain.utils.crypto.hash.Ripemd;
@@ -7,6 +8,7 @@ import com.okexchain.utils.exception.AddressFormatException;
 import org.bouncycastle.util.encoders.Hex;
 import org.web3j.crypto.Keys;
 import org.web3j.crypto.Sign;
+import org.web3j.utils.Numeric;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -73,5 +75,29 @@ public class AddressUtil {
     private static byte[] encode(int witnessVersion, byte[] witnessProgram) throws AddressFormatException {
         byte[] convertedProgram = ConvertBits.convertBits(witnessProgram, 0, witnessProgram.length, 8, 5, true);
         return convertedProgram;
+    }
+
+    public static String convertAddressFromHexToBech32(String hexAddress){
+        byte[] address = Numeric.hexStringToByteArray(hexAddress);
+
+        String bech32Address = null;
+        try {
+            byte[] bytes = encode(0, address);
+            bech32Address = Bech32.encode(EnvInstance.getEnv().GetMainPrefix(), bytes);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return bech32Address;
+    }
+
+    public static String convertAddressFromBech32ToHex(String bech32Address){
+        String hexAddress = null;
+        try {
+            byte[] bytes = decodeAddress(bech32Address);
+            hexAddress = Numeric.toHexString(bytes);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return hexAddress;
     }
 }
