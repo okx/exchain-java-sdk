@@ -1,4 +1,4 @@
-package com.okexchain.legacy.encoding;
+package com.okexchain.utils.encoding;
 
 import com.google.protobuf.CodedOutputStream;
 import org.spongycastle.util.encoders.Hex;
