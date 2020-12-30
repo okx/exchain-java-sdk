@@ -1,7 +1,7 @@
-package com.okexchain.legacy.encoding;
+package com.okexchain.utils.encoding;
 
-import com.okexchain.legacy.proto.Transfer;
-import com.okexchain.legacy.encoding.message.MessageType;
+import com.okexchain.utils.encoding.proto.Transfer;
+import com.okexchain.utils.encoding.message.MessageType;
 import org.bouncycastle.util.encoders.Hex;
 import org.junit.Assert;
 import org.junit.Test;

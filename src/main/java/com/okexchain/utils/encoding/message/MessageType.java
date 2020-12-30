@@ -1,6 +1,6 @@
-package com.okexchain.legacy.encoding.message;
+package com.okexchain.utils.encoding.message;
 
-import com.okexchain.legacy.encoding.EncodeUtils;
+import com.okexchain.utils.encoding.EncodeUtils;
 
 public enum MessageType {
     BaseType(null),

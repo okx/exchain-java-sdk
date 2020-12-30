@@ -1,7 +1,7 @@
-package com.okexchain.legacy.encoding.message;
+package com.okexchain.utils.encoding.message;
 
-import com.okexchain.legacy.proto.Transfer;
-import com.okexchain.legacy.encoding.EncodeUtils;
+import com.okexchain.utils.encoding.proto.Transfer;
+import com.okexchain.utils.encoding.EncodeUtils;
 import org.bouncycastle.util.encoders.Hex;
 
 import java.io.IOException;

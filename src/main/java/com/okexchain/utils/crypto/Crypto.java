@@ -2,7 +2,7 @@ package com.okexchain.utils.crypto;
 
 import com.google.common.base.Splitter;
 import com.okexchain.env.EnvInstance;
-import com.okexchain.legacy.encoding.message.AminoEncode;
+import com.okexchain.utils.encoding.message.AminoEncode;
 import org.bitcoinj.core.ECKey;
 import org.bitcoinj.core.Sha256Hash;
 import org.bitcoinj.core.Utils;
@@ -10,7 +10,6 @@ import org.bitcoinj.crypto.*;
 import org.bouncycastle.util.encoders.DecoderException;
 import org.bouncycastle.util.encoders.Hex;
 import org.web3j.crypto.Sign;
-import sun.nio.cs.ext.Big5;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
