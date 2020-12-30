@@ -23,7 +23,6 @@ public class Token {
         env.setChainID("okexchainevm-8");
         env.setDenom("okt");
 
-//        testMsgIssueToken();
 //        testMultiTransfer();
     }
 
