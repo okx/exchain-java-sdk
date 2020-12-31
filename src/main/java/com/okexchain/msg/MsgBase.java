@@ -176,6 +176,23 @@ public class MsgBase {
         operAddress = Crypto.generateValidatorAddressFromPub(pubKeyString);
     }
 
+    public void init(String addr, String pubkey) {
+        pubKeyString = pubkey;
+        address = addr;
+        JSONObject accountJson = JSON.parseObject(getAccountPrivate(address));
+        sequenceNum = getSequance(accountJson);
+        accountNum = getAccountNumber(accountJson);
+        operAddress = Crypto.generateValidatorAddressFromPub(pubKeyString);
+    }
+
+    public void init(String addr, String accountnum, String sequencenum, String pubkey) {
+        pubKeyString = pubkey;
+        address = addr;
+        accountNum = accountnum;
+        sequenceNum = sequencenum;
+        operAddress = Crypto.generateValidatorAddressFromPub(pubKeyString);
+    }
+
     public void init(String pubkey, String accountNum, String sequenceNum) {
         pubKeyString = pubkey;
         address = Crypto.generateAddressFromPub(pubKeyString);
