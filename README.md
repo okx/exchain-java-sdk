@@ -25,7 +25,7 @@ git clone https://github.com/okex/okexchain-java-sdk.git
 
 ### 3.API
 
-Find it on the [sdk documents](https://okexchain-docs.readthedocs.io/zh_CN/latest/api/sdk/java-sdk.html)
+Find it on the [sdk documents](https://okexchain-docs.readthedocs.io/en/latest/api/sdk/java-sdk.html)
 
 ### 4.Tesing
 
