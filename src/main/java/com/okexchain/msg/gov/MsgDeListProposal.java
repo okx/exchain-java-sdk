@@ -5,7 +5,9 @@ import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Token;
+import com.okexchain.msg.token.MsgTokenIssue;
 import com.okexchain.utils.Utils;
+import com.okexchain.utils.crypto.PrivateKey;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,18 +18,22 @@ public class MsgDeListProposal extends MsgBase {
     }
 
     public static void main(String[] args) throws JsonProcessingException {
+        EnvInstance.getEnv().setChainID("okexchainevm-8");
+        EnvInstance.getEnv().setRestServerUrl("http://localhost:8545");
+
+        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgDeListProposal msg = new MsgDeListProposal();
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        msg.init(key);
 
         Message messages = msg.produceDelistProposalMsg(
                 "delete token pair proposal",
                 "delete xxx-okt",
-                "xxx",
+                "usdk-017",
                 EnvInstance.getEnv().GetDenom(),
                 "100.00000000"
         );
 
-        msg.submit(messages, "0.01000000", "200000", "OKExChain delete token pair!");
+        msg.submit(messages, "0.05000000", "500000", "OKExChain delete token pair!");
     }
 
     public Message produceDelistProposalMsg(
@@ -47,9 +53,9 @@ public class MsgDeListProposal extends MsgBase {
         proposal.setQuoteAsset(quoteAsset);
 
         // wrapper
-        Message<MsgDeListProposalValue> wrapperMsg = new Message<>();
-        wrapperMsg.setType("okexchain/dex/DelistProposal");
-        wrapperMsg.setValue(proposal);
+        Content<MsgDeListProposalValue> content = new Content<>();
+        content.setType("okexchain/dex/DelistProposal");
+        content.setValue(proposal);
 
         // submit
         List<Token> depositList = new ArrayList<>();
@@ -58,12 +64,12 @@ public class MsgDeListProposal extends MsgBase {
         deposit.setAmount(Utils.NewDecString(amountDeposit));
         depositList.add(deposit);
 
-        MsgSubmitDeListProposalValue value = new MsgSubmitDeListProposalValue();
-        value.setContent(wrapperMsg);
+        MsgSubmitProposalValue<Content<MsgDeListProposalValue>> value = new MsgSubmitProposalValue<>();
+        value.setContent(content);
         value.setInitialDeposit(depositList);
         value.setProposer(this.address);
 
-        Message<MsgSubmitDeListProposalValue> msg = new Message<>();
+        Message<MsgSubmitProposalValue<Content<MsgDeListProposalValue>>> msg = new Message<>();
         msg.setType(msgType);
         msg.setValue(value);
         return msg;

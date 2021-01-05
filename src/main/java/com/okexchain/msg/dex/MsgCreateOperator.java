@@ -1,7 +1,9 @@
 package com.okexchain.msg.dex;
 
+import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
+import com.okexchain.utils.crypto.PrivateKey;
 
 public class MsgCreateOperator extends MsgBase {
     public MsgCreateOperator() {
@@ -9,16 +11,20 @@ public class MsgCreateOperator extends MsgBase {
     }
 
     public static void main(String[] args) {
+        EnvInstance.getEnv().setChainID("okexchainevm-8");
+        EnvInstance.getEnv().setRestServerUrl("http://localhost:8545");
+
+        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgCreateOperator msg = new MsgCreateOperator();
 
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        msg.init(key);
 
         Message messages = msg.produceCreateOperatorMsg(
-                "okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9",
+                key.getAddress(),
                 "https://captain.okg/operator.json");
 
         // okexchaincli tx dex register-operator --website http://captain.okg.com/operator.json --from captain --fees 0.02okt -b block -y
-        msg.submit(messages, "0.01000000", "200000", "okexchain dex create operator!");
+        msg.submit(messages, "0.05000000", "500000", "okexchain dex create operator!");
     }
 
     public Message produceCreateOperatorMsg(String handlingFeeAddress, String website) {

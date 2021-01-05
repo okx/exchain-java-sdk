@@ -11,6 +11,7 @@ import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Token;
+import com.okexchain.msg.tx.Response;
 import com.okexchain.utils.Utils;
 
 import java.util.ArrayList;
@@ -22,9 +23,14 @@ public class MsgParameterChangeProposal extends MsgBase {
         setMsgType("okexchain/gov/MsgSubmitProposal");
     }
 
-    public static void main(String[] args) throws JsonProcessingException {
+    public static void main(String[] args) throws Exception {
+        EnvInstance.getEnv().setChainID("okexchainevm-8");
+        EnvInstance.getEnv().setRestServerUrl("http://localhost:8545");
+
+        System.out.println(new Response().getRawLog());
+
         MsgParameterChangeProposal msg = new MsgParameterChangeProposal();
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        msg.initMnemonic("giggle sibling fun arrow elevator spoon blood grocery laugh tortoise culture tool");
 
         Message messages = msg.produceParameterChangeProposalMsg(
                 "param change of mint deflation_rate",
@@ -37,7 +43,9 @@ public class MsgParameterChangeProposal extends MsgBase {
                 "100.00000000"
         );
 
-        msg.submit(messages, "0.01000000", "200000", "OKExChain change parameter proposal!");
+        JSONObject result = msg.submit(messages, "0.05000000", "500000", "OKExChain change parameter proposal!");
+        boolean succeed = msg.isTxSucceed(result);
+        System.out.println("submit proposal: " + (succeed ? "succeed" : "failed"));
     }
 
 //    @SneakyThrows
@@ -76,14 +84,14 @@ public class MsgParameterChangeProposal extends MsgBase {
         proposal.setDescription(description);
         proposal.setChanges(changesList);
 
-        // proposal wrapper
-        MsgParameterChangeProposalWrapperValue wrapper = new MsgParameterChangeProposalWrapperValue();
-        wrapper.setProposal(proposal);
-        wrapper.setHeight(height);
+        // proposal wrappedProposal
+        MsgParameterChangeProposalWrapperValue wrappedProposal = new MsgParameterChangeProposalWrapperValue();
+        wrappedProposal.setProposal(proposal);
+        wrappedProposal.setHeight(height);
 
-        Message<MsgParameterChangeProposalWrapperValue> wrapperMsg = new Message<>();
-        wrapperMsg.setType("okexchain/params/ParameterChangeProposal");
-        wrapperMsg.setValue(wrapper);
+        Content<MsgParameterChangeProposalWrapperValue> content = new Content<>();
+        content.setType("okexchain/params/ParameterChangeProposal");
+        content.setValue(wrappedProposal);
 
         // submit
         List<Token> depositList = new ArrayList<>();
@@ -92,12 +100,12 @@ public class MsgParameterChangeProposal extends MsgBase {
         deposit.setAmount(Utils.NewDecString(amountDeposit));
         depositList.add(deposit);
 
-        MsgSubmitProposalValue value = new MsgSubmitProposalValue();
-        value.setContent(wrapperMsg);
+        MsgSubmitProposalValue<Content<MsgParameterChangeProposalWrapperValue>> value = new MsgSubmitProposalValue();
+        value.setContent(content);
         value.setInitialDeposit(depositList);
         value.setProposer(this.address);
 
-        Message<MsgSubmitProposalValue> msg = new Message<>();
+        Message<MsgSubmitProposalValue<Content<MsgParameterChangeProposalWrapperValue>>> msg = new Message<>();
         msg.setType(msgType);
         msg.setValue(value);
         return msg;

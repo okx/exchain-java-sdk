@@ -116,5 +116,17 @@ public class Response {
     public void setGasUsed(long gasUsed) {
         this.gasUsed = gasUsed;
     }
+
+    public boolean equal(Response res) {
+        return this.height == res.height &&
+                this.txhash.equals(res.txhash) &&
+                this.codespace.equals(res.codespace) &&
+                this.code == res.code &&
+                this.data.equals(res.data) &&
+                this.rawLog.equals(res.rawLog) &&
+                this.info.equals(res.info) &&
+                this.gas == res.gas &&
+                this.gasUsed == res.gasUsed;
+    }
 }
 

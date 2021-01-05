@@ -1,5 +1,6 @@
 package com.okexchain.msg.dex;
 
+import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
 import com.okexchain.utils.Utils;
@@ -11,17 +12,19 @@ public class MsgList extends MsgBase {
     }
 
     public static void main(String[] args) {
-        MsgList msg = new MsgList();
+        EnvInstance.getEnv().setChainID("okexchainevm-8");
+        EnvInstance.getEnv().setRestServerUrl("http://localhost:8545");
 
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        MsgList msg = new MsgList();
+        msg.initMnemonic("giggle sibling fun arrow elevator spoon blood grocery laugh tortoise culture tool");
 
         Message messages = msg.produceListMsg(
-                "eos-f4d",
+                "usdk-017",
                 "okt",
                 "1.00000000");
 
         // okexchaincli tx dex list --from captain --base-asset eos-a99 --quote-asset okt -y -b block --fees 0.01okt
-        msg.submit(messages, "0.01000000", "200000", "okexchain dex list!");
+        msg.submit(messages, "0.05000000", "500000", "okexchain dex list!");
     }
 
     public Message produceListMsg(String listAsset, String quoteAsset, String initPrice) {
