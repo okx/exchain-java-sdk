@@ -14,17 +14,21 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder(alphabetic = true)
-public class MsgSubmitProposalValue {
+public class MsgSubmitProposalValue<T> {
 
-    private Message<MsgParameterChangeProposalWrapperValue> content;
+    @JsonProperty("content")
+    @SerializedName("content")
+    private T content;
 
     @JsonProperty("initial_deposit")
     @SerializedName("initial_deposit")
     private List<Token> initialDeposit;
 
+    @JsonProperty("proposer")
+    @SerializedName("proposer")
     private String proposer;
 
-    public void setContent(Message<MsgParameterChangeProposalWrapperValue> content) {
+    public void setContent(T content) {
         this.content = content;
     }
 

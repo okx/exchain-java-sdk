@@ -243,9 +243,14 @@ public class MsgBase {
     }
 
     public boolean isTxSucceed(JSONObject result) throws Exception {
-        Response response = JSON.parseObject(result.toString(), Response.class);
         if (result.isEmpty()) {
             throw new Exception("result is empty");
-        } else return response.getCode() == 0;
+        }
+
+        Response response = JSON.parseObject(result.toString(), Response.class);
+        if (response.getRawLog() == null) {
+            throw new Exception("result is empty");
+        }
+        return response.getCode() == 0;
     }
 }

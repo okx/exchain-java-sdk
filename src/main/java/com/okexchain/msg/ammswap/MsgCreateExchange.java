@@ -36,7 +36,7 @@ public class MsgCreateExchange extends MsgBase {
         msg.init(key);
 
         Message messages = msg.productMsg(
-                "usdk-5f7",
+                "usdk",
                 "okt"
         );
         JSONObject res = msg.submit(messages, "0.05", "500000", "create exchange!");
