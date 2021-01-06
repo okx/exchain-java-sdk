@@ -24,7 +24,6 @@ import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class MsgBase {
 
@@ -75,8 +74,8 @@ public class MsgBase {
         return res;
     }
 
-    public static JSONObject boardcast(String tx, String url) {
-        System.out.println("Boardcast tx:");
+    public static JSONObject broadcast(String tx, String url) {
+        System.out.println("Broadcast tx:");
         System.out.println(tx);
 
         System.out.println("Response:");
@@ -98,9 +97,9 @@ public class MsgBase {
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), priKeyString);
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
+            BroadcastTx signedTx = unsignedTx.signed(signature);
 
-            return boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+            return broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
             return new JSONObject();

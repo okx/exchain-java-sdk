@@ -8,35 +8,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UnsignedTx {
-    private BoardcastTx boardcastTx;
-    private BoardcastValue boardcastValue;
+    private BroadcastTx broadcastTx;
+    private BroadcastValue broadcastValue;
 
     private String unsignedTxJson;
 
     public UnsignedTx(TxValue txValue, String unsignedTxJson) {
 
-        this.boardcastTx = new BoardcastTx();
-        this.boardcastTx.setTx(txValue);
-        this.boardcastTx.setMode("block");
+        this.broadcastTx = new BroadcastTx();
+        this.broadcastTx.setTx(txValue);
+        this.broadcastTx.setMode("block");
 
-        this.boardcastValue = new BoardcastValue();
-        this.boardcastValue.setTx(txValue);
+        this.broadcastValue = new BroadcastValue();
+        this.broadcastValue.setTx(txValue);
 
         this.unsignedTxJson = unsignedTxJson;
     }
 
-    public BoardcastTx signed(Signature signature) {
+    public BroadcastTx signed(Signature signature) {
         List<Signature> signatureList = new ArrayList<>();
         signatureList.add(signature);
-        boardcastTx.getTx().setSignatures(signatureList);
-        return boardcastTx;
+        broadcastTx.getTx().setSignatures(signatureList);
+        return broadcastTx;
     }
 
-    public BoardcastValue sign4gentx(Signature signature) {
+    public BroadcastValue sign4gentx(Signature signature) {
         List<Signature> signatureList = new ArrayList<>();
         signatureList.add(signature);
-        boardcastValue.getTx().setSignatures(signatureList);
-        return boardcastValue;
+        broadcastValue.getTx().setSignatures(signatureList);
+        return broadcastValue;
     }
 
     public String toString() {
@@ -44,7 +44,7 @@ public class UnsignedTx {
     }
 
 
-    public static BoardcastTx genBroadcastTx(String unsignedTxStr, Signature signature) {
+    public static BroadcastTx genBroadcastTx(String unsignedTxStr, Signature signature) {
         Data2Sign data = Data2Sign.fromJson(unsignedTxStr);
 
         TxValue txValue = new TxValue();

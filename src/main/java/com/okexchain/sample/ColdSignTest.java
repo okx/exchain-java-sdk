@@ -6,7 +6,7 @@ import com.okexchain.msg.token.MsgTokenIssue;
 import com.okexchain.msg.token.MsgTokenModify;
 import com.okexchain.msg.token.MsgTransferOwnership;
 import com.okexchain.msg.token.MsgConfirmOwnership;
-import com.okexchain.msg.tx.BoardcastTx;
+import com.okexchain.msg.tx.BroadcastTx;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.tx.UnsignedTx;
 import com.okexchain.msg.common.Signature;
@@ -80,9 +80,9 @@ public class ColdSignTest {
 
 
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
+            BroadcastTx signedTx = unsignedTx.signed(signature);
 
-            MsgBase.boardcast(signedTx.toJson(), "http://localhost:26659");
+            MsgBase.broadcast(signedTx.toJson(), "http://localhost:26659");
 
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");

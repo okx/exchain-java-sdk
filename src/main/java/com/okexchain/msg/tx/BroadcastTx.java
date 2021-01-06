@@ -4,13 +4,13 @@ import com.okexchain.utils.Utils;
 import com.okexchain.msg.common.TxValue;
 
 
-public class BoardcastTx {
+public class BroadcastTx {
 
     private String mode;
     private String type = "cosmos-sdk/StdTx";
     private TxValue tx;
 
-    public BoardcastTx() {
+    public BroadcastTx() {
     }
 
     public TxValue getTx() {
@@ -33,7 +33,7 @@ public class BoardcastTx {
         this.mode = mode;
     }
 
-    public static BoardcastTx fromJson(String json) {
-        return Utils.serializer.fromJson(json, BoardcastTx.class);
+    public static BroadcastTx fromJson(String json) {
+        return Utils.serializer.fromJson(json, BroadcastTx.class);
     }
 }

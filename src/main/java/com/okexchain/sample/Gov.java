@@ -9,7 +9,7 @@ import com.okexchain.msg.gov.MsgParameterChangeProposal;
 import com.okexchain.msg.gov.MsgVote;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Signature;
-import com.okexchain.msg.tx.BoardcastTx;
+import com.okexchain.msg.tx.BroadcastTx;
 import com.okexchain.msg.tx.UnsignedTx;
 import com.okexchain.utils.crypto.PrivateKey;
 
@@ -44,9 +44,9 @@ public class Gov {
             UnsignedTx unsignedTx = msg.getUnsignedTx(messages, "0.01000000", "200000", "");
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
+            BroadcastTx signedTx = unsignedTx.signed(signature);
 
-            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+            MsgBase.broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
 
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
@@ -71,9 +71,9 @@ public class Gov {
             UnsignedTx unsignedTx = msg.getUnsignedTx(messages, "0.01000000", "200000", "");
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
+            BroadcastTx signedTx = unsignedTx.signed(signature);
 
-            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+            MsgBase.broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
 
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
@@ -95,9 +95,9 @@ public class Gov {
             UnsignedTx unsignedTx = msg.getUnsignedTx(messages, "0.01000000", "200000", "");
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
+            BroadcastTx signedTx = unsignedTx.signed(signature);
 
-            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+            MsgBase.broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
 
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
