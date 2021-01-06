@@ -4,7 +4,7 @@ import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.staking.MsgCreateValidator;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Signature;
-import com.okexchain.msg.tx.BoardcastValue;
+import com.okexchain.msg.tx.BroadcastValue;
 import com.okexchain.msg.tx.UnsignedTx;
 import com.okexchain.utils.crypto.PrivateKey;
 
@@ -24,7 +24,7 @@ public class Gentx {
         try {
             UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"", "200000", "");
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
-            BoardcastValue signedTx = unsignedTx.sign4gentx(signature);
+            BroadcastValue signedTx = unsignedTx.sign4gentx(signature);
 
             System.out.println("======= gentx json =========");
             System.out.println(signedTx.toJson());

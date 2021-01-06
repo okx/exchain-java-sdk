@@ -9,7 +9,7 @@ import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.Crypto;
 import com.okexchain.utils.crypto.PrivateKey;
 import com.okexchain.msg.*;
-import com.okexchain.msg.tx.BoardcastTx;
+import com.okexchain.msg.tx.BroadcastTx;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.tx.UnsignedTx;
 import com.okexchain.msg.common.Signature;
@@ -54,9 +54,9 @@ public class Staking {
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
+            BroadcastTx signedTx = unsignedTx.signed(signature);
 
-            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+            MsgBase.broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
 
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
@@ -76,9 +76,9 @@ public class Staking {
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
+            BroadcastTx signedTx = unsignedTx.signed(signature);
 
-            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+            MsgBase.broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
 
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
@@ -97,9 +97,9 @@ public class Staking {
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
+            BroadcastTx signedTx = unsignedTx.signed(signature);
 
-            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+            MsgBase.broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
 
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
@@ -118,9 +118,9 @@ public class Staking {
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
+            BroadcastTx signedTx = unsignedTx.signed(signature);
 
-            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+            MsgBase.broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
 
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
@@ -139,9 +139,9 @@ public class Staking {
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
+            BroadcastTx signedTx = unsignedTx.signed(signature);
 
-            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+            MsgBase.broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
 
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
@@ -163,9 +163,9 @@ public class Staking {
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
+            BroadcastTx signedTx = unsignedTx.signed(signature);
 
-            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+            MsgBase.broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
 
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
@@ -184,9 +184,9 @@ public class Staking {
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
+            BroadcastTx signedTx = unsignedTx.signed(signature);
 
-            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+            MsgBase.broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
 
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
@@ -205,9 +205,9 @@ public class Staking {
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
+            BroadcastTx signedTx = unsignedTx.signed(signature);
 
-            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+            MsgBase.broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
 
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
@@ -226,9 +226,9 @@ public class Staking {
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
+            BroadcastTx signedTx = unsignedTx.signed(signature);
 
-            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+            MsgBase.broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
 
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
@@ -247,9 +247,9 @@ public class Staking {
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
+            BroadcastTx signedTx = unsignedTx.signed(signature);
 
-            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+            MsgBase.broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
 
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
@@ -268,9 +268,9 @@ public class Staking {
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
+            BroadcastTx signedTx = unsignedTx.signed(signature);
 
-            MsgBase.boardcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
+            MsgBase.broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
 
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
