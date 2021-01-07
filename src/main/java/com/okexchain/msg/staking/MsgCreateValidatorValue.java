@@ -18,12 +18,16 @@ public class MsgCreateValidatorValue {
     @SerializedName("delegator_address")
     private String delegatorAddress;
 
+    @JsonProperty("description")
+    @SerializedName("description")
     private Description description;
 
     @JsonProperty("min_self_delegation")
     @SerializedName("min_self_delegation")
     private Token minSelfDelegation;
 
+    @JsonProperty("pubkey")
+    @SerializedName("pubkey")
     private String pubkey;
 
     @JsonProperty("validator_address")

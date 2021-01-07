@@ -14,7 +14,7 @@ public class MsgRegProxy extends MsgBase {
         EnvInstance.setEnv("okq");
 
         MsgRegProxy msg = new MsgRegProxy();
-        msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
+        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
 
         Message messages = msg.produceMsg("okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9", true);
 

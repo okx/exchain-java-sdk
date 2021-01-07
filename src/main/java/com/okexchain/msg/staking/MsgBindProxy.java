@@ -14,7 +14,7 @@ public class MsgBindProxy extends MsgBase {
         EnvInstance.setEnv("okq");
 
         MsgBindProxy msg = new MsgBindProxy();
-        msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
+        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
 
         Message messages = msg.produceMsg("okexchain1fqc7fw5ka5md4jyrnj53n2m82f5jewz9vrvnan", "okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9");
 

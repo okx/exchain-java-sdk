@@ -14,7 +14,7 @@ public class MsgEditValidator extends MsgBase {
 
         MsgEditValidator msg = new MsgEditValidator();
         msg.setMsgType("okexchain/staking/MsgEditValidator");
-        msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
+        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
 
         Message messages = msg.produceMsg("1","1","1","1", "okexchainvaloper10q0rk5qnyag7wfvvt7rtphlw589m7frshchly8");
 

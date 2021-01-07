@@ -19,9 +19,21 @@ public class Data2Sign {
     @JsonProperty("chain_id")
     @SerializedName("chain_id")
     private String chainId;
+
+    @JsonProperty("fee")
+    @SerializedName("fee")
     private Fee fee;
+
+    @JsonProperty("memo")
+    @SerializedName("memo")
     private String memo;
+
+    @JsonProperty("msgs")
+    @SerializedName("msgs")
     private Message[] msgs;
+
+    @JsonProperty("sequence")
+    @SerializedName("sequence")
     private String sequence;
 
     public Data2Sign(String accountNumber, String chainId, Fee fee, String memo, Message[] msgs, String sequence) {

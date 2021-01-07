@@ -15,6 +15,8 @@ public class Signature {
     @SerializedName("pub_key")
     private Pubkey pubkey;
 
+    @JsonProperty("signature")
+    @SerializedName("signature")
     private String signature;
 
     public Pubkey getPubkey() {

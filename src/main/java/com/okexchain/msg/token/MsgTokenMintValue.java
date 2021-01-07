@@ -12,6 +12,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @JsonPropertyOrder(alphabetic = true)
 public class MsgTokenMintValue {
 
+    @JsonProperty("amount")
+    @SerializedName("amount")
     private Token amount;
 
     @JsonProperty("owner")

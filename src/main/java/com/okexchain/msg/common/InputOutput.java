@@ -1,7 +1,9 @@
 package com.okexchain.msg.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -11,7 +13,12 @@ import java.util.List;
 @JsonPropertyOrder(alphabetic = true)
 public class InputOutput {
 
+    @JsonProperty("address")
+    @SerializedName("address")
     private String address;
+
+    @JsonProperty("coins")
+    @SerializedName("coins")
     private List<Token> coins;
 
     public String getAddress() {

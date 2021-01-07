@@ -12,7 +12,7 @@ public class MsgAddShares extends MsgBase {
 
    public static void main(String[] args) {
         MsgAddShares msg = new MsgAddShares();
-        msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
+        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
 
         String [] validators = {"okexchainvaloper10q0rk5qnyag7wfvvt7rtphlw589m7frshchly8"};
         Message messages = msg.produceMsg("okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9", validators);

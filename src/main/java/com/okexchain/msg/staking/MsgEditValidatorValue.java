@@ -16,6 +16,8 @@ public class MsgEditValidatorValue {
     @SerializedName("Description")
     private Description description;
 
+    @JsonProperty("address")
+    @SerializedName("address")
     private String address;
 
     public void setDescription(Description description) {

@@ -19,6 +19,8 @@ public class CommissionMsg {
     @SerializedName("max_rate")
     private String maxRate;
 
+    @JsonProperty("rate")
+    @SerializedName("rate")
     private String rate;
 
     public void setRate(String rate) {

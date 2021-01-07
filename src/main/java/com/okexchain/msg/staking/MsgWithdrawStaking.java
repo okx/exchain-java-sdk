@@ -14,7 +14,7 @@ public class MsgWithdrawStaking  extends MsgBase {
         EnvInstance.setEnv("okq");
 
         MsgWithdrawStaking msg = new MsgWithdrawStaking();
-        msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
+        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
 
         Message messages = msg.produceMsg("okt", "10.00000000", "okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9");
 

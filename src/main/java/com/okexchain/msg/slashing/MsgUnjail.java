@@ -12,7 +12,7 @@ public class MsgUnjail  extends MsgBase {
     public static void main(String[] args) {
         EnvInstance.setEnv("okl");
         MsgUnjail msg = new MsgUnjail();
-        msg.initMnemonic(EnvInstance.getEnv().GetNode0Mnmonic());
+        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
         Message messages = msg.produceMsg("okexchainvaloper10q0rk5qnyag7wfvvt7rtphlw589m7frshchly8");
         msg.submit(messages, "100000.00000000", "200000", "");
     }

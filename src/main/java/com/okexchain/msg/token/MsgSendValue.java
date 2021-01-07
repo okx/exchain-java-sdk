@@ -13,6 +13,9 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder(alphabetic = true)
 public class MsgSendValue {
+
+    @JsonProperty("amount")
+    @SerializedName("amount")
     private List<Token> amount;
 
     @JsonProperty("from_address")

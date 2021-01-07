@@ -1,21 +1,27 @@
 package com.okexchain.msg.common;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 public class TxValue {
 
+    @JsonProperty("msg")
     @SerializedName("msg")
     private Message[] msgs;
 
+    @JsonProperty("fee")
+    @SerializedName("fee")
     private Fee fee;
 
+    @JsonProperty("signatures")
+    @SerializedName("signatures")
     private List<Signature> signatures;
 
+    @JsonProperty("memo")
+    @SerializedName("memo")
     private String memo;
-
-//    private  String type;
 
     public Message[] getMsgs() {
         return msgs;
@@ -44,14 +50,6 @@ public class TxValue {
     public void setMemo(String memo) {
         this.memo = memo;
     }
-
-//    public String getType() {
-//        return type;
-//    }
-
-//    public void setType(String type) {
-//        this.type = type;
-//    }
 
     public void setSignatures(List<Signature> signatures) {
         this.signatures = signatures;

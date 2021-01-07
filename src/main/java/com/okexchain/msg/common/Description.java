@@ -1,7 +1,9 @@
 package com.okexchain.msg.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -10,13 +12,21 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class Description {
 
     // very important, ensure order: d i m w
+    @JsonProperty("details")
+    @SerializedName("details")
     private String details;
+
+    @JsonProperty("identity")
+    @SerializedName("identity")
     private String identity;
 
+    @JsonProperty("moniker")
+    @SerializedName("moniker")
     private String moniker;
+
+    @JsonProperty("website")
+    @SerializedName("website")
     private String website;
-//    private String website;
-//    private String moniker;
 
     public void setMoniker(String moniker) {
         this.moniker = moniker;
