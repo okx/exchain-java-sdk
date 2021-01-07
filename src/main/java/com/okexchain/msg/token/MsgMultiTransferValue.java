@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.gson.annotations.SerializedName;
-import com.okexchain.msg.common.TransferUnits;
+import com.okexchain.msg.common.TransferUnit;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -20,13 +20,13 @@ public class MsgMultiTransferValue {
 
     @JsonProperty("transfers")
     @SerializedName("transfers")
-    private List<TransferUnits> transfers;
+    private List<TransferUnit> transfers;
 
-    public List<TransferUnits> getTransferUnits() {
+    public List<TransferUnit> getTransfers() {
         return transfers;
     }
 
-    public void setTransferUnits(List<TransferUnits> transferUnits) { this.transfers = transferUnits; }
+    public void setTransfers(List<TransferUnit> transferUnits) { this.transfers = transferUnits; }
 
     public String getFrom() {
         return from;

@@ -11,7 +11,7 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder(alphabetic = true)
-public class TransferUnits {
+public class TransferUnit {
 
     @JsonProperty("coins")
     @SerializedName("coins")
@@ -21,11 +21,11 @@ public class TransferUnits {
     @SerializedName("to")
     private String to;
 
-    public TransferUnits() {
+    public TransferUnit() {
 
     }
 
-    public TransferUnits(String to, List<Token> coins) {
+    public TransferUnit(String to, List<Token> coins) {
         this.to = to;
         this.coins = coins;
     }

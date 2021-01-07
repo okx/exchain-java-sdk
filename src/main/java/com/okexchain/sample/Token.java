@@ -3,15 +3,10 @@ package com.okexchain.sample;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.okexchain.env.EnvBase;
 import com.okexchain.env.EnvInstance;
-import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
-import com.okexchain.msg.common.Signature;
-import com.okexchain.msg.common.TransferUnits;
+import com.okexchain.msg.common.TransferUnit;
 import com.okexchain.msg.token.MsgMultiTransfer;
-import com.okexchain.msg.tx.BroadcastTx;
-import com.okexchain.msg.tx.UnsignedTx;
 import com.okexchain.utils.Utils;
-import com.okexchain.utils.crypto.PrivateKey;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,41 +18,42 @@ public class Token {
         env.setChainID("okexchainevm-8");
         env.setDenom("okt");
 
-//        testMultiTransfer();
+        testMultiTransfer();
     }
 
 
     static void testMultiTransfer() {
-        PrivateKey key = new PrivateKey("3040196C06C630C1E30D6D347B097C9EA64ADA24FB94823B6C755194F3A00761");
-
         MsgMultiTransfer msg = new MsgMultiTransfer();
-        msg.init(key.getPubKey());
+        msg.initMnemonic("giggle sibling fun arrow elevator spoon blood grocery laugh tortoise culture tool");
 
         List<com.okexchain.msg.common.Token> tokens = new ArrayList<>();
         com.okexchain.msg.common.Token amount = new com.okexchain.msg.common.Token();
         amount.setAmount(Utils.NewDecString("10"));
         amount.setDenom("okt");
         tokens.add(amount);
+        com.okexchain.msg.common.Token amount1 = new com.okexchain.msg.common.Token();
+        amount1.setAmount(Utils.NewDecString("10"));
+        amount1.setDenom("usdk");
+        tokens.add(amount1);
 
-        List<TransferUnits> transferUnits = new ArrayList<>();
-        TransferUnits transferUnit = new TransferUnits();
+        List<TransferUnit> transfers = new ArrayList<>();
+
+        TransferUnit transferUnit = new TransferUnit();
         transferUnit.setCoins(tokens);
         transferUnit.setTo("okexchain1twtrl3wvaf9yz6jvt4s726wj6e3cpfxxlgampg");
-        transferUnits.add(transferUnit);
+        transfers.add(transferUnit);
+
+        TransferUnit transferUnit1 = new TransferUnit();
+        transferUnit1.setCoins(tokens);
+        transferUnit1.setTo("okexchain1twtrl3wvaf9yz6jvt4s726wj6e3cpfxxlgampg");
+        transfers.add(transferUnit1);
 
         Message messages = msg.produceMsg(
-                transferUnits
+                transfers
         );
 
         try {
-            UnsignedTx unsignedTx = msg.getUnsignedTx(messages, "0.01000000", "200000", "multi transfer!");
-
-            Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
-
-            BroadcastTx signedTx = unsignedTx.signed(signature);
-
-            MsgBase.broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
-
+            msg.submit(messages, "0.03", "2000000", "");
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
         }
