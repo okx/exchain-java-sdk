@@ -8,7 +8,7 @@ import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Signature;
 import com.okexchain.msg.common.TransferUnits;
 import com.okexchain.msg.token.MsgMultiTransfer;
-import com.okexchain.msg.tx.BoardcastTx;
+import com.okexchain.msg.tx.BroadcastTx;
 import com.okexchain.msg.tx.UnsignedTx;
 import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
@@ -54,7 +54,7 @@ public class Token {
 
             Signature signature = MsgBase.signTx(unsignedTx.toString(), key.getPriKey());
 
-            BoardcastTx signedTx = unsignedTx.signed(signature);
+            BroadcastTx signedTx = unsignedTx.signed(signature);
 
             MsgBase.broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
 
