@@ -7,6 +7,7 @@ import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
 import com.okexchain.utils.crypto.PrivateKey;
+import com.sun.tools.doclint.Env;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +32,7 @@ public class MsgNewOrders extends MsgBase {
 
     public String[] getOrderIDs(JSONObject result) throws Exception {
         String orders = getMatchedAttribute(result, "orders");
-        JSONArray orderJSONs = JSONObject.parseObject(orders).getJSONArray("");
+        JSONArray orderJSONs = JSONObject.parseArray(orders);
         String[] orderIDs = new String[orderJSONs.size()];
         for (int i = 0; i < orderJSONs.size(); i++) {
             orderIDs[i] = orderJSONs.getJSONObject(i).getString("orderid");
