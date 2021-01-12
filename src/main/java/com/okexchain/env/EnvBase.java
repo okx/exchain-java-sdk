@@ -24,7 +24,7 @@ public class EnvBase {
         this.validatorAddrPrefix = "okexchainvaloper";
         this.pubPrefix = "okexchainpub";
         this.restPathPrefix = "/okexchain/v1";
-        this.txUrlPath = "/okexchain/v1/txs";
+        this.txUrlPath = this.restPathPrefix + "/txs";
         this.accountUrlPath = "/auth/accounts/";
     }
 
@@ -101,7 +101,7 @@ public class EnvBase {
     }
 
     public void setTxUrlPath(String txUrlPath) {
-        this.txUrlPath = txUrlPath;
+        this.txUrlPath = this.restPathPrefix + txUrlPath;
     }
 
     public void setAccountUrlPath(String accountUrlPath) {
