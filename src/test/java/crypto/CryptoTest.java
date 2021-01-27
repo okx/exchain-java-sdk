@@ -66,6 +66,7 @@ public class CryptoTest {
                         "culture shove curve address together pottery " +
                         "suggest lady sell clap seek whisper";
 
+//        String mnemonic = "arrive permit dust filter impulse route wing point bubble cement pact bulb";
 //        mnemonic = "sentence deputy little switch fiction balcony hollow iron net index sound hollow scare attitude only cushion best candy wonder phone napkin sketch announce derive";
         String prikey = Crypto.generatePrivateKeyFromMnemonic(mnemonic);
 

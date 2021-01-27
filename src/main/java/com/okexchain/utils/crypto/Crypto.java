@@ -52,9 +52,12 @@ public class Crypto {
     }
 
     public static String generateMnemonic() {
-        byte[] entrophy = new byte[128/4];
+        byte[] entrophy = new byte[128/8];
         new SecureRandom().nextBytes(entrophy);
         try {
+            String mnemonic = Utils.join(MnemonicCode.INSTANCE.toMnemonic(entrophy));
+            System.out.println("助记词已生成，请你备份并妥善保管好您的助记词，不要泄露给他人！");
+            System.out.println(mnemonic);
             return Utils.join(MnemonicCode.INSTANCE.toMnemonic(entrophy));
         } catch (MnemonicException.MnemonicLengthException e) {
             e.printStackTrace();
