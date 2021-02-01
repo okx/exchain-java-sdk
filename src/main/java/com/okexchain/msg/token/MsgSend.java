@@ -1,9 +1,11 @@
 package com.okexchain.msg.token;
 
+import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Token;
 import com.okexchain.utils.Utils;
+import com.okexchain.utils.crypto.AddressUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,10 @@ public class MsgSend extends MsgBase {
 
         MsgSendValue value = new MsgSendValue();
         value.setFromAddress(this.address);
+        // eth address
+        if (!to.startsWith(EnvInstance.getEnv().GetMainPrefix())) {
+            to = AddressUtil.convertAddressFromHexToBech32(to);
+        }
         value.setToAddress(to);
         value.setAmount(amountList);
 
