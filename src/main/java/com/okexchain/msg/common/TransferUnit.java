@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.gson.annotations.SerializedName;
+import com.okexchain.env.EnvInstance;
+import com.okexchain.utils.crypto.AddressUtil;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -35,6 +37,10 @@ public class TransferUnit {
     }
 
     public void setTo(String to) {
+        // eth address
+        if (!to.startsWith(EnvInstance.getEnv().GetMainPrefix())) {
+            to = AddressUtil.convertAddressFromHexToBech32(to);
+        }
         this.to = to;
     }
 
