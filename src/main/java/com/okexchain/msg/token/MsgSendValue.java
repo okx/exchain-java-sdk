@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.gson.annotations.SerializedName;
+import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.common.Token;
+import com.okexchain.utils.crypto.AddressUtil;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -39,6 +41,10 @@ public class MsgSendValue {
     }
 
     public void setToAddress(String toAddress) {
+        // eth address
+        if (!toAddress.startsWith(EnvInstance.getEnv().GetMainPrefix())) {
+            toAddress = AddressUtil.convertAddressFromHexToBech32(toAddress);
+        }
         this.toAddress = toAddress;
     }
 
