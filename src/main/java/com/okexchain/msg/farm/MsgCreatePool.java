@@ -1,10 +1,13 @@
 package com.okexchain.msg.farm;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.parser.Feature;
 import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Token;
+import com.okexchain.msg.tx.UnsignedTx;
 import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
 
@@ -33,27 +36,22 @@ public class MsgCreatePool extends MsgBase {
 
     public static void main(String[] args) {
 
-        EnvInstance.getEnv().setChainID("okexchainevm-8");
-        EnvInstance.getEnv().setRestServerUrl("http://localhost:8545");
-
-        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
+        EnvInstance.getEnv().setChainID("okexchain-66");
+        EnvInstance.getEnv().setRestServerUrl("https://okex.com");
 
         MsgCreatePool msg = new MsgCreatePool();
-        msg.init(key);
+        msg.init("okexchain1qjktrxusyql83kk6f8yxqmpfcu8lk3cycw5aae", "");
 
         Message messages = msg.produceMsg(
-                "100",
-                "okt",
-                "turing_pool",
+                "0",
+                "ammswap_ethk-c63_okt",
+                "ethk_okt",
                 "okt"
         );
-        JSONObject res = msg.submit(messages, "0.05", "500000", "create pool!");
+        UnsignedTx unsignedTx = msg.getUnsignedTx(messages, "0.05000000", "500000", "");
+        JSONObject jsonpObject = JSON.parseObject(unsignedTx.toString(), Feature.OrderedField);
+        jsonpObject.put("addressIndex", 82);
 
-        try {
-            boolean succeed = msg.isTxSucceed(res);
-            System.out.println("tx " + (succeed ? "succeed": "failed"));
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        System.out.println(jsonpObject.toString());
     }
 }

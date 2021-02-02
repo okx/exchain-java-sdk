@@ -1,10 +1,13 @@
 package com.okexchain.msg.ammswap;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.parser.Feature;
 import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Token;
+import com.okexchain.msg.tx.UnsignedTx;
 import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
 
@@ -41,31 +44,25 @@ public class MsgAddLiquidity extends MsgBase {
     }
 
     public static void main(String[] args) {
-        EnvInstance.getEnv().setChainID("okexchainevm-8");
-        EnvInstance.getEnv().setRestServerUrl("http://localhost:8545");
-
-        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
+        EnvInstance.getEnv().setChainID("okexchain-66");
+        EnvInstance.getEnv().setRestServerUrl("https://okex.com");
 
         MsgAddLiquidity msg = new MsgAddLiquidity();
-        msg.init(key);
+        msg.init("okexchain1e4ryfclt57z6d2tgy6rkgvmtf4tyzx8jrqv6x5", "");
 
         // the lexicographic order of BaseDenom must be less than QuoteDenom
         Message messages = msg.produceMsg(
-                "PT10S",
-                "0.5",
-                "100",
-                "okt",
-                "100",
-                "usdk-5f7"
+                "PT24H",
+                "1",
+                "0.01",
+                "btck-ba9",
+                "6.5",
+                "okt"
         );
-        JSONObject res = msg.submit(messages, "0.05", "500000", "add liquidity!");
+        UnsignedTx unsignedTx = msg.getUnsignedTx(messages, "0.05000000", "500000", "");
+        JSONObject jsonpObject = JSON.parseObject(unsignedTx.toString(), Feature.OrderedField);
+        jsonpObject.put("addressIndex", 81);
 
-        try {
-            boolean succeed = msg.isTxSucceed(res);
-            System.out.println("tx " + (succeed ? "succeed": "failed"));
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
-
+        System.out.println(jsonpObject.toString());
     }
 }

@@ -1,11 +1,14 @@
 package com.okexchain.msg.gov;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.parser.Feature;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Token;
+import com.okexchain.msg.tx.UnsignedTx;
 import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
 
@@ -19,29 +22,25 @@ public class MsgManageWhiteListProposal extends MsgBase {
     }
 
     public static void main(String[] args) throws JsonProcessingException {
-        EnvInstance.getEnv().setChainID("okexchainevm-8");
-        EnvInstance.getEnv().setRestServerUrl("http://localhost:8545");
+        EnvInstance.getEnv().setChainID("okexchain-66");
+        EnvInstance.getEnv().setRestServerUrl("https://okex.com");
 
-        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
         MsgManageWhiteListProposal msg = new MsgManageWhiteListProposal();
-        msg.init(key);
+        msg.init("okexchain1s6nfs7mlj7ewsskkrmekqhpq2w234fcz9sp3uz", "");
 
         Message messages = msg.produceManageWhiteListProposalMsg(
-                "add to manage white list",
-                "add to manage white list",
-                "turing_pool",
+                "add ethk_okt to manage while list",
+                "add ethk_okt to manage while list",
+                "ethk_okt",
                 true,
                 "100.00000000"
         );
 
-        JSONObject res = msg.submit(messages, "0.05000000", "500000", "OKExChain delete token pair!");
+        UnsignedTx unsignedTx = msg.getUnsignedTx(messages, "0.05000000", "500000", "");
+        JSONObject jsonpObject = JSON.parseObject(unsignedTx.toString(), Feature.OrderedField);
+        jsonpObject.put("addressIndex", 2);
 
-        try {
-            boolean succeed = msg.isTxSucceed(res);
-            System.out.println("tx " + (succeed ? "succeed": "failed"));
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
+        System.out.println(jsonpObject.toString());
     }
 
     public Message produceManageWhiteListProposalMsg(

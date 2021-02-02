@@ -132,8 +132,8 @@ public class MsgBase {
             Data2Sign data = new Data2Sign(accountNum, EnvInstance.getEnv().GetChainid(), fee, memo, msgs, sequenceNum);
             String unsignedTxJson = new ObjectMapper().writeValueAsString(data);
 
-            System.out.println("row data:");
-            System.out.println(unsignedTxJson);
+//            System.out.println("row data:");
+//            System.out.println(unsignedTxJson);
 
             TxValue txValue = new TxValue();
             txValue.setMsgs(msgs);
