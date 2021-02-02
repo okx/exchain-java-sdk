@@ -98,6 +98,6 @@ public class AddressUtil {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return hexAddress;
+        return Keys.toChecksumAddress(hexAddress);
     }
 }
