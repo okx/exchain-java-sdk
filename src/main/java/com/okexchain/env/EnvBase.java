@@ -20,7 +20,7 @@ public class EnvBase {
         this.mainPrefix = "okexchain";
         this.denom = "okt";
         this.chainID = "okexchain-1";
-        this.hdPath = "M/44H/996H/0H/0/0";
+        this.hdPath = "M/44H/60H/0H/0/0";
         this.validatorAddrPrefix = "okexchainvaloper";
         this.pubPrefix = "okexchainpub";
         this.restPathPrefix = "/okexchain/v1";
