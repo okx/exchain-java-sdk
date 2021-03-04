@@ -56,7 +56,7 @@ public class Crypto {
         new SecureRandom().nextBytes(entrophy);
         try {
             String mnemonic = Utils.join(MnemonicCode.INSTANCE.toMnemonic(entrophy));
-            System.out.println("您的助记词已生成，请您备份并妥善保管好您的助记词，不要泄露给他人！");
+            System.out.println("Your mnemonic phrase has been generated, please backup and keep your mnemonic phrase properly, do not quote it to others!");
             System.out.println(mnemonic);
             return mnemonic;
         } catch (MnemonicException.MnemonicLengthException e) {
