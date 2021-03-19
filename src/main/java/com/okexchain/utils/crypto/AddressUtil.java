@@ -100,4 +100,26 @@ public class AddressUtil {
         }
         return Keys.toChecksumAddress(hexAddress);
     }
+
+    public static String convertAddressFromValToBech32(String valAddress){
+        String bech32Address = null;
+        try {
+            byte[] bytes = Bech32.decode(valAddress).getData();
+            bech32Address = com.okexchain.utils.crypto.encode.Bech32.encode(EnvInstance.getEnv().GetMainPrefix(), bytes);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return bech32Address;
+    }
+
+    public static String convertAddressFromBech32ToVal(String bech32Address){
+        String valAddress = null;
+        try {
+            byte[] bytes = Bech32.decode(bech32Address).getData();
+            valAddress = com.okexchain.utils.crypto.encode.Bech32.encode(EnvInstance.getEnv().GetValidatorAddrPrefix(), bytes);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return valAddress;
+    }
 }
