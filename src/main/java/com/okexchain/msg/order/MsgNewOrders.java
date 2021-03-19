@@ -2,12 +2,10 @@ package com.okexchain.msg.order;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.okexchain.env.EnvBase;
 import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
 import com.okexchain.utils.crypto.PrivateKey;
-import com.sun.tools.doclint.Env;
 
 import java.util.ArrayList;
 import java.util.Arrays;
