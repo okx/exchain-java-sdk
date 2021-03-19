@@ -1,7 +1,12 @@
 package com.okexchain.msg.gov;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.parser.Feature;
+import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
+import com.okexchain.msg.tx.UnsignedTx;
 
 public class MsgVote extends MsgBase {
 
@@ -10,15 +15,21 @@ public class MsgVote extends MsgBase {
     }
 
     public static void main(String[] args) {
-        MsgVote msg = new MsgVote();
+        EnvInstance.getEnv().setChainID("okexchain-66");
+        EnvInstance.getEnv().setRestServerUrl("http://okexchaintest.okexcn.com:26659");
 
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        MsgVote msg = new MsgVote();
+        msg.init("okexchain1wgtgkzyzm3ecxntpqzzs2vr4rhqawlnpdld09k", "");
 
         Message messages = msg.produceVoteMsg(
-                "2",
+                "12",
                 "Yes");
 
-        msg.submit(messages, "0.01000000", "200000", "okexchain gov vot!");
+        UnsignedTx unsignedTx = msg.getUnsignedTx(messages, "0.05000000", "500000", "");
+        JSONObject jsonpObject = JSON.parseObject(unsignedTx.toString(), Feature.OrderedField);
+        jsonpObject.put("addressIndex", 820);
+
+        System.out.println(jsonpObject.toString());
     }
 
     public Message produceVoteMsg(String ProposalID, String option) {
