@@ -7,7 +7,7 @@ package com.okexchain.msg;
  * 描述：
  */
 public class TestGov {
-//
+
 //    @Test
 //    public void testContractBlockedListProposal() throws IOException {
 //        EnvBase env = EnvInstance.getEnv();
