@@ -1,13 +1,24 @@
-package com.okexchain.msg;
-
-/**
- * @author shaoyun.zhan
- * @date 2021/3/26
- * <p>
- * 描述：
- */
-public class TestGov {
-
+//package com.okexchain.msg;
+//
+//import com.alibaba.fastjson.JSONObject;
+//import com.okexchain.env.EnvBase;
+//import com.okexchain.env.EnvInstance;
+//import com.okexchain.msg.common.Message;
+//import com.okexchain.msg.gov.MsgContractBlockedListProposal;
+//import com.okexchain.msg.gov.MsgContractDeploymentWhitelistProposal;
+//import com.okexchain.utils.crypto.PrivateKey;
+//import org.junit.Test;
+//
+//import java.io.IOException;
+//
+///**
+// * @author shaoyun.zhan
+// * @date 2021/3/26
+// * <p>
+// * 描述：
+// */
+//public class TestGov {
+//
 //    @Test
 //    public void testContractBlockedListProposal() throws IOException {
 //        EnvBase env = EnvInstance.getEnv();
@@ -28,6 +39,7 @@ public class TestGov {
 //                "String description",
 //                contractAddresses,
 //                true,
+//                "okt",
 //                "100.000000000000000000"
 //        );
 //
@@ -59,6 +71,7 @@ public class TestGov {
 //                "String description",
 //                distributorAddresses,
 //                true,
+//                "okt",
 //                "100.000000000000000000"
 //        );
 //
@@ -71,5 +84,5 @@ public class TestGov {
 //            System.out.println(e.toString());
 //        }
 //    }
-
-}
+//
+//}
