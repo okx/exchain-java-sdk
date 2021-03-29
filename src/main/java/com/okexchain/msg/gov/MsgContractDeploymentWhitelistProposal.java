@@ -1,6 +1,5 @@
 package com.okexchain.msg.gov;
 
-import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Token;
@@ -21,6 +20,7 @@ public class MsgContractDeploymentWhitelistProposal extends MsgBase {
             String description,
             String[] distributorAddresses,
             boolean isAdded,
+            String denom,
             String amountDeposit
     ) {
 
@@ -31,12 +31,13 @@ public class MsgContractDeploymentWhitelistProposal extends MsgBase {
         proposal.setDistributorAddresses(distributorAddresses);
         proposal.setIsAdded(isAdded);
 
-        return produceContractDeploymentWhitelistProposal(proposal, amountDeposit);
+        return produceContractDeploymentWhitelistProposal(proposal,denom, amountDeposit);
     }
 
 
     public Message produceContractDeploymentWhitelistProposal(
             MsgContractDeploymentWhitelistProposalValue proposal,
+            String denom,
             String amountDeposit
     ) {
 
@@ -48,7 +49,7 @@ public class MsgContractDeploymentWhitelistProposal extends MsgBase {
         // submit
         List<Token> depositList = new ArrayList<>();
         Token deposit = new Token();
-        deposit.setDenom(EnvInstance.getEnv().GetDenom());
+        deposit.setDenom(denom);
         deposit.setAmount(Utils.NewDecString(amountDeposit));
         depositList.add(deposit);
 
