@@ -1,7 +1,5 @@
 package com.okexchain.env;
 
-import com.okexchain.utils.Utils;
-
 public class EnvBase {
 
     protected String restServerUrl;
@@ -17,13 +15,16 @@ public class EnvBase {
 
     public EnvBase() {
         this.restServerUrl = "http://127.0.0.1:8545";
-        this.mainPrefix = "okexchain";
+        this.mainPrefix = "ex";
         this.denom = "okt";
+        //todo
         this.chainID = "okexchain-1";
         this.hdPath = "M/44H/60H/0H/0/0";
-        this.validatorAddrPrefix = "okexchainvaloper";
-        this.pubPrefix = "okexchainpub";
+        this.validatorAddrPrefix = "exvaloper";
+        this.pubPrefix = "expub";
+        //todo
         this.restPathPrefix = "/okexchain/v1";
+        //todo
         this.txUrlPath = "/okexchain/v1/txs";
         this.accountUrlPath = "/auth/accounts/";
     }
