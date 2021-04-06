@@ -6,7 +6,7 @@
 
     <groupId>com.okexchain</groupId>
     <artifactId>okexchain-java-sdk</artifactId>
-    <version>0.16.7</version>
+    <version>0.17.0</version>
 
     <name>okexchain-java-sdk</name>
     <!-- FIXME change it to the project's website -->
