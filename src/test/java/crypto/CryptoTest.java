@@ -1,8 +1,9 @@
 package crypto;
 
 import com.okexchain.env.EnvInstance;
-import com.okexchain.utils.crypto.Crypto;
+import com.okexchain.utils.crypto.AddressConvertUtil;
 import com.okexchain.utils.crypto.AddressUtil;
+import com.okexchain.utils.crypto.Crypto;
 import org.bouncycastle.util.encoders.Hex;
 import org.junit.Assert;
 import org.junit.Test;
@@ -81,6 +82,19 @@ public class CryptoTest {
 
         System.out.println("address");
         System.out.println(Crypto.generateAddressFromPriv(prikey));
+    }
+
+    @Test
+    public void prefixTest() {
+        //"eth_address": "0x64fAB0187AF0BCfF8499079161d8a0D68Ee8827a"
+        //"privateKey": "2843de7dec93946f1022ec9355678fdec3dc49d3140d2314b452a3a4afe78191"
+        Assert.assertEquals(AddressConvertUtil.convertFromBech32ToHex("okexchain1vnatqxr67z70lpyeq7gkrk9q668w3qn6sufu56"),"0x64fAB0187AF0BCfF8499079161d8a0D68Ee8827a");
+        Assert.assertEquals(AddressConvertUtil.convertFromBech32ToHex("ex1vnatqxr67z70lpyeq7gkrk9q668w3qn6hhzuhk"),"0x64fAB0187AF0BCfF8499079161d8a0D68Ee8827a");
+        Assert.assertEquals(AddressConvertUtil.convertFromHexToOkexchainBech32("0x64fAB0187AF0BCfF8499079161d8a0D68Ee8827a"),"okexchain1vnatqxr67z70lpyeq7gkrk9q668w3qn6sufu56");
+        Assert.assertEquals(AddressConvertUtil.convertFromHexToExBech32("0x64fAB0187AF0BCfF8499079161d8a0D68Ee8827a"),"ex1vnatqxr67z70lpyeq7gkrk9q668w3qn6hhzuhk");
+        Assert.assertEquals(AddressConvertUtil.convertFromExBech32ToOkexchainBech32("ex1vnatqxr67z70lpyeq7gkrk9q668w3qn6hhzuhk"),"okexchain1vnatqxr67z70lpyeq7gkrk9q668w3qn6sufu56");
+        Assert.assertEquals(AddressConvertUtil.convertFromOkexchainBech32ToExBech32("okexchain1vnatqxr67z70lpyeq7gkrk9q668w3qn6sufu56"),"ex1vnatqxr67z70lpyeq7gkrk9q668w3qn6hhzuhk");
+
     }
 
 }
