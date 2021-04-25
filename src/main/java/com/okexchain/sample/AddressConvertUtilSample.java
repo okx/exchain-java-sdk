@@ -20,6 +20,7 @@ public class AddressConvertUtilSample {
         System.out.println(AddressConvertUtil.convertFromHexToExBech32("0x64fAB0187AF0BCfF8499079161d8a0D68Ee8827a").equals("ex1vnatqxr67z70lpyeq7gkrk9q668w3qn6hhzuhk"));
         System.out.println(AddressConvertUtil.convertFromExBech32ToOkexchainBech32("ex1vnatqxr67z70lpyeq7gkrk9q668w3qn6hhzuhk").equals("okexchain1vnatqxr67z70lpyeq7gkrk9q668w3qn6sufu56"));
         System.out.println(AddressConvertUtil.convertFromOkexchainBech32ToExBech32("okexchain1vnatqxr67z70lpyeq7gkrk9q668w3qn6sufu56").equals("ex1vnatqxr67z70lpyeq7gkrk9q668w3qn6hhzuhk"));
+        System.out.println(AddressConvertUtil.convertFromOkexchainValToExVal("okexchainvaloper18au05qx485u2qcw2gvqsrfh29evq77lm45mf4h").equals("exvaloper18au05qx485u2qcw2gvqsrfh29evq77lm9u2jwr"));
 
     }
 }
