@@ -34,6 +34,10 @@ public class AddressConvertUtil {
         return convertAddressFromHexToBech32(ex, hexAddress);
     }
 
+    public static String convertFromOkexchainValToExVal(String address) {
+        String hexAddress = convertAddressFromBech32ToHex(address);
+        return convertAddressFromHexToBech32(ex+"valoper", hexAddress);
+    }
 
     public static String convertAddressFromHexToBech32(String prefix, String hexAddress) {
         byte[] address = Numeric.hexStringToByteArray(hexAddress);
