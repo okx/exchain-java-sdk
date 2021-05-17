@@ -252,4 +252,12 @@ public class MsgBase {
         }
         return response.getCode() == 0;
     }
+
+    public String getSequenceNum() {
+        return sequenceNum;
+    }
+
+    public String getAccountNum() {
+        return accountNum;
+    }
 }
