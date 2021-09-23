@@ -18,6 +18,8 @@ import org.bouncycastle.util.encoders.Hex;
 import org.web3j.crypto.ECKeyPair;
 import org.web3j.crypto.Sign;
 
+
+
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.math.BigInteger;
@@ -149,19 +151,23 @@ public class MsgBase {
     }
 
 
-    public static Signature signTx(String unsignedTx, String privateKey) throws Exception {
-        byte[] byteSignData = unsignedTx.getBytes();
-        BigInteger privKey = new BigInteger(privateKey, 16);
-        Sign.SignatureData sig = Sign.signMessage(byteSignData, ECKeyPair.create(privKey));
-        String sigResult = toBase64(sig);
+    public static Signature signTx(String unsignedTx, String privateKey){
+        Signature signature=null;
+        try {
+            byte[] byteSignData = unsignedTx.getBytes();
+            BigInteger privKey = new BigInteger(privateKey, 16);
+            Sign.SignatureData sig = Sign.signMessage(byteSignData, ECKeyPair.create(privKey));
+            String sigResult = toBase64(sig);
 
-        Signature signature = new Signature();
-        Pubkey pubkey = new Pubkey();
-        pubkey.setType("ethermint/PubKeyEthSecp256k1");
-        pubkey.setValue(Strings.fromByteArray(Base64.encode(Hex.decode(Crypto.generatePubKeyHexFromPriv(privateKey)))));
-        signature.setPubkey(pubkey);
-        signature.setSignature(sigResult);
-
+            signature = new Signature();
+            Pubkey pubkey = new Pubkey();
+            pubkey.setType("ethermint/PubKeyEthSecp256k1");
+            pubkey.setValue(Strings.fromByteArray(Base64.encode(Hex.decode(Crypto.generatePubKeyHexFromPriv(privateKey)))));
+            signature.setPubkey(pubkey);
+            signature.setSignature(sigResult);
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
         return signature;
     }
 

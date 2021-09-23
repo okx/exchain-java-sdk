@@ -9,7 +9,7 @@ import org.bitcoinj.core.Utils;
 import org.bitcoinj.crypto.*;
 import org.bouncycastle.util.encoders.DecoderException;
 import org.bouncycastle.util.encoders.Hex;
-import org.web3j.crypto.Sign;
+
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -128,7 +128,6 @@ public class Crypto {
     }
 
     public static String generateValidatorAddressFromPub(String pubKey) {
-
         try {
             String addr = AddressUtil.createNewAddressSecp256k1(EnvInstance.getEnv().GetValidatorAddrPrefix(), Hex.decode(pubKey));
             return addr;
