@@ -12,6 +12,7 @@ import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.Crypto;
 import com.okexchain.msg.common.*;
 import com.okexchain.utils.crypto.PrivateKey;
+import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.util.Strings;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
@@ -27,6 +28,8 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Slf4j
 public class MsgBase {
 
 
@@ -58,7 +61,7 @@ public class MsgBase {
         String url = EnvInstance.getEnv().GetRestServerUrl() +
                 EnvInstance.getEnv().GetRestPathPrefix() +
                 EnvInstance.getEnv().GetAccountUrlPath() + userAddress;
-        System.out.println(url);
+        log.info("url={}",url);
         return HttpUtils.httpGet(url);
     }
 
@@ -84,8 +87,7 @@ public class MsgBase {
         String res = HttpUtils.httpPost(url + EnvInstance.getEnv().GetTxUrlPath(), tx);
         JSONObject result = JSON.parseObject(res);
 
-        System.out.println(result);
-        System.out.println("------------------------------------------------------");
+        log.info("result={}",result);
         return result;
     }
 
@@ -103,7 +105,7 @@ public class MsgBase {
 
             return broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
         } catch (Exception e) {
-            System.out.println("serialize transfer msg failed");
+            log.info("Exception={}","serialize transfer msg failed");
             return new JSONObject();
         }
     }
@@ -133,9 +135,7 @@ public class MsgBase {
 
             Data2Sign data = new Data2Sign(accountNum, EnvInstance.getEnv().GetChainid(), fee, memo, msgs, sequenceNum);
             String unsignedTxJson = new ObjectMapper().writeValueAsString(data);
-
-            System.out.println("row data:");
-            System.out.println(unsignedTxJson);
+            log.info("unsignedTxJson={}",unsignedTxJson);
 
             TxValue txValue = new TxValue();
             txValue.setMsgs(msgs);
@@ -144,7 +144,7 @@ public class MsgBase {
 
             tx = new UnsignedTx(txValue, unsignedTxJson);
         } catch (Exception e) {
-            System.out.println("serialize transfer msg failed");
+            log.info("Exception={}","serialize transfer msg failed");
         }
 
         return tx;
@@ -166,7 +166,7 @@ public class MsgBase {
             signature.setPubkey(pubkey);
             signature.setSignature(sigResult);
         }catch (Exception exception){
-            exception.printStackTrace();
+            log.error("exception={}",exception);
         }
         return signature;
     }
@@ -223,7 +223,7 @@ public class MsgBase {
         byte[] sigData = new byte[64];  // 32 bytes for R + 32 bytes for S
         System.arraycopy(sig.getR(), 0, sigData, 0, 32);
         System.arraycopy(sig.getS(), 0, sigData, 32, 32);
-        System.out.println(Hex.toHexString(sigData));
+        log.info("hexStr={}",Hex.toHexString(sigData));
         return new String(org.spongycastle.util.encoders.Base64.encode(sigData), Charset.forName("UTF-8"));
     }
 
