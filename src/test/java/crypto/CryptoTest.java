@@ -29,6 +29,7 @@ public class CryptoTest {
         try {
             String addr = AddressUtil.createNewAddressSecp256k1(EnvInstance.getEnv().GetMainPrefix(), pub);
             System.out.println(addr);
+
         }catch (Exception e){
             e.printStackTrace();
         }
