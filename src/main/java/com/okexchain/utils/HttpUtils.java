@@ -16,11 +16,10 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.SocketException;
+import java.io.PrintWriter;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -67,51 +66,92 @@ public class HttpUtils {
     }
 
     public static String httpGet(String httpUrl) {
-        BufferedReader reader = null;
-        String result = null;
-        StringBuffer sbf = new StringBuffer();
+        return sendGet(httpUrl, null);
+    }
 
 
+    /**
+     * GET请求
+     * @param url 发送请求的 URL
+     * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
+     * @return 所代表远程资源的响应结果
+     */
+    public static String sendGet(String url, String param) {
+        StringBuilder result = new StringBuilder();
+        BufferedReader in = null;
         try {
-            URL url = new URL(httpUrl);
-            HttpURLConnection connection = null;
-            connection = (HttpURLConnection) url.openConnection();// 正常访问
-
-            connection.setConnectTimeout(5000);
-            connection.setRequestMethod("GET");
-
+            String urlNameString = url + "?" + param;
+            URL realUrl = new URL(urlNameString);
+            URLConnection connection = realUrl.openConnection();
+            connection.setRequestProperty("accept", "*/*");
+            connection.setRequestProperty("connection", "Keep-Alive");
+            connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             connection.connect();
-            InputStream is = connection.getInputStream();
-            reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-            String strRead = null;
-            while ((strRead = reader.readLine()) != null) {
-                sbf.append(strRead);
-                sbf.append("\r\n");
+            in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+            while ((line = in.readLine()) != null) {
+                result.append(line);
             }
-            reader.close();
-            result = sbf.toString();
-        } catch (SocketException e) {
-            System.out.println("Connection timed out: connect");
+            System.out.println("result = " + result);
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
-        return result;
+        return result.toString();
     }
 
     public static String httpPost(String url, String data) {
-        //System.out.println("post: " + url);
-        //System.out.println("data: " + data);
-        try {
-            String res = sendPostDataByJson(url, data, "");
-            return res;
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-            return e.getMessage();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return e.getMessage();
-        }
+        return sendPost(url, data);
+    }
 
+
+    public static String sendPost(String url, String param) {
+        PrintWriter out = null;
+        BufferedReader in = null;
+        StringBuilder result = new StringBuilder();
+        try {
+            String urlNameString = url + "?" + param;
+            URL realUrl = new URL(urlNameString);
+            URLConnection conn = realUrl.openConnection();
+            conn.setRequestProperty("accept", "*/*");
+            conn.setRequestProperty("connection", "Keep-Alive");
+            conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            conn.setRequestProperty("Accept-Charset", "utf-8");
+            conn.setRequestProperty("contentType", "utf-8");
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            out = new PrintWriter(conn.getOutputStream());
+            out.print(param);
+            out.flush();
+            in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+            String line;
+            while ((line = in.readLine()) != null) {
+                result.append(line);
+            }
+            System.out.println("result = " + result);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+                if (in != null) {
+                    in.close();
+                }
+            } catch (IOException ex) {
+               ex.printStackTrace();
+            }
+        }
+        return result.toString();
     }
 
     public static String sendPostDataByMap(String url, Map<String, String> map, String encoding) throws ClientProtocolException, IOException {
