@@ -2,7 +2,7 @@ package com.okexchain.msg.gov;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
-import com.okexchain.msg.common.Contract_addresses;
+import com.okexchain.msg.common.ContractAddress;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -20,9 +20,9 @@ public class MsgContractMethodBlockedListProposalValue {
     @SerializedName("description")
     private String description;
 
-    @JsonProperty("contract_addresses")
-    @SerializedName("contract_addresses")
-    private List<Contract_addresses> contract_addresses_list;
+    @JsonProperty("contractAddress")
+    @SerializedName("contractAddress")
+    private List<ContractAddress> contractAddresslist;
 
 
     @JsonProperty("is_added")
@@ -35,7 +35,7 @@ public class MsgContractMethodBlockedListProposalValue {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("title", title)
                 .append("description", description)
-                .append("contract_addresses_list", contract_addresses_list)
+                .append("contractAddresslist", contractAddresslist)
                 .append("isAdded", isAdded)
                 .toString();
     }
@@ -50,8 +50,8 @@ public class MsgContractMethodBlockedListProposalValue {
         this.description = description;
     }
 
-    public void setContractAddresses(List<Contract_addresses> contract_addresses_list) {
-        this.contract_addresses_list = contract_addresses_list;
+    public void setContractAddresses(List<ContractAddress> contractAddresslist) {
+        this.contractAddresslist = contractAddresslist;
     }
 
     public void setIsAdded(boolean isAdded) {

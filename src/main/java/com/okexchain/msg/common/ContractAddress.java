@@ -1,6 +1,3 @@
-/**
- * Copyright 2022 bejson.com
- */
 package com.okexchain.msg.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -10,40 +7,33 @@ import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder(alphabetic = true)
-public class Block_methods {
+public class ContractAddress {
 
-    @JsonProperty("sign")
-    @SerializedName("sign")
-    private String sign;
+    @JsonProperty("address")
+    @SerializedName("address")
+    private String address;
 
-    @JsonProperty("extra")
-    @SerializedName("extra")
-    private String extra;
+    @JsonProperty("blockMethod")
+    @SerializedName("blockMethod")
+    private List<BlockMethod> blockMethod;
 
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("sign", sign)
-                .append("extra", extra)
+                .append("address", address)
+                .append("blockMethod", blockMethod)
                 .toString();
     }
 
-
-    public void setSign(String sign) {
-        this.sign = sign;
-    }
-    public String getSign() {
-        return sign;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public void setExtra(String extra) {
-        this.extra = extra;
+    public void setBlock_methods(List<BlockMethod> blockMethod) {
+        this.blockMethod = blockMethod;
     }
-    public String getExtra() {
-        return extra;
-    }
-
 }
