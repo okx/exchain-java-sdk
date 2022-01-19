@@ -1,0 +1,61 @@
+package com.okexchain.msg.gov;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
+import com.okexchain.msg.common.Contract_addresses;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.util.List;
+
+public class MsgContractMethodBlockedListProposalValue {
+
+
+    @JsonProperty("title")
+    @SerializedName("title")
+    private String title;
+
+
+    @JsonProperty("description")
+    @SerializedName("description")
+    private String description;
+
+    @JsonProperty("contract_addresses")
+    @SerializedName("contract_addresses")
+    private List<Contract_addresses> contract_addresses_list;
+
+
+    @JsonProperty("is_added")
+    @SerializedName("is_added")
+    private boolean isAdded;
+
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+                .append("title", title)
+                .append("description", description)
+                .append("contract_addresses_list", contract_addresses_list)
+                .append("isAdded", isAdded)
+                .toString();
+    }
+
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setContractAddresses(List<Contract_addresses> contract_addresses_list) {
+        this.contract_addresses_list = contract_addresses_list;
+    }
+
+    public void setIsAdded(boolean isAdded) {
+        this.isAdded = isAdded;
+    }
+
+}
