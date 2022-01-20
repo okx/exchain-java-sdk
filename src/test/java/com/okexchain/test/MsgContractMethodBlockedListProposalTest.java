@@ -1,5 +1,7 @@
 package com.okexchain.test;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.okexchain.msg.common.BlockMethod;
 import com.okexchain.msg.common.ContractAddress;
 import com.okexchain.msg.common.Message;
@@ -56,11 +58,11 @@ public class MsgContractMethodBlockedListProposalTest {
 
 
         ContractAddress ca=new ContractAddress();
-        ca.setAddress("1");
+        ca.setAddress("0x6825415e61F95965d80C556709C0f32B4092fc25");
         ca.setBlock_methods(bm);
 
         ContractAddress ca1=new ContractAddress();
-        ca1.setAddress("2");
+        ca1.setAddress("0x90dAE493DAEE9B8A16EAf1D87dc553A48644Ccfe");
         ca1.setBlock_methods(bm1);
 
 
@@ -79,7 +81,8 @@ public class MsgContractMethodBlockedListProposalTest {
         Message messages = msg.produceContractMethodBlockedListProposal(mb,"","");
 
         UnsignedTx unsignedTx = msg.getUnsignedTx(messages,"0.05000000","500000","");
-        System.out.println("mb=========="+mb);
-        //System.out.println("unsignedTx.toString()"+unsignedTx.toString());
+
+
+        System.out.println(JSON.toJSONString(mb));
     }
 }

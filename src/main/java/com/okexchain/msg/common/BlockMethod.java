@@ -40,5 +40,11 @@ public class BlockMethod {
         this.extra = extra;
     }
 
+    public String getSign(){
+        return sign;
+    }
+    public String getExtra(){
+        return extra;
+    }
 
 }

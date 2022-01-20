@@ -53,9 +53,24 @@ public class MsgContractMethodBlockedListProposalValue {
     public void setContractAddresses(List<ContractAddress> contractAddresslist) {
         this.contractAddresslist = contractAddresslist;
     }
-
     public void setIsAdded(boolean isAdded) {
         this.isAdded = isAdded;
+    }
+
+    public String getTitle(){
+        return title;
+    }
+
+    public String getDescription(){
+        return description;
+    }
+
+    public List<ContractAddress> getContractAddresslist(){
+        return contractAddresslist;
+    }
+
+    public boolean getIsAdded(){
+        return isAdded;
     }
 
 }

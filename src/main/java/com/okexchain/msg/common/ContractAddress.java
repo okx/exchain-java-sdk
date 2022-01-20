@@ -36,4 +36,12 @@ public class ContractAddress {
     public void setBlock_methods(List<BlockMethod> blockMethod) {
         this.blockMethod = blockMethod;
     }
+
+    public String getAddress(){
+        return address;
+    }
+
+    public List<BlockMethod> getBlockMethod(){
+        return blockMethod;
+    }
 }
