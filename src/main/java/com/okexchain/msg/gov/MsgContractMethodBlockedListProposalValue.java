@@ -1,13 +1,19 @@
 package com.okexchain.msg.gov;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.gson.annotations.SerializedName;
-import com.okexchain.msg.common.ContractAddress;
+import com.okexchain.msg.common.Contract_addresses;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.List;
 
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonPropertyOrder(alphabetic = true)
 public class MsgContractMethodBlockedListProposalValue {
 
 
@@ -20,13 +26,13 @@ public class MsgContractMethodBlockedListProposalValue {
     @SerializedName("description")
     private String description;
 
-    @JsonProperty("contractAddress")
-    @SerializedName("contractAddress")
-    private List<ContractAddress> contractAddresslist;
+    @JsonProperty("contract_addresses")
+    @SerializedName("contract_addresses")
+    private List<Contract_addresses> contract_addresses;
 
 
-    @JsonProperty("is_added")
-    @SerializedName("is_added")
+    @JsonProperty("isAdded")
+    @SerializedName("isAdded")
     private boolean isAdded;
 
 
@@ -35,42 +41,8 @@ public class MsgContractMethodBlockedListProposalValue {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("title", title)
                 .append("description", description)
-                .append("contractAddresslist", contractAddresslist)
+                .append("contract_addresses", contract_addresses)
                 .append("isAdded", isAdded)
                 .toString();
     }
-
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setContractAddresses(List<ContractAddress> contractAddresslist) {
-        this.contractAddresslist = contractAddresslist;
-    }
-    public void setIsAdded(boolean isAdded) {
-        this.isAdded = isAdded;
-    }
-
-    public String getTitle(){
-        return title;
-    }
-
-    public String getDescription(){
-        return description;
-    }
-
-    public List<ContractAddress> getContractAddresslist(){
-        return contractAddresslist;
-    }
-
-    public boolean getIsAdded(){
-        return isAdded;
-    }
-
 }

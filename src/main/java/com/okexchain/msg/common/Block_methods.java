@@ -7,12 +7,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.gson.annotations.SerializedName;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder(alphabetic = true)
-public class BlockMethod {
+public class Block_methods {
 
     @JsonProperty("sign")
     @SerializedName("sign")
@@ -26,25 +28,8 @@ public class BlockMethod {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("sign", sign)
-                .append("extra", extra)
+                .append("sign", this.sign)
+                .append("extra", this.extra)
                 .toString();
     }
-
-
-    public void setSign(String sign) {
-        this.sign = sign;
-    }
-
-    public void setExtra(String extra) {
-        this.extra = extra;
-    }
-
-    public String getSign(){
-        return sign;
-    }
-    public String getExtra(){
-        return extra;
-    }
-
 }

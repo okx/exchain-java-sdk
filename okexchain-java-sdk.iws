@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="49e3a19a-6ae2-4ed1-af24-6dc7ea51f25b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/okexchain-java-sdk.iws" beforeDir="false" afterPath="$PROJECT_DIR$/okexchain-java-sdk.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okexchain/msg/common/BlockMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okexchain/msg/common/BlockMethod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/okexchain/msg/common/ContractAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okexchain/msg/common/ContractAddress.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/okexchain/msg/common/Block_methods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okexchain/msg/common/Block_methods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/okexchain/msg/common/Contract_addresses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okexchain/msg/common/Contract_addresses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/okexchain/msg/gov/MsgContractMethodBlockedListProposal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okexchain/msg/gov/MsgContractMethodBlockedListProposal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/okexchain/msg/gov/MsgContractMethodBlockedListProposalValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/okexchain/msg/gov/MsgContractMethodBlockedListProposalValue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/okexchain/test/MsgContractMethodBlockedListProposalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/okexchain/test/MsgContractMethodBlockedListProposalTest.java" afterDir="false" />
     </list>
@@ -427,7 +428,9 @@
       <workItem from="1642644140962" duration="202000" />
       <workItem from="1642648025379" duration="948000" />
       <workItem from="1642649623168" duration="2043000" />
-      <workItem from="1642663352115" duration="2092000" />
+      <workItem from="1642663352115" duration="2192000" />
+      <workItem from="1642675924951" duration="31000" />
+      <workItem from="1642730473910" duration="3321000" />
     </task>
     <servers />
   </component>
