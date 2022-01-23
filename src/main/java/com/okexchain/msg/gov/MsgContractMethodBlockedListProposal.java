@@ -40,7 +40,7 @@ public class MsgContractMethodBlockedListProposal extends MsgBase {
                                                             String amountDeposit){
         // content
         Content<MsgContractMethodBlockedListProposalValue> content = new Content<>();
-        content.setType("okexchain/evm/ManageContractBlockedListProposal");
+        content.setType("okexchain/evm/ManageContractMethodBlockedListProposal");
         content.setValue(proposal);
 
         // submit
