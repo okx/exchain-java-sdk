@@ -31,8 +31,8 @@ public class MsgContractMethodBlockedListProposalValue {
     private List<Contract_addresses> contract_addresses;
 
 
-    @JsonProperty("isAdded")
-    @SerializedName("isAdded")
+    @JsonProperty("is_added")
+    @SerializedName("is_added")
     private boolean isAdded;
 
 
