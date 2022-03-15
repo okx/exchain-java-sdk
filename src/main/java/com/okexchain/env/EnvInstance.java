@@ -15,9 +15,10 @@ public class EnvInstance {
         return env;
     }
 
-    static public EnvBase getEnvMainNet() { return env.getEnvMainNet();}
+    static public EnvBase getEnvMainNet() { return env.configEnvMainNet();}
 
     static public EnvBase getEnvTestNet() {
-        return env.getEnvTestNet();
+        return env.configEnvTestNet();
     }
+
 }

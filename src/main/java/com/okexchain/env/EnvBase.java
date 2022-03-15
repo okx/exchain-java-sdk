@@ -13,8 +13,6 @@ public class EnvBase {
     protected String txUrlPath;
     protected String accountUrlPath;
 
-    private static EnvBase envBase=new EnvBase();
-
     public EnvBase() {
         this.restServerUrl = "http://127.0.0.1:8545";
         this.mainPrefix = "ex";
@@ -32,35 +30,22 @@ public class EnvBase {
     }
 
 
-    public EnvBase getEnvMainNet(){
-        envBase.setRestServerUrl("https://exchainrpc.okex.org");
-        envBase.setMainPrefix("ex");
-        envBase.setDenom("okt");
-        envBase.setChainID("okexchain-66");
-        envBase.setHdPath("M/44H/60H/0H/0/0");
-        envBase.setValidatorAddrPrefix("exvaloper");
-        envBase.setPubPrefix("expub");
-        envBase.setRestPathPrefix("/okexchain/v1");
-        envBase.setTxUrlPath("/okexchain/v1/txs");
-        envBase.setAccountUrlPath("/auth/accounts/");
-        return envBase;
-
+    public EnvBase configEnvMainNet(){
+        this.restServerUrl="https://exchainrpc.okex.org";
+        this.chainID="exchain-66";
+        this.restPathPrefix="/okexchain/v1";
+        this.txUrlPath="/okexchain/v1/txs";
+        return this;
     }
 
 
 
-    public EnvBase getEnvTestNet(){
-        envBase.setRestServerUrl("https://exchaintestrpc.okex.org");
-        envBase.setMainPrefix("ex");
-        envBase.setDenom("okt");
-        envBase.setChainID("okexchain-65");
-        envBase.setHdPath("M/44H/60H/0H/0/0");
-        envBase.setValidatorAddrPrefix("exvaloper");
-        envBase.setPubPrefix("expub");
-        envBase.setRestPathPrefix("/okexchain-test/v1");
-        envBase.setTxUrlPath("/okexchain-test/v1/txs");
-        envBase.setAccountUrlPath("/auth/accounts/");
-        return envBase;
+    public EnvBase configEnvTestNet(){
+        this.restServerUrl="https://exchaintestrpc.okex.org";
+        this.chainID="exchain-65";
+        this.restPathPrefix="/okexchain-test/v1";
+        this.txUrlPath="/okexchain-test/v1/txs";
+        return this;
     }
 
     public String GetMainPrefix() {
