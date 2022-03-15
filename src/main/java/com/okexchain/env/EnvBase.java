@@ -13,16 +13,7 @@ public class EnvBase {
     protected String txUrlPath;
     protected String accountUrlPath;
 
-    //main net rpc url
-    protected String mainNetServerUrl;
-    //main net chain id
-    protected String mainNetServerChainID;
-
-    //test net rpc url
-    protected String testNetServerUrl;
-
-    //test net chain id
-    protected String testNetServerChainID;
+    private static EnvBase envBase=new EnvBase();
 
     public EnvBase() {
         this.restServerUrl = "http://127.0.0.1:8545";
@@ -38,33 +29,39 @@ public class EnvBase {
         //todo
         this.txUrlPath = "/okexchain/v1/txs";
         this.accountUrlPath = "/auth/accounts/";
+    }
 
-        this.mainNetServerUrl="https://exchainrpc.okex.org";
-        this.mainNetServerChainID="okexchain-66";
 
-        this.testNetServerUrl="https://exchaintestrpc.okex.org";
-        this.testNetServerChainID="okexchain-65";
-
+    public EnvBase getEnvMainNet(){
+        envBase.setRestServerUrl("https://exchainrpc.okex.org");
+        envBase.setMainPrefix("ex");
+        envBase.setDenom("okt");
+        envBase.setChainID("okexchain-66");
+        envBase.setHdPath("M/44H/60H/0H/0/0");
+        envBase.setValidatorAddrPrefix("exvaloper");
+        envBase.setPubPrefix("expub");
+        envBase.setRestPathPrefix("/okexchain/v1");
+        envBase.setTxUrlPath("/okexchain/v1/txs");
+        envBase.setAccountUrlPath("/auth/accounts/");
+        return envBase;
 
     }
 
 
-    public String getMainNetServerUrl(){
-        return this.mainNetServerUrl;
-    }
 
-    public String getMainNetServerChainID(){
-        return this.mainNetServerChainID;
+    public EnvBase getEnvTestNet(){
+        envBase.setRestServerUrl("https://exchaintestrpc.okex.org");
+        envBase.setMainPrefix("ex");
+        envBase.setDenom("okt");
+        envBase.setChainID("okexchain-65");
+        envBase.setHdPath("M/44H/60H/0H/0/0");
+        envBase.setValidatorAddrPrefix("exvaloper");
+        envBase.setPubPrefix("expub");
+        envBase.setRestPathPrefix("/okexchain-test/v1");
+        envBase.setTxUrlPath("/okexchain-test/v1/txs");
+        envBase.setAccountUrlPath("/auth/accounts/");
+        return envBase;
     }
-
-    public String getTestNetServerUrl(){
-        return this.testNetServerUrl;
-    }
-
-    public String getTestNetServerChainID(){
-        return this.testNetServerChainID;
-    }
-
 
     public String GetMainPrefix() {
         return this.mainPrefix;
