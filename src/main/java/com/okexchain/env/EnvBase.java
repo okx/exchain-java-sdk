@@ -13,6 +13,17 @@ public class EnvBase {
     protected String txUrlPath;
     protected String accountUrlPath;
 
+    //main net rpc url
+    protected String mainNetServerUrl;
+    //main net chain id
+    protected String mainNetServerChainID;
+
+    //test net rpc url
+    protected String testNetServerUrl;
+
+    //test net chain id
+    protected String testNetServerChainID;
+
     public EnvBase() {
         this.restServerUrl = "http://127.0.0.1:8545";
         this.mainPrefix = "ex";
@@ -23,11 +34,37 @@ public class EnvBase {
         this.validatorAddrPrefix = "exvaloper";
         this.pubPrefix = "expub";
         //todo
-        this.restPathPrefix = "/okexchain/v1";
+        this.restPathPrefix = "/okexchain-test/v1";
         //todo
         this.txUrlPath = "/okexchain/v1/txs";
         this.accountUrlPath = "/auth/accounts/";
+
+        this.mainNetServerUrl="https://exchainrpc.okex.org";
+        this.mainNetServerChainID="okexchain-66";
+
+        this.testNetServerUrl="https://exchaintestrpc.okex.org";
+        this.testNetServerChainID="okexchain-65";
+
+
     }
+
+
+    public String getMainNetServerUrl(){
+        return this.mainNetServerUrl;
+    }
+
+    public String getMainNetServerChainID(){
+        return this.mainNetServerChainID;
+    }
+
+    public String getTestNetServerUrl(){
+        return this.testNetServerUrl;
+    }
+
+    public String getTestNetServerChainID(){
+        return this.testNetServerChainID;
+    }
+
 
     public String GetMainPrefix() {
         return this.mainPrefix;
