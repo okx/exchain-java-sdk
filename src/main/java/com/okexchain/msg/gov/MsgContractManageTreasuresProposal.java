@@ -54,19 +54,19 @@ public class MsgContractManageTreasuresProposal extends MsgBase {
     public Message produceContractManageTreasuresProposal(MsgContractManageTreasuresProposalValue proposal,
                                                           String denom,
                                                           String amountDeposit){
-        //content实例
+        //content object
         Content<MsgContractManageTreasuresProposalValue> content = new Content<>();
         content.setType("okexchain/mint/ManageTreasuresProposal");
         content.setValue(proposal);
 
-        //initial_deposit实例
+        //initial_deposit object
         List<Token> depositList = new ArrayList<>();
         Token deposit = new Token();
         deposit.setDenom(denom);
         deposit.setAmount(Utils.NewDecString(amountDeposit));
         depositList.add(deposit);
 
-        //MsgSubmitProposalValue实例
+        //MsgSubmitProposalValue object
         MsgSubmitProposalValue<Content<MsgContractManageTreasuresProposalValue>> value = new MsgSubmitProposalValue<>();
         value.setContent(content);
         value.setInitialDeposit(depositList);
