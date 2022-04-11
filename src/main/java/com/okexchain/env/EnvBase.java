@@ -23,10 +23,29 @@ public class EnvBase {
         this.validatorAddrPrefix = "exvaloper";
         this.pubPrefix = "expub";
         //todo
-        this.restPathPrefix = "/okexchain/v1";
+        this.restPathPrefix = "/okexchain-test/v1";
         //todo
         this.txUrlPath = "/okexchain/v1/txs";
         this.accountUrlPath = "/auth/accounts/";
+    }
+
+
+    public EnvBase configEnvMainNet(){
+        this.restServerUrl="https://exchainrpc.okex.org";
+        this.chainID="exchain-66";
+        this.restPathPrefix="/okexchain/v1";
+        this.txUrlPath="/okexchain/v1/txs";
+        return this;
+    }
+
+
+
+    public EnvBase configEnvTestNet(){
+        this.restServerUrl="https://exchaintestrpc.okex.org";
+        this.chainID="exchain-65";
+        this.restPathPrefix="/okexchain-test/v1";
+        this.txUrlPath="/okexchain-test/v1/txs";
+        return this;
     }
 
     public String GetMainPrefix() {
