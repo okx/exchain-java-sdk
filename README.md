@@ -34,3 +34,12 @@ All changes and addition of codes will be pushed with unit tests strictly. Right
 ### 5.Contributing
 
 No doubt that it's admirable to make contributions to okexchain Java SDK. You can provide your code as long as you have tested it with a local client, and your unit test showed its validity.  
+
+### 6.maven 
+
+<dependency>
+  <groupId>io.github.okex</groupId>
+  <artifactId>okexchain-java-sdk</artifactId>
+  <version>0.18.4</version>
+</dependency>
+
