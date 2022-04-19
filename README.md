@@ -37,9 +37,11 @@ No doubt that it's admirable to make contributions to okexchain Java SDK. You ca
 
 ### 6.maven 
 
+```
 <dependency>
   <groupId>io.github.okex</groupId>
   <artifactId>okexchain-java-sdk</artifactId>
   <version>0.18.4</version>
 </dependency>
+```
 
