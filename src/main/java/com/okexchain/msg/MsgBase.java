@@ -20,7 +20,6 @@ import org.web3j.crypto.ECKeyPair;
 import org.web3j.crypto.Sign;
 
 
-
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.math.BigInteger;
@@ -61,7 +60,7 @@ public class MsgBase {
         String url = EnvInstance.getEnv().GetRestServerUrl() +
                 EnvInstance.getEnv().GetRestPathPrefix() +
                 EnvInstance.getEnv().GetAccountUrlPath() + userAddress;
-        log.info("url={}",url);
+        log.info("url={}", url);
         return HttpUtils.httpGet(url);
     }
 
@@ -87,7 +86,16 @@ public class MsgBase {
         String res = HttpUtils.httpPost(url + EnvInstance.getEnv().GetTxUrlPath(), tx);
         JSONObject result = JSON.parseObject(res);
 
-        log.info("result={}",result);
+        log.info("result={}", result);
+        return result;
+    }
+
+
+    public static JSONObject txEncodeWithAmino(String txJson, String url) {
+        log.info(txJson);
+        String res  = HttpUtils.httpPost(url + "/txs/encode", txJson);
+        log.info(res);
+        JSONObject result = JSON.parseObject(res);
         return result;
     }
 
@@ -105,9 +113,29 @@ public class MsgBase {
 
             return broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
         } catch (Exception e) {
-            log.info("Exception={}","serialize transfer msg failed");
+            log.info("Exception={}", "serialize transfer msg failed");
             return new JSONObject();
         }
+    }
+
+
+    public JSONObject submitEncodeWithAmino(Message message, String feeAmount, String gas, String memo) {
+
+        UnsignedTx unsignedTx = getUnsignedTx(message, Utils.NewDecString(feeAmount), gas, memo);
+
+        Signature signature = MsgBase.signTx(unsignedTx.toString(), priKeyString);
+
+        BroadcastTx signedTx = unsignedTx.signed(signature);
+
+
+        String txJson =  Utils.serializer.toJson(signedTx.getTx());
+        String txBytes = (String) (txEncodeWithAmino(txJson, EnvInstance.getEnv().GetRestServerUrl()).get("tx"));
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("tx_bytes", txBytes);
+        jsonObject.put("mode", "BROADCAST_MODE_SYNC");
+
+        return broadcast(jsonObject.toJSONString(), EnvInstance.getEnv().GetRestServerUrl());
     }
 
     public UnsignedTx getUnsignedTx(Message message,
@@ -135,7 +163,7 @@ public class MsgBase {
 
             Data2Sign data = new Data2Sign(accountNum, EnvInstance.getEnv().GetChainid(), fee, memo, msgs, sequenceNum);
             String unsignedTxJson = new ObjectMapper().writeValueAsString(data);
-            log.info("unsignedTxJson={}",unsignedTxJson);
+            log.info("unsignedTxJson={}", unsignedTxJson);
 
             TxValue txValue = new TxValue();
             txValue.setMsgs(msgs);
@@ -144,15 +172,15 @@ public class MsgBase {
 
             tx = new UnsignedTx(txValue, unsignedTxJson);
         } catch (Exception e) {
-            log.info("Exception={}","serialize transfer msg failed");
+            log.info("Exception={}", "serialize transfer msg failed");
         }
 
         return tx;
     }
 
 
-    public static Signature signTx(String unsignedTx, String privateKey){
-        Signature signature=null;
+    public static Signature signTx(String unsignedTx, String privateKey) {
+        Signature signature = null;
         try {
             byte[] byteSignData = unsignedTx.getBytes();
             BigInteger privKey = new BigInteger(privateKey, 16);
@@ -165,8 +193,8 @@ public class MsgBase {
             pubkey.setValue(Strings.fromByteArray(Base64.encode(Hex.decode(Crypto.generatePubKeyHexFromPriv(privateKey)))));
             signature.setPubkey(pubkey);
             signature.setSignature(sigResult);
-        }catch (Exception exception){
-            log.error("exception={}",exception);
+        } catch (Exception exception) {
+            log.error("exception={}", exception);
         }
         return signature;
     }
@@ -223,7 +251,7 @@ public class MsgBase {
         byte[] sigData = new byte[64];  // 32 bytes for R + 32 bytes for S
         System.arraycopy(sig.getR(), 0, sigData, 0, 32);
         System.arraycopy(sig.getS(), 0, sigData, 32, 32);
-        log.info("hexStr={}",Hex.toHexString(sigData));
+        log.info("hexStr={}", Hex.toHexString(sigData));
         return new String(org.spongycastle.util.encoders.Base64.encode(sigData), Charset.forName("UTF-8"));
     }
 
@@ -236,7 +264,8 @@ public class MsgBase {
         }
 
         JSONArray rawLogs = JSON.parseArray(response.getRawLog());
-        RawLog<StringEvent<Attribute>> rawLog1 = JSONObject.parseObject(rawLogs.get(0).toString(), new TypeReference<RawLog<StringEvent<Attribute>>>() {});
+        RawLog<StringEvent<Attribute>> rawLog1 = JSONObject.parseObject(rawLogs.get(0).toString(), new TypeReference<RawLog<StringEvent<Attribute>>>() {
+        });
         for (StringEvent<Attribute> event : rawLog1.getEvents()) {
             for (Attribute attr : event.getAttributes()) {
                 if (attr.getKey().equals(matchedKey)) {
@@ -244,7 +273,7 @@ public class MsgBase {
                 }
             }
         }
-        throw  new Exception("can not find matched attribute");
+        throw new Exception("can not find matched attribute");
     }
 
     public boolean isTxSucceed(JSONObject result) throws Exception {
