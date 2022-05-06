@@ -6,8 +6,10 @@ import com.okexchain.utils.HttpUtils;
 import com.okexchain.utils.Utils;
 
 public class IbcQuery {
-    public static final String DENOM_TRACE_URL = "/ibc/apps/transfer/v1/denom_traces";
-    public static final String DENOM_TRACES_URL = "/ibc/apps/transfer/v1/denom_traces";
+    private static final String DENOM_TRACE_URL = "/ibc/apps/transfer/v1/denom_traces";
+    private static final String DENOM_TRACES_URL = "/ibc/apps/transfer/v1/denom_traces";
+
+    private static final String PARAMS_URL = "/ibc/apps/transfer/v1/params";
 
     public static void main(String[] args) {
         EnvBase env = EnvInstance.getEnv();
@@ -21,6 +23,9 @@ public class IbcQuery {
 
         DenomTracesResponse denomTracesResponse = new IbcQuery().queryDenomTraces(null,0,0,true);
         System.out.println(denomTracesResponse);
+
+        ParamsResponse paramsResponse = new IbcQuery().queryParams();
+        System.out.println(paramsResponse);
     }
 
     public DenomTraceResponse queryDenomTrace(String hash) {
@@ -41,6 +46,17 @@ public class IbcQuery {
         Result res = HttpUtils.httpGetResult(EnvInstance.getEnv().GetRestServerUrl() + DENOM_TRACES_URL + "?" + queryParmas);
         if (res.isSuccess()) {
             DenomTracesResponse response = Utils.serializer.fromJson(res.getData(), DenomTracesResponse.class);
+            return response;
+        }
+
+        return null;
+    }
+
+    public ParamsResponse queryParams() {
+
+        Result res = HttpUtils.httpGetResult(EnvInstance.getEnv().GetRestServerUrl() + PARAMS_URL);
+        if (res.isSuccess()) {
+            ParamsResponse response = Utils.serializer.fromJson(res.getData(), ParamsResponse.class);
             return response;
         }
 
