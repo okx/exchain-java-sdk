@@ -1,6 +1,7 @@
 package com.okexchain.utils;
 
 import com.okexchain.msg.common.Pair;
+import com.okexchain.msg.ibc.Result;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -96,6 +97,46 @@ public class HttpUtils {
             e.printStackTrace();
         }
         return result;
+    }
+
+
+    public static Result httpGetResult(String httpUrl) {
+        BufferedReader reader = null;
+        String result = null;
+        StringBuffer sbf = new StringBuffer();
+
+        Result r = new Result();
+        try {
+            URL url = new URL(httpUrl);
+            HttpURLConnection connection = null;
+            connection = (HttpURLConnection) url.openConnection();// 正常访问
+
+            connection.setConnectTimeout(5000);
+            connection.setRequestMethod("GET");
+
+            connection.connect();
+            InputStream is = connection.getInputStream();
+            reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            String strRead = null;
+            while ((strRead = reader.readLine()) != null) {
+                sbf.append(strRead);
+                sbf.append("\r\n");
+            }
+            reader.close();
+            result = sbf.toString();
+            if (connection.getResponseCode() == 200 ) {
+                r.setSuccess(true);
+                r.setData(result);
+            }else {
+                r.setMsg(result);
+                r.setSuccess(false);
+            }
+        } catch (SocketException e) {
+            System.out.println("Connection timed out: connect");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return r;
     }
 
     public static String httpPost(String url, String data) {
