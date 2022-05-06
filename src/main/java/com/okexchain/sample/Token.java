@@ -15,8 +15,12 @@ public class Token {
 
     public static void main(String[] args) throws JsonProcessingException {
         EnvBase env = EnvInstance.getEnv();
-        env.setChainID("okexchainevm-8");
-        env.setDenom("okt");
+
+        env.setChainID("exchain-101");
+//        env.setTxUrlPath("/cosmos/tx/v1beta1/txs");
+        env.setRestServerUrl("http://127.0.0.1:36659");
+        env.setRestPathPrefix("/exchain/v1");
+        env.setTxUrlPath("/exchain/v1/txs");
 
         testMultiTransfer();
     }
@@ -53,7 +57,7 @@ public class Token {
         );
 
         try {
-            msg.submit(messages, "0.03", "2000000", "");
+            System.out.println(msg.submit(messages, "0.03", "2000000", ""));
         } catch (Exception e) {
             System.out.println("serialize transfer msg failed");
         }

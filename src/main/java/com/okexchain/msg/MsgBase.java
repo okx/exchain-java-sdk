@@ -91,15 +91,6 @@ public class MsgBase {
     }
 
 
-    public static JSONObject txEncodeWithAmino(String txJson, String url) {
-        log.info(txJson);
-        String res  = HttpUtils.httpPost(url + "/txs/encode", txJson);
-        log.info(res);
-        JSONObject result = JSON.parseObject(res);
-        return result;
-    }
-
-
     public JSONObject submit(Message message,
                              String feeAmount,
                              String gas,
@@ -116,26 +107,6 @@ public class MsgBase {
             log.info("Exception={}", "serialize transfer msg failed");
             return new JSONObject();
         }
-    }
-
-
-    public JSONObject submitEncodeWithAmino(Message message, String feeAmount, String gas, String memo) {
-
-        UnsignedTx unsignedTx = getUnsignedTx(message, Utils.NewDecString(feeAmount), gas, memo);
-
-        Signature signature = MsgBase.signTx(unsignedTx.toString(), priKeyString);
-
-        BroadcastTx signedTx = unsignedTx.signed(signature);
-
-
-        String txJson =  Utils.serializer.toJson(signedTx.getTx());
-        String txBytes = (String) (txEncodeWithAmino(txJson, EnvInstance.getEnv().GetRestServerUrl()).get("tx"));
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("tx_bytes", txBytes);
-        jsonObject.put("mode", "BROADCAST_MODE_SYNC");
-
-        return broadcast(jsonObject.toJSONString(), EnvInstance.getEnv().GetRestServerUrl());
     }
 
     public UnsignedTx getUnsignedTx(Message message,
