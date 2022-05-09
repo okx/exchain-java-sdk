@@ -8,13 +8,11 @@ import com.okexchain.utils.Utils;
 public class IbcQuery {
     private static final String DENOM_TRACE_URL = "/ibc/apps/transfer/v1/denom_traces";
     private static final String DENOM_TRACES_URL = "/ibc/apps/transfer/v1/denom_traces";
-
     private static final String PARAMS_URL = "/ibc/apps/transfer/v1/params";
-
     public static void main(String[] args) {
         EnvBase env = EnvInstance.getEnv();
         env.setChainID("ibc-1");
-//        env.setTxUrlPath("/cosmos/tx/v1beta1/txs");
+//      env.setTxUrlPath("/cosmos/tx/v1beta1/txs");
         env.setRestServerUrl("http://127.0.0.1:10001");
         env.setRestPathPrefix("/exchain/v1");
         env.setTxUrlPath("/exchain/v1/txs");
@@ -29,39 +27,30 @@ public class IbcQuery {
     }
 
     public DenomTraceResponse queryDenomTrace(String hash) {
-
         Result res = HttpUtils.httpGetResult(EnvInstance.getEnv().GetRestServerUrl() + DENOM_TRACE_URL + "/" + hash);
-
         if (res.isSuccess()) {
             DenomTraceResponse response = Utils.serializer.fromJson(res.getData(), DenomTraceResponse.class);
             return response;
         }
-
         return null;
     }
 
     public DenomTracesResponse queryDenomTraces(String nextKey, int offset, int limit, boolean countTotal) {
         String queryParmas = "key=" + nextKey + "&offset="+offset + "&limit=" + limit + "&count_total";
-
         Result res = HttpUtils.httpGetResult(EnvInstance.getEnv().GetRestServerUrl() + DENOM_TRACES_URL + "?" + queryParmas);
         if (res.isSuccess()) {
             DenomTracesResponse response = Utils.serializer.fromJson(res.getData(), DenomTracesResponse.class);
             return response;
         }
-
         return null;
     }
 
     public ParamsResponse queryParams() {
-
         Result res = HttpUtils.httpGetResult(EnvInstance.getEnv().GetRestServerUrl() + PARAMS_URL);
         if (res.isSuccess()) {
             ParamsResponse response = Utils.serializer.fromJson(res.getData(), ParamsResponse.class);
             return response;
         }
-
         return null;
     }
-
-
 }
