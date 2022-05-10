@@ -1,4 +1,4 @@
-package com.okexchain.msg.ibc;
+package com.okexchain.msg.ibc.connections.pojo;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -9,24 +9,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder(alphabetic = true)
-public class PacketCommitmentsResponse {
+public class ConsensusState {
 
-    @JsonProperty("commitments")
-    @SerializedName("commitments")
-    private List<Commitment> commitments;
 
-    @JsonProperty("pagination")
-    @SerializedName("pagination")
-    private Pagination pagination;
+    @JsonProperty("type_url")
+    @SerializedName("type_url")
+    private String typeUrl;
 
-    @JsonProperty("height")
-    @SerializedName("height")
-    private Height height;
+
+    @JsonProperty("value")
+    @SerializedName("value")
+    private String value;
 }

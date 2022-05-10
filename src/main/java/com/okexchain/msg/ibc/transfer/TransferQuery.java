@@ -1,11 +1,15 @@
-package com.okexchain.msg.ibc;
+package com.okexchain.msg.ibc.transfer;
 
 import com.okexchain.env.EnvBase;
 import com.okexchain.env.EnvInstance;
+import com.okexchain.msg.ibc.transfer.pojo.DenomTraceResponse;
+import com.okexchain.msg.ibc.transfer.pojo.DenomTracesResponse;
+import com.okexchain.msg.ibc.transfer.pojo.ParamsResponse;
+import com.okexchain.msg.ibc.Result;
 import com.okexchain.utils.HttpUtils;
 import com.okexchain.utils.Utils;
 
-public class IbcQuery {
+public class TransferQuery {
     private static final String DENOM_TRACE_URL = "/ibc/apps/transfer/v1/denom_traces";
     private static final String DENOM_TRACES_URL = "/ibc/apps/transfer/v1/denom_traces";
     private static final String PARAMS_URL = "/ibc/apps/transfer/v1/params";
@@ -16,13 +20,13 @@ public class IbcQuery {
         env.setRestServerUrl("http://127.0.0.1:10001");
         env.setRestPathPrefix("/exchain/v1");
         env.setTxUrlPath("/exchain/v1/txs");
-        DenomTraceResponse response = new IbcQuery().queryDenomTrace("CD3872E1E59BAA23BDAB04A829035D4988D6397569EC77F1DC991E4520D4092B");
+        DenomTraceResponse response = new TransferQuery().queryDenomTrace("CD3872E1E59BAA23BDAB04A829035D4988D6397569EC77F1DC991E4520D4092B");
         System.out.println(response.getDenomTrace());
 
-        DenomTracesResponse denomTracesResponse = new IbcQuery().queryDenomTraces(null,0,0,true);
+        DenomTracesResponse denomTracesResponse = new TransferQuery().queryDenomTraces(null,0,0,true);
         System.out.println(denomTracesResponse);
 
-        ParamsResponse paramsResponse = new IbcQuery().queryParams();
+        ParamsResponse paramsResponse = new TransferQuery().queryParams();
         System.out.println(paramsResponse);
     }
 

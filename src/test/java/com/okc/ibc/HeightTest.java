@@ -1,6 +1,6 @@
 package com.okc.ibc;
 
-import com.okexchain.msg.ibc.PacketCommitmentsResponse;
+import com.okexchain.msg.ibc.channels.pojo.PacketCommitmentsResponse;
 import com.okexchain.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;

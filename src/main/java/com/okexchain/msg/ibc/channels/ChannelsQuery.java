@@ -1,7 +1,9 @@
-package com.okexchain.msg.ibc;
+package com.okexchain.msg.ibc.channels;
 
 import com.okexchain.env.EnvBase;
 import com.okexchain.env.EnvInstance;
+import com.okexchain.msg.ibc.*;
+import com.okexchain.msg.ibc.channels.pojo.*;
 import com.okexchain.utils.HttpUtils;
 import com.okexchain.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
@@ -14,11 +16,12 @@ import java.util.List;
  * @query for the packet commitment given a sequence and channel ID on a network by chain ID
  */
 @Slf4j
-public class PacketCommit {
+public class ChannelsQuery {
     //PACKET_COMMIT API BASE URL
-    private static String packetCommitmentsBasePath = "/ibc/core/channel/v1/channels/%s/ports/%s/packet_commitments";
+    private static final String PACKET_COMMITMENTS_BASEPATH = "/ibc/core/channel/v1/channels/%s/ports/%s/packet_commitments";
 
-    private static String packetReceiptBasePath="/ibc/core/channel/v1/channels/%s/ports/%s/packet_receipts";
+    private static final String PACKET_RECEIPT_BASEPATH="/ibc/core/channel/v1/channels/%s/ports/%s/packet_receipts";
+
 
 
     /***
@@ -26,7 +29,7 @@ public class PacketCommit {
      * @return
      */
     public static PacketCommitmentsResponse queryPacketCommitments(String channelId, String portId, Paging paging) {
-        String basePath = String.format(packetCommitmentsBasePath, channelId, portId);
+        String basePath = String.format(PACKET_COMMITMENTS_BASEPATH, channelId, portId);
         String queryParmas = "key=" + paging.getKey() + "&offset=" + paging.getOffset() + "&limit=" + paging.getLimit() + "&count_total=" + paging.isCountTotal();
         StringBuffer stringBuffer = new StringBuffer(basePath + "?");
         stringBuffer.append(queryParmas);
@@ -43,7 +46,7 @@ public class PacketCommit {
      * @return
      */
     public static UnreceivedAcksResponse queryUnreceivedAcks(String channelId, String portId, List<String> acknowledgementSequences) {
-        String basePath = String.format(packetCommitmentsBasePath, channelId, portId);
+        String basePath = String.format(PACKET_COMMITMENTS_BASEPATH, channelId, portId);
         String strTmp = "";
         for (int i = 0; i < acknowledgementSequences.size(); i++) {
             strTmp += acknowledgementSequences.get(i) + ",";
@@ -64,7 +67,7 @@ public class PacketCommit {
      * @return
      */
     public static UnreceivedPacketsResponse queryUnreceivedPackets(String channelId, String portId, List<String> packetSequences) {
-        String basePath = String.format(packetCommitmentsBasePath, channelId, portId);
+        String basePath = String.format(PACKET_COMMITMENTS_BASEPATH, channelId, portId);
         String strTmp = "";
         for (int i = 0; i < packetSequences.size(); i++) {
             strTmp += packetSequences.get(i) + ",";
@@ -84,7 +87,7 @@ public class PacketCommit {
      *PacketCommitment queries a stored packet commitment hash
      */
     public static PacketCommitmentResponse queryPacketCommitment(String channelId, String portId, String packetSequence) {
-        String basePath = String.format(packetCommitmentsBasePath, channelId, portId);
+        String basePath = String.format(PACKET_COMMITMENTS_BASEPATH, channelId, portId);
         StringBuffer stringBuffer = new StringBuffer(basePath + "/");
         stringBuffer.append(packetSequence);
         Result res = HttpUtils.httpGetResult(EnvInstance.getEnv().GetRestServerUrl() + stringBuffer);
@@ -101,7 +104,7 @@ public class PacketCommit {
      * @return
      */
     public static PacketReceiptResponse queryPacketReceipt(String channelId, String portId, String packetSequence){
-        String basePath = String.format(packetReceiptBasePath, channelId, portId);
+        String basePath = String.format(PACKET_RECEIPT_BASEPATH, channelId, portId);
         StringBuffer stringBuffer = new StringBuffer(basePath + "/");
         stringBuffer.append(packetSequence);
         System.out.println(EnvInstance.getEnv().GetRestServerUrl() + stringBuffer);
@@ -117,7 +120,5 @@ public class PacketCommit {
     public static void main(String[] args) {
         EnvBase env = EnvInstance.getEnv();
         env.setRestServerUrl("https://api.cosmos.network");
-        PacketReceiptResponse packetReceiptResponse = PacketCommit.queryPacketReceipt("channel-0", "transfer", "1");
-        System.out.println(Utils.serializer.toJson(packetReceiptResponse));
     }
 }

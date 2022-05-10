@@ -1,4 +1,4 @@
-package com.okexchain.msg.ibc;
+package com.okexchain.msg.ibc.channels.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

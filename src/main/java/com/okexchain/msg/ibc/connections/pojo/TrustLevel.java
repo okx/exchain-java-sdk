@@ -1,4 +1,5 @@
-package com.okexchain.msg.ibc;
+package com.okexchain.msg.ibc.connections.pojo;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,18 +14,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder(alphabetic = true)
-public class PacketCommitmentResponse {
-    @JsonProperty("commitment")
-    @SerializedName("commitment")
-    private String commitment;
+public class TrustLevel {
 
+    @JsonProperty("numerator")
+    @SerializedName("numerator")
+    private String numerator;
 
-    @JsonProperty("proof")
-    @SerializedName("proof")
-    private String proof;
-
-
-    @JsonProperty("proof_height")
-    @SerializedName("proof_height")
-    private Height height;
+    @JsonProperty("denominator")
+    @SerializedName("denominator")
+    private String denominator;
 }

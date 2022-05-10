@@ -1,9 +1,10 @@
-package com.okexchain.msg.ibc;
+package com.okexchain.msg.ibc.transfer.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.gson.annotations.SerializedName;
+import com.okexchain.msg.ibc.transfer.pojo.Params;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder(alphabetic = true)
