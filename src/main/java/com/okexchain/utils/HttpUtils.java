@@ -1,7 +1,7 @@
 package com.okexchain.utils;
 
 import com.okexchain.msg.common.Pair;
-import com.okexchain.msg.ibc.Result;
+import com.okexchain.msg.ibc.common.Result;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
