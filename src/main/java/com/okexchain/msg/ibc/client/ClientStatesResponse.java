@@ -1,11 +1,11 @@
-package com.okexchain.msg.ibc.connection;
+package com.okexchain.msg.ibc.client;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.gson.annotations.SerializedName;
-import com.okexchain.msg.common.Height;
+import com.okexchain.msg.common.Pagination;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,17 +17,13 @@ import java.util.List;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder(alphabetic = true)
-public class ClientConnectionsResponse {
+public class ClientStatesResponse {
 
-    @JsonProperty("connection_paths")
-    @SerializedName("connection_paths")
-    private List<String> connectionPaths;
+    @JsonProperty("client_states")
+    @SerializedName("client_states")
+    private List<ClientStates> clientStates;
 
-    @JsonProperty("proof")
-    @SerializedName("proof")
-    private String proof;
-
-    @JsonProperty("proof_height")
-    @SerializedName("proof_height")
-    private Height proofHeight;
+    @JsonProperty("pagination")
+    @SerializedName("pagination")
+    private Pagination pagination;
 }

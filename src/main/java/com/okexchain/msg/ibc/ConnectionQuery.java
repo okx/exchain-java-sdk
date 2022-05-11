@@ -1,8 +1,8 @@
 package com.okexchain.msg.ibc;
 
 import com.okexchain.env.EnvInstance;
-import com.okexchain.msg.ibc.common.Paging;
-import com.okexchain.msg.ibc.common.Result;
+import com.okexchain.msg.common.Paging;
+import com.okexchain.msg.common.Result;
 import com.okexchain.msg.ibc.connection.*;
 import com.okexchain.utils.HttpUtils;
 import com.okexchain.utils.Utils;
@@ -38,7 +38,6 @@ public class ConnectionQuery {
     }
 
 
-
     /**
      * Connections queries all the IBC connections of a chain.
      */
@@ -53,7 +52,6 @@ public class ConnectionQuery {
         }
         return null;
     }
-
 
     /**
      * ClientConnections queries the connection paths associated with a client state.

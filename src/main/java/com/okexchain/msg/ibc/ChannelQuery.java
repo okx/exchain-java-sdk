@@ -3,8 +3,8 @@ package com.okexchain.msg.ibc;
 
 import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.ibc.channel.*;
-import com.okexchain.msg.ibc.common.Paging;
-import com.okexchain.msg.ibc.common.Result;
+import com.okexchain.msg.common.Paging;
+import com.okexchain.msg.common.Result;
 import com.okexchain.msg.ibc.channel.ConnectionChannelsResponse;
 import com.okexchain.utils.HttpUtils;
 import com.okexchain.utils.Utils;

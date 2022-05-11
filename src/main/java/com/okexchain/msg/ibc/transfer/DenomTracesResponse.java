@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.gson.annotations.SerializedName;
 import com.okexchain.msg.common.DenomTrace;
-import com.okexchain.msg.ibc.common.Pagination;
+import com.okexchain.msg.common.Pagination;
 
 import java.util.List;
 

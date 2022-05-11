@@ -1,4 +1,4 @@
-package com.okexchain.msg.ibc.common;
+package com.okexchain.msg.common;
 
 public class Result {
 
