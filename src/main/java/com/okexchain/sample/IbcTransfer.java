@@ -14,14 +14,11 @@ public class IbcTransfer {
     public static void main(String[] args) throws JsonProcessingException {
         EnvBase env = EnvInstance.getEnv();
         env.setChainID("exchain-101");
-//        env.setTxUrlPath("/cosmos/tx/v1beta1/txs");
+//      env.setTxUrlPath("/cosmos/tx/v1beta1/txs");
         env.setRestServerUrl("http://127.0.0.1:36659");
         env.setRestPathPrefix("/exchain/v1");
         env.setTxUrlPath("/exchain/v1/txs");
-
-
         testIbcTransfer();
-
     }
 
 
