@@ -47,13 +47,4 @@ public class ClientQuery {
         }
         return null;
     }
-
-
-    public static void main(String [] args){
-        EnvBase env = EnvInstance.getEnv();
-        env.setRestServerUrl("https://api.cosmos.network");
-        Paging paging=new Paging();
-        System.out.println(Utils.serializer.toJson(ClientQuery.queryClientStates(paging)));
-    }
-
 }
