@@ -1,6 +1,3 @@
-/**
- * Copyright 2022 bejson.com
- */
 package com.okexchain.msg.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -11,25 +8,27 @@ import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.util.List;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder(alphabetic = true)
-public class Block_methods {
+public class ContractAddresses {
 
-    @JsonProperty("sign")
-    @SerializedName("sign")
-    private String sign;
+    @JsonProperty("address")
+    @SerializedName("address")
+    private String address;
 
-    @JsonProperty("extra")
-    @SerializedName("extra")
-    private String extra;
+
+    @JsonProperty("block_methods")
+    @SerializedName("block_methods")
+    private List<BlockMethods> blockMethods;
 
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("sign", this.sign)
-                .append("extra", this.extra)
+                .append("address", this.address)
+                .append("block_methods", this.blockMethods)
                 .toString();
     }
 }

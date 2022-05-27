@@ -1,7 +1,7 @@
 package com.okexchain.msg.gov;
 
 import com.okexchain.msg.MsgBase;
-import com.okexchain.msg.common.Contract_addresses;
+import com.okexchain.msg.common.ContractAddresses;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Token;
 import com.okexchain.utils.Utils;
@@ -20,7 +20,7 @@ public class MsgContractMethodBlockedListProposal extends MsgBase {
 
     public Message produceContractMethodBlockedListProposal(String title,
                                                             String description,
-                                                            List<Contract_addresses> contract_addresses_list,
+                                                            List<ContractAddresses> contractAddressesList,
                                                             boolean isAdded,
                                                             String denom,
                                                             String amountDeposit){
@@ -28,7 +28,7 @@ public class MsgContractMethodBlockedListProposal extends MsgBase {
         MsgContractMethodBlockedListProposalValue proposal = new MsgContractMethodBlockedListProposalValue();
         proposal.setTitle(title);
         proposal.setDescription(description);
-        proposal.setContract_addresses(contract_addresses_list);
+        proposal.setContractAddresses(contractAddressesList);
         proposal.setAdded(isAdded);
 
         return produceContractMethodBlockedListProposal(proposal,denom, amountDeposit);

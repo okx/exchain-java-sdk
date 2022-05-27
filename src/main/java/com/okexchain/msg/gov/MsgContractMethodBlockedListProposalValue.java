@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.gson.annotations.SerializedName;
-import com.okexchain.msg.common.Contract_addresses;
+import com.okexchain.msg.common.ContractAddresses;
 import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -28,7 +28,7 @@ public class MsgContractMethodBlockedListProposalValue {
 
     @JsonProperty("contract_addresses")
     @SerializedName("contract_addresses")
-    private List<Contract_addresses> contract_addresses;
+    private List<ContractAddresses> contractAddresses;
 
 
     @JsonProperty("is_added")
@@ -41,7 +41,7 @@ public class MsgContractMethodBlockedListProposalValue {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("title", title)
                 .append("description", description)
-                .append("contract_addresses", contract_addresses)
+                .append("contract_addresses", contractAddresses)
                 .append("isAdded", isAdded)
                 .toString();
     }
