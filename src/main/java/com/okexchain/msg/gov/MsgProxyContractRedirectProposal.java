@@ -40,6 +40,6 @@ public class MsgProxyContractRedirectProposal extends MsgBase {
         Message<MsgSubmitProposalValue<Content<MsgProxyContractRedirectProposalValue>>> msg = new Message<>();
         msg.setType(msgType);
         msg.setValue(value);
-        return null;
+        return msg;
     }
 }
