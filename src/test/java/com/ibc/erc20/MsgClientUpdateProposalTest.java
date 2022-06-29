@@ -17,7 +17,7 @@ public class MsgClientUpdateProposalTest {
     public void testProduceClientUpdateProposal(){
         EnvInstance.getEnvTestNet();
         MsgClientUpdateProposal msg=new MsgClientUpdateProposal();
-        msg.init(new PrivateKey("7fd8c2db0ad8f99f6d33a5e92a51a71be585d891176bd0338e5a6be64c4ff982"));
+        msg.init(new PrivateKey(""));
 
         MsgClientUpdateProposalValue value=new MsgClientUpdateProposalValue();
         value.setTitle("title");
@@ -34,6 +34,5 @@ public class MsgClientUpdateProposalTest {
         } catch (Exception e) {
             System.out.println(e);
         }
-
     }
 }

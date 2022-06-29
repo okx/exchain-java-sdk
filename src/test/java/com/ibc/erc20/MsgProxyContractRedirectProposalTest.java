@@ -16,7 +16,7 @@ public class MsgProxyContractRedirectProposalTest {
     public void testProduceProxyContractRedirectProposal(){
         EnvInstance.getEnvTestNet();
         MsgProxyContractRedirectProposal msg=new MsgProxyContractRedirectProposal();
-        msg.init(new PrivateKey("8d8322c9a4356247d9d603eff9e163c5b9166a6a7b92926d38aac813df60db5c"));
+        msg.init(new PrivateKey(""));
 
         MsgProxyContractRedirectProposalValue proposal=new MsgProxyContractRedirectProposalValue();
         proposal.setTitle("ProxyContractRedirectProposal");

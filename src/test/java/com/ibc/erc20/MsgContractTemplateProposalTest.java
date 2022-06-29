@@ -16,7 +16,7 @@ public class MsgContractTemplateProposalTest {
     public void testProduceContractTemplateProposal(){
         EnvInstance.getEnvTestNet();
         MsgContractTemplateProposal msg=new MsgContractTemplateProposal();
-        msg.init(new PrivateKey("7fd8c2db0ad8f99f6d33a5e92a51a71be585d891176bd0338e5a6be64c4ff982"));
+        msg.init(new PrivateKey(""));
 
         MsgContractTemplateProposalValue value=new MsgContractTemplateProposalValue();
 

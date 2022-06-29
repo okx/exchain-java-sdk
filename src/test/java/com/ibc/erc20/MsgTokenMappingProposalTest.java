@@ -17,7 +17,7 @@ public class MsgTokenMappingProposalTest {
     public void testProduceTokenMappingProposal(){
         EnvInstance.getEnvTestNet();
         MsgTokenMappingProposal msg=new MsgTokenMappingProposal();
-        msg.init(new PrivateKey("8d8322c9a4356247d9d603eff9e163c5b9166a6a7b92926d38aac813df60db5c"));
+        msg.init(new PrivateKey(""));
         MsgTokenMappingProposalValue proposal=new MsgTokenMappingProposalValue();
         proposal.setTitle("test");
         proposal.setDescription("test");
