@@ -32,7 +32,7 @@ public class MsgProxyContractRedirectProposalValue {
 
     @JsonProperty("type")
     @SerializedName("type")
-    private int type;
+    private String type;
 
     @JsonProperty("addr")
     @SerializedName("addr")

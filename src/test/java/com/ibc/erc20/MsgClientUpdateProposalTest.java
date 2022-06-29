@@ -22,11 +22,11 @@ public class MsgClientUpdateProposalTest {
         MsgClientUpdateProposalValue value=new MsgClientUpdateProposalValue();
         value.setTitle("title");
         value.setDescription("des");
-        value.setSubjectClientId("c1");
-        value.setSubstituteClientId("c2");
+        value.setSubjectClientId("07-tendermint-0");
+        value.setSubstituteClientId("07-tendermint-1");
 
-        Message message=msg.produceClientUpdateProposal(value,"okt","0.050000000000000000");
-        JSONObject res = msg.submit(message, "0.03", "2000000", "");
+        Message message=msg.produceClientUpdateProposal(value,"okt","20.000000000000000000");
+        JSONObject res = msg.submit(message, "0.03", "20000000", "");
         System.out.println(res.toJSONString());
         try {
             boolean succeed = msg.isTxSucceed(res);

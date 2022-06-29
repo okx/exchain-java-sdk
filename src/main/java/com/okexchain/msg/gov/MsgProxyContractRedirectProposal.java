@@ -14,9 +14,9 @@ public class MsgProxyContractRedirectProposal extends MsgBase {
         setMsgType("okexchain/gov/MsgSubmitProposal");
     }
 
-    public Message produceProxyContractRedirectProposal(String title, String description, String denomIBC, int type, String addr, String denom, String amountDeposit) {
-        MsgProxyContractRedirectProposalValue proposal=new MsgProxyContractRedirectProposalValue(title,description,denomIBC,type,addr);
-        return produceProxyContractRedirectProposal(proposal,denom,amountDeposit);
+    public Message produceProxyContractRedirectProposal(String title, String description, String denomIBC, String type, String addr, String denom, String amountDeposit) {
+        MsgProxyContractRedirectProposalValue proposal = new MsgProxyContractRedirectProposalValue(title, description, denomIBC, type, addr);
+        return produceProxyContractRedirectProposal(proposal, denom, amountDeposit);
 
     }
 

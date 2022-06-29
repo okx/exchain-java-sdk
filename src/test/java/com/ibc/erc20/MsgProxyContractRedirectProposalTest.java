@@ -16,16 +16,16 @@ public class MsgProxyContractRedirectProposalTest {
     public void testProduceProxyContractRedirectProposal(){
         EnvInstance.getEnvTestNet();
         MsgProxyContractRedirectProposal msg=new MsgProxyContractRedirectProposal();
-        msg.init(new PrivateKey("7fd8c2db0ad8f99f6d33a5e92a51a71be585d891176bd0338e5a6be64c4ff982"));
+        msg.init(new PrivateKey("8d8322c9a4356247d9d603eff9e163c5b9166a6a7b92926d38aac813df60db5c"));
 
         MsgProxyContractRedirectProposalValue proposal=new MsgProxyContractRedirectProposalValue();
         proposal.setTitle("ProxyContractRedirectProposal");
         proposal.setDescription("update contract owner");
-        proposal.setType(1);
-        proposal.setDenom("ibc/34343");
-        proposal.setAddr("0xFc909f43A85e80135f46d4c493B177cFE4CF3514");
+        proposal.setType("1");
+        proposal.setDenom("ibc/9117a26ba81e29fa4f78f57dc2bd90cd3d26848101ba880445f119b22a1e254e");
+        proposal.setAddr("0xbbE4733d85bc2b90682147779DA49caB38C0aA1F");
 
-        Message message=msg.produceProxyContractRedirectProposal(proposal,"okt","0.050000000000000000");
+        Message message=msg.produceProxyContractRedirectProposal(proposal,"okt","1.000000000000000000");
         JSONObject res = msg.submit(message, "0.03", "2000000", "");
         System.out.println(res.toJSONString());
         try {
