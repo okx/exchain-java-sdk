@@ -32,10 +32,12 @@ public class MsgExecuteContract extends MsgBase {
 
     public static void main(String[] args) {
         EnvInstance.getEnv().setChainID("exchain-67");
-        EnvInstance.getEnv().setRestServerUrl("http://localhost:8545");
+        EnvInstance.getEnv().setRestServerUrl("http://127.0.0.1:8545");
+        EnvInstance.getEnv().setRestPathPrefix("/exchain/v1");
+        EnvInstance.getEnv().setTxUrlPath("/exchain/v1/txs");
 
         PrivateKey key = new PrivateKey("8FF3CA2D9985C3A52B459E2F6E7822B23E1AF845961E22128D5F372FB9AA5F17");
-        MsgExecuteContract msg=new MsgExecuteContract();
+        MsgExecuteContract msg = new MsgExecuteContract();
         msg.init(key);
 
         List<Funds> fundsArrayList = new ArrayList<>();
@@ -43,11 +45,12 @@ public class MsgExecuteContract extends MsgBase {
         funds.setDenom("okt");
         funds.setAmount("1");
         fundsArrayList.add(funds);
-        String msgStr ="{\"release\":{}}";
+        String msgStr = "{\"release\":{}}";
 
-        Message message = msg.produceMsg("ex1efgvwhxkaj642uwjq65q9k3wzrghy0v2ftyap0kkwe4r3nx3846sjhluuc",fundsArrayList,msgStr);
+        Message message = msg.produceMsg("ex1wkwy0xh89ksdgj9hr347dyd2dw7zesmtrue6kfzyml4vdtz6e5wsnw8alf", fundsArrayList, msgStr);
 
-        JSONObject res = msg.submit(message, "0.05", "500000", "");
+        JSONObject res = msg.submit(message, "0.03", "100000000", "");
+        System.out.println(res);
         try {
             boolean succeed = msg.isTxSucceed(res);
             System.out.println("tx " + (succeed ? "succeed" : "failed"));

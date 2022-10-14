@@ -12,9 +12,10 @@ public class MsgUpdateAdmin extends MsgBase {
         setMsgType("wasm/MsgUpdateAdmin");
     }
 
-    public Message produceMsg(String newAdmin){
+    public Message produceMsg(String newAdmin,String contract){
         MsgUpdateAdminValue value= new MsgUpdateAdminValue();
         value.setNewAdmin(newAdmin);
+        value.setContract(contract);
         value.setSender(this.address);
         Message<MsgUpdateAdminValue> msg = new Message<>();
         msg.setType(msgType);
@@ -24,14 +25,15 @@ public class MsgUpdateAdmin extends MsgBase {
 
     public static void main(String[] args) {
         EnvInstance.getEnv().setChainID("exchain-67");
-        EnvInstance.getEnv().setRestServerUrl("http://localhost:8545");
+        EnvInstance.getEnv().setRestServerUrl("http://127.0.0.1:8545");
         EnvInstance.getEnv().setRestPathPrefix("/exchain/v1");
+        EnvInstance.getEnv().setTxUrlPath("/exchain/v1/txs");
         MsgUpdateAdmin msg=new MsgUpdateAdmin();
         PrivateKey key = new PrivateKey("8FF3CA2D9985C3A52B459E2F6E7822B23E1AF845961E22128D5F372FB9AA5F17");
         msg.init(key);
-        Message message= msg.produceMsg("ex1yw4xvtc43me9scqfr2jr2gzvcxd3a9y4eq7gaukreugw2yd2f8tsfem2z7");
-        JSONObject res = msg.submit(message, "0.05", "500000", "");
-
+        Message message= msg.produceMsg("ex1h0j8x0v9hs4eq6ppgamemfyu4vuvp2sl0q9p3v","ex1wkwy0xh89ksdgj9hr347dyd2dw7zesmtrue6kfzyml4vdtz6e5wsnw8alf");
+        JSONObject res = msg.submit(message, "0.03", "100000000", "");
+        System.out.println(res);
         try {
             boolean succeed = msg.isTxSucceed(res);
             System.out.println("tx " + (succeed ? "succeed": "failed"));

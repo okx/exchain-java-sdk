@@ -11,14 +11,14 @@ public class WasmQuerySample {
         //set RestServerUrl and RestPathPrefix
         EnvInstance.getEnv().setRestServerUrl("http://localhost:8545");
         EnvInstance.getEnv().setRestPathPrefix("/exchain/v1");
-
+        EnvInstance.getEnv().setChainID("exchain-67");
         System.out.println(WasmQuery.queryListCode());
-        System.out.println(WasmQuery.queryListContractsByCodeID("77"));
-        System.out.println(WasmQuery.queryCodeByCodeID("77"));
-        System.out.println(WasmQuery.queryContractByContractAddr("ex14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9s6fqu27"));
-        System.out.println(WasmQuery.queryContractHistoryByContractAddr("ex14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9s6fqu27"));
-        System.out.println(WasmQuery.queryContractStateAllByContractAddr("ex14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9s6fqu27"));
-        System.out.println(WasmQuery.queryContractStateSmart("ex14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9s6fqu27",""));
-        System.out.println(WasmQuery.queryContractStateRaw("ex14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9s6fqu27",""));
+        System.out.println(WasmQuery.queryListContractsByCodeID("4"));
+        System.out.println(WasmQuery.queryCodeByCodeID("1"));
+        System.out.println(WasmQuery.queryContractByContractAddr("ex1wkwy0xh89ksdgj9hr347dyd2dw7zesmtrue6kfzyml4vdtz6e5wsnw8alf"));
+        System.out.println(WasmQuery.queryContractHistoryByContractAddr("ex1wkwy0xh89ksdgj9hr347dyd2dw7zesmtrue6kfzyml4vdtz6e5wsnw8alf"));
+        System.out.println(WasmQuery.queryContractStateAllByContractAddr("ex1wkwy0xh89ksdgj9hr347dyd2dw7zesmtrue6kfzyml4vdtz6e5wsnw8alf"));
+        System.out.println(WasmQuery.queryContractStateSmart("ex1wkwy0xh89ksdgj9hr347dyd2dw7zesmtrue6kfzyml4vdtz6e5wsnw8alf","{\"verifier\":{}}"));
+        System.out.println(WasmQuery.queryContractStateRaw("ex1wkwy0xh89ksdgj9hr347dyd2dw7zesmtrue6kfzyml4vdtz6e5wsnw8alf","config"));
     }
 }

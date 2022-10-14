@@ -25,4 +25,8 @@ public class MsgUpdateAdminValue {
     @JsonProperty("sender")
     @SerializedName("sender")
     private String sender;
+
+    @JsonProperty("contract")
+    @SerializedName("contract")
+    private String contract;
 }
