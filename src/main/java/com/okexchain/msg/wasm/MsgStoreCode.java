@@ -5,13 +5,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
+import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
-
-import static com.google.common.io.ByteStreams.toByteArray;
 
 import java.io.*;
 import java.util.Base64;
-import java.util.zip.GZIPOutputStream;
+
 
 
 public class MsgStoreCode extends MsgBase {
@@ -34,7 +33,7 @@ public class MsgStoreCode extends MsgBase {
     }
 
     public static void main(String[] args) throws IOException {
-        byte[] byteArray = MsgStoreCode.getBytes("/Users/asahi/IdeaProjects/exchain-java-sdk/src/main/java/com/okexchain/msg/wasm/hackatom.wasm");
+        byte[] byteArray = Utils.compressBytes("/Users/asahi/IdeaProjects/exchain-java-sdk/src/main/java/com/okexchain/msg/wasm/hackatom.wasm");
         EnvInstance.getEnv().setChainID("exchain-67");
         EnvInstance.getEnv().setRestServerUrl("http://127.0.0.1:8545");
         EnvInstance.getEnv().setRestPathPrefix("/exchain/v1");
@@ -55,11 +54,5 @@ public class MsgStoreCode extends MsgBase {
         } catch (Exception e) {
             System.out.println(e);
         }
-    }
-
-    private static byte[] getBytes(String filePath) throws IOException {
-        InputStream in = new FileInputStream(filePath);
-        byte[] byteArray = toByteArray(in);
-        return byteArray;
     }
 }

@@ -7,9 +7,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.util.*;
+import java.util.zip.GZIPOutputStream;
+
+import static com.google.common.io.ByteStreams.toByteArray;
 
 public class Utils {
 
@@ -163,5 +168,23 @@ public class Utils {
             }
         }
         return new JSONObject(map);
+    }
+
+
+    //compress wasm bytes file
+    public static byte[] compressBytes(String filePath) throws IOException {
+        InputStream in = new FileInputStream(filePath);
+        byte[] byteArray = toByteArray(in);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        GZIPOutputStream gzip;
+        try {
+            gzip = new GZIPOutputStream(out);
+            gzip.write(byteArray);
+            in.close();
+            gzip.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return out.toByteArray();
     }
 }
