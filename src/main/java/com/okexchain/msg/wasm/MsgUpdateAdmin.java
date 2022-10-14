@@ -23,10 +23,11 @@ public class MsgUpdateAdmin extends MsgBase {
     }
 
     public static void main(String[] args) {
-        EnvInstance.getEnv().setChainID("exchain-65");
-        EnvInstance.getEnv().setRestServerUrl("https://exchaintestrpc.okex.org");
+        EnvInstance.getEnv().setChainID("exchain-67");
+        EnvInstance.getEnv().setRestServerUrl("http://localhost:8545");
+        EnvInstance.getEnv().setRestPathPrefix("/exchain/v1");
         MsgUpdateAdmin msg=new MsgUpdateAdmin();
-        PrivateKey key = new PrivateKey("EA6D97F31E4B70663594DD6AFC3E3550AAB5FDD9C44305E8F8F2003023B27FDA");
+        PrivateKey key = new PrivateKey("8FF3CA2D9985C3A52B459E2F6E7822B23E1AF845961E22128D5F372FB9AA5F17");
         msg.init(key);
         Message message= msg.produceMsg("ex1yw4xvtc43me9scqfr2jr2gzvcxd3a9y4eq7gaukreugw2yd2f8tsfem2z7");
         JSONObject res = msg.submit(message, "0.05", "500000", "");

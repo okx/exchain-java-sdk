@@ -10,32 +10,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder(alphabetic = true)
-public class MsgInstantiateContractValue {
-
-
-    @JsonProperty("admin")
-    @SerializedName("admin")
-    private String admin;
+public class MsgMigrateContractValue {
 
     @JsonProperty("code_id")
     @SerializedName("code_id")
     private String codeId;
 
-    @JsonProperty("funds")
-    @SerializedName("funds")
-    private List<Funds> funds;
-
-    @JsonProperty("label")
-    @SerializedName("label")
-    private String label;
+    @JsonProperty("contract")
+    @SerializedName("contract")
+    private String contract;
 
     @JsonProperty("msg")
     @SerializedName("msg")

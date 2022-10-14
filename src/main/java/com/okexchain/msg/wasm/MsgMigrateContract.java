@@ -4,21 +4,24 @@ import com.alibaba.fastjson.JSONObject;
 import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
+import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
 
+public class MsgMigrateContract extends MsgBase {
 
-public class MsgClearAdmin extends MsgBase {
-
-    public MsgClearAdmin(){
-        setMsgType("wasm/MsgClearAdmin");
+    public MsgMigrateContract() {
+        setMsgType("wasm/MsgMigrateContract");
     }
 
-    public Message produceMsg(String contract){
+    public Message produceMsg(String codeId, String contract, String msgStr) {
+        MsgMigrateContractValue value = new MsgMigrateContractValue();
 
-        MsgClearAdminValue value=new MsgClearAdminValue();
+        value.setCodeId(codeId);
         value.setContract(contract);
         value.setSender(this.address);
-        Message<MsgClearAdminValue> msg = new Message<>();
+        value.setMsg(Utils.getSortJson(msgStr));
+
+        Message<MsgMigrateContractValue> msg = new Message<>();
         msg.setType(msgType);
         msg.setValue(value);
         return msg;
@@ -28,15 +31,21 @@ public class MsgClearAdmin extends MsgBase {
         EnvInstance.getEnv().setChainID("exchain-67");
         EnvInstance.getEnv().setRestServerUrl("http://localhost:8545");
         EnvInstance.getEnv().setRestPathPrefix("/exchain/v1");
-        MsgClearAdmin msg=new MsgClearAdmin();
-        PrivateKey key = new PrivateKey("8FF3CA2D9985C3A52B459E2F6E7822B23E1AF845961E22128D5F372FB9AA5F17");
-        msg.init(key);
-        Message message= msg.produceMsg("ex1yw4xvtc43me9scqfr2jr2gzvcxd3a9y4eq7gaukreugw2yd2f8tsfem2z7");
-        JSONObject res = msg.submit(message, "0.05", "500000", "");
 
+        PrivateKey key = new PrivateKey("8FF3CA2D9985C3A52B459E2F6E7822B23E1AF845961E22128D5F372FB9AA5F17");
+
+
+        MsgMigrateContract msg = new MsgMigrateContract();
+        msg.init(key);
+
+        String msgStr = "{\"payout\":\"ex1qj5c07sm6jetjz8f509qtrxgh4psxkv3ddyq7u\"}";
+
+        Message message = msg.produceMsg("3", "ex1yw4xvtc43me9scqfr2jr2gzvcxd3a9y4eq7gaukreugw2yd2f8tsfem2z7", msgStr);
+
+        JSONObject res = msg.submit(message, "0.05", "500000", "");
         try {
             boolean succeed = msg.isTxSucceed(res);
-            System.out.println("tx " + (succeed ? "succeed": "failed"));
+            System.out.println("tx " + (succeed ? "succeed" : "failed"));
         } catch (Exception e) {
             System.out.println(e);
         }

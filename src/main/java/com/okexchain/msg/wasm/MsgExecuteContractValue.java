@@ -1,6 +1,5 @@
 package com.okexchain.msg.wasm;
 
-
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,28 +17,24 @@ import java.util.List;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder(alphabetic = true)
-public class MsgInstantiateContractValue {
+public class MsgExecuteContractValue {
 
 
-    @JsonProperty("admin")
-    @SerializedName("admin")
-    private String admin;
+    @JsonProperty("contract")
+    @SerializedName("contract")
+    private String contract;
 
-    @JsonProperty("code_id")
-    @SerializedName("code_id")
-    private String codeId;
+
 
     @JsonProperty("funds")
     @SerializedName("funds")
     private List<Funds> funds;
 
-    @JsonProperty("label")
-    @SerializedName("label")
-    private String label;
 
     @JsonProperty("msg")
     @SerializedName("msg")
     private JSON msg;
+
 
     @JsonProperty("sender")
     @SerializedName("sender")
