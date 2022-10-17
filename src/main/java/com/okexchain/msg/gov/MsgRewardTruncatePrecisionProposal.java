@@ -14,7 +14,16 @@ public class MsgRewardTruncatePrecisionProposal extends MsgBase {
         setMsgType("okexchain/gov/MsgSubmitProposal");
     }
 
-    public Message produceMsgRewardTruncatePrecisionProposal(MsgRewardTruncatePrecisionProposalValue proposalValue, String denom, String amountDeposit) {
+
+    public Message produceMsgRewardTruncatePrecisionProposal(String title, String description, int precision, String denom, String amountDeposit) {
+        MsgRewardTruncatePrecisionProposalValue proposalValue = new MsgRewardTruncatePrecisionProposalValue();
+        proposalValue.setTitle(title);
+        proposalValue.setDescription(description);
+        proposalValue.setPrecision(String.valueOf(precision));
+        return produceMsgRewardTruncatePrecisionProposal(proposalValue, denom, amountDeposit);
+    }
+
+    private Message produceMsgRewardTruncatePrecisionProposal(MsgRewardTruncatePrecisionProposalValue proposalValue, String denom, String amountDeposit) {
 
         Content<MsgRewardTruncatePrecisionProposalValue> content = new Content();
         content.setType("okexchain/distribution/RewardTruncatePrecisionProposal");
