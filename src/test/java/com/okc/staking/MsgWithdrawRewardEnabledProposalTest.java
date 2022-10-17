@@ -16,7 +16,7 @@ public class MsgWithdrawRewardEnabledProposalTest {
     public void testWithdrawRewardEnabledProposal(){
         MsgWithdrawRewardEnabledProposal msg=new MsgWithdrawRewardEnabledProposal();
         EnvInstance.getEnvTestNet();
-        msg.initMnemonic("local cram lens mushroom trade chalk kangaroo denial core exhaust ladder gesture");
+        msg.initMnemonic("");
 
         MsgWithdrawRewardEnabledProposalValue proposalValue=new MsgWithdrawRewardEnabledProposalValue();
         proposalValue.setTitle("test WithdrawRewardEnabledProposal");
