@@ -25,7 +25,7 @@ public class MsgStoreCode extends MsgBase {
         Base64.Encoder encoder = Base64.getEncoder();
         String encodedText = encoder.encodeToString(byteArray);
         MsgStoreCodeValue value = new MsgStoreCodeValue();
-        value.setInstantiatePermission(JSON.parseObject(instantiatePermission));
+        value.setInstantiatePermission(Utils.getSortJson(instantiatePermission));
         value.setSender(this.address);
         value.setWasmByteCode(encodedText);
         Message<MsgStoreCodeValue> msg = new Message<>();

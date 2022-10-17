@@ -28,7 +28,7 @@ public class MsgExecuteContractValue {
 
     @JsonProperty("funds")
     @SerializedName("funds")
-    private List<Funds> funds;
+    private List<Fund> fund;
 
 
     @JsonProperty("msg")

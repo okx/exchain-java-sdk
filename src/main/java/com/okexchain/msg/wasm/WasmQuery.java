@@ -52,7 +52,6 @@ public class WasmQuery {
      * @return
      */
     public static String queryListCode() {
-        System.out.println(EnvInstance.getEnv().GetRestServerUrl() + EnvInstance.getEnv().GetRestPathPrefix() + QUERY_LIST_CODE);
         Result res = HttpUtils.httpGetResult(EnvInstance.getEnv().GetRestServerUrl() + EnvInstance.getEnv().GetRestPathPrefix() + QUERY_LIST_CODE);
         if (res.isSuccess()) {
             return res.getData();
@@ -152,12 +151,9 @@ public class WasmQuery {
      * @param key
      * @return
      */
-    public static String queryContractStateRaw(String contractAddr, String key) throws UnsupportedEncodingException {
-        byte[] textByte = key.getBytes("UTF-8");
-        String hex = Hex.toHexString(textByte);
-        String basePath = String.format(QUERY_CONTRACT_STATE_RAW, contractAddr, hex);
+    public static String queryContractStateRaw(String contractAddr, String key){
+        String basePath = String.format(QUERY_CONTRACT_STATE_RAW, contractAddr, key);
         Result res = HttpUtils.httpGetResult(EnvInstance.getEnv().GetRestServerUrl() + EnvInstance.getEnv().GetRestPathPrefix() + basePath);
-        System.out.println(EnvInstance.getEnv().GetRestServerUrl() + EnvInstance.getEnv().GetRestPathPrefix() + basePath);
         if (res.isSuccess()) {
             return res.getData();
         }
