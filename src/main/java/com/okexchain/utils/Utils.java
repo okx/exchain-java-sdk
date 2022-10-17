@@ -1,12 +1,20 @@
 package com.okexchain.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
-import java.util.Arrays;
+import java.util.*;
+import java.util.zip.GZIPOutputStream;
+
+import static com.google.common.io.ByteStreams.toByteArray;
 
 public class Utils {
 
@@ -62,7 +70,7 @@ public class Utils {
         byte[] bigInt = BigIntegerToBytes(value);
         int prefix = 0;
         boolean finded = false;
-        for (int i=bigInt.length-1; i>=0; i--) {// get raw bits and seek to first zero byte
+        for (int i = bigInt.length - 1; i >= 0; i--) {// get raw bits and seek to first zero byte
             if (bigInt[i] == 0x00) {
                 prefix = i;
                 finded = true;
@@ -71,13 +79,13 @@ public class Utils {
         }
         if (value.compareTo(new BigInteger("0")) > 0) {
             if (!finded) {
-                prefix = bigInt.length-1;
+                prefix = bigInt.length - 1;
             }
         } else {
             throw new IOException("algorithm not support to marshal a negative bigint");
         }
         byte[] varint = new byte[8];
-        int n = putUvarint(varint, prefix+1); //write length prefix
+        int n = putUvarint(varint, prefix + 1); //write length prefix
         stream.write(varint);
         stream.write(bigInt);
         return n;
@@ -97,6 +105,7 @@ public class Utils {
             return data;
         }
     }
+
     public static String NewDecString(String str) {
         if (str.length() == 0) {
             return "";
@@ -127,9 +136,55 @@ public class Utils {
 
         // add some extra zero's to correct to the Precision factor
         int zerosToAdd = Precision - lenDecs;
-        String format = "%0"+String.valueOf(zerosToAdd)+"d";
+        String format = "%0" + String.valueOf(zerosToAdd) + "d";
         String zeros = String.format(format, 0);
         str += zeros;
         return str;
+    }
+
+    //json str sort by key
+    public static JSONObject getSortJson(String jsonStr) {
+        JSONObject json = JSONObject.parseObject(jsonStr);
+        if (Objects.isNull(json)) {
+            return new JSONObject();
+        }
+        Set<String> keySet = json.keySet();
+        SortedMap<String, Object> map = new TreeMap<>();
+        for (String key : keySet) {
+            Object value = json.get(key);
+            if (Objects.nonNull(value) && value instanceof JSONArray) {
+                JSONArray array = json.getJSONArray(key);
+                JSONArray jsonArray = new JSONArray(new LinkedList<>());
+                for (int i = 0; i < array.size(); i++) {
+                    JSONObject sortJson = getSortJson(String.valueOf(array.getJSONObject(i)));
+                    jsonArray.add(sortJson);
+                }
+                map.put(key, jsonArray);
+            } else if (Objects.nonNull(value) && value instanceof JSONObject) {
+                JSONObject sortJson = getSortJson(String.valueOf(json.getJSONObject(key)));
+                map.put(key, sortJson);
+            } else {
+                map.put(key, value);
+            }
+        }
+        return new JSONObject(map);
+    }
+
+
+    //compress wasm bytes file
+    public static byte[] compressBytes(String filePath) throws IOException {
+        InputStream in = new FileInputStream(filePath);
+        byte[] byteArray = toByteArray(in);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        GZIPOutputStream gzip;
+        try {
+            gzip = new GZIPOutputStream(out);
+            gzip.write(byteArray);
+            in.close();
+            gzip.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return out.toByteArray();
     }
 }
