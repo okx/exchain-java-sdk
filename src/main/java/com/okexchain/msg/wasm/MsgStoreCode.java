@@ -8,9 +8,11 @@ import com.okexchain.msg.common.Message;
 import com.okexchain.utils.Utils;
 import com.okexchain.utils.crypto.PrivateKey;
 
+import static com.google.common.io.ByteStreams.toByteArray;
+
 import java.io.*;
 import java.util.Base64;
-
+import java.util.zip.GZIPOutputStream;
 
 
 public class MsgStoreCode extends MsgBase {
