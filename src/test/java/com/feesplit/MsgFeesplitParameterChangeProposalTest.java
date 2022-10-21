@@ -19,7 +19,7 @@ public class MsgFeesplitParameterChangeProposalTest {
     public void testMsgFeesplitParameterChangeProposal() throws Exception {
         EnvInstance.getEnvTestNet();
         MsgParameterChangeProposal msg = new MsgParameterChangeProposal();
-        msg.initMnemonic("local cram lens mushroom trade chalk kangaroo denial core exhaust ladder gesture");
+        msg.initMnemonic("");
         Message messages = msg.produceParameterChangeProposalMsg(
                 "test",
                 "test",

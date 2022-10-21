@@ -27,7 +27,7 @@ public class MsgUpdateFeeSplit extends MsgBase {
     public static void main(String[] args) {
         EnvInstance.getEnvTestNet();
         MsgUpdateFeeSplit msg = new MsgUpdateFeeSplit();
-        PrivateKey key = new PrivateKey("8d8322c9a4356247d9d603eff9e163c5b9166a6a7b92926d38aac813df60db5c");
+        PrivateKey key = new PrivateKey("");
         msg.init(key);
 
         Message message = msg.produceMsg(
