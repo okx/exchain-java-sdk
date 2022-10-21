@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.okexchain.utils.crypto.AddressConvertUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -186,5 +187,18 @@ public class Utils {
             e.printStackTrace();
         }
         return out.toByteArray();
+    }
+
+
+    //convert contract address
+    public static String convertContractAddress(String contractAddress) throws Exception {
+        String headStr = contractAddress.substring(0, 2);
+        if (headStr.equals("ex")) {
+            return AddressConvertUtil.convertFromBech32ToHex(contractAddress);
+        } else if (headStr.equals("0x")) {
+            return contractAddress;
+        } else {
+            throw new Exception("address error:" + contractAddress);
+        }
     }
 }

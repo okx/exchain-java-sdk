@@ -19,7 +19,7 @@ public class MsgChangeDistributionTypeProposalTest {
 
         MsgChangeDistributionTypeProposal msg=new MsgChangeDistributionTypeProposal();
         EnvInstance.getEnvTestNet();
-        msg.initMnemonic("");
+        msg.initMnemonic("local cram lens mushroom trade chalk kangaroo denial core exhaust ladder gesture");
         MsgChangeDistributionTypeProposalValue proposalValue=new MsgChangeDistributionTypeProposalValue();
         proposalValue.setTitle("test ChangeDistributionTypeProposal");
         proposalValue.setDescription("desc");
