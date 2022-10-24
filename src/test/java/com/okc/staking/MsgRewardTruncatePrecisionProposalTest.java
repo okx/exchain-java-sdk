@@ -18,7 +18,7 @@ public class MsgRewardTruncatePrecisionProposalTest {
 
         MsgRewardTruncatePrecisionProposal msg=new MsgRewardTruncatePrecisionProposal();
         EnvInstance.getEnvTestNet();
-        msg.initMnemonic("local cram lens mushroom trade chalk kangaroo denial core exhaust ladder gesture");
+        msg.initMnemonic("");
         Message message=msg.produceMsgRewardTruncatePrecisionProposal("test RewardTruncatePrecisionProposal","desc",1,"okt","10.000000000000000000");
         JSONObject res = msg.submit(message, "0.03", "20000000", "");
         System.out.println(res.toJSONString());
