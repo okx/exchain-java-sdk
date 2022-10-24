@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
+
 @Slf4j
 @Data
 @AllArgsConstructor
@@ -38,11 +39,14 @@ public class MsgRegisterFeeSplitValue {
     private String[] nonce;
 
     //overwrite set method
-    public void setNonce(int[] nonce) {
-        this.nonce = Arrays.stream(nonce)
-                .mapToObj(String::valueOf)
-                .toArray(String[]::new);
-        Arrays.toString(this.nonce);
+    public void setNonce(int[] nonce) throws Exception {
+        if (nonce.length > 0) {
+            this.nonce = Arrays.stream(nonce)
+                    .mapToObj(String::valueOf)
+                    .toArray(String[]::new);
+        } else {
+            throw new Exception("The nonce array must be greater than 0");
+        }
     }
 
     //if withdrawerAddress is "" then this.withdrawerAddress=this.deployerAddress;
@@ -59,7 +63,7 @@ public class MsgRegisterFeeSplitValue {
         try {
             this.contractAddress = Utils.convertContractAddress(contractAddress);
         } catch (Exception e) {
-            log.error("address error: {}",e);
+            log.error("address error: {}", e);
         }
     }
 }

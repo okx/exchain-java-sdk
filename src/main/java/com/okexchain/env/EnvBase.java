@@ -23,7 +23,7 @@ public class EnvBase {
         this.validatorAddrPrefix = "exvaloper";
         this.pubPrefix = "expub";
         //todo
-        this.restPathPrefix = "/okexchain/v1/v1";
+        this.restPathPrefix = "/okexchain/v1";
         //todo
         this.txUrlPath = "/okexchain/v1/txs";
         this.accountUrlPath = "/auth/accounts/";
