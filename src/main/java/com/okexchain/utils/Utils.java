@@ -201,4 +201,17 @@ public class Utils {
             throw new Exception("address error:" + contractAddress);
         }
     }
+
+
+    // if address is Hex address then convert From Hex To ExBech32
+    public static String convertHexAddrToExBech32(String contractAddress) throws Exception {
+        String headStr = contractAddress.substring(0, 2);
+        if (headStr.equals("0x")) {
+            return AddressConvertUtil.convertFromHexToExBech32(contractAddress);
+        } else if (headStr.equals("ex")) {
+            return contractAddress;
+        } else {
+            throw new Exception("address error:" + contractAddress);
+        }
+    }
 }
