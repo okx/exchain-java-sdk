@@ -31,15 +31,4 @@ public class MsgStoreCodeValue {
     @JsonProperty("wasm_byte_code")
     @SerializedName("wasm_byte_code")
     private String wasmByteCode;
-
-    public static void main(String []args){
-        MsgStoreCodeValue value=new MsgStoreCodeValue();
-
-
-        String jsonStr="{\"permission\":\"Everybody\"}";
-        value.setInstantiatePermission(JSON.parseObject(jsonStr));
-        value.setSender("1232");
-        value.setWasmByteCode("34535");
-        System.out.println(value);
-    }
 }
