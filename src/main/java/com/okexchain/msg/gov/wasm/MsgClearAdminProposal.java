@@ -10,17 +10,17 @@ import com.okexchain.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MsgMigrateContractProposal extends MsgBase {
+public class MsgClearAdminProposal extends MsgBase {
 
-    public MsgMigrateContractProposal() {
+    public MsgClearAdminProposal(){
         setMsgType("okexchain/gov/MsgSubmitProposal");
     }
 
-
-    public Message produceMsgMigrateContractProposal(MsgMigrateContractProposalValue proposalValue, String denom, String amountDeposit) {
-        Content<MsgMigrateContractProposalValue> content = new Content<>();
-        content.setType("wasm/MigrateContractProposal");
+    public Message produceMsgClearAdminProposal(MsgClearAdminProposalValue proposalValue,String denom, String amountDeposit){
+        Content<MsgClearAdminProposalValue> content=new Content<>();
+        content.setType("wasm/ClearAdminProposal");
         content.setValue(proposalValue);
+
         // set token list
         List<Token> tokenList = new ArrayList<>();
         Token token = new Token();
@@ -28,12 +28,12 @@ public class MsgMigrateContractProposal extends MsgBase {
         token.setAmount(Utils.NewDecString(amountDeposit));
         tokenList.add(token);
 
-        MsgSubmitProposalValue<Content<MsgMigrateContractProposalValue>> value = new MsgSubmitProposalValue<>();
-        value.setContent(content);
-        value.setInitialDeposit(tokenList);
+        MsgSubmitProposalValue<Content<MsgClearAdminProposalValue>> value=new MsgSubmitProposalValue<>();
         value.setProposer(this.address);
+        value.setInitialDeposit(tokenList);
+        value.setContent(content);
 
-        Message<MsgSubmitProposalValue<Content<MsgMigrateContractProposalValue>>> msg = new Message<>();
+        Message<MsgSubmitProposalValue<Content<MsgClearAdminProposalValue>>> msg=new Message<>();
         msg.setValue(value);
         msg.setType(msgType);
 

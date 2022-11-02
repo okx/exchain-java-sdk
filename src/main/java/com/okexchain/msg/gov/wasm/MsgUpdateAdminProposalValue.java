@@ -27,6 +27,11 @@ public class MsgUpdateAdminProposalValue {
     private String description;
 
 
+    @JsonProperty("new_admin")
+    @SerializedName("new_admin")
+    private String newAdmin;
+
+
     @JsonProperty("contract")
     @SerializedName("contract")
     private String contract;

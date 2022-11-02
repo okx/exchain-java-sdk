@@ -1,9 +1,8 @@
 package com.okexchain.msg.gov.wasm;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.*;
 import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +23,6 @@ public class BlockedMethod {
 
     @JsonProperty("methods")
     @SerializedName("methods")
-    private List<Method> methodList;
+    private List<Method> methods;
 
 }

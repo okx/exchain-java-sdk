@@ -1,7 +1,11 @@
 package com.okexchain.msg.tx;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.okexchain.utils.Utils;
 import com.okexchain.msg.common.TxValue;
+
+import java.io.IOException;
 
 
 public class BroadcastTx {
@@ -21,8 +25,13 @@ public class BroadcastTx {
         this.tx = value;
     }
 
-    public String toJson() {
-        return Utils.serializer.toJson(this);
+
+//  public String toJson() {
+//        return Utils.serializer.toJson(this);
+//  }
+
+    public String toJson() throws JsonProcessingException {
+        return new ObjectMapper().writeValueAsString(this);
     }
 
     public String getMode() {
@@ -33,7 +42,12 @@ public class BroadcastTx {
         this.mode = mode;
     }
 
-    public static BroadcastTx fromJson(String json) {
-        return Utils.serializer.fromJson(json, BroadcastTx.class);
+//    public static BroadcastTx fromJson(String json) {
+//        return Utils.serializer.fromJson(json, BroadcastTx.class);
+//    }
+
+    public static BroadcastTx fromJson(String json) throws IOException {
+        return new ObjectMapper().readValue(json,BroadcastTx.class);
     }
+
 }

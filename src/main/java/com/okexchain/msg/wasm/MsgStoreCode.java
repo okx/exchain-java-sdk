@@ -35,11 +35,8 @@ public class MsgStoreCode extends MsgBase {
     }
 
     public static void main(String[] args) throws IOException {
-        byte[] byteArray = Utils.compressBytes("/Users/asahi/IdeaProjects/exchain-java-sdk/src/main/java/com/okexchain/msg/wasm/hackatom.wasm");
-        EnvInstance.getEnv().setChainID("exchain-67");
-        EnvInstance.getEnv().setRestServerUrl("http://127.0.0.1:8545");
-        EnvInstance.getEnv().setRestPathPrefix("/exchain/v1");
-        EnvInstance.getEnv().setTxUrlPath("/exchain/v1/txs");
+        byte[] byteArray = Utils.compressBytes("/Users/asahi/IdeaProjects/exchain-java-sdk/src/main/java/com/okexchain/msg/wasm/cw20_base.wasm");
+        EnvInstance.getEnvLocalNet();
 
         MsgStoreCode msg = new MsgStoreCode();
         PrivateKey key = new PrivateKey("8FF3CA2D9985C3A52B459E2F6E7822B23E1AF845961E22128D5F372FB9AA5F17");

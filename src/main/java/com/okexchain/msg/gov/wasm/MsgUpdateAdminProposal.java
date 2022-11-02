@@ -19,7 +19,7 @@ public class MsgUpdateAdminProposal extends MsgBase {
     public  Message produceMsgUpdateAdminProposal(MsgUpdateAdminProposalValue proposalValue,String denom, String amountDeposit){
         Content<MsgUpdateAdminProposalValue> content=new Content<>();
         content.setValue(proposalValue);
-        content.setType("wasm/ClearAdminProposal");
+        content.setType("wasm/UpdateAdminProposal");
 
         // set token list
         List<Token> tokenList = new ArrayList<>();

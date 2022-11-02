@@ -24,10 +24,7 @@ public class MsgUpdateAdmin extends MsgBase {
     }
 
     public static void main(String[] args) {
-        EnvInstance.getEnv().setChainID("exchain-67");
-        EnvInstance.getEnv().setRestServerUrl("http://127.0.0.1:8545");
-        EnvInstance.getEnv().setRestPathPrefix("/exchain/v1");
-        EnvInstance.getEnv().setTxUrlPath("/exchain/v1/txs");
+        EnvInstance.getEnvLocalNet();
         MsgUpdateAdmin msg=new MsgUpdateAdmin();
         PrivateKey key = new PrivateKey("8FF3CA2D9985C3A52B459E2F6E7822B23E1AF845961E22128D5F372FB9AA5F17");
         msg.init(key);

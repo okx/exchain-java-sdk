@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Arrays;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,13 +27,15 @@ public class MsgUnpinCodesProposalValue {
 
     @JsonProperty("code_ids")
     @SerializedName("code_ids")
-    private int[] codeIds;
+    private String[] codeIds;
 
 
     public void setCodeIds(int[] codeIds) throws Exception {
-        if(codeIds.length>0){
-            this.codeIds=codeIds;
-        }else{
+        if (codeIds.length > 0) {
+            this.codeIds = Arrays.stream(codeIds)
+                    .mapToObj(String::valueOf)
+                    .toArray(String[]::new);
+        } else {
             throw new Exception("The codeIds array must be greater than 0");
         }
     }

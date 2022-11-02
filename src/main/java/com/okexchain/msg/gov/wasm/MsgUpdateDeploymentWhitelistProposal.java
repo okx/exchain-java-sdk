@@ -19,7 +19,7 @@ public class MsgUpdateDeploymentWhitelistProposal extends MsgBase {
     public Message produceMsgUpdateDeploymentWhitelistProposal(MsgUpdateDeploymentWhitelistProposalValue proposalValue,String denom, String amountDeposit){
         Content<MsgUpdateDeploymentWhitelistProposalValue> content=new Content<>();
         content.setValue(proposalValue);
-        content.setType("wasm/ClearAdminProposal");
+        content.setType("wasm/UpdateDeploymentWhitelistProposal");
 
         // set token list
         List<Token> tokenList = new ArrayList<>();
