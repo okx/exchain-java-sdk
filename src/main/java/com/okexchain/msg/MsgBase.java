@@ -79,13 +79,9 @@ public class MsgBase {
     }
 
     public static JSONObject broadcast(String tx, String url) {
-        System.out.println("Broadcast tx:");
-        System.out.println(tx);
-
-        System.out.println("Response:");
+        log.info("Broadcast tx={}", tx);
         String res = HttpUtils.httpPost(url + EnvInstance.getEnv().GetTxUrlPath(), tx);
         JSONObject result = JSON.parseObject(res);
-
         log.info("result={}", result);
         return result;
     }
@@ -102,6 +98,7 @@ public class MsgBase {
 
             BroadcastTx signedTx = unsignedTx.signed(signature);
 
+            log.info("signedTx={}", signedTx.toJson());
             return broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
         } catch (Exception e) {
             log.info("Exception={}", "serialize transfer msg failed");

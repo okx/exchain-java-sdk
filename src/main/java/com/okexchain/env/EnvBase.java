@@ -30,6 +30,7 @@ public class EnvBase {
     }
 
 
+    //set main net
     public EnvBase configEnvMainNet(){
         this.restServerUrl="https://exchainrpc.okex.org";
         this.chainID="exchain-66";
@@ -39,7 +40,7 @@ public class EnvBase {
     }
 
 
-
+    //set test net
     public EnvBase configEnvTestNet(){
         this.restServerUrl="https://exchaintestrpc.okex.org";
         this.chainID="exchain-65";
@@ -48,7 +49,14 @@ public class EnvBase {
         return this;
     }
 
-
+    //set local net
+    public EnvBase configEnvLocalNet(){
+        this.restServerUrl="http://127.0.0.1:8545";
+        this.chainID="exchain-67";
+        this.restPathPrefix="/exchain/v1";
+        this.txUrlPath="/exchain/v1/txs";
+        return this;
+    }
 
 
     public String GetMainPrefix() {

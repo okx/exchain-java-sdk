@@ -4,23 +4,24 @@ public class EnvInstance {
 
     static EnvBase env = new EnvBase();
 
-    static public void setEnv(String type) {
+    public static void setEnv(String type) {
     }
 
-    static public void setEnv(EnvBase env) {
+    public static void setEnv(EnvBase env) {
         EnvInstance.env = env;
     }
 
-    static public EnvBase getEnv() {
+    public static EnvBase getEnv() {
         return env;
     }
 
-    static public EnvBase getEnvMainNet() {
+    public static EnvBase getEnvMainNet() {
         return env.configEnvMainNet();
     }
 
-    static public EnvBase getEnvTestNet() {
+    public static EnvBase getEnvTestNet() {
         return env.configEnvTestNet();
     }
 
+    public static EnvBase getEnvLocalNet(){ return env.configEnvLocalNet();}
 }
