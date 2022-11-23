@@ -6,6 +6,7 @@ import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
 
+import java.math.BigDecimal;
 
 
 public class MsgEditValidatorCommissionRate extends MsgBase {
@@ -14,7 +15,7 @@ public class MsgEditValidatorCommissionRate extends MsgBase {
         setMsgType("okexchain/staking/MsgEditValidatorCommissionRate");
     }
 
-    public Message produceMsg(String validatorAddress, float commissionRate) throws Exception {
+    public Message produceMsg(String validatorAddress, BigDecimal commissionRate) throws Exception {
         MsgEditValidatorCommissionRateValue value = new MsgEditValidatorCommissionRateValue();
         value.setValidatorAddress(validatorAddress);
         value.setCommissionRate(commissionRate);
@@ -27,9 +28,9 @@ public class MsgEditValidatorCommissionRate extends MsgBase {
     public static void main(String[] args) throws Exception {
         EnvInstance.getEnvTestNet();
         MsgEditValidatorCommissionRate msg = new MsgEditValidatorCommissionRate();
-        msg.initMnemonic("local cram lens mushroom trade chalk kangaroo denial core exhaust ladder gesture");
+        msg.initMnemonic("");
         String bech32 = "exvaloper1l0ukprlxa8a7uh06jwkyvc28p6qz3qnd78slyk";
-        Message message = msg.produceMsg(bech32, 0.2f);
+        Message message = msg.produceMsg(bech32, BigDecimal.valueOf(0.5));
 
         JSONObject res = msg.submit(message, "0.09", "100000000", "");
         System.out.println(res);
@@ -39,5 +40,6 @@ public class MsgEditValidatorCommissionRate extends MsgBase {
         } catch (Exception e) {
             System.out.println(e);
         }
+
     }
 }

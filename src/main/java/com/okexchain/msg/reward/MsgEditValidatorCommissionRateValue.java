@@ -10,6 +10,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 
 @Data
 @AllArgsConstructor
@@ -28,10 +30,12 @@ public class MsgEditValidatorCommissionRateValue {
     private String validatorAddress;
 
 
-    public void setCommissionRate(float commissionRate) throws Exception {
-        if(0f<=commissionRate&&commissionRate<=1f){
-            this.commissionRate= Utils.NewDecString(String.valueOf(commissionRate));
-        }else {
+    public void setCommissionRate(BigDecimal commissionRate) throws Exception {
+        int n1 = commissionRate.compareTo(new BigDecimal(0));
+        int n2 = commissionRate.compareTo(new BigDecimal(1));
+        if ((n1 == 0 || n1 == 1) && (n2 == -1 || n2 == 0)) {
+            this.commissionRate = Utils.NewDecString(String.valueOf(commissionRate));
+        } else {
             throw new Exception("data range is [0,1]");
         }
     }
