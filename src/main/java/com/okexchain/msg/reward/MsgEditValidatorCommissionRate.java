@@ -28,7 +28,7 @@ public class MsgEditValidatorCommissionRate extends MsgBase {
     public static void main(String[] args) throws Exception {
         EnvInstance.getEnvTestNet();
         MsgEditValidatorCommissionRate msg = new MsgEditValidatorCommissionRate();
-        msg.initMnemonic("");
+        msg.initMnemonic("local cram lens mushroom trade chalk kangaroo denial core exhaust ladder gesture");
         String bech32 = "exvaloper1l0ukprlxa8a7uh06jwkyvc28p6qz3qnd78slyk";
         Message message = msg.produceMsg(bech32, BigDecimal.valueOf(0.5));
 
