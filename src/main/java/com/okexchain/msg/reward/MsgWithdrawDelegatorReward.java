@@ -25,7 +25,7 @@ public class MsgWithdrawDelegatorReward extends MsgBase {
     public static void main(String[] args) {
         EnvInstance.getEnvTestNet();
         MsgWithdrawDelegatorReward msg=new MsgWithdrawDelegatorReward();
-        msg.init(new PrivateKey("8d8322c9a4356247d9d603eff9e163c5b9166a6a7b92926d38aac813df60db5c"));
+        msg.init(new PrivateKey(""));
         Message message=msg.produceMsg("ex1l5jugfjaqys4k64rpqud3lymf8a3csg6ds2j4h","exvaloper1l0ukprlxa8a7uh06jwkyvc28p6qz3qnd78slyk");
         JSONObject res = msg.submit(message, "0.09", "100000000", "");
         System.out.println(res);

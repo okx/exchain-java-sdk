@@ -18,7 +18,7 @@ public class MsgDeposit extends MsgBase {
     public static void main(String[] args) {
         EnvInstance.getEnvTestNet();
         MsgDeposit msg = new MsgDeposit();
-        msg.init(new PrivateKey("8d8322c9a4356247d9d603eff9e163c5b9166a6a7b92926d38aac813df60db5c"));
+        msg.init(new PrivateKey(""));
         Message messages = msg.produceMsg("okt", "10.00000000", "ex1l5jugfjaqys4k64rpqud3lymf8a3csg6ds2j4h");
         JSONObject res =  msg.submit(messages, "0.09", "100000000", "");
         System.out.println(res);

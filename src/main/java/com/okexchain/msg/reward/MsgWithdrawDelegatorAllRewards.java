@@ -25,8 +25,7 @@ public class MsgWithdrawDelegatorAllRewards extends MsgBase {
     public static void main(String[] args) {
         EnvInstance.getEnvTestNet();
         MsgWithdrawDelegatorAllRewards msg = new MsgWithdrawDelegatorAllRewards();
-        //msg.initMnemonic("local cram lens mushroom trade chalk kangaroo denial core exhaust ladder gesture");
-        msg.init(new PrivateKey("8d8322c9a4356247d9d603eff9e163c5b9166a6a7b92926d38aac813df60db5c"));
+        msg.init(new PrivateKey(""));
         MsgWithdrawDelegatorAllRewardsValue value=new MsgWithdrawDelegatorAllRewardsValue();
         Message message=msg.produceMsg("ex1l5jugfjaqys4k64rpqud3lymf8a3csg6ds2j4h");
         JSONObject res = msg.submit(message, "0.09", "100000000", "");

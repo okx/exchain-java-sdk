@@ -15,7 +15,7 @@ public class MsgAddShares extends MsgBase {
     public static void main(String[] args) {
         EnvInstance.getEnvTestNet();
         MsgAddShares msg = new MsgAddShares();
-        msg.init(new PrivateKey("8d8322c9a4356247d9d603eff9e163c5b9166a6a7b92926d38aac813df60db5c"));
+        msg.init(new PrivateKey(""));
         //exvaloper1l0ukprlxa8a7uh06jwkyvc28p6qz3qnd78slyk
         //okexchainvaloper10q0rk5qnyag7wfvvt7rtphlw589m7frshchly8
         String[] validators = {"exvaloper1l0ukprlxa8a7uh06jwkyvc28p6qz3qnd78slyk"};
