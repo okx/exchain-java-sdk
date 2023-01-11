@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.okexchain.utils.crypto.AddressConvertUtil;
+import org.bouncycastle.util.encoders.Hex;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -22,10 +23,7 @@ public class Utils {
 
     public static int Precision = 18;
 
-    public static final Gson serializer = new GsonBuilder()
-            .serializeNulls()
-            .setDateFormat(rfc3339DateFormat)
-            .disableHtmlEscaping().create();
+    public static final Gson serializer = new GsonBuilder().serializeNulls().setDateFormat(rfc3339DateFormat).disableHtmlEscaping().create();
 
     public static int writeVarint(long value, ByteArrayOutputStream stream) throws IOException {
         byte[] varint = new byte[8];
@@ -212,5 +210,30 @@ public class Utils {
         } else {
             throw new Exception("address error:" + contractAddress);
         }
+    }
+
+    public static boolean isValidHexAddress(String hexAddress) {
+        boolean result = false;
+
+        if (hexAddress == null || "".equals(hexAddress)) {
+            return result;
+        }
+
+        if (!hexAddress.startsWith("0x")) {
+            return result;
+        }
+
+        String hex = hexAddress.substring(2);
+        if (hex.length() != 40) {
+            return result;
+        }
+
+        try {
+            Hex.decode(hex);
+            result = true;
+        } catch (Exception e) {
+
+        }
+        return result;
     }
 }
