@@ -4,8 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.okexchain.env.EnvBase;
 import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.common.Message;
-import com.okexchain.msg.gov.wasm.MsgMigrateContractProposal;
-import com.okexchain.msg.gov.wasm.MsgMigrateContractProposalValue;
 import org.junit.Test;
 
 public class MsgManageContractBytecodeProposalTest{
