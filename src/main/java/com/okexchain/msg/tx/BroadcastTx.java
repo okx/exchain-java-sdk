@@ -14,6 +14,8 @@ public class BroadcastTx {
     private String type = "cosmos-sdk/StdTx";
     private TxValue tx;
 
+    private String nonce;
+
     public BroadcastTx() {
     }
 
@@ -24,11 +26,6 @@ public class BroadcastTx {
     public void setTx(TxValue value) {
         this.tx = value;
     }
-
-
-//  public String toJson() {
-//        return Utils.serializer.toJson(this);
-//  }
 
     public String toJson() throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString(this);
@@ -42,9 +39,13 @@ public class BroadcastTx {
         this.mode = mode;
     }
 
-//    public static BroadcastTx fromJson(String json) {
-//        return Utils.serializer.fromJson(json, BroadcastTx.class);
-//    }
+    public void setNonce(String nonce) {
+        this.nonce = nonce;
+    }
+
+    public String getNonce() {
+        return this.nonce;
+    }
 
     public static BroadcastTx fromJson(String json) throws IOException {
         return new ObjectMapper().readValue(json,BroadcastTx.class);
