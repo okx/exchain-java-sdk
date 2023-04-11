@@ -18,7 +18,7 @@ public class MsgModifyNextBlockUpdateProposal extends UniversalProposal<MsgModif
     @AllArgsConstructor
     @JsonIgnoreProperties(ignoreUnknown = true)
     @JsonPropertyOrder(alphabetic = true)
-    static class ProposalValue {
+    public static class ProposalValue {
 
         @JsonProperty("title")
         @SerializedName("title")

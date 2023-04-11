@@ -18,7 +18,7 @@ public class MsgUpgradeProposal extends UniversalProposal<MsgUpgradeProposal.Pro
     @AllArgsConstructor
     @JsonIgnoreProperties(ignoreUnknown = true)
     @JsonPropertyOrder(alphabetic = true)
-    static class ProposalValue {
+    public static class ProposalValue {
         @JsonProperty("title")
         @SerializedName("title")
         private String title;
