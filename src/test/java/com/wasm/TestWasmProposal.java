@@ -181,4 +181,24 @@ public class TestWasmProposal {
             System.out.println(e);
         }
     }
+
+    @Test
+    public void testExtraProposal() throws Exception {
+        EnvInstance.getEnvLocalNet();
+
+        MsgExtraProposal.ProposalValue extraProposalValue = new MsgExtraProposal.ProposalValue();
+        extraProposalValue.setTitle("modify wasm gas factor");
+        extraProposalValue.setDescription("modify wasm gas factor");
+        extraProposalValue.setAction("GasFactor");
+        extraProposalValue.setExtra("{\"factor\":\"19.7\"}");
+
+        MsgExtraProposal proposal = new MsgExtraProposal(extraProposalValue);
+        proposal.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+
+        Message message = proposal.buildMessage("okt","10");
+        JSONObject res = proposal.submit(message, "0.05000000", "500000", "");
+        System.out.println(res.toString());
+        boolean succeed = proposal.isTxSucceed(res);
+        assert succeed;
+    }
 }
