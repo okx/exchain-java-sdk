@@ -1,6 +1,7 @@
 package com.okexchain.msg.gov;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.gson.annotations.SerializedName;
@@ -33,9 +34,11 @@ public class MsgUpgradeProposal extends UniversalProposal<MsgUpgradeProposal.Pro
 
         @JsonProperty("expectHeight")
         @SerializedName("expectHeight")
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         private String expectHeight;
 
         @JsonProperty("config")
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         @SerializedName("config")
         private String config;
     }

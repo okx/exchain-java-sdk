@@ -11,11 +11,15 @@ public class MsgUpgradeProposalTest {
 
     @Test
     public void testProposal() {
-        EnvBase env = EnvInstance.getEnvLocalNet();
+        EnvBase env = EnvInstance.getEnvTestNet();
+        env.setRestServerUrl("http://18.178.135.201:26659");
+        env.setRestPathPrefix("/exchain/v1");
+        env.setTxUrlPath("/exchain/v1/txs");
+//        EnvBase envBase = EnvInstance.getEnvLocalNet();
         try {
-            MsgUpgradeProposal.ProposalValue proposalValue = new MsgUpgradeProposal.ProposalValue("upgrade","upgrade","mars","1000","xxxx");
+            MsgUpgradeProposal.ProposalValue proposalValue = new MsgUpgradeProposal.ProposalValue("upgradeProposalTest","upgrade","UnvoteTest10","20049719",null);
             MsgUpgradeProposal proposal = new MsgUpgradeProposal(proposalValue);
-            proposal.initMnemonic("");
+            proposal.initMnemonic("tree allow unlock rug enact senior laundry aunt festival lab jungle ill");
             Message message = proposal.buildMessage("okt","10");
             JSONObject res = proposal.submit(message, "0.05000000", "500000", "");
             System.out.println(res.toString());
