@@ -97,6 +97,7 @@ public class MsgBase {
             Signature signature = MsgBase.signTx(unsignedTx.toString(), priKeyString);
 
             BroadcastTx signedTx = unsignedTx.signed(signature);
+            signedTx.setNonce(this.sequenceNum);
 
             log.info("signedTx={}", signedTx.toJson());
             return broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
@@ -139,6 +140,7 @@ public class MsgBase {
             txValue.setMemo(memo);
 
             tx = new UnsignedTx(txValue, unsignedTxJson);
+
         } catch (Exception e) {
             log.info("Exception={}", "serialize transfer msg failed");
         }
