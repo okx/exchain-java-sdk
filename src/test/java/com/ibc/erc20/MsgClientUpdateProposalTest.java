@@ -2,11 +2,11 @@ package com.ibc.erc20;
 
 
 import com.alibaba.fastjson.JSONObject;
-import com.okexchain.env.EnvInstance;
-import com.okexchain.msg.common.Message;
-import com.okexchain.msg.gov.MsgClientUpdateProposal;
-import com.okexchain.msg.gov.MsgClientUpdateProposalValue;
-import com.okexchain.utils.crypto.PrivateKey;
+import com.okbchain.env.EnvInstance;
+import com.okbchain.msg.common.Message;
+import com.okbchain.msg.gov.MsgClientUpdateProposal;
+import com.okbchain.msg.gov.MsgClientUpdateProposalValue;
+import com.okbchain.utils.crypto.PrivateKey;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 

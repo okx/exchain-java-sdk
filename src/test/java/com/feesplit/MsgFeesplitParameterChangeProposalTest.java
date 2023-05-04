@@ -2,9 +2,9 @@ package com.feesplit;
 
 
 import com.alibaba.fastjson.JSONObject;
-import com.okexchain.env.EnvInstance;
-import com.okexchain.msg.common.Message;
-import com.okexchain.msg.gov.MsgParameterChangeProposal;
+import com.okbchain.env.EnvInstance;
+import com.okbchain.msg.common.Message;
+import com.okbchain.msg.gov.MsgParameterChangeProposal;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -17,9 +17,9 @@ public class MsgFeesplitParameterChangeProposalTest {
     //test result https://www.oklink.com/zh-cn/okc-test/tx/0x29DCB78763BBF48E55BF0241E6C644DB7C8973FA43FB5F3E84FFD19B6B071E77
     @Test
     public void testMsgFeesplitParameterChangeProposal() throws Exception {
-        EnvInstance.getEnvTestNet();
+        EnvInstance.getEnvLocalNet();
         MsgParameterChangeProposal msg = new MsgParameterChangeProposal();
-        msg.initMnemonic("");
+        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
         Message messages = msg.produceParameterChangeProposalMsg(
                 "test",
                 "test",
@@ -27,11 +27,11 @@ public class MsgFeesplitParameterChangeProposalTest {
                 "DeveloperShares",
                 "",
                 "\"0.5\"",
-                "15743837",
+                "1000",
                 "10.00000000"
         );
 
-        JSONObject res = msg.submit(messages, "0.05000000", "500000", "OKExChain change parameter proposal!");
+        JSONObject res = msg.submit(messages, "0.05000000", "500000", "okbchain change parameter proposal!");
         try {
             boolean succeed = msg.isTxSucceed(res);
             System.out.println("tx " + (succeed ? "succeed" : "failed"));

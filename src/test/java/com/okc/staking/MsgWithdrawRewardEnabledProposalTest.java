@@ -1,10 +1,10 @@
 package com.okc.staking;
 
 import com.alibaba.fastjson.JSONObject;
-import com.okexchain.env.EnvInstance;
-import com.okexchain.msg.common.Message;
-import com.okexchain.msg.gov.MsgWithdrawRewardEnabledProposal;
-import com.okexchain.msg.gov.MsgWithdrawRewardEnabledProposalValue;
+import com.okbchain.env.EnvInstance;
+import com.okbchain.msg.common.Message;
+import com.okbchain.msg.gov.MsgWithdrawRewardEnabledProposal;
+import com.okbchain.msg.gov.MsgWithdrawRewardEnabledProposalValue;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 

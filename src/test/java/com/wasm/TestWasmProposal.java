@@ -1,10 +1,9 @@
 package com.wasm;
 
 import com.alibaba.fastjson.JSONObject;
-import com.okexchain.env.EnvBase;
-import com.okexchain.env.EnvInstance;
-import com.okexchain.msg.common.Message;
-import com.okexchain.msg.gov.wasm.*;
+import com.okbchain.env.EnvInstance;
+import com.okbchain.msg.common.Message;
+import com.okbchain.msg.gov.wasm.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -24,13 +23,13 @@ public class TestWasmProposal {
         MsgMigrateContractProposalValue proposalValue = new MsgMigrateContractProposalValue();
         proposalValue.setTitle("test");
         proposalValue.setDescription("test");
-        proposalValue.setContract("ex18cszlvm6pze0x9sz32qnjq4vtd45xehqs8dq7cwy8yhq35wfnn3q3m0jje");
+        proposalValue.setContract("0x07fA2f05F447DDEfd1B31FB5611C8d3252fF1D42");
         proposalValue.setCodeId(4);
         proposalValue.setMsg(strJson);
 
         Message message = msg.produceMsgMigrateContractProposal(
                 proposalValue,
-                "okt",
+                "okb",
                 "10");
         JSONObject res = msg.submit(message, "0.05000000", "500000", "");
         System.out.println(res.toString());
@@ -53,7 +52,7 @@ public class TestWasmProposal {
         proposalValue.setDescription("test");
         proposalValue.setCodeIds(new int[]{4, 5, 6});
 
-        Message message = msg.produceMsgPinCodesProposal(proposalValue, "okt", "10");
+        Message message = msg.produceMsgPinCodesProposal(proposalValue, "okb", "10");
         JSONObject res = msg.submit(message, "0.05000000", "500000", "");
         try {
             boolean succeed = msg.isTxSucceed(res);
@@ -75,7 +74,7 @@ public class TestWasmProposal {
         proposalValue.setDescription("test");
         proposalValue.setCodeIds(new int[]{4, 5, 6});
 
-        Message message = msg.produceMsgUnpinCodesProposal(proposalValue, "okt", "10");
+        Message message = msg.produceMsgUnpinCodesProposal(proposalValue, "okb", "10");
         JSONObject res = msg.submit(message, "0.05000000", "500000", "");
         try {
             boolean succeed = msg.isTxSucceed(res);
@@ -98,9 +97,9 @@ public class TestWasmProposal {
         proposalValue.setTitle("test");
         proposalValue.setDescription("test");
         proposalValue.setNewAdmin("0xEB3F2e59f7ed9E777Db64df4284f027c143Cbf66");
-        proposalValue.setContract("ex18cszlvm6pze0x9sz32qnjq4vtd45xehqs8dq7cwy8yhq35wfnn3q3m0jje");
+        proposalValue.setContract("0x07fA2f05F447DDEfd1B31FB5611C8d3252fF1D42");
 
-        Message message = msg.produceMsgUpdateAdminProposal(proposalValue, "okt", "10");
+        Message message = msg.produceMsgUpdateAdminProposal(proposalValue, "okb", "10");
         JSONObject res = msg.submit(message, "0.05000000", "500000", "");
         try {
             boolean succeed = msg.isTxSucceed(res);
@@ -119,10 +118,10 @@ public class TestWasmProposal {
         MsgClearAdminProposalValue proposalValue=new MsgClearAdminProposalValue();
         proposalValue.setTitle("ClearAdminProposal");
         proposalValue.setDescription("ClearAdminProposal");
-        proposalValue.setContract("ex18cszlvm6pze0x9sz32qnjq4vtd45xehqs8dq7cwy8yhq35wfnn3q3m0jje");
+        proposalValue.setContract("0x07fA2f05F447DDEfd1B31FB5611C8d3252fF1D42");
 
 
-        Message message = msg.produceMsgClearAdminProposal(proposalValue, "okt", "10");
+        Message message = msg.produceMsgClearAdminProposal(proposalValue, "okb", "10");
         JSONObject res = msg.submit(message, "0.05000000", "500000", "");
         try {
             boolean succeed = msg.isTxSucceed(res);
@@ -145,7 +144,7 @@ public class TestWasmProposal {
         String [] contractAddr={"0xEB3F2e59f7ed9E777Db64df4284f027c143Cbf66","0x66d351A5509dd876A01a8624B69721d845562e7D"};
         proposalValue.setDistributorAddrs(contractAddr);
 
-        Message message = msg.produceMsgUpdateDeploymentWhitelistProposal(proposalValue, "okt", "10");
+        Message message = msg.produceMsgUpdateDeploymentWhitelistProposal(proposalValue, "okb", "10");
         JSONObject res = msg.submit(message, "0.05000000", "500000", "");
         try {
             boolean succeed = msg.isTxSucceed(res);
@@ -157,7 +156,7 @@ public class TestWasmProposal {
 
     @Test
     public void testProduceMsgUpdateWASMContractMethodBlockedListProposal(){
-        String strJson="{\"contractAddr\":\"ex14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9s6fqu27\",\"methods\":[{\"name\":\"transfer\"}]}";
+        String strJson="{\"contractAddr\":\"0x07fA2f05F447DDEfd1B31FB5611C8d3252fF1D42\",\"methods\":[{\"name\":\"transfer\"}]}";
         EnvInstance.getEnvLocalNet();
         MsgUpdateWASMContractMethodBlockedListProposal msg=new MsgUpdateWASMContractMethodBlockedListProposal();
 
@@ -172,7 +171,7 @@ public class TestWasmProposal {
         proposalValue.setDelete(false);
 
 
-        Message message = msg.produceMsgUpdateWASMContractMethodBlockedListProposal(proposalValue, "okt", "10");
+        Message message = msg.produceMsgUpdateWASMContractMethodBlockedListProposal(proposalValue, "okb", "10");
         JSONObject res = msg.submit(message, "0.05000000", "500000", "");
         try {
             boolean succeed = msg.isTxSucceed(res);
@@ -195,7 +194,7 @@ public class TestWasmProposal {
         MsgExtraProposal proposal = new MsgExtraProposal(extraProposalValue);
         proposal.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
 
-        Message message = proposal.buildMessage("okt","10");
+        Message message = proposal.buildMessage("okb","10");
         JSONObject res = proposal.submit(message, "0.05000000", "500000", "");
         System.out.println(res.toString());
         boolean succeed = proposal.isTxSucceed(res);

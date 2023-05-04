@@ -2,11 +2,11 @@ package com.feesplit;
 
 
 import com.alibaba.fastjson.JSONObject;
-import com.okexchain.env.EnvInstance;
-import com.okexchain.msg.common.Message;
-import com.okexchain.msg.gov.feesplit.MsgFeeSplitSharesProposal;
-import com.okexchain.msg.gov.feesplit.MsgFeeSplitSharesProposalValue;
-import com.okexchain.msg.gov.feesplit.Share;
+import com.okbchain.env.EnvInstance;
+import com.okbchain.msg.common.Message;
+import com.okbchain.msg.gov.feesplit.MsgFeeSplitSharesProposal;
+import com.okbchain.msg.gov.feesplit.MsgFeeSplitSharesProposalValue;
+import com.okbchain.msg.gov.feesplit.Share;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 

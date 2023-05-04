@@ -2,10 +2,10 @@ package com.okc.staking;
 
 
 import com.alibaba.fastjson.JSONObject;
-import com.okexchain.env.EnvInstance;
-import com.okexchain.msg.common.Message;
-import com.okexchain.msg.gov.MsgChangeDistributionTypeProposal;
-import com.okexchain.msg.gov.MsgChangeDistributionTypeProposalValue;
+import com.okbchain.env.EnvInstance;
+import com.okbchain.msg.common.Message;
+import com.okbchain.msg.gov.MsgChangeDistributionTypeProposal;
+import com.okbchain.msg.gov.MsgChangeDistributionTypeProposalValue;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
