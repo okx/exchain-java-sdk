@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.okexchain</groupId>
-    <artifactId>okexchain-java-sdk</artifactId>
-    <version>0.18.1</version>
+    <groupId>com.okbchain</groupId>
+    <artifactId>okbchain-java-sdk</artifactId>
+    <version>0.1.1</version>
 
-    <name>okexchain-java-sdk</name>
+    <name>okbchain-java-sdk</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
