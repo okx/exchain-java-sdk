@@ -97,7 +97,7 @@ public class MsgBase {
             Signature signature = MsgBase.signTx(unsignedTx.toString(), priKeyString);
 
             BroadcastTx signedTx = unsignedTx.signed(signature);
-
+            System.out.println(signedTx.toJson());
             log.info("signedTx={}", signedTx.toJson());
             return broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
         } catch (Exception e) {

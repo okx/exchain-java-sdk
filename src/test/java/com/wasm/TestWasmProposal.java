@@ -18,7 +18,7 @@ public class TestWasmProposal {
         EnvInstance.getEnvLocalNet();
 
         MsgMigrateContractProposal msg = new MsgMigrateContractProposal();
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        msg.initMnemonic("");
         String strJson = "{\"beneficiary\":\"ex1fsfwwvl93qv6r56jpu084hxxzn9zphnyxhske5\",\"verifier\":\"ex1qj5c07sm6jetjz8f509qtrxgh4psxkv3ddyq7u\"}";
 
         MsgMigrateContractProposalValue proposalValue = new MsgMigrateContractProposalValue();
@@ -47,7 +47,7 @@ public class TestWasmProposal {
         EnvInstance.getEnvLocalNet();
 
         MsgPinCodesProposal msg = new MsgPinCodesProposal();
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        msg.initMnemonic("");
         MsgPinCodesProposalValue proposalValue = new MsgPinCodesProposalValue();
         proposalValue.setTitle("test");
         proposalValue.setDescription("test");
@@ -68,7 +68,7 @@ public class TestWasmProposal {
         EnvInstance.getEnvLocalNet();
 
         MsgUnpinCodesProposal msg=new MsgUnpinCodesProposal();
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        msg.initMnemonic("");
 
         MsgUnpinCodesProposalValue proposalValue=new MsgUnpinCodesProposalValue();
         proposalValue.setTitle("test");
@@ -91,7 +91,7 @@ public class TestWasmProposal {
         EnvInstance.getEnvLocalNet();
 
         MsgUpdateAdminProposal msg=new MsgUpdateAdminProposal();
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        msg.initMnemonic("");
         MsgUpdateAdminProposalValue proposalValue= new MsgUpdateAdminProposalValue();
 
 
@@ -114,7 +114,7 @@ public class TestWasmProposal {
     public void testProduceMsgClearAdminProposal(){
         EnvInstance.getEnvLocalNet();
         MsgClearAdminProposal msg=new MsgClearAdminProposal();
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        msg.initMnemonic("");
 
         MsgClearAdminProposalValue proposalValue=new MsgClearAdminProposalValue();
         proposalValue.setTitle("ClearAdminProposal");
@@ -134,15 +134,15 @@ public class TestWasmProposal {
 
     @Test
     public void testProduceMsgUpdateDeploymentWhitelistProposal(){
-        EnvInstance.getEnvLocalNet();
+        EnvInstance.getEnvTestNet();
         MsgUpdateDeploymentWhitelistProposal msg=new MsgUpdateDeploymentWhitelistProposal();
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        msg.initMnemonic("");
 
         MsgUpdateDeploymentWhitelistProposalValue proposalValue=new MsgUpdateDeploymentWhitelistProposalValue();
 
         proposalValue.setTitle("UpdateDeploymentWhitelistProposal");
         proposalValue.setDescription("UpdateDeploymentWhitelistProposal");
-        String [] contractAddr={"0xEB3F2e59f7ed9E777Db64df4284f027c143Cbf66","0x66d351A5509dd876A01a8624B69721d845562e7D"};
+        String [] contractAddr={"all"};
         proposalValue.setDistributorAddrs(contractAddr);
 
         Message message = msg.produceMsgUpdateDeploymentWhitelistProposal(proposalValue, "okt", "10");
@@ -161,7 +161,7 @@ public class TestWasmProposal {
         EnvInstance.getEnvLocalNet();
         MsgUpdateWASMContractMethodBlockedListProposal msg=new MsgUpdateWASMContractMethodBlockedListProposal();
 
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        msg.initMnemonic("");
 
         MsgUpdateWASMContractMethodBlockedListProposalValue proposalValue=new MsgUpdateWASMContractMethodBlockedListProposalValue();
         proposalValue.setTitle("UpdateWASMContractMethodBlockedListProposal");
@@ -193,7 +193,7 @@ public class TestWasmProposal {
         extraProposalValue.setExtra("{\"factor\":\"19.7\"}");
 
         MsgExtraProposal proposal = new MsgExtraProposal(extraProposalValue);
-        proposal.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        proposal.initMnemonic("");
 
         Message message = proposal.buildMessage("okt","10");
         JSONObject res = proposal.submit(message, "0.05000000", "500000", "");

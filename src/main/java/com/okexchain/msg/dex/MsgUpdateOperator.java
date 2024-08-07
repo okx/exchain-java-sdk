@@ -11,7 +11,7 @@ public class MsgUpdateOperator extends MsgBase {
     public static void main(String[] args) {
         MsgUpdateOperator msg = new MsgUpdateOperator();
 
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        msg.initMnemonic("");
 
         Message messages = msg.produceUpdateOperatorMsg(
                 "okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9",

@@ -1,5 +1,7 @@
 package com.okexchain.msg.token;
 
+import com.okexchain.env.EnvBase;
+import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
 import com.okexchain.msg.common.Token;
@@ -16,8 +18,10 @@ public class MsgSend extends MsgBase {
 
     public static void main(String[] args) {
         MsgSend msg = new MsgSend();
-
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        EnvBase envBase = EnvInstance.getEnvLocalNet();
+        envBase.setRestPathPrefix("/v1/");
+        envBase.setTxUrlPath("/v1/txs/");
+        msg.initMnemonic("");
 
         Message messages = msg.produceSendMsg(
                 "okt",

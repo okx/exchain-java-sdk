@@ -12,7 +12,7 @@ public class MsgWithdrawReward extends MsgBase {
     public static void main(String[] args) {
         MsgWithdrawReward msg = new MsgWithdrawReward();
 
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        msg.initMnemonic("");
 
         Message messages = msg.produceWithdrawRewardMsg(
                 "okexchainvaloper10q0rk5qnyag7wfvvt7rtphlw589m7frshchly8");

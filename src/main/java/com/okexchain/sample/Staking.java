@@ -35,10 +35,6 @@ public class Staking {
     }
 
     static void testBindProxy() {
-//        String mnemonic = "puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer";
-//        String prikey = Crypto.generatePrivateKeyFromMnemonic(mnemonic);
-//        System.out.println(prikey);
-
         PrivateKey key = new PrivateKey("17157D973569415C616E70BE2537DFB9F48BAD5C7FF088A5FCDF193DD3E450E3");
 
         MsgBindProxy msg = new MsgBindProxy();

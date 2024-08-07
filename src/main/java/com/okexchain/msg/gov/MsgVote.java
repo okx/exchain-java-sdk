@@ -12,7 +12,7 @@ public class MsgVote extends MsgBase {
     public static void main(String[] args) {
         MsgVote msg = new MsgVote();
 
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        msg.initMnemonic("");
 
         Message messages = msg.produceVoteMsg(
                 "2",
