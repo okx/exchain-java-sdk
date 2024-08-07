@@ -17,6 +17,10 @@ public class MsgSend extends MsgBase {
     }
 
     public static void main(String[] args) {
+        EnvInstance.getEnv().setRestServerUrl("http://localhost:8545");
+        EnvInstance.getEnv().setRestPathPrefix("/exchain/v1");
+        EnvInstance.getEnv().setTxUrlPath("/exchain/v1/txs");
+        EnvInstance.getEnv().setChainID("exchain-67");
         MsgSend msg = new MsgSend();
         EnvBase envBase = EnvInstance.getEnvLocalNet();
         envBase.setRestPathPrefix("/v1/");
@@ -26,10 +30,16 @@ public class MsgSend extends MsgBase {
         Message messages = msg.produceSendMsg(
                 "okt",
                 "6.00000000",
-                "okexchain1v853tq96n9ghvyxlvqyxyj97589clccrufrkz9");
+                "ex1h0j8x0v9hs4eq6ppgamemfyu4vuvp2sl0q9p3v");
 
         // okexchaincli tx send okexchain10q0rk5qnyag7wfvvt7rtphlw589m7frsku8qc9 okexchain1v853tq96n9ghvyxlvqyxyj97589clccrufrkz9 6okt --from captain -y -b block --fees 0.01okt
-        msg.submit(messages, "0.01000000", "200000", "okexchain transfer!");
+        JSONObject obj = msg.submit(messages, "0.01000000", "200000", "okexchain transfer!");
+        System.out.println(obj);
+        try {
+            System.out.println(msg.isTxSucceed(obj));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Message produceSendMsg(String denom, String amountDenom, String to) {
