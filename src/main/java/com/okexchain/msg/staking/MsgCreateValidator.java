@@ -18,7 +18,7 @@ public class MsgCreateValidator extends MsgBase {
         EnvInstance.setEnv("ok");
         MsgCreateValidator msg = new MsgCreateValidator();
         msg.setMsgType("cosmos-sdk/MsgCreateValidator");
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        msg.initMnemonic("");
         Message messages = msg.produceMsg();
         msg.submit(messages, "6", "200000", "");
     }

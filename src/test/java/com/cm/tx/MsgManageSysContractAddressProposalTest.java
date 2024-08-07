@@ -19,7 +19,7 @@ public class MsgManageSysContractAddressProposalTest {
         EnvInstance.getEnv().setTxUrlPath("/exchain/v1/txs");
         EnvInstance.getEnv().setChainID("exchain-67");
         MsgManageSysContractAddressProposal msg=new MsgManageSysContractAddressProposal();
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        msg.initMnemonic("");
         MsgManageSysContractAddressProposalValue value=new MsgManageSysContractAddressProposalValue();
         value.setTitle("test");
         value.setDescription("test");

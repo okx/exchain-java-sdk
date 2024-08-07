@@ -13,7 +13,7 @@ public class ColdSign {
 
     public static void main(String[] args) {
         PrivateKey key = new PrivateKey("8145bfb1d3acc216c54490952c994d5e3bce09dd65ae73d0c79f892284f721e7");
-//        PrivateKey key = new PrivateKey("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+//        PrivateKey key = new PrivateKey("");
 
         MsgSend msg = new MsgSend();
         msg.init(key.getPubKey());

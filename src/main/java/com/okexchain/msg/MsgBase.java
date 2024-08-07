@@ -98,7 +98,6 @@ public class MsgBase {
 
             BroadcastTx signedTx = unsignedTx.signed(signature);
             signedTx.setNonce(this.sequenceNum);
-
             log.info("signedTx={}", signedTx.toJson());
             return broadcast(signedTx.toJson(), EnvInstance.getEnv().GetRestServerUrl());
         } catch (Exception e) {

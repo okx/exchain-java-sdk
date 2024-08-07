@@ -12,7 +12,7 @@ public class MsgModifyWithdrawAddress extends MsgBase {
     public static void main(String[] args) {
         MsgModifyWithdrawAddress msg = new MsgModifyWithdrawAddress();
 
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        msg.initMnemonic("");
 
         Message messages = msg.produceModifyWithdrawAddressMsg(
                 "okexchain1v853tq96n9ghvyxlvqyxyj97589clccrufrkz9");

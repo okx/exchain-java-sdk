@@ -16,7 +16,7 @@ public class MsgList extends MsgBase {
         EnvInstance.getEnv().setRestServerUrl("http://localhost:8545");
 
         MsgList msg = new MsgList();
-        msg.initMnemonic("giggle sibling fun arrow elevator spoon blood grocery laugh tortoise culture tool");
+        msg.initMnemonic("");
 
         Message messages = msg.produceListMsg(
                 "usdk-017",

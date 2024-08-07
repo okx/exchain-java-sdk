@@ -10,7 +10,6 @@ import com.okexchain.utils.crypto.PrivateKey;
 
 public class Gentx {
     public static void main(String[] args) {
-//        String priKey = Crypto.generatePrivateKeyFromMnemonic("race imitate stay curtain puppy suggest spend toe old bridge sunset pride");
         PrivateKey key = new PrivateKey("b4083733cd8379f1249cb9431a074e495a64ae003273d31a7e58356eaad8a0cf");
 
         MsgCreateValidator msg = new MsgCreateValidator();

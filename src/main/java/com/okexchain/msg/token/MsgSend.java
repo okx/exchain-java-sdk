@@ -1,6 +1,6 @@
 package com.okexchain.msg.token;
 
-import com.alibaba.fastjson.JSONObject;
+import com.okexchain.env.EnvBase;
 import com.okexchain.env.EnvInstance;
 import com.okexchain.msg.MsgBase;
 import com.okexchain.msg.common.Message;
@@ -22,9 +22,10 @@ public class MsgSend extends MsgBase {
         EnvInstance.getEnv().setTxUrlPath("/exchain/v1/txs");
         EnvInstance.getEnv().setChainID("exchain-67");
         MsgSend msg = new MsgSend();
-
-
-        msg.initMnemonic("puzzle glide follow cruel say burst deliver wild tragic galaxy lumber offer");
+        EnvBase envBase = EnvInstance.getEnvLocalNet();
+        envBase.setRestPathPrefix("/v1/");
+        envBase.setTxUrlPath("/v1/txs/");
+        msg.initMnemonic("");
 
         Message messages = msg.produceSendMsg(
                 "okt",
